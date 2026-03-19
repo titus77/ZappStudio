@@ -109,17 +109,17 @@ const AllowedDomainsWidget = ({ isWriteAccess }: Props) => {
     const trimmedDomain = newDomain.trim().toLowerCase();
 
     if (!trimmedDomain) {
-      setDomainError('Please enter a domain');
+      setDomainError('Veuillez saisir un domaine');
       return;
     }
 
     if (!isValidDomain(trimmedDomain)) {
-      setDomainError('Invalid domain format. Please enter a valid domain (e.g., example.com)');
+      setDomainError('Format de domaine invalide. Veuillez saisir un domaine valide (ex. : example.com)');
       return;
     }
 
     if (domains.includes(trimmedDomain)) {
-      setDomainError('This domain has already been added');
+      setDomainError('Ce domaine a déjà été ajouté');
       return;
     }
 
@@ -189,10 +189,10 @@ const AllowedDomainsWidget = ({ isWriteAccess }: Props) => {
       queryClient.invalidateQueries({ queryKey: ['availableEmbodiments', agentId] });
 
       setHasUnsavedChanges(false);
-      successToast('Allowed domains saved successfully');
+      successToast('Domaines autorisés enregistrés avec succès');
     } catch (error) {
       console.error('Failed to save allowed domains:', error);
-      errorToast('Failed to save allowed domains. Please try again.');
+      errorToast('Échec de l\'enregistrement des domaines autorisés. Veuillez réessayer.');
     } finally {
       setIsSaving(false);
     }
@@ -200,7 +200,7 @@ const AllowedDomainsWidget = ({ isWriteAccess }: Props) => {
 
   // Show loading state
   if (isLoading) {
-    return <SkeletonLoader title="Allowed Domains" />;
+    return <SkeletonLoader title="Domaines autorisés" />;
   }
 
   return (
@@ -213,13 +213,13 @@ const AllowedDomainsWidget = ({ isWriteAccess }: Props) => {
         <div className="flex justify-between items-start">
           <div className="w-full">
             <div className="flex items-center">
-              <h3 className="text-sm font-semibold text-gray-700">Allowed Domains</h3>
+              <h3 className="text-sm font-semibold text-gray-700">Domaines autorisés</h3>
             </div>
             <p className="text-sm text-gray-500 mt-1">
-              Specify which domains are allowed to host your agent embodiments.
+              Indiquez les domaines autorisés à héberger les canaux de diffusion de votre agent IA.
             </p>
             <p className="text-sm text-gray-500 mt-1">
-              This setting applies to Chatbot, Form Preview, and Voice.
+              Ce paramètre s'applique au Chatbot, à l'Aperçu de formulaire et à la Voix.
             </p>
           </div>
         </div>
@@ -232,7 +232,7 @@ const AllowedDomainsWidget = ({ isWriteAccess }: Props) => {
               <div className="flex-1">
                 <input
                   type="text"
-                  placeholder="Enter domain (e.g., example.com)"
+                  placeholder="Saisir un domaine (ex. : example.com)"
                   value={newDomain}
                   onChange={(e) => {
                     setNewDomain(e.target.value);
@@ -253,7 +253,7 @@ const AllowedDomainsWidget = ({ isWriteAccess }: Props) => {
                 className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-white bg-v2-blue rounded-md hover:bg-v2-blue/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <Plus className="w-4 h-4" />
-                Add
+                Ajouter
               </button>
             </div>
             {domainError && <p className="mt-1 text-xs text-red-500">{domainError}</p>}
@@ -261,7 +261,7 @@ const AllowedDomainsWidget = ({ isWriteAccess }: Props) => {
 
           <div className="bg-amber-50 border border-amber-200 rounded-md p-3 w-full my-2">
             <p className="text-amber-800 text-xs">
-              <strong>Note:</strong> Note: A domain permission is only required if you want to host agent embodiments on an external website.
+              <strong>Remarque :</strong> Une permission de domaine n'est requise que si vous souhaitez héberger les canaux de diffusion de l'agent IA sur un site externe.
             </p>
           </div>
 
@@ -291,7 +291,7 @@ const AllowedDomainsWidget = ({ isWriteAccess }: Props) => {
           {/* Save button */}
           <div className="flex justify-end mt-4">
             <CustomButton
-              label="Save Domains"
+              label="Enregistrer les domaines"
               handleClick={handleSaveDomains}
               loading={isSaving}
               disabled={!isWriteAccess || isSaving || !hasUnsavedChanges}

@@ -89,9 +89,9 @@ export function VectorDatabases() {
   }) => {
     // Show success message
     if (data.isEdit) {
-      successToast('Connection updated successfully.');
+      successToast('Connexion mise à jour avec succès.');
     } else {
-      successToast('Connection created successfully.');
+      successToast('Connexion créée avec succès.');
     }
 
     // Reset state
@@ -148,13 +148,13 @@ export function VectorDatabases() {
         {/* Header */}
         <div className="flex items-center justify-between mb-4 pr-2 flex-wrap">
           <h2 className="flex items-center gap-2 text-lg font-semibold">
-            Vector Databases
+            Bases de données vectorielles
             <Tooltip>
               <TooltipTrigger asChild>
                 <Info className="w-4 h-4" />
               </TooltipTrigger>
               <TooltipContent className="max-w-[240px] text-center text-wrap">
-                <p>Manage connections to vector databases for storing and retrieving embeddings</p>
+                <p>Gérez les connexions aux bases de données vectorielles pour stocker et récupérer des embeddings</p>
               </TooltipContent>
             </Tooltip>
           </h2>
@@ -166,15 +166,15 @@ export function VectorDatabases() {
             <CredentialsListSkeleton rows={3} />
           ) : credentials.length === 0 ? (
             <div className="py-8 text-center">
-              <p className="text-muted-foreground mb-2">No vector database connections found</p>
-              <p className="text-sm text-gray-500">Get started by adding your first connection</p>
+              <p className="text-muted-foreground mb-2">Aucune connexion de base de données vectorielle trouvée</p>
+              <p className="text-sm text-gray-500">Commencez par ajouter votre première connexion</p>
             </div>
           ) : (
             <table className="w-full min-w-[500px] text-sm text-left table-fixed">
               <thead className="text-xs text-muted-foreground">
                 <tr>
-                  <th className="pr-4 py-2 w-1/3">Connection Name</th>
-                  <th className="px-4 py-2 w-1/3">Provider</th>
+                  <th className="pr-4 py-2 w-1/3">Nom de la connexion</th>
+                  <th className="px-4 py-2 w-1/3">Fournisseur</th>
                   <th className="px-4 py-2 w-1/3 text-right">Actions</th>
                 </tr>
               </thead>
@@ -188,7 +188,7 @@ export function VectorDatabases() {
                         {connection.isManaged && (
                           <span
                             className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 border border-blue-200 ml-2 shadow-sm"
-                            title="This is an internal connection automatically managed by ZappStudio"
+                            title="Connexion interne gérée automatiquement par ZappStudio"
                           >
                             <svg
                               className="w-3 h-3 mr-1 text-blue-400"
@@ -198,7 +198,7 @@ export function VectorDatabases() {
                             >
                               <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.93 12.412a.75.75 0 11-1.86 0l-1.406-5.624A.75.75 0 017.38 7h5.24a.75.75 0 01.716.788l-1.406 5.624zm-.93-7.162a1 1 0 110-2 1 1 0 010 2z" />
                             </svg>
-                            Managed
+                            Géré
                           </span>
                         )}
                       </div>
@@ -235,7 +235,7 @@ export function VectorDatabases() {
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Edit</p>
+                              <p>Modifier</p>
                             </TooltipContent>
                           </Tooltip>
 
@@ -251,7 +251,7 @@ export function VectorDatabases() {
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Delete</p>
+                              <p>Supprimer</p>
                             </TooltipContent>
                           </Tooltip>
                         </div>
@@ -274,7 +274,7 @@ export function VectorDatabases() {
               setEditingConnection(undefined);
               setIsCreateModalOpen(true);
             }}
-            label="Add Vector Database"
+            label="Ajouter une base de données vectorielle"
             disabled={isLoading}
           />
         </div>

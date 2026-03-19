@@ -128,7 +128,7 @@ async function populateKeysList() {
                     hour: 'numeric',
                     minute: 'numeric',
                   })
-                : 'Unknown date',
+                : 'Date inconnue',
             });
           });
 
@@ -144,16 +144,16 @@ async function populateKeysList() {
     revokeBtn.onclick = async () => {
       // Show confirmation dialog
       twModalDialog({
-        title: 'Revoke API Key',
+        title: 'Revoquer la cle API',
         content: `
           <div class="p-4">
-            <p class="text-gray-700">Are you sure you want to revoke this API key? This action cannot be undone.</p>
+            <p class="text-gray-700">Etes-vous sur de vouloir revoquer cette cle API ? Cette action est irreversible.</p>
           </div>
         `,
         onCloseClick: function () {},
         actions: [
           {
-            label: 'Revoke Key',
+            label: 'Revoquer la cle',
             cssClass: DELETE_BUTTON_STYLE,
             callback: async () => {
               revokeBtn.disabled = true;
@@ -183,9 +183,9 @@ async function populateKeysList() {
       const tooltip = keyCopyBtn.querySelector('.copy-tooltip');
       if (!tooltip) return;
 
-      tooltip.textContent = 'Copied!';
+      tooltip.textContent = 'Copie !';
       setTimeout(() => {
-        tooltip.textContent = 'Copy';
+        tooltip.textContent = 'Copier';
       }, 2000);
     });
   });
@@ -206,18 +206,18 @@ function attachCreateKeyBtn() {
 
       // Show dialog to get key name
       twModalDialog({
-        title: 'Create New AgentLLM Key',
+        title: 'Creer une nouvelle cle AgentLLM',
         content: `
           <div class="p-4">
             <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Key Name</label>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Nom de la cle</label>
               <input autofocus type="text"
                 id="agent-llm-key-name"
-                class="w-full px-3 py-2 
+                class="w-full px-3 py-2
               bg-white text-gray-900 block text-sm font-normal placeholder:text-sm placeholder:font-light
                 rounded outline-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-shadow-none
                 border border-gray-300 border-b-gray-500 focus:border-b-2 focus:border-b-blue-500 focus-visible:border-b-2 focus-visible:border-b-blue-500"
-                placeholder="e.g. Production Key">
+                placeholder="ex. : Cle de production">
             </div>
           </div>
         `,
@@ -226,7 +226,7 @@ function attachCreateKeyBtn() {
         },
         actions: [
           {
-            label: 'Create',
+            label: 'Creer',
             cssClass: PRIMARY_BUTTON_STYLE,
             callback: async function (dialog) {
               const keyNameInput = dialog.querySelector('#agent-llm-key-name') as HTMLInputElement;
@@ -346,7 +346,7 @@ async function populateVersionSelector() {
 
     // Add default options
     const options = [
-      { value: 'dev', text: 'Dev (Current)' },
+      { value: 'dev', text: 'Dev (Actuel)' },
       { value: 'prod', text: 'Prod' },
     ];
 

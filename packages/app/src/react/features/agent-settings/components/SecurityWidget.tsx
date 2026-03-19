@@ -43,12 +43,12 @@ const SecurityWidget = (props: Props) => {
   }
 
   return (
-    <WidgetCard title="Security">
+    <WidgetCard title="Sécurité">
       <div className="bg-white p-4 ">
         <div className="flex justify-between items-center flex-col">
           <div className="w-full">
-            <h3 className="font-semibold mb-1">Managers</h3>
-            <p className="text-sm text-gray-500">Who is your agent allowed to speak with?</p>
+            <h3 className="font-semibold mb-1">Responsables</h3>
+            <p className="text-sm text-gray-500">Qui peut interagir avec votre agent IA ?</p>
           </div>
 
           <div className="w-full mt-6">
@@ -99,7 +99,7 @@ const SecurityWidget = (props: Props) => {
                 disabled={false}
               >
                 <img src="/img/icons/Edit-blue.svg" className="w-4 h-4" />
-                <p className="ml-2 text-primary-500">Edit</p>
+                <p className="ml-2 text-primary-500">Modifier</p>
               </button>
             )}
 
@@ -111,7 +111,7 @@ const SecurityWidget = (props: Props) => {
                   className="mt-4  bg-transparent font-semibold"
                   disabled={false}
                 >
-                  Cancel
+                  Annuler
                 </button>
                 <button
                   type="submit"
@@ -119,7 +119,7 @@ const SecurityWidget = (props: Props) => {
                   className="mt-4 bg-transparent font-semibold text-primary-500 ml-5"
                   disabled={false}
                 >
-                  Save
+                  Enregistrer
                 </button>
               </>
             )}

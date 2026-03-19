@@ -59,9 +59,15 @@ const corsOptionsDelegate = async (req, callback) => {
 
   const isAllowedOrigin = allAllowedOrigins.includes(origin);
 
-  const allowAllOrigins = agentAllowedDomains?.length === 0; // if user has not specified any allowed domains, allow all origins
+  // If user has not specified any allowed domains, allow all origins
+  // EXCEPT on /wai/* routes where hostname is shared — deny-all by default for security
+  const isWaiRoute = !!(req as any)._waiRoute;
+  const allowAllOrigins = agentAllowedDomains?.length === 0 && !isWaiRoute;
 
-  if (isKnownHost || isSameOrigin || isAllowedOrigin || allowAllOrigins) {
+  // On /wai/* routes, isSameOrigin is not meaningful (all agents share zap.immo)
+  const effectiveSameOrigin = isSameOrigin && !isWaiRoute;
+
+  if (isKnownHost || effectiveSameOrigin || isAllowedOrigin || allowAllOrigins) {
     // Enable CORS for the same origin and the allowed domains
     corsOptions = {
       origin: true,

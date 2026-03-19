@@ -24,18 +24,18 @@ export const Error: FC<TProps> = ({ message, retry }) => {
           <div className="flex-1 text-red-700 text-sm leading-relaxed">
             {isApiKeyError && (
               <>
-                <h6 className="font-bold">Invalid API Key</h6>
+                <h6 className="font-bold">Clé API invalide</h6>
                 <p>
-                  The API key you provided is not valid. Please set a valid key to continue:&nbsp;
+                  La clé API fournie n'est pas valide. Veuillez définir une clé valide pour continuer :&nbsp;
                   <a
                     href="/vault"
                     target="_blank"
                     className="text-red-700 hover:text-red-900 font-semibold"
                   >
-                    Set API Key
+                    Définir la clé API
                   </a>
                 </p>
-                <h6 className="font-semibold pt-1">Error details:</h6>
+                <h6 className="font-semibold pt-1">Détails de l'erreur :</h6>
               </>
             )}
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{message}</ReactMarkdown>
@@ -47,7 +47,7 @@ export const Error: FC<TProps> = ({ message, retry }) => {
             className="inline-flex items-center px-4 gap-x-1 py-2 border border-gray-300 text-sm font-medium rounded-[18px] text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
           >
             <RetryIcon />
-            Retry
+            Réessayer
           </button>
         )}
       </div>

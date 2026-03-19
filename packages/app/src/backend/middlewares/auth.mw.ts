@@ -8,7 +8,7 @@ export async function pageAuth(
   next: express.NextFunction,
 ) {
   if (!req.user.isAuthenticated) {
-    return res.status(401).json({ error: 'Authentication required' });
+    return res.status(401).json({ error: 'Authentification requise' });
   }
   if (req.session.pendingPath) {
     const pendingPath = req.session.pendingPath;
@@ -30,7 +30,7 @@ export async function apiAuth(
   next: express.NextFunction,
 ) {
   if (!req.user.isAuthenticated) {
-    return res.status(401).send({ error: 'Unauthorized' });
+    return res.status(401).send({ error: 'Non autorise' });
   }
   req._user = req.user.claims;
   req._user.id = req._user.sub;
@@ -49,7 +49,7 @@ export async function includeTeamDetails(req: any, res: any, next: any) {
     next();
   } catch (error) {
     // console.log(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Erreur interne du serveur' });
   }
 }
 
@@ -65,6 +65,6 @@ export async function includeMyUserRole(req: any, res: any, next: any) {
     next();
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Erreur interne du serveur' });
   }
 }

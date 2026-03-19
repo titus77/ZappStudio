@@ -30,15 +30,15 @@ const WidgetSubscribeInfo = ({ infoText, analytics }: Props) => {
 
   return (
     <>
-      <p className="text-sm font-semibold my-4">This is a premium feature.</p>
+      <p className="text-sm font-semibold my-4">Il s'agit d'une fonctionnalité premium.</p>
       <div className="flex items-center gap-4 my-4">
         <p className="text-sm italic">
-          {infoText} Upgrade to a <strong>Basic</strong> or <strong>Pro</strong> plan to unlock more
-          premium features.
+          {infoText} Passez à une offre <strong>Basic</strong> ou <strong>Pro</strong> pour débloquer davantage de
+          fonctionnalités premium.
         </p>
       </div>
       <div className="pt-4 flex justify-end">
-        <Button label="Upgrade plan" variant="primary" handleClick={handleUpgrade} />
+        <Button label="Améliorer l'offre" variant="primary" handleClick={handleUpgrade} />
       </div>
     </>
   );

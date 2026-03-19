@@ -101,7 +101,7 @@ export const ModelDropdown: FC<IProps> = (props) => {
             )}
           >
             <span>
-              {selectedModel?.label || 'Select Model'}
+              {selectedModel?.label || 'Sélectionner un modèle'}
               {selectedBadge ? ` (${selectedBadge})` : ''}
             </span>
             <IoChevronDown
@@ -114,7 +114,7 @@ export const ModelDropdown: FC<IProps> = (props) => {
           </button>
         </TooltipTrigger>
         <TooltipContent side="bottom">
-          <p>{isModelAgent ? 'Default agents have a fixed model' : 'Select model'}</p>
+          <p>{isModelAgent ? 'Les agents IA par défaut ont un modèle fixe' : 'Sélectionner un modèle'}</p>
         </TooltipContent>
       </Tooltip>
 

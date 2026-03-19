@@ -182,7 +182,7 @@ function AgentsPage() {
           onClose={() => setShowUpsellModal(false)}
           analytics={{ page_url: '/agents', source: 'quota limit reached for adding more agents' }}
         >
-          Upgrade your plan to add more agents.
+          Améliorez votre offre pour ajouter davantage d'agents IA.
         </UpSellModal>
       )}
     </div>

@@ -27,7 +27,7 @@ export const UploadMenu: FC<TProps> = (props) => {
   const menuItems: TMenuItem[] = [
     {
       id: 'add-files',
-      label: 'Add files or photos',
+      label: 'Ajouter des fichiers ou des photos',
       icon: Paperclip,
       shortcut: 'Ctrl+U',
       onClick: () => {
@@ -37,7 +37,7 @@ export const UploadMenu: FC<TProps> = (props) => {
     },
     {
       id: 'take-screenshot',
-      label: 'Take a screenshot',
+      label: 'Prendre une capture d\'écran',
       icon: Camera,
       onClick: () => {
         onTakeScreenshot();
@@ -98,7 +98,7 @@ export const UploadMenu: FC<TProps> = (props) => {
     <div
       ref={menuRef}
       role="menu"
-      aria-label="Upload options"
+      aria-label="Options d'envoi"
       className={`
         absolute bottom-full left-0 mb-2 z-50
         min-w-[220px] p-1.5

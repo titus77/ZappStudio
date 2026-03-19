@@ -16,8 +16,7 @@ export const Footer: FC = () => {
       </div>
 
       <h6 className="py-4 text-center text-xs text-gray-500">
-        ZappStudio can make mistakes, always check your work. We don&apos;t store chat history, save
-        important work.
+        ZappStudio peut faire des erreurs, vérifiez toujours votre travail. Nous ne conservons pas l&apos;historique des conversations, sauvegardez les éléments importants.
       </h6>
     </div>
   );

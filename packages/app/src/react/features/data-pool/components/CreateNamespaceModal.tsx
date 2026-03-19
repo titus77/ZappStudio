@@ -232,10 +232,10 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
       <Dialog open={isOpen} onOpenChange={onClose}>
         <DialogContent className={'sm:max-w-[500px] max-h-[90vh] overflow-y-auto'}>
           <DialogHeader>
-            <DialogTitle>Create Data Space</DialogTitle>
+            <DialogTitle>Créer un espace de données</DialogTitle>
             <p className="text-sm text-gray-600 mt-1">
-              Set up a Data Space to unlock your agents&apos; ability to search, automate, and learn
-              from your data — using RAG and other tools
+              Configurez un espace de données pour permettre à vos agents IA de rechercher, automatiser et apprendre
+              de vos données — via RAG et d'autres outils
             </p>
           </DialogHeader>
 

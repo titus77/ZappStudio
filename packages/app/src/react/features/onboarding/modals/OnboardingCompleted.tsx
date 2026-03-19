@@ -13,10 +13,10 @@ const OnboardingCompletedModal = (props: Props) => {
         <img src="/img/onboard/congrats.png" />
       </div>
       <div className="mt-10">
-        <div className="text-3xl font-bold text-center">Congratulations!</div>
+        <div className="text-3xl font-bold text-center">Félicitations !</div>
         <div className="mt-3 text-gray-900 text-lg text-center">
-          You've successfully completed all the items on your checklist. This marks an important
-          milestone in your ZappStudio journey.
+          Vous avez réussi à compléter tous les éléments de votre liste. C'est une étape importante
+          dans votre parcours ZappStudio.
         </div>
       </div>
     </Modal>

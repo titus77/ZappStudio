@@ -113,7 +113,7 @@ const FormEmbodimentModal: FC<FormEmbodimentModalProps> = ({
       <div className="relative bg-white rounded-2xl shadow-lg w-full p-6 flex flex-col overflow-auto max-h-[90vh] max-w-[520px]">
         {/* Header with back and close buttons */}
         <ModalHeaderEmbodiment
-          title="Form Preview Integration Snippet"
+          title="Snippet d'intégration Aperçu de formulaire"
           onBack={onClose}
           onClose={onClose}
           showBackButton={showBackButton}
@@ -129,13 +129,13 @@ const FormEmbodimentModal: FC<FormEmbodimentModalProps> = ({
             {/* Instructions */}
             <div className="text-sm text-gray-700">
               <p>
-                Copy and paste this snippet into your website before the closing &lt;/body&gt; tag.
+                Copiez et collez ce snippet dans votre site web juste avant la balise &lt;/body&gt;.
               </p>
 
               {/* API Endpoints Dropdown */}
               <div className="mb-2 mt-6 flex justify-between items-center text-base">
                 <label htmlFor="api-endpoint" className="block font-semibold text-gray-700">
-                  Select A Form
+                  Sélectionner un formulaire
                 </label>
                 <a
                   href={previewUrl}
@@ -143,7 +143,7 @@ const FormEmbodimentModal: FC<FormEmbodimentModalProps> = ({
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-[13px] text-[#707070]"
                 >
-                  Preview <ArrowRightIcon className="w-4 h-4" />
+                  Aperçu <ArrowRightIcon className="w-4 h-4" />
                 </a>
               </div>
               <div className="">
@@ -154,11 +154,11 @@ const FormEmbodimentModal: FC<FormEmbodimentModalProps> = ({
                   onChange={(e) => setSelectedEndpoint(e.target.value)}
                 >
                   <option value="" disabled>
-                    Choose an API endpoint...
+                    Choisissez un endpoint API...
                   </option>
                   {components.map((component: any) => (
                     <option key={component.id} value={component.id}>
-                      {component.title || component.name || 'Unnamed API Endpoint'}
+                      {component.title || component.name || 'Endpoint API sans nom'}
                     </option>
                   ))}
                 </select>
@@ -170,7 +170,7 @@ const FormEmbodimentModal: FC<FormEmbodimentModalProps> = ({
               htmlFor="code-snippet"
               className="block text-base font-semibold text-gray-700 my-2 mt-4"
             >
-              Code Snippet
+              Snippet de code
             </label>
             <div className="flex flex-col gap-4">
               <textarea
@@ -186,15 +186,15 @@ const FormEmbodimentModal: FC<FormEmbodimentModalProps> = ({
                 <Button
                   variant="primary"
                   handleClick={handleCopyClick}
-                  label={copied ? 'Copied' : 'Copy Code'}
-                  aria-label={copied ? 'Copied' : 'Copy code'}
+                  label={copied ? 'Copié !' : 'Copier le code'}
+                  aria-label={copied ? 'Copié !' : 'Copier le code'}
                 />
               </div>
             </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-12 gap-4">
-            <p className="text-sm text-gray-600">No API endpoints found</p>
+            <p className="text-sm text-gray-600">Aucun endpoint API trouvé</p>
           </div>
         )}
       </div>

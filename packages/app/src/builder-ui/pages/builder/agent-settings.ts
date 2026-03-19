@@ -92,12 +92,12 @@ function createAgent() {
 
     agentNameError.classList.add('hidden');
     // agentNameInput.value = 'My Agent';
-    agentNameInput.value = 'Untitled Agent';
+    agentNameInput.value = 'Agent sans titre';
     agentDescriptionTA.value = '';
     // newAgentModal.classList.remove('hidden'); // * We'll remove the New Agent creation form
 
     agentTemplate.innerHTML =
-      '<option value="NONE">Select Template</option><option value="NONE">Empty Agent</option>';
+      '<option value="NONE">Selectionnez un modele</option><option value="NONE">Agent vide</option>';
 
     function inputLengthCheck(input, min, max) {
       return input.trim().length >= min && input.trim().length <= max;
@@ -111,9 +111,9 @@ function createAgent() {
       if (!skipErrors) {
         agentNameError.innerText =
           agentNameLength < 3
-            ? 'Name should be at least 3 characters long.'
+            ? 'Le nom doit comporter au moins 3 caracteres.'
             : agentNameLength > 60
-              ? 'Name should not be more than 60 characters long.'
+              ? 'Le nom ne doit pas depasser 60 caracteres.'
               : '';
 
         agentNameError.classList.toggle('hidden', !isAgentNameInValid);
@@ -169,7 +169,7 @@ function createAgent() {
     const createAgentClick = async () => {
       newAgentModal.classList.add('hidden');
 
-      showOverlay('Creating Agent ...');
+      showOverlay('Creation de l\'agent...');
       const selectedTemplateId = agentTemplate.options[agentTemplate.options.selectedIndex].value;
 
       let jsonData = templates[selectedTemplateId]?.template;
@@ -204,7 +204,7 @@ function createAgent() {
 
       if (result) {
         if (jsonData) {
-          showOverlay('Loading Template Data ...');
+          showOverlay('Chargement des donnees du modele...');
           // * hide overlay will be called from workspace.import
         }
 
@@ -237,7 +237,7 @@ function createAgent() {
 
         resolve(workspace.agent.id);
       } else {
-        showOverlay('<span class="text-red-700/70">Could not create agent</span>');
+        showOverlay('<span class="text-red-700/70">Impossible de creer l\'agent</span>');
       }
     };
 
@@ -262,7 +262,7 @@ async function loadAgent(agentId = null) {
     const status = error?.status || 500;
     const message =
       error?.status == 404
-        ? "You don't have access to this agent."
+        ? "Vous n'avez pas acces a cet agent."
         : error?.message || error?.error || 'Operation failed';
 
     console.log(error);
@@ -270,10 +270,10 @@ async function loadAgent(agentId = null) {
     if (error?.status == 404) {
       if (error?.errorData?.errKey?.includes('DIFFERENT_TEAM')) {
         const dialog = modalDialog(
-          'Access Error',
-          'You are not authorized to access this agent. Would you like to switch to the correct team?',
+          'Erreur d\'acces',
+          'Vous n\'etes pas autorise a acceder a cet agent. Souhaitez-vous basculer vers la bonne equipe ?',
           {
-            'Switch Team': {
+            'Changer d\'equipe': {
               class: 'text-white bg-v2-blue z-50',
               handler: async () => {
                 //Switch Team and refresh page
@@ -295,7 +295,7 @@ async function loadAgent(agentId = null) {
                 }
               },
             },
-            'Go to Home': {
+            'Accueil': {
               class: 'border border-gray-700 hover:opacity-75',
               handler: () => {
                 window.location.href = '/';
@@ -308,17 +308,17 @@ async function loadAgent(agentId = null) {
       } else if (error?.errorData?.errKey?.includes('NOT_ALLOWED_TO_ACCESS_AGENT')) {
         // we don't know if this is an access issue. uncomment if this is certain.
         const dialog = modalDialog(
-          'Access Error',
+          'Erreur d\'acces',
           message,
           {
-            'Request Access': {
+            'Demander l\'acces': {
               class: 'text-white bg-v2-blue z-50',
               handler: () => {
                 // Call requestAgentAccess when Request Access is clicked
                 requestAgentAccess(agentId, workspace?.userData?.email);
               },
             },
-            'Go to Home': {
+            'Accueil': {
               class: 'border border-gray-700 hover:opacity-75',
               handler: () => {
                 window.location.href = '/';
@@ -481,9 +481,9 @@ async function handleAgentSettings(agentId) {
       nameInput.value = workspace.agent.name;
       const watermarkeAgentName = document.querySelector('#watermark-agent-name') as HTMLElement;
       if (watermarkeAgentName) watermarkeAgentName.innerText = workspace.agent.name;
-      successToast('Agent saved');
+      successToast('Agent enregistre');
     } else {
-      errorToast('Save failed');
+      errorToast('Echec de l\'enregistrement');
     }
 
     if (updateDomain) {
@@ -495,17 +495,17 @@ async function handleAgentSettings(agentId) {
       })
         .then((response) => {
           if (response.ok) {
-            successToast('Domain Updated');
+            successToast('Domaine mis a jour');
             workspace.agent.domain = selectedDomain;
             updateDeploymentDomainField(selectedDomain);
           } else {
             //throw new Error('Something went wrong');
-            errorToast('Domain Update failed');
+            errorToast('Echec de la mise a jour du domaine');
           }
         })
         .catch((error) => {
           console.log(error);
-          errorToast('Domain Update failed');
+          errorToast('Echec de la mise a jour du domaine');
         });
     }
 
@@ -527,9 +527,9 @@ async function handleAgentSettings(agentId) {
   }
 
   agentDeleteBtn?.addEventListener('click', async () => {
-    const shouldDelete = await confirm('Are you sure you want to delete this agent ?', '', {
-      btnNoLabel: 'No, Cancel',
-      btnYesLabel: "Yes, I'm sure",
+    const shouldDelete = await confirm('Etes-vous sur de vouloir supprimer cet agent ?', '', {
+      btnNoLabel: 'Non, annuler',
+      btnYesLabel: "Oui, je confirme",
       btnYesClass: 'bg-smyth-red-500 border-smyth-red-500',
     });
     if (!shouldDelete) return;
@@ -537,11 +537,11 @@ async function handleAgentSettings(agentId) {
     const id = workspace.agent.id;
     const result = await workspace.deleteAgent(id);
     if (result) {
-      successToast('Agent deleted');
+      successToast('Agent supprime');
       await delay(1000);
       document.location.href = '/agents';
     } else {
-      errorToast('Delete failed');
+      errorToast('Echec de la suppression');
     }
   });
 
@@ -792,8 +792,8 @@ export async function openChatGPTEmbodiment() {
 
   if (!testDomain && !prodDomain) {
     const content =
-      '<div class="p-4">Agent domain is not set. Cannot provide chatGPT configuration</div>';
-    openEmbodimentDialog(content, {}, 'ChatGPT deployment instructions');
+      '<div class="p-4">Le domaine de l\'agent n\'est pas configure. Impossible de fournir la configuration chatGPT.</div>';
+    openEmbodimentDialog(content, {}, 'Instructions de deploiement ChatGPT');
     return;
   }
 
@@ -1022,7 +1022,7 @@ export async function openVoiceEmbodiment() {
       // Handle iframe load error
       voiceIframe.addEventListener('error', () => {
         isIframeLoading = false;
-        errorToast('Failed to load voice session');
+        errorToast('Echec du chargement de la session vocale');
         resetVoiceSession();
       });
     }
@@ -1119,13 +1119,13 @@ export async function openAlexaEmbodiment() {
   }
 
   const testUrl = testDomain ? `${scheme}://${testDomain}/alexa` : '';
-  const prodUrl = prodDomain ? `${scheme}://${prodDomain}/alexa` : 'Agent is not deployed yet';
+  const prodUrl = prodDomain ? `${scheme}://${prodDomain}/alexa` : 'L\'agent n\'est pas encore deploye';
 
   // Update the close and cancel buttons to also reset the publish button
   const closeModalCode = `(() => {
     document.getElementById('alexa-access-token').value = '';
     document.getElementById('alexa-vendor-id').value = '';
-    document.querySelector('#alexa-publish-modal .publish-btn').innerHTML = 'Publish';
+    document.querySelector('#alexa-publish-modal .publish-btn').innerHTML = 'Publier';
     document.querySelector('#alexa-publish-modal .publish-btn').disabled = false;
     document.getElementById('alexa-publish-modal').classList.add('hidden');
   })()`;
@@ -1139,7 +1139,7 @@ export async function openAlexaEmbodiment() {
       spinner.className = 'inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2';
       btn.innerHTML = '';
       btn.appendChild(spinner);
-      btn.appendChild(document.createTextNode('Publishing...'));
+      btn.appendChild(document.createTextNode('Publication...'));
       btn.disabled = true;
 
       const accessToken = document.getElementById('alexa-access-token').value;
@@ -1162,17 +1162,17 @@ export async function openAlexaEmbodiment() {
 
       // Show success state
       document.getElementById('alexa-publish-modal').classList.add('hidden');
-      successToast('Alexa Skill published successfully');
+      successToast('Alexa Skill publiee avec succes');
 
     } catch (error) {
       console.error(error);
-      btn.innerHTML = 'Failed to Publish';
-      errorToast('Failed to publish Alexa Skill');
+      btn.innerHTML = 'Echec de la publication';
+      errorToast('Echec de la publication de l\'Alexa Skill');
       
       // Reset button after delay
       setTimeout(() => {
         btn.disabled = false;
-        btn.innerHTML = 'Publish';
+        btn.innerHTML = 'Publier';
       }, 2000);
     }
   })()"
@@ -1200,10 +1200,10 @@ export async function openAlexaEmbodiment() {
               />
               <button onclick="(function(){ 
                   navigator.clipboard.writeText('${testUrl}');
-                  successToast('URL copied to clipboard', 'Info');
+                  successToast('URL copiee dans le presse-papiers', 'Info');
                 })()" 
                 class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
-                title="Copy URL">
+                title="Copier l'URL">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1225,10 +1225,10 @@ export async function openAlexaEmbodiment() {
               />
               <button onclick="(function(){ 
                   navigator.clipboard.writeText('${prodUrl}');
-                  successToast('URL copied to clipboard', 'Info');
+                  successToast('URL copiee dans le presse-papiers', 'Info');
                 })()" 
                 class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
-                title="Copy URL">
+                title="Copier l'URL">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1258,7 +1258,7 @@ export async function openAlexaEmbodiment() {
                 <label class="block text-sm font-medium text-gray-700 mb-1">Access Token</label>
                 <input type="text" id="alexa-access-token" 
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                  placeholder="Enter Access Token">
+                  placeholder="Saisir le jeton d'acces">
               </div>
 
 
@@ -1266,7 +1266,7 @@ export async function openAlexaEmbodiment() {
                 <label class="block text-sm font-medium text-gray-700 mb-1">Vendor ID</label>
                 <input type="text" id="alexa-vendor-id" 
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                  placeholder="Enter Vendor ID">
+                  placeholder="Saisir l'identifiant vendeur">
               </div>
             </div>
 
@@ -1292,7 +1292,7 @@ export async function openAlexaEmbodiment() {
   builderStore.subscribe(
     (state) => [state.agentDomains.prod, state.agentDomains.scheme],
     ([prodDomain, scheme]) => {
-      const prodUrl = prodDomain ? `${scheme}://${prodDomain}/alexa` : 'Agent is not deployed yet';
+      const prodUrl = prodDomain ? `${scheme}://${prodDomain}/alexa` : 'L\'agent n\'est pas encore deploye';
       const prodUrlElement = document.querySelector(
         '#alexa-embodiment-wrapper #alexa-prod-url',
       ) as HTMLInputElement;
@@ -1304,7 +1304,7 @@ export async function openAlexaEmbodiment() {
         if (alexaCopyButton) {
           alexaCopyButton.setAttribute(
             'onclick',
-            `(function(){ navigator.clipboard.writeText('${prodUrl}'); successToast('URL copied to clipboard', 'Info'); })()`,
+            `(function(){ navigator.clipboard.writeText('${prodUrl}'); successToast('URL copiee dans le presse-papiers', 'Info'); })()`,
           );
         }
       }
@@ -1398,7 +1398,7 @@ export async function openChatbotEmbodiment() {
           }
         },
         label: `<span class="refresh-chat-btn loading flex items-center justify-center w-4 h-4" style="pointer-events: none; opacity: 0.7;">${spinnerIcon}</span>`, // Start with disabled spinner for initial load
-        tooltip: 'Refresh chat session',
+        tooltip: 'Rafraichir la session de chat',
         tooltipPlacement: 'left',
       },
     };
@@ -1588,10 +1588,10 @@ export async function openMCPEmbodiment() {
               />
               <button onclick="(function(){ 
                   navigator.clipboard.writeText('${mcpDevUrl}');
-                  successToast('URL copied to clipboard', 'Info');
+                  successToast('URL copiee dans le presse-papiers', 'Info');
                 })()" 
                 class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
-                title="Copy URL">
+                title="Copier l'URL">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1613,10 +1613,10 @@ export async function openMCPEmbodiment() {
               />
               <button onclick="(function(){ 
                   navigator.clipboard.writeText('${mcpProdUrl}');
-                  successToast('URL copied to clipboard', 'Info');
+                  successToast('URL copiee dans le presse-papiers', 'Info');
                 })()" 
                 class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
-                title="Copy URL">
+                title="Copier l'URL">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1652,7 +1652,7 @@ export async function openMCPEmbodiment() {
         if (copyButton) {
           copyButton.setAttribute(
             'onclick',
-            `(function(){ navigator.clipboard.writeText('${mcpProdUrl}'); successToast('URL copied to clipboard', 'Info'); })()`,
+            `(function(){ navigator.clipboard.writeText('${mcpProdUrl}'); successToast('URL copiee dans le presse-papiers', 'Info'); })()`,
           );
         }
       }
@@ -1696,7 +1696,7 @@ function openVideoTutorialDialog(videoLink: string) {
       class: 'border border-gray-700 hover:opacity-75',
       handler: () => { },
     },
-    'Open in new tab': {
+    'Ouvrir dans un nouvel onglet': {
       class: 'text-white bg-v2-blue',
       handler: () => {
         window.open(videoLink, '_blank');
@@ -1823,14 +1823,14 @@ async function requestAgentAccess(agentId: string, email: string) {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to request access. Please try again later.');
+      throw new Error('Echec de la demande d\'acces. Veuillez reessayer plus tard.');
     }
 
     // Success - redirect to home page
     window.location.href = '/';
   } catch (error) {
     // Re-throw error to be handled by the modal's error handling
-    throw new Error(error.message || 'An error occurred requesting access');
+    throw new Error(error.message || 'Une erreur est survenue lors de la demande d\'acces');
   }
 }
 

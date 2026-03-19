@@ -228,7 +228,7 @@ export async function getAgent(req: Request, id, returnFullResponse = false) {
         Array.isArray(response?.data?.agent?.domain) &&
         response?.data?.agent?.domain.length == 0
       ) {
-        response?.data?.agent?.domain.push({ name: `${id}.${config.env.PROD_AGENT_DOMAIN}` });
+        response?.data?.agent?.domain.push({ name: `${config.env.PROD_AGENT_DOMAIN}/${id}` });
       }
     }
 

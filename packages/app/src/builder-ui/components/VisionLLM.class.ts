@@ -128,7 +128,7 @@ export class VisionLLM extends Component {
         class: 'mb-6',
         validate: `required`, // Omit maximum length, as the tokens counted in backend may be different from the frontend.
         validateMessage: `Please provide a prompt. It's required!`,
-        value: 'What’s in this image?',
+        value: `Que contient cette image ?`,
         help: 'Explain what to extract or describe from the images (for example, detection, OCR, quality check).',
         attributes: { 'data-template-vars': 'true' },
       },

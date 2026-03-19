@@ -54,7 +54,7 @@ export function AgentsGrid({
     return (
       <div className="py-5 mx-auto mb-6">
         <div className="py-5 mx-auto w-11/12">
-          <p className="secondary-grey mt-15">No agents available.</p>
+          <p className="secondary-grey mt-15">Aucun agent IA disponible.</p>
         </div>
       </div>
     );
@@ -90,7 +90,7 @@ export function AgentsGrid({
             />
           )}
           <span>
-            View more agents
+            Voir plus d'agents IA
             <FaArrowRight className="inline-block ml-1" />
           </span>
         </button>

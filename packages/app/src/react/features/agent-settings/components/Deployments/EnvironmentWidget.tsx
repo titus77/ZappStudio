@@ -93,7 +93,7 @@ const DomainRow = ({
                     </button>
                   </TooltipTrigger>
                   <TooltipContent side="top" className="min-w-max">
-                    <p>Copy</p>
+                    <p>Copier</p>
                   </TooltipContent>
                 </Tooltip>
                 <Tooltip>
@@ -107,7 +107,7 @@ const DomainRow = ({
                     </button>
                   </TooltipTrigger>
                   <TooltipContent side="top">
-                    <p>API calls and endpoint testing</p>
+                    <p>Appels API et tests des endpoints</p>
                   </TooltipContent>
                 </Tooltip>
               </>
@@ -122,7 +122,7 @@ const DomainRow = ({
                 </button>
               </TooltipTrigger>
               <TooltipContent side="top">
-                <p>Open in a new tab</p>
+                <p>Ouvrir dans un nouvel onglet</p>
               </TooltipContent>
             </Tooltip>
           </div>
@@ -331,16 +331,16 @@ const EnvironmentWidget = ({ isWriteAccess, isDeployed }: Props) => {
         {/* Header */}
         <div>
           <div className="flex items-start gap-2 mb-2">
-            <h3 className="text-sm font-semibold text-gray-700">Environment</h3>
+            <h3 className="text-sm font-semibold text-gray-700">Environnement</h3>
           </div>
           <p className="text-sm text-gray-600">
-            Access Live production domain and test domain of agents.
+            Accédez au domaine de production et au domaine de test de vos agents IA.
           </p>
         </div>
 
         {/* Production Domain */}
         <DomainRow
-          label="Production Domain"
+          label="Domaine de production"
           value={selectedDomain || '[None]'}
           options={availableDomains}
           showAPI={selectedDomain !== '[None]'}
@@ -366,7 +366,7 @@ const EnvironmentWidget = ({ isWriteAccess, isDeployed }: Props) => {
 
         {/* Test Domain */}
         <DomainRow
-          label={'Test Domain'}
+          label={'Domaine de test'}
           value={testDomainUrl}
           onCopyClick={(domain) => {
             navigator.clipboard.writeText(ensureHttps(domain));
@@ -389,7 +389,7 @@ const EnvironmentWidget = ({ isWriteAccess, isDeployed }: Props) => {
               handleClick={handleSaveSettings}
               className="px-2 py-1"
             >
-              Save
+              Enregistrer
             </Button>
           </div>
         )}

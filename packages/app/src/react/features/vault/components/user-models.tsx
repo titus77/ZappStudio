@@ -33,7 +33,7 @@ const validationRules = {
 };
 
 const errorMessages = {
-  apiKey: 'API key is required and must be less than 10000 characters.',
+  apiKey: 'La clé API est requise et doit comporter moins de 10 000 caractères.',
 };
 
 function SetupModal({ isOpen, onClose, model, existingKey, isEdit }: SetupModalProps) {
@@ -71,11 +71,11 @@ function SetupModal({ isOpen, onClose, model, existingKey, isEdit }: SetupModalP
       { modelId: model.id, keyName: model.id, apiKey: apiKey.trim() },
       {
         onSuccess: () => {
-          successToast(`API key ${isEdit ? 'updated' : 'added'} successfully`);
+          successToast(`Clé API ${isEdit ? 'mise à jour' : 'ajoutée'} avec succès`);
           onClose();
         },
         onError: () => {
-          errorToast(`Failed to ${isEdit ? 'update' : 'add'} API key`);
+          errorToast(`Échec de ${isEdit ? 'la mise à jour' : 'l\'ajout'} de la clé API`);
         },
       },
     );
@@ -98,17 +98,17 @@ function SetupModal({ isOpen, onClose, model, existingKey, isEdit }: SetupModalP
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-xl text-[#1E1E1E]">
-            {isEdit ? 'Update API Key for' : 'Setup API Key for'} {model.name}
+            {isEdit ? 'Mettre à jour la clé API pour' : 'Configurer la clé API pour'} {model.name}
           </DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="flex flex-col gap-4">
             <TextArea
-              label="API Key"
+              label="Clé API"
               labelClassName={'text-base font-normal text-[#1E1E1E] mb-2'}
               id="apiKey"
               value={apiKey}
-              placeholder="Enter your API key"
+              placeholder="Saisir votre clé API"
               onChange={(e) => {
                 setApiKey(e.target.value);
                 // Validate length on every change, but not emptiness
@@ -124,7 +124,7 @@ function SetupModal({ isOpen, onClose, model, existingKey, isEdit }: SetupModalP
           <CustomButton
             handleClick={handleSubmit}
             disabled={isSaveDisabled}
-            label={isLoading ? 'Saving...' : 'Save'}
+            label={isLoading ? 'Enregistrement...' : 'Enregistrer'}
             className={cn('w-[100px] rounded-sm')}
           />
         </DialogFooter>
@@ -150,11 +150,11 @@ const DeleteUserModelKeyDialog = ({
       { modelId: apiKey },
       {
         onSuccess: () => {
-          successToast('API key deleted successfully');
+          successToast('Clé API supprimée avec succès');
           onClose();
         },
         onError: (error) => {
-          errorToast('Failed to delete API key');
+          errorToast('Échec de la suppression de la clé API');
           console.error('Failed to delete API key:', error);
         },
       },
@@ -168,10 +168,10 @@ const DeleteUserModelKeyDialog = ({
   return (
     <ConfirmModal
       onClose={onClose}
-      label={isLoading ? 'Deleting...' : 'Delete'}
+      label={isLoading ? 'Suppression...' : 'Supprimer'}
       handleConfirm={handleDelete}
-      message="Are you sure?"
-      lowMsg="This action cannot be undone. This will permanently delete the API key."
+      message="Êtes-vous sûr ?"
+      lowMsg="Cette action est irréversible. La clé API sera définitivement supprimée."
       isLoading={isLoading}
       width="max-w-[600px] w-[calc(100vw_-_-20px)]"
       confirmBtnClasses="bg-red-600 hover:bg-red-700 text-white"
@@ -208,11 +208,11 @@ export function UserModels({ pageAccess }: { pageAccess: { write: boolean } }) {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Chargement...</div>;
   }
 
   if (error || !models) {
-    return <div>Error: {error?.message || 'Failed to load AI models'}</div>;
+    return <div>Erreur : {error?.message || 'Impossible de charger les modèles IA'}</div>;
   }
 
   const handleModalSetupClose = () => {
@@ -232,21 +232,21 @@ export function UserModels({ pageAccess }: { pageAccess: { write: boolean } }) {
     <div className="rounded-lg bg-card text-card-foreground border border-solid border-gray-200 shadow-sm">
       <div className="p-6">
         <h2 className="flex items-center gap-2 text-lg font-semibold mb-4">
-          Your Own AI Models
+          Vos propres modèles IA
           <Tooltip>
             <TooltipTrigger asChild>
               <Info className="w-4 h-4 cursor-help" />
             </TooltipTrigger>
             <TooltipContent className="max-w-[240px] text-center text-wrap">
               <p>
-                Bring and maintain your own AI models by adding API keys for OpenAI, Google,
-                Anthropic, and other providers
+                Apportez et gérez vos propres modèles IA en ajoutant des clés API pour OpenAI, Google,
+                Anthropic et d'autres fournisseurs
               </p>
             </TooltipContent>
           </Tooltip>
         </h2>
         <p className="text-sm text-muted-foreground mb-4">
-          Bring and maintain your own AI models. See{' '}
+          Apportez et gérez vos propres modèles IA. Voir la{' '}
           <a
             href={`${SMYTHOS_DOCS_URL}/agent-studio/key-concepts/vault#custom-ai-model-configuration`}
             target="_blank"
@@ -292,7 +292,7 @@ export function UserModels({ pageAccess }: { pageAccess: { write: boolean } }) {
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>{copiedKeyId === model?.id ? 'Copied!' : 'Copy'}</p>
+                          <p>{copiedKeyId === model?.id ? 'Copié !' : 'Copier'}</p>
                         </TooltipContent>
                       </Tooltip>
                       {pageAccess?.write && (
@@ -317,7 +317,7 @@ export function UserModels({ pageAccess }: { pageAccess: { write: boolean } }) {
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>Edit</p>
+                            <p>Modifier</p>
                           </TooltipContent>
                         </Tooltip>
                       )}
@@ -338,7 +338,7 @@ export function UserModels({ pageAccess }: { pageAccess: { write: boolean } }) {
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>Delete</p>
+                            <p>Supprimer</p>
                           </TooltipContent>
                         </Tooltip>
                       )}
@@ -358,7 +358,7 @@ export function UserModels({ pageAccess }: { pageAccess: { write: boolean } }) {
                             },
                           })
                         }
-                        label={pageAccess?.write ? 'Setup' : 'Upgrade Plan'}
+                        label={pageAccess?.write ? 'Configurer' : 'Améliorer l\'offre'}
                         dataAttributes={{
                           'data-qa': pageAccess?.write ? `${key}-setup-own-model-button` : '',
                         }}

@@ -50,28 +50,29 @@ const GptEmbodimentModal: React.FC<GptEmbodimentModalProps> = ({ onClose }) => {
         {/* Step-by-step instructions */}
         <ol className="list-decimal pl-5 space-y-2 text-sm text-gray-700">
           <li>
-            Click{' '}
+            Cliquez{' '}
             <a
               href="https://chatgpt.com/gpts"
               target="_blank"
               rel="noopener noreferrer"
               className="text-v2-blue font-semibold underline"
             >
-              Here
+              ici
             </a>{' '}
-            to Create a custom GPT from chatGPT interface.
+            pour créer un GPT personnalisé depuis l'interface chatGPT.
           </li>
-          <li>Click on "Configure" tab</li>
+          <li>Cliquez sur l'onglet "Configure"</li>
           <li>
-            Enter your Custom GPT information: We recommend to copy the content of ZappStudio Agent
-            behavior inside "Instructions" area in order to have a consistent behavior
+            Renseignez les informations de votre GPT personnalisé : nous vous recommandons de copier
+            le contenu du comportement de votre agent IA ZappStudio dans la zone "Instructions" pour
+            garantir un comportement cohérent.
           </li>
-          <li>Scroll down and Click on "Create new action" button.</li>
-          <li>Click Import URL and enter the following URL:</li>
+          <li>Faites défiler vers le bas et cliquez sur le bouton "Create new action".</li>
+          <li>Cliquez sur "Import URL" et saisissez l'URL suivante :</li>
         </ol>
         {devUrl && (
           <>
-            <div className="text-sm text-gray-900 -mb-4">GPT Dev URL</div>
+            <div className="text-sm text-gray-900 -mb-4">URL GPT de développement</div>
             <div className="relative flex items-center mt-1 group w-full">
               <Input
                 type="text"
@@ -95,7 +96,7 @@ const GptEmbodimentModal: React.FC<GptEmbodimentModalProps> = ({ onClose }) => {
         )}
         {prodUrl && (
           <>
-            <div className="text-sm text-gray-900 -mb-4">GPT Prod URL</div>
+            <div className="text-sm text-gray-900 -mb-4">URL GPT de production</div>
             <div className="relative flex items-center mt-1 group w-full">
               <Input
                 type="text"

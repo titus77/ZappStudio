@@ -352,14 +352,14 @@ export async function createEmbodimentSidebar(title?, content?, actions?, toolti
   const tabContainer = embodimentSidebar.querySelector('.tab-container');
   const nav = embodimentSidebar.querySelector('.tab-container nav');
   const convertTitleToKeys = {
-    'LLM API / AgentLLM': 'Test as LLM',
-    Chatbot: 'Test as Chat',
-    api: 'Test as API',
-    'Custom GPT': 'Test in ChatGPT',
-    'Postman Integration': 'Test in Postman',
-    LLM: 'Test as LLM',
-    Voice: 'Test with Voice',
-    'Alexa Skill': 'Test with Alexa',
+    'LLM API / AgentLLM': 'Tester en LLM',
+    Chatbot: 'Tester en Chat',
+    api: 'Tester via API',
+    'Custom GPT': 'Tester dans ChatGPT',
+    'Postman Integration': 'Tester dans Postman',
+    LLM: 'Tester en LLM',
+    Voice: 'Tester par Voix',
+    'Alexa Skill': 'Tester avec Alexa',
   };
 
   // Build header configs from EMBODIMENT_DESCRIPTIONS
@@ -682,12 +682,12 @@ export function showRefreshAuthPopup() {
     if (showRefreshAuthPopup['open']) return resolve(false); // skip if already open
     showRefreshAuthPopup['open'] = true;
     const confirmAuth = await confirm(
-      'Authentication',
-      'Session expired, do you want to re-authenticate?',
+      'Authentification',
+      'La session a expire, souhaitez-vous vous re-authentifier ?',
       {
         icon: '',
-        btnYesLabel: 'Yes',
-        btnNoLabel: 'No',
+        btnYesLabel: 'Oui',
+        btnNoLabel: 'Non',
       },
     );
     showRefreshAuthPopup['open'] = false;
@@ -715,8 +715,8 @@ export function showRefreshAuthPopup() {
 
   return new Promise((resolve) => {
     Metro.dialog.create({
-      title: 'Authentication',
-      content: `<div class="form">Session expired, do you want to re-authenticate ?</div>`,
+      title: 'Authentification',
+      content: `<div class="form">La session a expire, souhaitez-vous vous re-authentifier ?</div>`,
       onShow: async function (dialog) {
         showRefreshAuthPopup['open'] = true;
         showOverlay();
@@ -727,14 +727,14 @@ export function showRefreshAuthPopup() {
       },
       actions: [
         {
-          caption: 'No',
+          caption: 'Non',
           cls: 'js-dialog-close alert',
           onclick: function () {
             resolve(false);
           },
         },
         {
-          caption: 'Yes',
+          caption: 'Oui',
           cls: 'success',
           onclick: function (dialog) {
             const authEventListener = (event) => {
@@ -812,7 +812,7 @@ export function prompt(message, defaultValue = '') {
                       </div>`,
       actions: [
         {
-          caption: 'Cancel',
+          caption: 'Annuler',
           cls: 'js-dialog-close alert',
           onclick: function () {
             resolve(null);
@@ -959,7 +959,7 @@ export function editValues({
       const _this = event.target as HTMLButtonElement;
 
       const btnText = _this.textContent;
-      _this.textContent = 'Saving...';
+      _this.textContent = 'Enregistrement...';
       _this.disabled = true;
 
       const formElm = _this.closest('.dialog').querySelector('.dlg-form') as HTMLFormElement;

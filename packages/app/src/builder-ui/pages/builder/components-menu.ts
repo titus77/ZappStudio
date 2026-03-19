@@ -76,7 +76,7 @@ function handleWorkspaceEvents(workspace: Workspace) {
 
   // init
   if (CmpToggleBtnText) {
-    CmpToggleBtnText.textContent = workspace.areComponentsCollapsed() ? 'Expand' : 'Collapse';
+    CmpToggleBtnText.textContent = workspace.areComponentsCollapsed() ? 'Developper' : 'Reduire';
   }
   if (CmpToggleBtnIcon) {
     CmpToggleBtnIcon.classList.remove('mif-unfold-less', 'mif-unfold-more');
@@ -91,14 +91,14 @@ function handleWorkspaceEvents(workspace: Workspace) {
       CmpToggleBtnIcon?.classList.remove('mif-unfold-less');
       CmpToggleBtnIcon?.classList.add('mif-unfold-more');
       if (CmpToggleBtnText) {
-        CmpToggleBtnText.textContent = 'Expand';
+        CmpToggleBtnText.textContent = 'Developper';
       }
       workspace.collapseComponents();
     } else {
       CmpToggleBtnIcon?.classList.remove('mif-unfold-more');
       CmpToggleBtnIcon?.classList.add('mif-unfold-less');
       if (CmpToggleBtnText) {
-        CmpToggleBtnText.textContent = 'Collapse';
+        CmpToggleBtnText.textContent = 'Reduire';
       }
       workspace.expandComponents();
     }
@@ -528,7 +528,7 @@ export function setupSearch(config: SearchConfig): void {
               emptyStateMessage = document.createElement('div');
               emptyStateMessage.className =
                 'empty-section-message text-sm text-gray-500 italic px-4 py-2';
-              emptyStateMessage.textContent = 'No components available';
+              emptyStateMessage.textContent = 'Aucun composant disponible';
               // Append to container after the group button
               const groupBtn = container.querySelector('.group-btn');
               if (groupBtn && groupBtn.nextSibling) {
@@ -701,7 +701,7 @@ function setupBuilderMenuDragDrop() {
         tooltip.style.left = targetCoords.right + 10 + 'px';
         tooltip.style.top = targetCoords.top - 20 + 'px';
         tooltip.textContent =
-          'Oops! You’re dropping this component off the Canvas—please drop it inside.';
+          'Oups ! Vous deposez ce composant en dehors du canevas — veuillez le deposer a l\'interieur.';
 
         event.target.appendChild(tooltip);
 
@@ -765,9 +765,9 @@ function setupBuilderMenuDragDrop() {
       ]);
       if (RAG_COMPONENTS.has(cpName) && !isPremiumPlan()) {
         renderCompUpgradeModal({
-          msg: `RAG search, remember, and forget functions are not available on your plan.
-               {{Upgrade}} to enable RAG capabilities and much more.`,
-          title: 'Unlock RAG Components',
+          msg: `Les fonctions de recherche, memorisation et suppression RAG ne sont pas disponibles dans votre offre.
+               {{Upgrade}} pour activer les capacites RAG et bien plus encore.`,
+          title: 'Debloquer les composants RAG',
           analytics: {
             page_url: '/builder',
             source: 'drag and drop rag component',
@@ -777,9 +777,9 @@ function setupBuilderMenuDragDrop() {
       }
       if (cpName === 'ComputerUse' && !isEnterprisePlan()) {
         renderCompUpgradeModal({
-          msg: `Computer Use is not available on your plan.
-               {{Upgrade}} to enable Computer Use and much more.`,
-          title: 'Unlock Computer Use',
+          msg: `Computer Use n'est pas disponible dans votre offre.
+               {{Upgrade}} pour activer Computer Use et bien plus encore.`,
+          title: 'Debloquer Computer Use',
           analytics: {
             page_url: '/builder',
             source: 'drag and drop computer use component',
@@ -1130,17 +1130,17 @@ function renderUpgradeModal() {
       fields: {},
       content: `
           <div class="text-center">
-            <h2 class="text-2xl font-medium">Access More Integrations</h2>
+            <h2 class="text-2xl font-medium">Acceder a plus d'integrations</h2>
             <div class="flex items-center gap-4 my-4">
               <p class="text-sm text-[#2F2F2F] w-3/4 mx-auto">
-                Upgrade your plan to access this integration and unlock more powerful features.
+                Passez a un forfait superieur pour acceder a cette integration et debloquer des fonctionnalites plus puissantes.
               </p>
             </div>
           </div>
         `,
       actions: [
         {
-          label: 'Upgrade',
+          label: 'Mettre a niveau',
           cssClass:
             'bg-primary-100 text-white rounded-md px-4 py-1.5 hover:opacity-75 cursor-pointer w-full',
           callback: (_, dialog) => {
@@ -1196,7 +1196,7 @@ function renderCompUpgradeModal({
                    page_url: '/builder',
                    source: 'restoring previous version'
                  })">
-                Upgrade</a>`,
+                Mettre a niveau</a>`,
   );
 
   twEditValuesWithCallback(
@@ -1301,14 +1301,14 @@ function renderRestrictedAccessModal(feature: string) {
 
   const modalContent = {
     'Hugging Face': {
-      title: 'Unlock Hugging Face Models',
-      message: 'Access to Hugging Face models are not available on your plan.',
+      title: 'Debloquer les modeles Hugging Face',
+      message: 'L\'acces aux modeles Hugging Face n\'est pas disponible dans votre offre.',
     },
     OpenAI: {
-      title: 'Unlock OpenAPI Models',
+      title: 'Debloquer les modeles OpenAPI',
       message:
-        'Adding models using OpenAPI specifications is not available on your plan. Please upgrade to startup or above to continue.',
-      minimumPlan: 'to startup or above',
+        'L\'ajout de modeles via des specifications OpenAPI n\'est pas disponible dans votre offre. Veuillez passer a l\'offre Startup ou superieure pour continuer.',
+      minimumPlan: 'a l\'offre Startup ou superieure',
     },
   }[feature];
 
@@ -1332,8 +1332,8 @@ function renderRestrictedAccessModal(feature: string) {
                   page_url: '/builder',
                   source: 'adding ${feature}'
                 })">
-                Upgrade ${modalContent?.minimumPlan || ''}
-              </a> to import and add third party models.
+                Passer ${modalContent?.minimumPlan || ''}
+              </a> pour importer et ajouter des modeles tiers.
             </p>
           </div>
         </div>
@@ -1364,12 +1364,12 @@ function renderRestrictedAccessModalWebTools() {
       content: `
         <div class="text-center px-4 py-6">
           <h2 class="text-2xl font-bold text-gray-800 mb-2">
-            Unlock Web Access
+            Debloquer l'acces web
           </h2>
 
           <div class="mb-6">
             <p class="text-base text-gray-600 leading-relaxed mx-auto max-w-md">
-              Webscrape and Websearch components are not available on legacy plans.
+              Les composants Webscrape et Websearch ne sont pas disponibles dans les offres legacy.
               <a href="/plans"
                 target="_blank"
                 class="text-blue-600 underline hover:opacity-75"
@@ -1377,8 +1377,8 @@ function renderRestrictedAccessModalWebTools() {
                   page_url: '/builder',
                   source: 'adding web tools'
                 })">
-                Upgrade
-              </a> to continue using these features and much more.
+                Mettre a niveau
+              </a> pour continuer a utiliser ces fonctionnalites et bien plus encore.
             </p>
           </div>
         </div>

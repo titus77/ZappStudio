@@ -98,7 +98,7 @@ export class LLMAssistant extends Component {
         validateMessage: `The behavior prompt should be a non empty text of less than 30,000 characters`,
         value: 'You are a helpful assistant that helps people with their questions',
         attributes: { 'data-template-vars': 'true' },
-        help: 'Set the assistant’s tone, rules, and actions so replies fit the intended use case. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See behaviour examples</a>',
+        help: `Definissez le ton, les regles et les actions de l'assistant pour que les reponses correspondent au cas d'usage prevu. <a href="https://zapp.immo/docs/studio/composants" target="_blank" class="text-blue-600 hover:text-blue-800">Voir des exemples</a>`,
         tooltipClasses: 'w-56 ',
         arrowClasses: '-ml-11',
       },

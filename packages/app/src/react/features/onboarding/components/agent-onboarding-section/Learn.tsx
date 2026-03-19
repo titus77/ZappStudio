@@ -5,9 +5,9 @@ import { SMYTHOS_DOCS_URL } from '@src/shared/constants/general';
 const learnCards: LearnCardProps[] = [
   {
     image: '/img/onboard/note.png',
-    title: 'Read Documentation',
+    title: 'Lire la documentation',
     description:
-      'Basics, Tutorials, Components, Integrations, Data, Deployment, Security, Advanced Topics, Best Practices, Troubleshooting, and more. ',
+      'Bases, tutoriels, composants, intégrations, données, déploiement, sécurité, sujets avancés, bonnes pratiques, dépannage, et bien plus. ',
     link: SMYTHOS_DOCS_URL,
   },
   // TODO: Delete this commented block once removal is confirmed. Discord & Academy links were removed from the app; code kept for traceability.
@@ -32,7 +32,7 @@ const learnCards: LearnCardProps[] = [
 export const Learn = () => {
   return (
     <div className="my-10 pb-3">
-      <h3 className="text-lg">Learn ZappStudio</h3>
+      <h3 className="text-lg">Apprendre ZappStudio</h3>
       <div className="mt-4 flex flex-wrap gap-4">
         {learnCards.map((card) => (
           <LearnCard key={card.title} {...card} />

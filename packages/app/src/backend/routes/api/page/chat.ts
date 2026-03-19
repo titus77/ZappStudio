@@ -284,7 +284,7 @@ router.post('/upload', [includeTeamDetails], (req: any, res, next) => {
       // Ensure agent id is forwarded for agent resolution by runtime
       proxyReq.setHeader('X-AGENT-ID', agentId);
       proxyReq.setHeader('x-agent-id', agentId);
-      // Ensure cookies aren’t forwarded
+      // Ensure cookies aren't forwarded
       proxyReq.removeHeader('Cookie');
     },
     logLevel: 'silent',

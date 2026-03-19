@@ -20,18 +20,18 @@ const AccountDeletedPage = () => {
     <div className="container mx-auto p-8 font-sans h-screen flex items-center justify-center">
       <div className="px-8 py-16 bg-white text-gray-900 w-full md:w-1/2 flex items-center justify-center rounded-lg font-sans font-medium flex-col">
         <h3 className="text-xl text-center">
-          Your account has been deleted. We're sorry to see you go.
+          Votre compte a été supprimé. Nous sommes désolés de vous voir partir.
         </h3>
 
         <p className="text-center mt-4">
-          If you have any feedback or need help, please reach out to us at{' '}
+          Si vous avez des commentaires ou besoin d'aide, contactez-nous à{' '}
           <a href="mailto:hello@zapp.immo" className="text-primary-100">
             hello@zapp.immo
           </a>
           .
         </p>
-        <h3 className="mt-20">Please wait while we redirect you to the login page.</h3>
-        <h3 className="text-center">{countdown} seconds remaining...</h3>
+        <h3 className="mt-20">Veuillez patienter pendant la redirection vers la page de connexion.</h3>
+        <h3 className="text-center">{countdown} secondes restantes...</h3>
       </div>
     </div>
   );

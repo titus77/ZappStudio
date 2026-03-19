@@ -19,7 +19,7 @@ export const HeaderActions: FC<IProps> = ({ onNewChat }) => (
         </button>
       </TooltipTrigger>
       <TooltipContent side="bottom">
-        <p>New Chat</p>
+        <p>Nouvelle conversation</p>
       </TooltipContent>
     </Tooltip>
 
@@ -30,7 +30,7 @@ export const HeaderActions: FC<IProps> = ({ onNewChat }) => (
         </Link>
       </TooltipTrigger>
       <TooltipContent side="bottom">
-        <p>Exit</p>
+        <p>Quitter</p>
       </TooltipContent>
     </Tooltip>
   </div>

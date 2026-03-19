@@ -203,7 +203,7 @@ export const AgentSettingsProvider: FC<AgentSettingsProviderProps> = ({
       fetch('/api/status')
         .then((res) => res.json())
         .then((data) => {
-          return data?.status?.agent_domain ? `${agentId}.${data?.status?.agent_domain}` : null;
+          return data?.status?.agent_domain ? `${data?.status?.agent_domain}/${agentId}` : null;
         }),
     cacheTime: 0,
     staleTime: 0,

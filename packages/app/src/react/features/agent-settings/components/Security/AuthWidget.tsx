@@ -183,10 +183,10 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
           await workspace.saveAgent(undefined, undefined, workspace.agent.data);
         }
 
-        successToast('Auth settings saved successfully');
+        successToast('Paramètres d\'authentification enregistrés avec succès');
       } catch (error) {
         console.error('Save auth settings error:', error);
-        errorToast('Failed to save auth settings');
+        errorToast('Échec de l\'enregistrement des paramètres d\'authentification');
       }
     },
     [agentId, workspace],
@@ -257,26 +257,26 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
     // Validate required fields for OAuth OIDC
     if (selectedAuth === 'oauth-oidc') {
       if (!oauthConfig.OIDCConfigURL) {
-        setValidationErrors((prev) => ({ ...prev, oidcEndpoint: 'OIDC Endpoint is required' }));
+        setValidationErrors((prev) => ({ ...prev, oidcEndpoint: 'Le point de terminaison OIDC est requis' }));
         hasErrors = true;
       } else if (!isValidURL(oauthConfig.OIDCConfigURL)) {
-        setValidationErrors((prev) => ({ ...prev, oidcEndpoint: 'Invalid OIDC Endpoint URL' }));
+        setValidationErrors((prev) => ({ ...prev, oidcEndpoint: 'URL du point de terminaison OIDC invalide' }));
         hasErrors = true;
       }
       if (!oauthConfig.clientID) {
-        setValidationErrors((prev) => ({ ...prev, clientId: 'Client ID is required' }));
+        setValidationErrors((prev) => ({ ...prev, clientId: 'L\'identifiant client est requis' }));
         hasErrors = true;
       }
 
       if (!oauthConfig.clientSecret) {
-        setValidationErrors((prev) => ({ ...prev, clientSecret: 'Client Secret is required' }));
+        setValidationErrors((prev) => ({ ...prev, clientSecret: 'Le secret client est requis' }));
         hasErrors = true;
       }
     }
 
     // Validate required fields for Bearer token
     if (selectedAuth === 'api-key-bearer' && !bearerConfig.token) {
-      setValidationErrors((prev) => ({ ...prev, bearerToken: 'Bearer token is required' }));
+      setValidationErrors((prev) => ({ ...prev, bearerToken: 'Le jeton Bearer est requis' }));
       hasErrors = true;
     }
 
@@ -310,14 +310,14 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
     try {
       await saveWorkSpaceAuth(authData);
     } catch (error) {
-      errorToast('Failed to save auth settings');
+      errorToast('Échec de l\'enregistrement des paramètres d\'authentification');
       console.error('Save auth settings error:', error);
     } finally {
       setIsBusySavingVariables(false);
     }
   }, [selectedAuth, oauthConfig, bearerConfig, saveWorkSpaceAuth]);
 
-  if (!agentAuthData) return <SkeletonLoader title="Auth" />;
+  if (!agentAuthData) return <SkeletonLoader title="Authentification" />;
 
   return (
     <WidgetCard title="" isWriteAccess={isWriteAccess}>
@@ -328,7 +328,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
         <div className="flex justify-between items-center">
           <div>
             <div className="flex items-center">
-              <h3 className="text-sm font-semibold text-gray-700">Configure Custom Auth</h3>
+              <h3 className="text-sm font-semibold text-gray-700">Configurer l'authentification personnalisée</h3>
               {/* <Tooltip content="Change Log">
                 <span className="ml-1 inline-block">
                   <div className="border border-solid border-gray-500 p-0.5 flex items-center rounded-full">
@@ -341,7 +341,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
         </div>
         <div className="mt-1">
           <label htmlFor="auth-method" className="block text-sm text-gray-700 mb-2">
-            Select an Auth Method
+            Sélectionner une méthode d'authentification
           </label>
           <select
             id="auth-method"
@@ -350,8 +350,8 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
             className="w-full p-2 text-sm border border-gray-300 rounded-md bg-white focus:ring-v2-blue focus:border-v2-blue"
             disabled={!isWriteAccess}
           >
-            <option value="none">None</option>
-            <option value="api-key-bearer">Bearer API Key</option>
+            <option value="none">Aucune</option>
+            <option value="api-key-bearer">Clé API Bearer</option>
             <option value="oauth-oidc">OAuth OIDC</option>
           </select>
         </div>
@@ -369,7 +369,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
                 <input
                   id="bearer-token"
                   type={showBearerToken ? 'text' : 'password'}
-                  placeholder="Enter your bearer token"
+                  placeholder="Saisir votre jeton Bearer"
                   value={bearerConfig.token}
                   onChange={(e) => setBearerConfig((prev) => ({ ...prev, token: e.target.value }))}
                   className={`w-full p-2 text-sm border rounded-md bg-white ${
@@ -398,12 +398,12 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
                 htmlFor="bearer-verification"
                 className="block text-sm font-medium text-gray-600 mb-2"
               >
-                OpenAI Verification
+                Vérification OpenAI
               </label>
               <input
                 id="bearer-verification"
                 type="text"
-                placeholder="Enter verification token"
+                placeholder="Saisir le jeton de vérification"
                 value={bearerConfig.BearerOpenAIVerificationToken}
                 onChange={(e) =>
                   setBearerConfig((prev) => ({
@@ -422,18 +422,18 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
           <div className="mt-4 space-y-4">
             <div className="bg-amber-50 border border-amber-200 rounded-md p-3">
               <p className="text-amber-800 text-xs">
-                <strong>Note:</strong> To use OAuth OIDC, you need to set the redirect URI in the
-                OAuth OIDC settings.
+                <strong>Remarque :</strong> Pour utiliser OAuth OIDC, vous devez définir l'URI de redirection dans les
+                paramètres OAuth OIDC.
                 <br />
                 <br />
                 <code className="block max-w-full overflow-x-auto break-all whitespace-pre-wrap">
-                  Test Redirect URI:
+                  URI de redirection Test :
                   <br />
                   {testRedirectEndpoint}
                 </code>
                 <br />
                 <code className="block max-w-full overflow-x-auto break-all whitespace-pre-wrap">
-                  Prod Redirect URI:
+                  URI de redirection Production :
                   <br />
                   {prodRedirectEndpoint}
                 </code>
@@ -445,12 +445,12 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
                 htmlFor="oidc-endpoint"
                 className="block text-sm font-medium text-gray-600 mb-2"
               >
-                OIDC Configuration Endpoint <span className="text-red-500">*</span>
+                Point de terminaison de configuration OIDC <span className="text-red-500">*</span>
               </label>
               <input
                 id="oidc-endpoint"
                 type="text"
-                placeholder="Enter OIDC configuration URL"
+                placeholder="Saisir l'URL de configuration OIDC"
                 value={oauthConfig.OIDCConfigURL}
                 onChange={(e) =>
                   setOauthConfig((prev) => ({ ...prev, OIDCConfigURL: e.target.value }))
@@ -474,7 +474,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
               <input
                 id="client-id"
                 type="text"
-                placeholder="Enter your client ID"
+                placeholder="Saisir votre identifiant client"
                 value={oauthConfig.clientID}
                 onChange={(e) => setOauthConfig((prev) => ({ ...prev, clientID: e.target.value }))}
                 className={`w-full p-2 text-sm border rounded-md bg-white ${
@@ -499,7 +499,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
               <input
                 id="client-secret"
                 type={showClientSecret ? 'text' : 'password'}
-                placeholder="Enter your client secret"
+                placeholder="Saisir votre secret client"
                 value={oauthConfig.clientSecret}
                 onChange={(e) =>
                   setOauthConfig((prev) => ({ ...prev, clientSecret: e.target.value }))
@@ -529,12 +529,12 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
                 htmlFor="allowed-emails"
                 className="block text-sm font-medium text-gray-600 mb-2"
               >
-                Allowed Emails
+                Emails autorisés
               </label>
               <input
                 id="allowed-emails"
                 type="text"
-                placeholder="Enter comma separated emails or domains"
+                placeholder="Saisir des emails ou domaines séparés par des virgules"
                 value={oauthConfig.allowedEmails}
                 onChange={(e) =>
                   setOauthConfig((prev) => ({ ...prev, allowedEmails: e.target.value }))
@@ -549,12 +549,12 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
                 htmlFor="verification-token"
                 className="block text-sm font-medium text-gray-600 mb-2"
               >
-                OpenAI Verification
+                Vérification OpenAI
               </label>
               <input
                 id="verification-token"
                 type="text"
-                placeholder="Enter verification token"
+                placeholder="Saisir le jeton de vérification"
                 value={oauthConfig.OIDCOpenAIVerificationToken}
                 onChange={(e) =>
                   setOauthConfig((prev) => ({
@@ -569,7 +569,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-2">
-                Test Authorize Endpoint
+                Point de terminaison d'autorisation Test
               </label>
               <div className="p-2 pl-0 bg-gray-50 border border-gray-300 rounded-md text-gray-600 text-sm break-words">
                 {testAuthorizeEndpoint}
@@ -578,7 +578,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-2">
-                Test Token Endpoint
+                Point de terminaison de jeton Test
               </label>
               <div className="p-2 pl-0 bg-gray-50 border border-gray-300 rounded-md text-gray-600 text-sm break-words">
                 {testTokenEndpoint}
@@ -587,7 +587,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-2">
-                Prod Authorize Endpoint
+                Point de terminaison d'autorisation Production
               </label>
               <div className="p-2 pl-0 bg-gray-50 border border-gray-300 rounded-md text-gray-600 text-sm break-words">
                 {prodAuthorizeEndpoint}
@@ -596,7 +596,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-2">
-                Prod Token Endpoint
+                Point de terminaison de jeton Production
               </label>
               <div className="p-2 pl-0 bg-gray-50 border border-gray-300 rounded-md text-gray-600 text-sm break-words">
                 {prodTokenEndpoint}
@@ -608,7 +608,7 @@ const AuthWidget = ({ isWriteAccess }: Props) => {
         <div className="flex justify-end">
           <CustomButton
             className="mt-4"
-            label="Save Auth Settings"
+            label="Enregistrer les paramètres d'authentification"
             handleClick={saveAuthSettings}
             loading={isBusySavingVariables}
             disabled={!isWriteAccess || isBusySavingVariables}

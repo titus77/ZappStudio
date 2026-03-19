@@ -149,7 +149,7 @@ export class Component extends EventEmitter {
       allowDefaultEdit: true,
       editConfig: {
         type: 'textarea',
-        label: 'Default Value',
+        label: 'Valeur par defaut',
         fieldCls:
           'bg-white border text-gray-900 rounded block w-full outline-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-shadow-none text-sm font-normal placeholder:text-sm placeholder:font-light py-2 px-3 transition-all duration-150 ease-in-out border-gray-300 border-b-gray-500 focus:border-b-2 focus:border-b-blue-500 focus-visible:border-b-2 focus-visible:border-b-blue-500',
         attributes: {
@@ -158,7 +158,7 @@ export class Component extends EventEmitter {
           rows: '2',
         }, // Enable auto-size for consistent UX with 2-line default
         section: 'Advanced_Options',
-        hint: 'Value assigned if no specific value provided by user.',
+        hint: 'Valeur attribuee si aucune valeur specifique n\'est fournie par l\'utilisateur.',
         hintPosition: 'after_label',
       },
     },
@@ -521,7 +521,7 @@ export class Component extends EventEmitter {
     };
 
     new TooltipV2(debugBtn, {
-      text: 'Run with Debug',
+      text: 'Lancer avec le debug',
       position: this.isLogicalComponent() ? 'left' : 'top',
       showWhen: 'hover',
     });
@@ -562,7 +562,7 @@ export class Component extends EventEmitter {
     const missingSettings = requiredSettings.filter((setting) => !this.data[setting.id]);
     if (missingSettings.length > 0) {
       this.addComponentMessage(
-        `Missing Settings ${missingSettings.map((e) => e.name).join(', ')}`,
+        `Parametres manquants : ${missingSettings.map((e) => e.name).join(', ')}`,
         'alert pointer',
         () => {
           Observability.observeInteraction('app_component_alert_click', {
@@ -587,7 +587,7 @@ export class Component extends EventEmitter {
         // Ensure the "Manage Keys" message is rendered before adding the mock data toggle button to prevent duplicate messages. Since adding the toggle button is an asynchronous operation and checkSettings is called without await, there is a potential race condition.
         if (addManageMessage) {
           this?.addComponentMessage(
-            'Manage keys',
+            'Gerer les cles',
             'info pointer',
             () => window.open('/vault', '_blank'),
             MANAGE_KEYS_MESSAGE_CLASS_NAME,
@@ -664,7 +664,7 @@ export class Component extends EventEmitter {
       // #endregion get missing settings
 
       if (missingSettings.length > 0) {
-        this.addComponentMessage(`Missing Settings`, 'alert pointer', () => {
+        this.addComponentMessage(`Parametres manquants`, 'alert pointer', () => {
           Observability.observeInteraction('app_component_alert_click', {
             type: 'missing settings',
           });
@@ -784,7 +784,7 @@ export class Component extends EventEmitter {
         if (hasMissingKeyMessage) continue;
 
         this.addComponentMessage(
-          `Missing Key "${keyName}"`,
+          `Cle manquante "${keyName}"`,
           'alert pointer',
           () => {
             Observability.observeInteraction('app_component_alert_click', {
@@ -907,7 +907,7 @@ export class Component extends EventEmitter {
   }
   public async addOutput(parent, name, outputProperties: any = {}, options: any = {}) {
     if (this.outputNameExists(name)) {
-      errorToast(`Output "${name}" already exists`);
+      errorToast(`La sortie "${name}" existe deja`);
       console.warn(`Output "${name}" already exists`, this);
       return;
     }
@@ -988,17 +988,17 @@ export class Component extends EventEmitter {
       const color = outputDiv.getAttribute('smt-color') || `${WorkspaceDefaults.conStartColor}`;
       const valConfig: any = {
         name: {
-          label: 'Output Name',
+          label: 'Nom de la sortie',
           type: 'text',
           class: 'stg-output stg-name',
           value: name,
           readonly: defaultEP || templateDefaultEP,
           validate: 'required custom=isValidOutputName',
-          validateMessage: `Name is required and allow JSON path notation, e.g., Response.text, items[0], data['key'], etc.`,
+          validateMessage: `Le nom est requis et accepte la notation de chemin JSON, ex. : Response.text, items[0], data['key'], etc.`,
         },
         additionalOptionsLabel: {
           type: 'div',
-          html: '<small class="field-hint">You can also assign a color label to this input for better organization or categorization.</small>',
+          html: '<small class="field-hint">Vous pouvez egalement attribuer une etiquette de couleur a cette sortie pour une meilleure organisation ou categorisation.</small>',
           section: 'Advanced_Options',
           formControlCls: 'bg-white',
         },
@@ -1031,8 +1031,8 @@ export class Component extends EventEmitter {
 
       const dialogTitle =
         this.constructor.name === COMP_NAMES.apiEndpoint
-          ? `<span class="text-xl agent-skill-dialog-title">Edit Skill Output</span>`
-          : '<span class="text-xl">Edit Output</span>';
+          ? `<span class="text-xl agent-skill-dialog-title">Modifier la sortie de competence</span>`
+          : '<span class="text-xl">Modifier la sortie</span>';
 
       const orderedValConfig = getOrderedValConfig(valConfig, [
         'name',
@@ -1071,7 +1071,7 @@ export class Component extends EventEmitter {
       if (!newValues) return;
       if (newValues.name != name) {
         if (this.outputNameExists(newValues.name)) {
-          errorToast(`${newValues.name} already used`);
+          errorToast(`${newValues.name} est deja utilise`);
           return;
         }
         outputDiv.setAttribute('smt-name', newValues.name);
@@ -1128,9 +1128,9 @@ export class Component extends EventEmitter {
       if (defaultEP || templateDefaultEP) return;
       event.stopPropagation();
       event.stopImmediatePropagation();
-      return (await confirm('Deleting Output. Are you sure ?', '', {
-        btnYesLabel: 'Delete',
-        btnNoLabel: 'Cancel',
+      return (await confirm('Supprimer cette sortie. Etes-vous sur ?', '', {
+        btnYesLabel: 'Supprimer',
+        btnNoLabel: 'Annuler',
         btnNoClass: 'hidden',
         btnYesType: 'danger',
       }))
@@ -1245,7 +1245,7 @@ export class Component extends EventEmitter {
 
   public async addInput(parent, name, inputProperties: any = {}) {
     if (this.inputNameExists(name)) {
-      errorToast(`Input "${name}" already exists`);
+      errorToast(`L'entree "${name}" existe deja`);
       console.warn(`Input "${name}" already exists`, this);
       return;
     }
@@ -1383,14 +1383,14 @@ export class Component extends EventEmitter {
       } = {
         name: {
           type: 'text',
-          label: 'Input Name',
+          label: 'Nom de l\'entree',
           class: 'stg-input stg-name',
           value: name,
           readonly: defaultEP || templateDefaultEP,
           validate: 'required',
           smythValidate: 'func=isValidInputName',
           validateMessage:
-            'Name is required and can only contain letters, numbers, and underscores.',
+            'Le nom est requis et ne peut contenir que des lettres, chiffres et underscores.',
         },
       };
 
@@ -1417,7 +1417,7 @@ export class Component extends EventEmitter {
 
       valConfig.additionalOptionsLabel = {
         type: 'div',
-        html: '<small class="field-hint">Choose whether this input is mandatory or optional. You can also assign a color label to this input for better organization or categorization.</small>',
+        html: '<small class="field-hint">Choisissez si cette entree est obligatoire ou optionnelle. Vous pouvez egalement attribuer une etiquette de couleur pour une meilleure organisation ou categorisation.</small>',
         section: 'Advanced_Options',
         formControlCls: 'bg-white',
       };
@@ -1456,8 +1456,8 @@ export class Component extends EventEmitter {
 
       const dialogTitle =
         this.constructor.name === COMP_NAMES.apiEndpoint
-          ? `<span class="text-xl agent-skill-dialog-title">Edit Skill Input</span>`
-          : '<span class="text-xl">Edit Input</span>';
+          ? `<span class="text-xl agent-skill-dialog-title">Modifier l'entree de competence</span>`
+          : '<span class="text-xl">Modifier l\'entree</span>';
 
       // Move description inside Advanced Options section
       if (valConfig?.description) {
@@ -1501,7 +1501,7 @@ export class Component extends EventEmitter {
       if (!newValues) return;
       if (newValues.name !== name) {
         if (this.inputNameExists(newValues.name)) {
-          errorToast(`${newValues.name} already used`);
+          errorToast(`${newValues.name} est deja utilise`);
           return;
         }
         inputDiv.setAttribute('smt-name', newValues.name);
@@ -1586,9 +1586,9 @@ export class Component extends EventEmitter {
 
       event.stopPropagation();
       event.stopImmediatePropagation();
-      const _confirm = await confirm('Deleting Input. Are you sure ?', '', {
-        btnYesLabel: 'Delete',
-        btnNoLabel: 'Cancel',
+      const _confirm = await confirm('Supprimer cette entree. Etes-vous sur ?', '', {
+        btnYesLabel: 'Supprimer',
+        btnNoLabel: 'Annuler',
         btnNoClass: 'hidden',
         btnYesType: 'danger',
       });
@@ -1791,10 +1791,10 @@ export class Component extends EventEmitter {
     const changed = this.settingsChanged();
     if (changed) {
       const saveBeforeClose = await confirm(
-        'Settings Changed',
-        'You have unsaved changes. Are you sure you want to discard your changes?',
+        'Parametres modifies',
+        'Vous avez des modifications non enregistrees. Etes-vous sur de vouloir les abandonner ?',
         {
-          btnYesLabel: 'Save Changes',
+          btnYesLabel: 'Enregistrer les modifications',
           btnNoClass: 'hidden',
         },
       );
@@ -1803,7 +1803,7 @@ export class Component extends EventEmitter {
         const values = readFormValues(form, this.settingsEntries);
         const saved = await this.save(values);
         if (!saved) {
-          errorToast('Error saving settings');
+          errorToast('Erreur lors de l\'enregistrement des parametres');
           return;
         }
 
@@ -2190,7 +2190,7 @@ export class Component extends EventEmitter {
     debugBar.appendChild(debugInfo);
 
     const debugLogBtn = document.createElement('button');
-    debugLogBtn.innerHTML = `<span class="mif-search icon"></span> Log`;
+    debugLogBtn.innerHTML = `<span class="mif-search icon"></span> Journal`;
     debugLogBtn.className = 'btn-debug-log button primary mini outline hidden';
     debugLogBtn.onclick = (event) => {
       event.stopPropagation();
@@ -2243,7 +2243,7 @@ export class Component extends EventEmitter {
 
         const weaverTab = document.getElementById('builder-button');
         if (!weaverTab) {
-          errorToast('Agent Weaver is not enabled');
+          errorToast('Agent Weaver n\'est pas active');
           return;
         }
         const weaverTextArea: HTMLTextAreaElement = document.getElementById(
@@ -3064,8 +3064,8 @@ export class Component extends EventEmitter {
 
           if ((wfStatus === 'error' && !hasError) || wfStatus === 'inprogress') {
             warningToast(
-              'A debug session is in progress. Please stop the current run before starting again.',
-              'Debug Running',
+              'Une session de debug est en cours. Veuillez arreter l\'execution en cours avant d\'en demarrer une nouvelle.',
+              'Debug en cours',
             );
             return null;
           }
@@ -3083,8 +3083,8 @@ export class Component extends EventEmitter {
             // If there's an existing debug session, we should still allow debug operations
             // but warn the user about the existing session
             warningToast(
-              'A debug session is already running. The new debug operation will take over.',
-              'Debug Session Active',
+              'Une session de debug est deja active. La nouvelle operation de debug va prendre le relais.',
+              'Session de debug active',
             );
           }
 
@@ -3126,10 +3126,10 @@ export class Component extends EventEmitter {
                   We don't get 413 status when the error returns from the proxy server (nginx).
                   Typically fetch request fails due to CORS issue. (The CORS configuration is set up at the application level. Making it work at the nginx level requires additional effort.)
               */
-              if (error?.status == 413) errorToast('Payload Too Large');
+              if (error?.status == 413) errorToast('Donnees trop volumineuses');
             }
 
-            errorToast('Something went wrong, please try again later!');
+            errorToast('Une erreur est survenue, veuillez reessayer plus tard !');
             reject({ status: 'error' });
             return { errorOccurred: true };
           } finally {
@@ -3210,7 +3210,7 @@ export class Component extends EventEmitter {
       prompt?: string;
     } = readFormValues(form, oldSettings);
 
-    const loader = createTypingLoader('Generating Title...');
+    const loader = createTypingLoader('Generation du titre...');
     const titleElm = this.domElement.querySelector('.title-bar .title') as HTMLElement;
     const titleTextElm = titleElm.querySelector('.text') as HTMLElement;
     const editBtnElm = titleElm.querySelector('.btn-edit-inline') as HTMLElement;
@@ -3716,7 +3716,7 @@ function missingKeyMessageClickHandler(keyName: string, event: Event) {
     keyName,
     component: this,
     onSuccess: (data: Record<string, { name: string; scope: string[] }>) => {
-      successToast('Key saved successfully');
+      successToast('Cle enregistree avec succes');
       this?.clearComponentMessage(`.${formatKeyAsClassName(keyName)}`);
 
       updateVaultDataCache(data);

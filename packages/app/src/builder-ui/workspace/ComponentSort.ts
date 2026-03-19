@@ -607,7 +607,7 @@ async function sortAll() {
     // Resolve collisions with components that weren't originally inside Notes
     await resolveNoteCollisions(noteGroups);
   } catch (error) {
-    errorToast(error instanceof Error ? error.message : 'Unknown error occurred', 'Prettify Failed');
+    errorToast(error instanceof Error ? error.message : 'Une erreur inconnue est survenue', 'Echec de la mise en forme');
     console.error('Error during sort:', error);
   } finally {
     workspace.unlock();

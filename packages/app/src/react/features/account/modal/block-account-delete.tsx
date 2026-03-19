@@ -104,7 +104,7 @@ export default function BlockAccountDeleteModal({ handleToggle, deleteAccRequire
             <Alert className="border-blue-200 bg-blue-50 flex gap-2">
               <Info color="#1E40AF" className="h-4 w-4" />
               <AlertDescription className="text-[#1E40AF] text-[14px] font-inter font-normal">
-                <strong>Next steps:</strong>
+                <strong>Prochaines étapes :</strong>
                 <ol className="list-decimal list-inside mt-2 space-y-1">
                   {deleteAccRequirement.steps.map((step, index) => renderStep(step, index))}
                 </ol>
@@ -125,9 +125,9 @@ export default function BlockAccountDeleteModal({ handleToggle, deleteAccRequire
               >
                 <Users className="w-4 h-4 mr-2" />
                 {DeleteAccountType.IS_NOT_TEAM_OWNER === deleteAccRequirement.type
-                  ? 'View'
-                  : 'Manage'}{' '}
-                Team Members
+                  ? 'Voir'
+                  : 'Gérer'}{' '}
+                les membres de l'équipe
               </Button>
             )}
 
@@ -137,7 +137,7 @@ export default function BlockAccountDeleteModal({ handleToggle, deleteAccRequire
                 onClick={handleManageSubscription}
               >
                 <Crown className="w-4 h-4 mr-2" />
-                Manage Subscription
+                Gérer l'abonnement
               </Button>
             )}
 
@@ -146,13 +146,13 @@ export default function BlockAccountDeleteModal({ handleToggle, deleteAccRequire
               className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 text-[14px] font-inter font-normal rounded-sm"
               onClick={handleClose}
             >
-              Close
+              Fermer
             </Button>
           </div>
 
           <div className="text-center">
             <p className="text-xs text-gray-500 font-inter font-normal">
-              Need help? Visit our{' '}
+              Besoin d'aide ? Consultez notre{' '}
               <a
                 href={SMYTHOS_DOCS_URL}
                 className="text-[#3C89F9] hover:underline"

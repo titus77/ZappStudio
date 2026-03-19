@@ -44,10 +44,10 @@ async function onComponentLoad(sidebar) {
           <p class="text-sm text-gray-600 leading-relaxed">
             <span class="description-short">${shortDescription}</span>
             <span class="description-full hidden">${fullDescription}</span>
-            <button class="see-more-btn text-blue-600 hover:text-blue-800 text-xs ml-1 cursor-pointer">See more</button>
-            <button class="see-less-btn text-blue-600 hover:text-blue-800 text-xs ml-1 cursor-pointer hidden">See less</button>
+            <button class="see-more-btn text-blue-600 hover:text-blue-800 text-xs ml-1 cursor-pointer">Voir plus</button>
+            <button class="see-less-btn text-blue-600 hover:text-blue-800 text-xs ml-1 cursor-pointer hidden">Voir moins</button>
           </p>
-          ${componentDoc.docsLink ? `<a href="${componentDoc.docsLink}" target="_blank" class="text-xs text-blue-600 hover:text-blue-800 mt-1 inline-block">View Documentation →</a>` : ''}
+          ${componentDoc.docsLink ? `<a href="${componentDoc.docsLink}" target="_blank" class="text-xs text-blue-600 hover:text-blue-800 mt-1 inline-block">Voir la documentation →</a>` : ''}
         `;
 
         // Add event listeners for see more/less functionality
@@ -72,7 +72,7 @@ async function onComponentLoad(sidebar) {
       } else {
         descriptionDiv.innerHTML = `
           <p class="text-sm text-gray-600 leading-relaxed">${componentDoc.description}</p>
-          ${componentDoc.docsLink ? `<a href="${componentDoc.docsLink}" target="_blank" class="text-xs text-blue-600 hover:text-blue-800 mt-1 inline-block">View Documentation →</a>` : ''}
+          ${componentDoc.docsLink ? `<a href="${componentDoc.docsLink}" target="_blank" class="text-xs text-blue-600 hover:text-blue-800 mt-1 inline-block">Voir la documentation →</a>` : ''}
         `;
       }
 
@@ -98,8 +98,8 @@ async function onComponentLoad(sidebar) {
       'ml-2 mt-2 test-with-debug-btn bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 rounded text-sm transition-colors duration-200 flex items-center justify-center';
     testWithDebugButton.style.height = '32px';
     testWithDebugButton.style.alignSelf = 'center';
-    testWithDebugButton.textContent = 'Test with Debug';
-    testWithDebugButton.setAttribute('aria-label', 'Test with Debug');
+    testWithDebugButton.textContent = 'Tester avec le debug';
+    testWithDebugButton.setAttribute('aria-label', 'Tester avec le debug');
 
     // Add click handler for Test with Debug button
     testWithDebugButton.onclick = async (event) => {
@@ -145,7 +145,7 @@ async function onComponentLoad(sidebar) {
         await component.openDebugDialog(event, 'run', prefillValues);
       } catch (error) {
         console.error('Error opening debug modal from Test with Debug button:', error);
-        errorToast('Failed to open debug modal');
+        errorToast('Impossible d\'ouvrir la fenetre de debug');
       }
     };
 
@@ -240,11 +240,11 @@ function onTemplateCreateLoad(sidebar) {
         checkboxElement.checked = false;
         checkboxElement.disabled = true;
         checkboxElement.classList.add('hidden');
-        chkLabel.innerHTML = 'Override Not allowed With Custom Variables';
+        chkLabel.innerHTML = 'Remplacement non autorise avec des variables personnalisees';
       } else {
         checkboxElement.disabled = false;
         checkboxElement.classList.remove('hidden');
-        chkLabel.innerText = 'Allow Override';
+        chkLabel.innerText = 'Autoriser le remplacement';
       }
     };
 
@@ -313,7 +313,7 @@ function onTemplateCreateLoad(sidebar) {
       interactiveLayer.style.pointerEvents = 'none'; // Let clicks pass through to checkbox
 
       const chkLabel = document.createElement('label');
-      chkLabel.innerText = 'Allow Override';
+      chkLabel.innerText = 'Autoriser le remplacement';
       chkLabel.className = 'px-1 cursor-pointer';
 
       const checkboxElement = document.createElement('input');
@@ -370,7 +370,7 @@ async function onSave(values) {
 
   const saved = await component.save(settingsValues);
   if (!saved) {
-    errorToast('Error saving settings');
+    errorToast('Erreur lors de l\'enregistrement des parametres');
     return;
   }
 
@@ -448,36 +448,36 @@ const templateHelpSection = {
     type: 'div',
     classOverride: 'all-initial p-2 px-4',
     html: `
-<h1 class="text-lg font-bold text-emerald-600 mt-6">Component Template Builder Help</h1>
+<h1 class="text-lg font-bold text-emerald-600 mt-6">Aide - Constructeur de modeles de composant</h1>
 
-<div class="bg-gray-200 p-4 rounded-md" ><b>Note : </b> This help section explains the usage of custom template variables, this is an MVP implementation, a <b>Visual Editor</b> will replace it later</div>
+<div class="bg-gray-200 p-4 rounded-md" ><b>Note : </b> Cette section d'aide explique l'utilisation des variables de modele personnalisees. Il s'agit d'une implementation MVP, un <b>editeur visuel</b> la remplacera ultérieurement.</div>
 
-<p class="mt-4">You can use the following annotations inside text inputs in order to generate additional fields in the new component : </p>
+<p class="mt-4">Vous pouvez utiliser les annotations suivantes dans les champs texte afin de generer des champs supplementaires dans le nouveau composant : </p>
 <ul>
-<li><b class="w-8"> * Select</b> : {{<span class="font-bold text-indigo-700">SELECT</span>:<span class="font-bold text-emerald-700">Select label</span>:<span class="font-bold text-blue-700">["value1", "value2", "value3"]</span>}}</li>
-<li><b class="w-8"> * Range</b> : {{<span class="font-bold text-indigo-700">RANGE</span>:<span class="font-bold text-emerald-700">Range label</span>:<span class="font-bold text-blue-700">{"min":0,"max":10,"step":1,"value":5}</span>}}</li>
-<li><b class="w-8"> * Key-Value</b> : {{<span class="font-bold text-indigo-700">KVJSON</span>:<span class="font-bold text-emerald-700">KV label</span>:<span class="font-bold text-blue-700">{"field1":"value1","field2":10,"field3":""}</span>}}</li>
-<li><b class="w-8"> * Text Input</b> : {{<span class="font-bold text-indigo-700">INPUT</span>:<span class="font-bold text-emerald-700">Input label</span>:<span class="font-bold text-blue-700">[""]</span>}} </li>
-<li><b class="w-8"> * Text Area</b> : {{<span class="font-bold text-indigo-700">TEXTAREA</span>:<span class="font-bold text-emerald-700">Input label</span>:<span class="font-bold text-blue-700">[""]</span>}}</li>
-<li><b class="w-8"> * Password</b> : {{<span class="font-bold text-indigo-700">PASSWORD</span>:<span class="font-bold text-emerald-700">Input label</span>:<span class="font-bold text-blue-700">[""]</span>}}</li>
+<li><b class="w-8"> * Select</b> : {{<span class="font-bold text-indigo-700">SELECT</span>:<span class="font-bold text-emerald-700">Libelle de la liste</span>:<span class="font-bold text-blue-700">["valeur1", "valeur2", "valeur3"]</span>}}</li>
+<li><b class="w-8"> * Range</b> : {{<span class="font-bold text-indigo-700">RANGE</span>:<span class="font-bold text-emerald-700">Libelle du curseur</span>:<span class="font-bold text-blue-700">{"min":0,"max":10,"step":1,"value":5}</span>}}</li>
+<li><b class="w-8"> * Cle-Valeur</b> : {{<span class="font-bold text-indigo-700">KVJSON</span>:<span class="font-bold text-emerald-700">Libelle cle-valeur</span>:<span class="font-bold text-blue-700">{"champ1":"valeur1","champ2":10,"champ3":""}</span>}}</li>
+<li><b class="w-8"> * Champ texte</b> : {{<span class="font-bold text-indigo-700">INPUT</span>:<span class="font-bold text-emerald-700">Libelle du champ</span>:<span class="font-bold text-blue-700">[""]</span>}} </li>
+<li><b class="w-8"> * Zone texte</b> : {{<span class="font-bold text-indigo-700">TEXTAREA</span>:<span class="font-bold text-emerald-700">Libelle du champ</span>:<span class="font-bold text-blue-700">[""]</span>}}</li>
+<li><b class="w-8"> * Mot de passe</b> : {{<span class="font-bold text-indigo-700">PASSWORD</span>:<span class="font-bold text-emerald-700">Libelle du champ</span>:<span class="font-bold text-blue-700">[""]</span>}}</li>
 </ul>
 
 
 <p class="mt-4">
 
-The <span class="font-bold text-indigo-700">first field</span> (in CAPITAL letters) is the field type, it should always be one of the following : SELECT, INPUT, TEXTAREA, PASSWORD.<br/>
-you can use variant annotations like : <br />
- - VARINPUT, VARTEXTAREA for an text inputs that accepts variables<br />
- - VAULTPASSWORD for a password field that can be managed using the vault <br />
+Le <span class="font-bold text-indigo-700">premier champ</span> (en majuscules) est le type de champ ; il doit toujours etre l'un des suivants : SELECT, INPUT, TEXTAREA, PASSWORD.<br/>
+Vous pouvez utiliser des annotations variantes telles que : <br />
+ - VARINPUT, VARTEXTAREA pour des champs texte acceptant des variables<br />
+ - VAULTPASSWORD pour un champ mot de passe gerable depuis le coffre-fort <br />
 </p>
 
 <p class="mt-4">
-The <span class="font-bold text-emerald-700">second field</span> is the label that will be displayed in the component settings, this is a free text, but keep it short.
+Le <span class="font-bold text-emerald-700">deuxieme champ</span> est le libelle affiche dans les parametres du composant ; c'est un texte libre, mais il doit rester concis.
 </p>
 
 <p class="mt-4">
-The <span class="font-bold text-blue-700">last field</span> should be an array of possible values for SELECT input, or an empty element [""].<br/>
-<b>It's important to use the empty element [""] even if no value is configured.</b>
+Le <span class="font-bold text-blue-700">dernier champ</span> doit etre un tableau de valeurs possibles pour un champ SELECT, ou un element vide [""].<br/>
+<b>Il est important d'utiliser l'element vide [""] meme si aucune valeur n'est configuree.</b>
 </p>
 
         `,
@@ -510,10 +510,10 @@ export async function closeSettings(component: Component, force = false) {
   const changed = component.settingsChanged();
   if (!force && changed) {
     const discard = await confirm(
-      'You have unsaved changes',
-      'Are you sure you want to close this without saving?',
+      'Modifications non enregistrees',
+      'Etes-vous sur de vouloir fermer sans enregistrer ?',
       {
-        btnYesLabel: 'Discard Changes',
+        btnYesLabel: 'Ignorer les modifications',
         btnYesClass: 'rounded-lg px-8',
         btnNoClass: 'hidden',
       },
@@ -597,10 +597,10 @@ export async function editSettings(component: Component) {
     if (!changed) return true;
 
     const discard = await confirm(
-      'You have unsaved changes',
-      'Are you sure you want to close this without saving?',
+      'Modifications non enregistrees',
+      'Etes-vous sur de vouloir fermer sans enregistrer ?',
       {
-        btnYesLabel: 'Discard Changes',
+        btnYesLabel: 'Ignorer les modifications',
         btnYesClass: 'rounded-lg px-8',
         btnNoClass: 'hidden',
       },
@@ -660,20 +660,20 @@ export async function editSettings(component: Component) {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to add new collection');
+        throw new Error('Echec de l\'ajout de la collection');
       }
 
       const result = await response.json();
 
       if (result.error) {
-        errorToast('Error adding new collection');
+        errorToast('Erreur lors de l\'ajout de la collection');
         return null;
       }
 
       // For adding newely added collection to the dropdown we will add that logic here
       return result;
     } catch (error) {
-      errorToast('Error adding new collection');
+      errorToast('Erreur lors de l\'ajout de la collection');
       return null;
     }
   }
@@ -682,7 +682,7 @@ export async function editSettings(component: Component) {
   const templateInfoSettings = {
     name: {
       type: 'input',
-      label: 'Name',
+      label: 'Nom',
       value: component.properties?.template?.templateInfo?.name || component.title || '',
     },
     description: {
@@ -693,12 +693,12 @@ export async function editSettings(component: Component) {
     },
     sidebarDescription: {
       type: 'textarea',
-      label: 'Sidebar Description',
+      label: 'Description du panneau lateral',
       value: component.properties?.template?.templateInfo?.sidebarDescription || '',
     },
     icon: {
       type: 'textarea',
-      label: 'Font Awesome Class or SVG',
+      label: 'Classe Font Awesome ou SVG',
       value: component.properties?.template?.templateInfo?.icon || '',
       events: {
         change: iconUpdate,
@@ -718,17 +718,17 @@ export async function editSettings(component: Component) {
     },
     docPath: {
       type: 'input',
-      label: 'Documentation Path',
+      label: 'Chemin de documentation',
       value: component.properties?.template?.templateInfo?.docPath || '',
     },
     ytLink: {
       type: 'input',
-      label: 'Youtube Tutorial Link',
+      label: 'Lien tutoriel Youtube',
       value: component.properties?.template?.templateInfo?.ytLink || '',
     },
     newCollectionCheckbox: {
       type: 'checkbox',
-      label: 'Do you want to create a new collection?',
+      label: 'Creer une nouvelle collection ?',
       value: false, // Ensures the checkbox is unchecked initially
       events: {
         change: (e) => {
@@ -757,13 +757,13 @@ export async function editSettings(component: Component) {
     },
     newCollectionInput: {
       type: 'input',
-      label: 'New Collection Name',
+      label: 'Nom de la nouvelle collection',
       value: '',
       class: 'invisible hidden',
     },
     newCollectionButton: {
       type: 'button',
-      label: 'Add Collection',
+      label: 'Ajouter la collection',
       class: 'invisible hidden',
       attributes: {},
       events: {
@@ -815,10 +815,10 @@ export async function editSettings(component: Component) {
               newCollectionButton.classList.remove('inline-block', 'visible');
               newCollectionButton.classList.add('invisible', 'hidden');
 
-              successToast('New collection added');
+              successToast('Collection ajoutee avec succes');
             }
           } else {
-            errorToast('Please enter a collection name');
+            errorToast('Veuillez saisir un nom de collection');
           }
         },
       },
@@ -856,13 +856,13 @@ export async function editSettings(component: Component) {
       type: 'input',
       label: 'Version',
       validate: `custom=isValidSemVer`,
-      validateMessage: `Invalid version number. Must be in the format x.x.x`,
+      validateMessage: `Numero de version invalide. Le format attendu est x.x.x`,
       value: component.properties?.template?.templateInfo?.version || '1.0.0',
     },
     published: {
       type: 'checkbox',
       class: 'w-32',
-      label: 'Published',
+      label: 'Publie',
       value: component.properties?.template?.templateInfo?.published || false,
     },
   };
@@ -883,7 +883,7 @@ export async function editSettings(component: Component) {
             ? '<i class="fa-solid fa-pen-to-square"></i>'
             : '<i class="fa-solid fa-screwdriver-wrench"></i>',
           icon: '',
-          hint: component.properties.template ? 'Edit This Template' : 'Create Template Component',
+          hint: component.properties.template ? 'Modifier ce modele' : 'Creer un composant modele',
           hintPosition: 'right',
           class: 'bg-transparent font-semibold text-base hover:bg-gray-300 hover:text-emerald-600',
           click: async () => {
@@ -906,7 +906,7 @@ export async function editSettings(component: Component) {
                 type: 'button',
                 label: '<i class="fa-regular fa-floppy-disk"></i>',
                 icon: '',
-                hint: 'Save Template Component',
+                hint: 'Enregistrer le composant modele',
                 hintPosition: 'right',
                 class:
                   'bg-transparent font-semibold text-base hover:bg-gray-300 hover:text-emerald-600',
@@ -942,7 +942,7 @@ export async function editSettings(component: Component) {
                   component.emit('settingsSaving', settingsValues);
                   const saved = await component.save(settingsValues);
                   if (!saved) {
-                    errorToast('Error saving settings');
+                    errorToast('Erreur lors de l\'enregistrement des parametres');
                     return;
                   }
 
@@ -1026,8 +1026,8 @@ export async function editSettings(component: Component) {
                     if (tplSave.error) {
                       console.log('error saving template', tplSave.error);
                       errorToast(
-                        tplSave.error?.error?.message || 'Cannot save component',
-                        'Error Saving template',
+                        tplSave.error?.error?.message || 'Impossible d\'enregistrer le composant',
+                        'Erreur lors de l\'enregistrement du modele',
                       );
                       return;
                     }
@@ -1099,11 +1099,11 @@ export async function editSettings(component: Component) {
 
                     creatingTemplate = false;
                     component.workspace.saveAgent();
-                    if (creatingTemplate) successToast('Component Template Created');
-                    else successToast('Component Template Updated');
+                    if (creatingTemplate) successToast('Modele de composant cree');
+                    else successToast('Modele de composant mis a jour');
                   } catch (error) {
                     console.log('error saving template', error);
-                    errorToast('Error saving template');
+                    errorToast('Erreur lors de l\'enregistrement du modele');
                   }
                 },
               },
@@ -1132,11 +1132,11 @@ export async function editSettings(component: Component) {
   switch (componentClass) {
     case 'ServerlessCode':
       helpTooltip =
-        'Run scalable, cloud-based code. This option supports npm packages and third-party libraries, making it perfect for more complex, enterprise-level workflows.';
+        'Executez du code cloud scalable. Cette option prend en charge les packages npm et les bibliotheques tierces, ce qui en fait un choix ideal pour les workflows complexes d\'entreprise.';
       break;
     case 'Code':
       helpTooltip =
-        'Execute pure JavaScript in a secure, sandboxed environment—ideal for lightweight tasks.';
+        'Executez du JavaScript pur dans un environnement securise et isole — parfait pour les taches legeres.';
       break;
     default:
       helpTooltip = '';
@@ -1172,7 +1172,7 @@ async function getComponentsCollections() {
     .then((res) => res.json())
     .catch((err) => []); // for backward compatibility with CE
   if (result.error) {
-    errorToast('Error fetching collections');
+    errorToast('Erreur lors de la recuperation des collections');
     return [];
   }
   console.log('collectionResult', result);

@@ -254,7 +254,7 @@ const ChatbotEmbodimentModal: React.FC<ChatbotEmbodimentModalProps> = ({
       <div className="relative bg-white rounded-2xl shadow-lg w-full p-6 flex flex-col gap-4 overflow-auto max-h-[90vh] max-w-[520px]">
         {/* Header with back and close buttons */}
         <ModalHeaderEmbodiment
-          title="Chatbot Integration Snippet"
+          title="Snippet d'intégration Chatbot"
           onBack={onClose}
           onClose={onClose}
         />
@@ -266,7 +266,7 @@ const ChatbotEmbodimentModal: React.FC<ChatbotEmbodimentModalProps> = ({
             /* Loading state */
             <div className="flex flex-col items-center justify-center py-12 gap-4">
               <Spinner size="lg" />
-              <p className="text-sm text-gray-600">Loading chatbot configuration...</p>
+              <p className="text-sm text-gray-600">Chargement de la configuration du chatbot...</p>
             </div>
           ) : (
             <>
@@ -275,11 +275,10 @@ const ChatbotEmbodimentModal: React.FC<ChatbotEmbodimentModalProps> = ({
                 <p>
                   {!isUsingFullScreen ? (
                     <>
-                      Copy and paste this snippet into your website before the closing &lt;/body&gt;
-                      tag.
+                      Copiez et collez ce snippet dans votre site web juste avant la balise &lt;/body&gt;.
                     </>
                   ) : (
-                    'Place this snippet inside a container DOM element, and the chatbot will occupy the full available space within it.'
+                    'Placez ce snippet dans un élément DOM conteneur, et le chatbot occupera tout l\'espace disponible à l\'intérieur.'
                   )}
                 </p>
               </div>
@@ -294,7 +293,7 @@ const ChatbotEmbodimentModal: React.FC<ChatbotEmbodimentModalProps> = ({
                       rel="noopener noreferrer"
                     >
                       <span className="text-[#707070] flex items-center gap-1">
-                        Preview <ArrowRightIcon className="w-5 h-5" />
+                        Aperçu <ArrowRightIcon className="w-5 h-5" />
                       </span>
                     </a>
                   ) : (
@@ -302,12 +301,12 @@ const ChatbotEmbodimentModal: React.FC<ChatbotEmbodimentModalProps> = ({
                       className="text-gray-400 flex items-center gap-1 cursor-not-allowed tooltip-trigger relative"
                       data-tooltip={
                         actualDomain === 'your-domain.com'
-                          ? 'Unable to load agent domain. Please try refreshing the page.'
-                          : 'Agent needs to be deployed first to preview it.'
+                          ? "Impossible de charger le domaine de l'agent IA. Essayez de rafraîchir la page."
+                          : "L'agent IA doit être déployé avant de pouvoir afficher l'aperçu."
                       }
                       data-tooltip-position="left"
                     >
-                      Preview <ArrowRightIcon className="w-5 h-5" />
+                      Aperçu <ArrowRightIcon className="w-5 h-5" />
                     </span>
                   )}
                 </div>
@@ -323,8 +322,8 @@ const ChatbotEmbodimentModal: React.FC<ChatbotEmbodimentModalProps> = ({
                   <Button
                     variant="primary"
                     handleClick={handleCopyClick}
-                    label={copied ? 'Copied' : 'Copy Code'}
-                    aria-label={copied ? 'Copied' : 'Copy code'}
+                    label={copied ? 'Copié !' : 'Copier le code'}
+                    aria-label={copied ? 'Copié !' : 'Copier le code'}
                   />
                 </div>
               </div>

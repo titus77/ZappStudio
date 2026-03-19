@@ -82,8 +82,8 @@ router.post('/updateDomain', async (req, res) => {
     if (curDomain == domain) return res.json({ success: true });
 
     const defaultDomain = config.env.PROD_AGENT_DOMAIN;
-    // if curDomain is a subdomain of the default domain, then it is not stored in the database, so no need to free it
-    if (curDomain && !curDomain.endsWith(defaultDomain)) {
+    // if curDomain is a path-based default domain (zap.immo/wai/{id}), it is not stored in the database, so no need to free it
+    if (curDomain && !curDomain.startsWith(defaultDomain)) {
       //free the current domain
       const domainResult = await userData
         .saveDomain(req, curDomain, null)
@@ -93,7 +93,7 @@ router.post('/updateDomain', async (req, res) => {
       }
     }
 
-    if (domain && !domain.endsWith(defaultDomain)) {
+    if (domain && !domain.startsWith(defaultDomain)) {
       //then set the new domain
       const domainResult = await userData
         .saveDomain(req, domain, agentId)

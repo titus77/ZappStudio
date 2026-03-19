@@ -53,6 +53,9 @@ const config = {
     SRE_STORAGE_PATH: path.join(LOCAL_STORAGE_PATH, '.smyth'),
 
     SMYTHOS_SERVER_TYPE: process.env.SMYTHOS_SERVER_TYPE || 'combined',
+
+    // ZappImmo /wai path-based routing
+    WAI_COOKIE_PATH: process.env.WAI_COOKIE_PATH || '/',
   },
 };
 

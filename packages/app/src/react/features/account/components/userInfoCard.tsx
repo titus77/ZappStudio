@@ -60,43 +60,43 @@ const UserInfoCard = () => {
 
   const deleteAccRequirements = [
     {
-      title: 'You do not have permissions to delete this account.',
+      title: 'Vous n\'avez pas les droits pour supprimer ce compte.',
       type: DeleteAccountType.IS_NOT_TEAM_OWNER,
       bool: !user.userTeamRole.isTeamInitiator,
       error:
-        'Please contact the account owner for assistance. You can view the owner on the Members page. If you need help, reach out to support.',
+        'Veuillez contacter le proprietaire du compte. Vous pouvez le retrouver sur la page Membres. Besoin d\'aide ? Contactez le support.',
     },
     {
-      title: 'Account deletion blocked',
+      title: 'Suppression du compte bloquee',
       type: DeleteAccountType.USER_HAS_TEAM_MEMBERS_AND_SUBSCRIPTION,
       bool:
         !teamMembersQuery.isLoading &&
         teamMembersQuery.data?.members?.length > 1 &&
         isActiveSubscription(subs),
-      error: 'Your account cannot be deleted while you have active team members.',
+      error: 'Votre compte ne peut pas etre supprime tant que vous avez des membres actifs.',
       steps: [
-        'Remove all team members from your account',
-        'Then cancel your subscription from <a href="/my-plan">My Plan page</a>',
-        'Contact support if you need assistance',
+        'Retirez tous les membres de votre equipe',
+        'Puis annulez votre abonnement depuis <a href="/my-plan">la page Mon abonnement</a>',
+        'Contactez le support si besoin',
       ],
     },
     {
-      title: 'Account deletion blocked',
+      title: 'Suppression du compte bloquee',
       type: DeleteAccountType.USER_HAS_TEAM_MEMBERS,
       bool: !teamMembersQuery.isLoading && teamMembersQuery.data?.members?.length > 1,
-      error: 'Your account cannot be deleted while you have active team members.',
+      error: 'Votre compte ne peut pas etre supprime tant que vous avez des membres actifs.',
       isLoading: teamMembersQuery.isLoading,
       steps: [
-        'Remove all team members from your account',
-        'Contact support if you need assistance',
+        'Retirez tous les membres de votre equipe',
+        'Contactez le support si besoin',
       ],
     },
     {
-      title: 'Account deletion blocked',
+      title: 'Suppression du compte bloquee',
       type: DeleteAccountType.USER_HAS_SUBSCRIPTION,
       bool: isActiveSubscription(subs),
       error:
-        'Your account cannot be deleted while you have active subscription. To proceed with deletion, <a href="/my-plan">click here</a> and cancel your subscription.',
+        'Votre compte ne peut pas etre supprime tant que vous avez un abonnement actif. Pour continuer, <a href="/my-plan">cliquez ici</a> pour annuler votre abonnement.',
     },
   ];
 
@@ -112,7 +112,7 @@ const UserInfoCard = () => {
       }
       fullWidth
     >
-      Delete Account
+      Supprimer le compte
     </CustomButton>
   );
 
@@ -122,19 +122,19 @@ const UserInfoCard = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
           <div className="flex justify-center items-center">
             <div className="text-center flex flex-col items-center justify-center">
-              <h5 className="text-lg font-semibold">User Profile</h5>
+              <h5 className="text-lg font-semibold">Profil utilisateur</h5>
               <img
                 className="pb-2 mt-3 min-w-[85px]"
                 src={user.avatar || '/img/user_default.svg'}
-                alt="User Avatar"
+                alt="Photo de profil"
               />
               <div className="text-xl font-semibold" id="user-name">
-                {loadingUserName ? 'Loading...' : userName} {/* Show loading text */}
+                {loadingUserName ? 'Chargement...' : userName} {/* Show loading text */}
               </div>
               <span>{user.email}</span>
               {user?.createdAt && (
                 <p className="mt-3 ">
-                  <b className="text-xs">Member Since: </b>
+                  <b className="text-xs">Membre depuis : </b>
                   <span className="text-xs">
                     {Intl.DateTimeFormat('en-US', {
                       year: 'numeric',

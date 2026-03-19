@@ -20,11 +20,11 @@ export function AgentContributorsModal({
       applyMaxWidth={false}
       isOpen={isOpen}
       onClose={onClose}
-      title="Agent Contributors"
+      title="Contributeurs de l'agent IA"
     >
       <div className="mt-6 space-y-6">
         {contributors.length === 0 ? (
-          <p className="text-gray-500 text-center py-4">No contributors found</p>
+          <p className="text-gray-500 text-center py-4">Aucun contributeur trouvé</p>
         ) : (
           contributors.map((contributor) => (
             <div className="flex items-center space-x-2" key={contributor.user.id}>
@@ -54,7 +54,7 @@ export function AgentContributorsModal({
                 <p className="text-sm font-medium tracking-tight text-gray-900 dark:text-white">
                   {contributor.user.name || contributor.user.email}
                   {contributor.isCreator && (
-                    <span className="ml-2 text-blue-600 font-semibold">(Creator)</span>
+                    <span className="ml-2 text-blue-600 font-semibold">(Créateur)</span>
                   )}
                 </p>
                 {contributor.user.name && contributor.user.email && (

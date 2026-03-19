@@ -146,7 +146,7 @@ async function createAndShowMenu(event: MouseEvent, workspace: Workspace) {
 
   // Build items
   const copyItem = buildMenuItem(
-    'Copy',
+    'Copier',
     () => {
       const canCopyComponents = canCopy(workspace);
       if (!canCopyComponents) return;
@@ -157,7 +157,7 @@ async function createAndShowMenu(event: MouseEvent, workspace: Workspace) {
   );
 
   const pasteItem = buildMenuItem(
-    'Paste',
+    'Coller',
     async () => {
       try {
         if (!(await canPaste(workspace))) return;
@@ -177,7 +177,7 @@ async function createAndShowMenu(event: MouseEvent, workspace: Workspace) {
   );
 
   const deleteItem = buildMenuItem(
-    'Delete',
+    'Supprimer',
     async () => {
       await deleteSelectionWithConfirm(workspace);
     },
@@ -186,7 +186,7 @@ async function createAndShowMenu(event: MouseEvent, workspace: Workspace) {
   );
 
   const exportItem = buildMenuItem(
-    'Export agent',
+    'Exporter l\'agent',
     async () => {
       await workspace.exportTemplate();
     },
@@ -195,7 +195,7 @@ async function createAndShowMenu(event: MouseEvent, workspace: Workspace) {
   );
 
   const searchItem = buildMenuItem(
-    'Search',
+    'Rechercher',
     () => {
       const searchHelper = CanvasSearchHelper.getInstance();
       searchHelper.openSearch(workspace);

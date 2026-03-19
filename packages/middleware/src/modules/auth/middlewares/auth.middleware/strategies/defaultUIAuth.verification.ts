@@ -23,7 +23,7 @@ export default class DefaultUIAuth implements AuthStrategy {
     const data: UserTokenData = {};
 
     if (!token) {
-      return { error: 'Access token is required', data: null, success: false };
+      return { error: `Un jeton d'acces est requis`, data: null, success: false };
     }
 
     // Verify JWT with PGRST_JWT_SECRET (ZappImmo trusted secret)
@@ -31,14 +31,14 @@ export default class DefaultUIAuth implements AuthStrategy {
     try {
       if (!TRUSTED_JWT_SECRET) {
         LOGGER.error(new Error('TRUSTED_JWT_SECRET is not configured'));
-        return { error: 'Server misconfigured: no JWT secret', data: null, success: false };
+        return { error: 'Erreur de configuration serveur : secret JWT manquant', data: null, success: false };
       }
       const secret = new TextEncoder().encode(TRUSTED_JWT_SECRET);
       const { payload } = await jose.jwtVerify(token, secret);
       decoded = payload;
     } catch (err: any) {
       LOGGER.error(new Error(`JWT verification failed: ${err.message}`));
-      return { error: 'Access token is invalid or expired', data: null, success: false };
+      return { error: `Le jeton d'acces est invalide ou expire`, data: null, success: false };
     }
 
     const userAuth = {
@@ -63,7 +63,7 @@ export default class DefaultUIAuth implements AuthStrategy {
 
     if (!user.teamId) {
       LOGGER.info(`User ${userAuth.primaryEmail} is logging without a team`);
-      return { error: 'User does not belong to a team', data: null, success: false };
+      return { error: `L'utilisateur n'appartient a aucune equipe`, data: null, success: false };
     }
 
     data.user = {

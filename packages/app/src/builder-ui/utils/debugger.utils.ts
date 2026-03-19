@@ -146,14 +146,14 @@ export function updateDebugControlsOnSelection() {
     updateDebugControls(controls, {
       controlsOverlay: {
         enable: !isDebugSwitcherOn || (!isComponentSelected && !errorOccurred), // Only show overlay when debug is off
-        tooltipText: isDebugSwitcherOn ? 'Please select a component' : 'Click to toggle debug',
+        tooltipText: isDebugSwitcherOn ? 'Veuillez selectionner un composant' : 'Cliquer pour activer/desactiver le debug',
       },
     });
 
     /* disableAllDebugControls({
       controlsOverlay: {
         enable: true,
-        tooltipText: isDebugSwitcherOn ? 'Please select a component' : 'Click to toggle debug',
+        tooltipText: isDebugSwitcherOn ? 'Veuillez selectionner un composant' : 'Cliquer pour activer/desactiver le debug',
       },
     }); */
   }

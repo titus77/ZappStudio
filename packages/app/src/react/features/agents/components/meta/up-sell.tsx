@@ -32,7 +32,7 @@ const UpSellModal = ({ onClose, children, analytics }: Props) => {
     <Modal onClose={onClose}>
       <div className="flex flex-col items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Quota Limit Reached</h1>
+          <h1 className="text-2xl font-bold mb-4">Quota atteint</h1>
           {children}
           <div className="flex justify-center mt-10">
             <button
@@ -41,7 +41,7 @@ const UpSellModal = ({ onClose, children, analytics }: Props) => {
               type="button"
               onClick={handleUpgradeClick}
             >
-              Upgrade
+              Améliorer mon offre
             </button>
           </div>
         </div>

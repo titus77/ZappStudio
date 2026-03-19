@@ -80,14 +80,14 @@ ${workflowEndpoint.exampleResponse}`;
     <div className="fixed inset-0 bg-black/25 flex items-center justify-center z-50">
       <div className="relative bg-white rounded-2xl shadow-lg w-full p-6 flex flex-col gap-4 overflow-auto max-h-[90vh] max-w-[480px] md:max-w-[600px]">
         {/* Header with back and close buttons */}
-        <ModalHeaderEmbodiment title="Integrate to Lovable" onBack={onClose} onClose={onClose} />
+        <ModalHeaderEmbodiment title="Intégrer à Lovable" onBack={onClose} onClose={onClose} />
 
         <div className="">
           {/* Step 1 */}
           <div className="space-y-2">
             <Collapsible open={step1Expanded} onOpenChange={setStep1Expanded}>
               <CollapsibleTrigger className="flex items-center gap-2 text-left hover:bg-gray-50 p-2 rounded-md w-full">
-                <span className="font-medium text-[#424242]">1. Open your Lovable project</span>
+                <span className="font-medium text-[#424242]">1. Ouvrez votre projet Lovable</span>
                 {step1Expanded ? (
                   <ChevronDown className="h-4 w-4 ml-auto" />
                 ) : (
@@ -96,8 +96,8 @@ ${workflowEndpoint.exampleResponse}`;
               </CollapsibleTrigger>
               <CollapsibleContent className="pl-6 pt-2">
                 <p className="text-sm text-muted-foreground">
-                  Navigate to your Lovable project dashboard and open the project where you want to
-                  integrate this ZappStudio agent.
+                  Accédez au tableau de bord de votre projet Lovable et ouvrez le projet dans lequel
+                  vous souhaitez intégrer cet agent IA ZappStudio.
                 </p>
               </CollapsibleContent>
             </Collapsible>
@@ -106,7 +106,7 @@ ${workflowEndpoint.exampleResponse}`;
           {/* Step 2 */}
           <div className="space-y-3 p-2">
             <h3 className="font-medium text-[#424242]">
-              2. Paste the text below into the Lovable chat.
+              2. Collez le texte ci-dessous dans le chat Lovable.
             </h3>
 
             <div className="relative">
@@ -131,12 +131,12 @@ ${workflowEndpoint.exampleResponse}`;
                   <span className="mr-2 inline-block w-fit align-text-bottom">
                     <RiErrorWarningFill className="h-4 w-4 text-[#fe9900]"></RiErrorWarningFill>
                   </span>
-                  <span className="font-medium">Important:</span> This endpoint requires
-                  authentication. Make sure to set your{' '}
+                  <span className="font-medium">Important :</span> Cet endpoint nécessite une
+                  authentification. Veillez à définir votre variable d'environnement{' '}
                   <code className="bg-[#fef3c6] px-1 py-0.5 rounded font-mono">
                     SMYTHOS_AGENTLLM_KEY
                   </code>{' '}
-                  environment variable in your Lovable project settings.
+                  dans les paramètres de votre projet Lovable.
                 </AlertDescription>
               </Alert>
             </div>
@@ -145,7 +145,7 @@ ${workflowEndpoint.exampleResponse}`;
           {/* Copy Button */}
           <div className="flex justify-end px-2">
             <Button handleClick={handleCopy} className="px-8">
-              {copySuccess ? 'Copied!' : 'Copy'}
+              {copySuccess ? 'Copié !' : 'Copier'}
             </Button>
           </div>
         </div>

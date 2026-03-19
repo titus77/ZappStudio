@@ -46,7 +46,7 @@ export const getTeamInfo: ExpressHandler<
   const team = await teamService.getTeamDetails(teamId);
 
   res.status(httpStatus.OK).json({
-    message: 'Team retrieved successfully',
+    message: 'Equipe recuperee avec succes',
     team: {
       ...team,
       userId,
@@ -115,7 +115,7 @@ export const updateMemberRole: ExpressHandlerWithParams<
   });
 
   res.status(httpStatus.OK).json({
-    message: 'Member role updated successfully',
+    message: 'Role du membre mis a jour avec succes',
   });
 };
 
@@ -141,7 +141,7 @@ export const updateMemberSpecificAcl: ExpressHandler<
   });
 
   res.status(httpStatus.OK).json({
-    message: 'Member role updated successfully',
+    message: 'Role du membre mis a jour avec succes',
   });
 };
 

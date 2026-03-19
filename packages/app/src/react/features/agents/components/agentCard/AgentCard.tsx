@@ -137,12 +137,12 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
 
   const chatTooltipContent = (
     <div style={{ width: '100%' }}>
-      To chat with your agent, please deploy to production.{' '}
+      Pour discuter avec votre agent IA, veuillez le déployer en production.{' '}
       <>
         <Link to={`/builder/${agent.id}`} className="underline" reloadDocument>
-          Deploy
+          Déployez
         </Link>{' '}
-        your agent now.
+        votre agent IA maintenant.
       </>
     </div>
   );
@@ -179,7 +179,7 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
                   'object-cover': agentData.avatarImage !== DEFAULT_AVATAR,
                 })}
                 src={agentData.avatarImage}
-                alt={agent.name || 'Agent avatar'}
+                alt={agent.name || "Avatar de l'agent IA"}
               />
             </div>
 
@@ -195,7 +195,7 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
                     className="mt-1 text-sm text-gray-500 line-clamp-2 whitespace-nowrap text-ellipsis"
                     title={userName}
                   >
-                    by {userName}
+                    par {userName}
                   </p>
                 </div>
                 {agent.isPinned && (
@@ -261,11 +261,11 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
                                       )}
                                       {cardState.isPinning
                                         ? agent.isPinned
-                                          ? 'Unpinning...'
-                                          : 'Pinning...'
+                                          ? 'Désépinglage...'
+                                          : 'Épinglage...'
                                         : agent.isPinned
-                                          ? 'Unpin Agent'
-                                          : 'Pin Agent'}
+                                          ? "Désépingler l'agent IA"
+                                          : "Épingler l'agent IA"}
                                     </button>
                                   )}
                                 </Menu.Item>
@@ -295,7 +295,7 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
                                       ) : (
                                         <FaRegCopy className="mr-3 h-4 w-4" />
                                       )}
-                                      {cardState.isDuplicating ? 'Duplicating...' : 'Duplicate'}
+                                      {cardState.isDuplicating ? 'Duplication...' : 'Dupliquer'}
                                     </button>
                                   )}
                                 </Menu.Item>
@@ -316,7 +316,7 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
                                       )}
                                     >
                                       <FaUsers className="mr-3 h-4 w-4" />
-                                      Contributors
+                                      Contributeurs
                                     </button>
                                   )}
                                 </Menu.Item>
@@ -337,7 +337,7 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
                                       )}
                                     >
                                       <FaClockRotateLeft className="mr-3 h-4 w-4" />
-                                      Activity
+                                      Activité
                                     </button>
                                   )}
                                 </Menu.Item>
@@ -364,7 +364,7 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
                                       ) : (
                                         <FaTrash className="mr-3 h-4 w-4" />
                                       )}
-                                      {cardState.isDeleting ? 'Deleting...' : 'Delete'}
+                                      {cardState.isDeleting ? 'Suppression...' : 'Supprimer'}
                                     </button>
                                   )}
                                 </Menu.Item>
@@ -403,7 +403,7 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
                     onMouseLeave={() => cardState.setIsButtonTooltipVisible(false)}
                   >
                     <span className="text-sm font-normal text-[#5a5a5a] font-body">
-                      {agentData.permissions.canEdit ? 'Edit' : 'View'}
+                      {agentData.permissions.canEdit ? 'Modifier' : 'Voir'}
                     </span>
                   </Button>
                 )}
@@ -446,7 +446,7 @@ export function AgentCard({ agent, loadAgents, updateAgentInPlace }: AgentCardPr
                               'text-[#5a5a5a]': !agentData.isAvailable,
                             })}
                           >
-                            Chat
+                            Discuter
                           </span>
                         </Button>
                       </div>

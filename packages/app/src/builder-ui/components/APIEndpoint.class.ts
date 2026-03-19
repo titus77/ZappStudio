@@ -273,7 +273,7 @@ export class APIEndpoint extends Component {
           label: 'Behavior',
           type: 'textarea',
           section: 'Advanced_Options',
-          hint: `Describe how this input should be handled. For example, if the input is a user question, specify how to handle long or ambiguous queries (e.g., “summarize if over 10 words”). Clearly state any rules, transformations, or validations the input must follow.`,
+          hint: `Describe how this input should be handled. For example, if the input is a user question, specify how to handle long or ambiguous queries (e.g., "summarize if over 10 words"). Clearly state any rules, transformations, or validations the input must follow.`,
           hintPosition: 'after_label',
           attributes: {
             placeholder: `Describe input behavior, formatting (e.g., MM-DD-YY), and requirements`,

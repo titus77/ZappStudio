@@ -25,11 +25,11 @@ export const getTeamSubs = async (teamId: string, options?: { tx?: PrismaTransac
   });
 
   if (!team) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Team not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Equipe introuvable');
   }
 
   if (!team.subscriptionId) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Team does not have a subscription');
+    throw new ApiError(httpStatus.NOT_FOUND, `L'equipe n'a pas d'abonnement`);
   }
 
   // RESET date will be the first day of the next month

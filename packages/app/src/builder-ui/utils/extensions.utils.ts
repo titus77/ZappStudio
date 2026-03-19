@@ -298,7 +298,7 @@ const _changeBtnStatus = (elm: HTMLButtonElement, status: string = 'add'): void 
     case 'adding':
       iconToBeRemoved = 'mif-plus';
       iconToBeAdded = 'smyth-spinner';
-      label = 'Adding...';
+      label = 'Ajout...';
       break;
     case 'added':
       iconToBeRemoved = 'smyth-spinner';
@@ -457,10 +457,10 @@ export const getExtensionCompLabel = (compName: string): string => {
       label = 'OpenAPI';
       break;
     case EXTENSION_COMP_NAMES.agentPlugin:
-      label = 'My ZappStudio Agents';
+      label = 'Mes agents ZappStudio';
       break;
     case EXTENSION_COMP_NAMES.huggingFaceModel:
-      label = 'Hugging Face Model';
+      label = 'Modele Hugging Face';
       break;
     default:
       label = compName;
@@ -474,13 +474,13 @@ export const getExtensionManualFieldLabel = (compName: string): string => {
 
   switch (compName) {
     case EXTENSION_COMP_NAMES.gptPlugin:
-      label = `Enter the OpenAPI URL`;
+      label = `Saisir l'URL OpenAPI`;
       break;
     case EXTENSION_COMP_NAMES.agentPlugin:
-      label = 'Enter Deployed Agent ID';
+      label = 'Saisir l\'identifiant de l\'agent deploye';
       break;
     case EXTENSION_COMP_NAMES.huggingFaceModel:
-      label = 'Enter the Hugging Face Model Name';
+      label = 'Saisir le nom du modele Hugging Face';
       break;
     default:
       label = compName;
@@ -615,10 +615,10 @@ export async function deleteExtensionHandler(compName, event) {
 
   const shouldDelete = await confirm(
     '',
-    `Are you sure you want to delete this ${extensionLabel}?`,
+    `Etes-vous sur de vouloir supprimer cet element ${extensionLabel} ?`,
     {
-      btnNoLabel: 'No, Cancel',
-      btnYesLabel: "Yes, I'm sure",
+      btnNoLabel: 'Non, annuler',
+      btnYesLabel: 'Oui, je confirme',
       btnYesClass: 'bg-smyth-red-500 border-smyth-red-500',
     },
   );

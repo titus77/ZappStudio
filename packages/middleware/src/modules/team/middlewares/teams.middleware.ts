@@ -10,7 +10,7 @@ export const requireTeamManager: ExpressHandler<{}, {}> = asyncHandler(async (re
   const userId = authExpressHelpers.getUserId(res);
 
   if (!teamId || !userId) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'User or team not found');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Utilisateur ou equipe introuvable');
   }
   await teamService.checkIfCanManageTeamOrThrow(userId, teamId);
   next();

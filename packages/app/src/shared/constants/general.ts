@@ -22,14 +22,14 @@ export const V4_ALL_PLANS = [
 export const TRIMMED_PLANS = ['scaleup', 'enterprise', 'startup', 'builder'];
 
 export const ERR_MSG_VAULT_KEY_NAME =
-  'Please provide a unique and alphanumeric key name that is under 300 characters [allowed symbols _ . ( ) - @]';
+  'Veuillez saisir un nom de cle unique et alphanumerique de moins de 300 caracteres [symboles autorises : _ . ( ) - @]';
 
 export const GLOBAL_VAULT_KEYS = {
   openai: {
     name: 'OpenAI',
     key: '',
     placeholder:
-      'ZappStudio provides the Key to get you started. Unlock full access by adding your API key.',
+      'ZappStudio fournit une cle pour demarrer. Ajoutez votre propre cle API pour un acces complet.',
   },
   anthropic: {
     name: 'Anthropic',
@@ -92,9 +92,9 @@ export const ENTERPRISE_COLLECTION_TEMPLATE_NAMES = [
 
 export const MAX_ATTACHMENT_SIZE = 5 * 1024 * 1024; // 5MB in bytes
 
-export const WEAVER_LIMIT_MESSAGE = 'Sorry, you exceeded your daily limit.';
+export const WEAVER_LIMIT_MESSAGE = 'Vous avez atteint votre limite quotidienne.';
 
-export const WEAVER_REQUIRE_CREDITS = 'Weaver requires credits';
+export const WEAVER_REQUIRE_CREDITS = 'Des credits sont necessaires pour cette action';
 
 export const AGENTS_WITH_NEXT_STEPS_SHOWN = 'agentsWithNextStepsShown';
 
@@ -117,61 +117,61 @@ type EmbodimentDescription = {
 
 export const EMBODIMENT_DESCRIPTIONS: Record<string, EmbodimentDescription> = {
   agent_skill: {
-    title: 'Agent Skills',
+    title: 'Competences Agent',
     tooltipTitle: '',
     description: '',
   },
   chat: {
     title: 'Chatbot',
-    tooltipTitle: 'Conversational chatbot UI for live use or embedding.',
+    tooltipTitle: 'Interface de conversation pour tester ou integrer sur votre site.',
     description:
-      'Chat with your agent using an interactive chatbot UI. This can be used for live testing or embedded into your website.',
+      'Discutez avec votre agent IA via une interface de chat. Ideal pour tester en direct ou integrer sur votre site web immobilier.',
   },
   llm: {
-    title: 'LLM API / AgentLLM',
-    tooltipTitle: 'OpenAI-compatible LLM for prompt-response workflows.',
+    title: 'API LLM / AgentLLM',
+    tooltipTitle: 'API compatible OpenAI pour vos workflows IA.',
     description:
-      'Use your agent like an OpenAI-compatible API. Seamlessly integrate it into your applications to send prompts and receive responses using standard OpenAI endpoints, such as /chat/completions. No SDK changes required.',
+      'Utilisez votre agent comme une API compatible OpenAI. Integrez-le dans vos applications pour envoyer des requetes et recevoir des reponses via les endpoints standards (ex: /chat/completions).',
   },
   api: {
-    title: 'API Endpoints',
-    tooltipTitle: 'Interactive environment for testing API endpoints.',
+    title: 'Points d\'acces API',
+    tooltipTitle: 'Environnement interactif pour tester vos points d\'acces API.',
     description:
-      'Swagger UI for simple API calls and endpoint testing. Use this live interface for making API calls, reviewing input/output formats, and integrating your agent into workflows.',
+      'Interface Swagger pour tester simplement vos appels API. Visualisez les formats d\'entree/sortie et integrez votre agent dans vos outils metier.',
   },
   chatgpt: {
-    title: 'Custom GPT',
-    tooltipTitle: 'Export your agent as a custom GPT.',
+    title: 'GPT personnalise',
+    tooltipTitle: 'Exportez votre agent comme GPT personnalise.',
     description:
-      'Deploy your agent as a custom GPT in ChatGPT. Follow step-by-step instructions to set up behavior and connect using the ChatGPT interface.',
+      'Deployez votre agent comme GPT personnalise dans ChatGPT. Suivez les instructions pour configurer le comportement et connecter l\'interface.',
   },
   postman: {
-    title: 'Postman Integration',
-    tooltipTitle: "Export and test your agent's APIs using Postman collections.",
+    title: 'Integration Postman',
+    tooltipTitle: 'Exportez et testez les API de votre agent via Postman.',
     description:
-      'Test your agent using Postman or import Postman collections to your agent workspace. Includes tools for exporting and debugging API calls.',
+      'Testez votre agent avec Postman ou importez des collections. Outils inclus pour exporter et deboquer vos appels API.',
   },
   agentllm: {
     title: 'LLM',
-    tooltipTitle: 'OpenAI-compatible LLM API endpoint',
+    tooltipTitle: 'Point d\'acces API LLM compatible OpenAI',
     description:
-      'Use your agent as an OpenAI-compatible API endpoint for seamless integration with existing LLM workflows.',
+      'Utilisez votre agent comme point d\'acces API compatible OpenAI pour l\'integrer dans vos workflows existants.',
   },
   voice: {
-    title: 'Voice',
-    tooltipTitle: 'Live voice conversation with your agent.',
-    description: 'Start a live voice session with your agent for natural, real-time conversations.',
+    title: 'Voix',
+    tooltipTitle: 'Conversation vocale en direct avec votre agent.',
+    description: 'Demarrez une session vocale en direct avec votre agent pour des echanges naturels.',
   },
   alexa: {
-    title: 'Alexa Skill',
-    tooltipTitle: 'Publish as an Alexa Skill or deploy across managed Echo devices.',
+    title: 'Skill Alexa',
+    tooltipTitle: 'Publiez comme Skill Alexa ou deployez sur vos appareils Echo.',
     description:
-      'Publish your agent as an Alexa Skill or deploy across managed Echo devices for voice interactions.',
+      'Publiez votre agent comme Skill Alexa ou deployez-le sur vos appareils Echo pour des interactions vocales.',
   },
   mcp: {
     title: 'MCP',
-    tooltipTitle: 'MCP',
-    description: 'Use your agent as an MCP for seamless integration with existing MCP workflows.',
+    tooltipTitle: 'Protocole MCP (Model Context Protocol)',
+    description: 'Utilisez votre agent via le protocole MCP pour l\'integrer dans vos outils compatibles (Claude, etc.).',
   },
 };
 
@@ -209,17 +209,17 @@ export const LEGACY_PLANS = new Set([
  * Used for displaying the correct page title in the TopbarPrimary component
  */
 export const PAGE_TITLE_MAP: Record<string, string> = {
-  '/my-plan': 'Manage Subscription',
-  '/data': 'Data Pool',
-  '/vault': 'Vault',
-  '/telemetry': 'Telemetry & Logs',
-  '/account': 'Account',
-  '/teams/roles': 'Team Roles',
-  '/teams/members': 'User Management',
-  '/domain': 'Domains',
-  '/analytics': 'Analytics',
-  '/templates': 'Templates',
-  '/agents': 'Team Dashboard', // Base title, will be customized with team name in component
+  '/my-plan': 'Mon abonnement',
+  '/data': 'Donnees',
+  '/vault': 'Coffre-fort',
+  '/telemetry': 'Suivi et journaux',
+  '/account': 'Mon compte',
+  '/teams/roles': 'Roles de l\'equipe',
+  '/teams/members': 'Gestion des membres',
+  '/domain': 'Domaines',
+  '/analytics': 'Statistiques',
+  '/templates': 'Modeles',
+  '/agents': 'Tableau de bord',
 };
 
 // TODO P4-DOCS: Mettre en place la documentation ZappStudio en français.

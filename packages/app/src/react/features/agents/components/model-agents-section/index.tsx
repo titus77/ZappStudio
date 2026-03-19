@@ -31,7 +31,7 @@ const ModelAgentsSection = () => {
     return (
       <section className="my-10">
         <div className="flex justify-between align-middle mb-4 text-lg">
-          <p>Model Agents</p>
+          <p>Agents IA modèles</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((index) => (
@@ -64,9 +64,9 @@ const ModelAgentsSection = () => {
   if (error) {
     return (
       <section className="my-10">
-        <h2 className="text-xl font-medium text-gray-800 mb-4">Models</h2>
+        <h2 className="text-xl font-medium text-gray-800 mb-4">Modèles</h2>
         <div className="p-4 text-red-500 bg-red-50 rounded-lg">
-          Error loading models. Please try again later.
+          Erreur lors du chargement des modèles. Veuillez réessayer ultérieurement.
         </div>
       </section>
     );
@@ -75,7 +75,7 @@ const ModelAgentsSection = () => {
   return (
     <section className="my-10">
       <div className="flex justify-between align-middle mb-4 text-lg">
-        <p>Model Agents</p>
+        <p>Agents IA modèles</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

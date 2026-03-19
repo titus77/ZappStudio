@@ -24,16 +24,16 @@ interface AgentsHeaderProps {
 
 const SORT_FIELDS = [
   {
-    title: 'Name',
+    title: 'Nom',
     value: 'name',
   },
   {
-    title: 'Date Created',
+    title: 'Date de création',
     value: 'createdAt',
     isDefault: true,
   },
   {
-    title: 'Date Modified',
+    title: 'Date de modification',
     value: 'updatedAt',
   },
 ];
@@ -57,14 +57,14 @@ export function AgentsHeader({
           <div className="w-20 h-4 bg-gray-200 rounded-full dark:bg-gray-700 animate-pulse" />
         }
       >
-        <h2 className="capitalize text-lg">Agents</h2>
+        <h2 className="capitalize text-lg">Agents IA</h2>
       </Suspense>
 
       <div className="w-max flex justify-between gap-2 flex-wrap flex-col sm:flex-row sm:flex-nowrap">
         <div className="flex items-center">
           <Select onValueChange={onSortCriteriaChange} value={sortCriteria}>
             <SelectTrigger className="w-36">
-              <SelectValue placeholder="Select sort criteria" />
+              <SelectValue placeholder="Critère de tri" />
             </SelectTrigger>
             <SelectContent>
               {SORT_FIELDS.map((s: SortOption) => (
@@ -75,7 +75,7 @@ export function AgentsHeader({
             </SelectContent>
           </Select>
 
-          <button onClick={onSortOrderToggle} className="mx-2" aria-label="Sort agents">
+          <button onClick={onSortOrderToggle} className="mx-2" aria-label="Trier les agents IA">
             {sortOrder === 'asc' ? (
               <AscendingIcon className="text-[#616161]" />
             ) : (
@@ -87,7 +87,7 @@ export function AgentsHeader({
           BtnComponent={
             <CustomButton
               handleClick={onCreateAgentClick}
-              label="Create Agent"
+              label="Créer un agent IA"
               addIcon
               dataAttributes={{
                 'data-test': 'create-agent-button',
@@ -97,10 +97,10 @@ export function AgentsHeader({
           }
           handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onSearch(e.target.value)}
           handleClick={onCreateAgentClick}
-          label="Create Agent"
+          label="Créer un agent IA"
           addIcon
           search
-          placeholder="Search Agents"
+          placeholder="Rechercher des agents IA"
           isReadOnlyAccess={isReadOnlyAccess}
           dataAttributes={{
             'data-qa': 'search-agents-input',

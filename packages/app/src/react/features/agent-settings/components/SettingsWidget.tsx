@@ -78,23 +78,23 @@ const SettingsWidget = () => {
               htmlFor="models"
               className="flex items-center gap-2 text-gray-700 text-sm font-semibold mt-4"
             >
-              Default LLM
+              LLM par défaut
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Info className="w-4 h-4 mt-[-2px]" />
                 </TooltipTrigger>
                 <TooltipContent className="max-w-[240px] text-center text-wrap">
                   <div>
-                    Primary language model
+                    Modèle de langage principal
                     <br />
-                    Used for chat and chatbot interactions
+                    Utilisé pour le chat et les interactions avec le chatbot
                     <br />
-                    Affects response quality and capabilities
+                    Affecte la qualité des réponses et les capacités
                   </div>
                 </TooltipContent>
               </Tooltip>
             </label>
-            <p className="text-sm text-gray-500 mb-2 mt-0.5">Select your preferred default LLM.</p>
+            <p className="text-sm text-gray-500 mb-2 mt-0.5">Sélectionnez votre LLM par défaut préféré.</p>
             <select
               id="models"
               name="models"
@@ -145,11 +145,11 @@ const SettingsWidget = () => {
 
           <div className="mt-6 w-full">
             <CustomTextarea
-              label="Behavior"
+              label="Comportement"
               labelClassName="text-sm font-semibold"
-              subLabel="Describe your agent's behavior."
+              subLabel="Décrivez le comportement de votre agent IA."
               name="behavior"
-              placeholder="Friendly, professional, etc."
+              placeholder="Amical, professionnel, etc."
               value={formik.values.behavior}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -159,10 +159,10 @@ const SettingsWidget = () => {
               fullWidth
               infoTooltip={
                 <div>
-                  Define how the agent should respond and behave during interactions.
+                  Définissez comment l'agent doit répondre et se comporter lors des interactions.
                   <br />
-                  Include personality traits, communication style, and any specific instructions for
-                  handling user requests.
+                  Incluez les traits de personnalité, le style de communication et toute instruction
+                  spécifique pour gérer les demandes des utilisateurs.
                 </div>
               }
             />
@@ -198,13 +198,13 @@ const SettingsWidget = () => {
           >
             <Modal.Header>
               <span className="text-[#1E1E1E] text-xl font-semibold">
-                Describe your agent's behavior
+                Décrivez le comportement de votre agent IA
               </span>
             </Modal.Header>
             <Modal.Body>
               <CustomTextarea
                 name="behavior"
-                placeholder="Friendly, professional, etc."
+                placeholder="Amical, professionnel, etc."
                 value={formik.values.behavior}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

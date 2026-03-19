@@ -24,7 +24,7 @@ export const getUserInfo: ExpressHandler<
   }
 
   res.json({
-    message: 'User info retrieved successfully',
+    message: 'Informations utilisateur recuperees avec succes',
     user: userInfo,
   });
 };

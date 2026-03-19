@@ -77,14 +77,14 @@ const ApiEmbodimentModal: React.FC<ApiEmbodimentModalProps> = ({ onClose }) => {
         {/* Description */}
         <div>
           <p className="text-sm text-gray-700">
-            Enable Agent to communicate with each other using a set of definitions and protocols.
+            Permettez à vos agents IA de communiquer entre eux via un ensemble de définitions et de protocoles.
           </p>
         </div>
 
         {/* Dev API URL */}
         {swaggerUrl && (
           <>
-            <div className="text-sm text-gray-900 -mb-4">Dev API</div>
+            <div className="text-sm text-gray-900 -mb-4">API de développement</div>
             <div className="relative flex items-center mt-1 group w-full">
               <Input
                 type="text"
@@ -110,7 +110,7 @@ const ApiEmbodimentModal: React.FC<ApiEmbodimentModalProps> = ({ onClose }) => {
         {/* Prod API URL */}
         {swaggerUrlProd && (
           <>
-            <div className="text-sm text-gray-900 -mb-4">Prod API</div>
+            <div className="text-sm text-gray-900 -mb-4">API de production</div>
             <div className="relative flex items-center mt-1 group w-full">
               <Input
                 type="text"
@@ -152,7 +152,7 @@ const ApiEmbodimentModal: React.FC<ApiEmbodimentModalProps> = ({ onClose }) => {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   />
                 </svg>
-                <span className="sr-only">Loading...</span>
+                <span className="sr-only">Chargement...</span>
               </div>
             </div>
           )}
@@ -175,7 +175,7 @@ const ApiEmbodimentModal: React.FC<ApiEmbodimentModalProps> = ({ onClose }) => {
           {!swaggerUrl && (
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-base text-gray-700">
-                Agent domain is not set. Cannot provide API features.
+                Le domaine de l'agent IA n'est pas configuré. Les fonctionnalités API ne sont pas disponibles.
               </span>
             </div>
           )}

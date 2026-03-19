@@ -19,28 +19,28 @@ const DeleteAccountModal = ({ onClose }: Props) => {
     mutationFn: deleteAccount,
 
     onError: (error: SmythAPIError) => {
-      errorToast(error.error.message ?? 'Error deleting account');
+      errorToast(error.error.message ?? 'Erreur lors de la suppression du compte');
       console.log(error);
     },
     onSuccess: () => {
-      successToast('Account deleted successfully');
+      successToast('Compte supprimé avec succès');
     },
   });
 
   return (
-    <Modal onClose={onClose} title="Delete Account">
+    <Modal onClose={onClose} title="Supprimer le compte">
       <div className="modal-body">
         <div className="flex flex-col gap-4 mt-3">
-          <p>Are you sure you want to delete your account?</p>
+          <p>Êtes-vous sûr de vouloir supprimer votre compte ?</p>
           <p>
-            This action is irreversible. If you delete your account, you will lose all your data,
-            including your subscriptions, team members, and any other information associated with
-            your account.
+            Cette action est irréversible. Si vous supprimez votre compte, vous perdrez toutes vos données,
+            y compris vos abonnements, membres de l'équipe et toute autre information associée à
+            votre compte.
           </p>
 
           <p>
-            To confirm, please type the word{' '}
-            <strong className="text-red-500">{deleteConfirmationWord}</strong> in the field below.
+            Pour confirmer, veuillez saisir le mot{' '}
+            <strong className="text-red-500">{deleteConfirmationWord}</strong> dans le champ ci-dessous.
           </p>
 
           <CustomInput
@@ -48,9 +48,9 @@ const DeleteAccountModal = ({ onClose }: Props) => {
             onChange={(e) => setConfirmationWord(e.target.value)}
             fullWidth
             autoFocus
-            placeholder="Type DELETE to confirm"
+            placeholder="Tapez DELETE pour confirmer"
             error={deleteAccMutation.isError}
-            errorMessage="An error occurred while deleting your account. Please try again later."
+            errorMessage="Une erreur s'est produite lors de la suppression de votre compte. Veuillez réessayer ultérieurement."
           />
 
           <CustomButton
@@ -67,7 +67,7 @@ const DeleteAccountModal = ({ onClose }: Props) => {
             }}
             loading={deleteAccMutation.isLoading}
           >
-            Delete Account
+            Supprimer le compte
           </CustomButton>
         </div>
       </div>

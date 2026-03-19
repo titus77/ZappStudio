@@ -9,11 +9,6 @@ import tokenVerStrategies from './strategies';
 
 const INTERNAL_TRUSTED_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET;
 
-/**
- * Detect if a token is an internal M2M call:
- * - Matches INTERNAL_TRUSTED_SECRET exactly
- * - Or is sent via X-Internal-Secret header
- */
 function isInternalToken(token: string, req: any): boolean {
   if (INTERNAL_TRUSTED_SECRET && token === INTERNAL_TRUSTED_SECRET) return true;
   const internalHeader = req.headers['x-internal-secret'];
@@ -27,50 +22,49 @@ const authMiddlewareFactory = ({ requireTeam = true, allowM2M = false, limitToM2
       const token: string = req.headers.authorization?.split(' ')[1] || req.query.token;
 
       if (!token) {
-        return next(new ApiError(httpStatus.UNAUTHORIZED, 'Access token is required'));
+        return next(new ApiError(httpStatus.UNAUTHORIZED, `Un jeton d'acces est requis`));
       }
 
       const isM2M = isInternalToken(token, req);
 
       if (isM2M) {
-        if (!allowM2M) throw new ApiError(httpStatus.FORBIDDEN, 'M2M is not enabled');
+        if (!allowM2M) throw new ApiError(httpStatus.FORBIDDEN, `L'acces M2M n'est pas active`);
 
         const { success } = await tokenVerStrategies.defaultM2MAuth.verifyToken(token);
 
         if (!success) {
-          return next(new ApiError(httpStatus.UNAUTHORIZED, 'Access token is invalid or expired'));
+          return next(new ApiError(httpStatus.UNAUTHORIZED, `Le jeton d'acces est invalide ou expire`));
         }
         res.locals.isM2M = true;
 
         return next();
       } else {
         // JWT auth (from Authentik/ZappImmo)
-        if (limitToM2M) throw new ApiError(httpStatus.FORBIDDEN, 'User auth is not enabled for this request');
+        if (limitToM2M) throw new ApiError(httpStatus.FORBIDDEN, `L'authentification utilisateur n'est pas activee pour cette requete`);
 
         const { data, success } = await tokenVerStrategies.defaultUIAuth.verifyToken(token);
 
         if (!success) {
-          return next(new ApiError(httpStatus.UNAUTHORIZED, 'Access token is invalid or expired'));
+          return next(new ApiError(httpStatus.UNAUTHORIZED, `Le jeton d'acces est invalide ou expire`));
         }
 
         res.locals.logtoUser = data!.logtoUser;
         res.locals.user = data!.user;
         res.locals.userId = data!.userId;
 
-        // Check if another teamId was passed in the request header
         const teamIdHeader = req.headers['x-smyth-team-id'];
         if (teamIdHeader) {
           const hasTeamAccess = await teamService.isUserPartOfTeam(data!.userId, teamIdHeader);
 
           if (!hasTeamAccess) {
-            throw new ApiError(httpStatus.FORBIDDEN, 'You do not have access to this team');
+            throw new ApiError(httpStatus.FORBIDDEN, `Vous n'avez pas acces a cette equipe`);
           }
 
           res.locals.targetTeamId = teamIdHeader;
         }
 
         if (requireTeam && !data!.user?.teamId) {
-          throw new ApiError(httpStatus.BAD_REQUEST, 'Please create a team and try again');
+          throw new ApiError(httpStatus.BAD_REQUEST, `Veuillez creer une equipe et reessayer`);
         }
 
         runLocalsFieldsSanityChecks(res);
@@ -86,7 +80,7 @@ const authMiddlewareFactory = ({ requireTeam = true, allowM2M = false, limitToM2
 const runLocalsFieldsSanityChecks = (res: any) => {
   if (!res.locals.logtoUser || !res.locals.user || !res.locals.userId) {
     LOGGER.error(new Error(`User auth middleware failed to set required fields in res.locals`));
-    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, `Une erreur est survenue`);
   }
 };
 

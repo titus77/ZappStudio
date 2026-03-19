@@ -51,7 +51,7 @@ const DataPoolPageContent: FC = () => {
         );
         setHasMore(fetchedNamespaces.length === DEFAULT_PAGINATION_LIMIT);
       } catch (error: unknown) {
-        const errorMessage = (error as Error)?.message || 'Failed to fetch data spaces. Please try again.';
+        const errorMessage = (error as Error)?.message || 'Impossible de récupérer les espaces de données. Veuillez réessayer.';
         errorToast(errorMessage);
       } finally {
         setLoading(false);
@@ -118,10 +118,10 @@ const DataPoolPageContent: FC = () => {
       // Manually remove from list without refetching
       setNamespaces((prev) => prev.filter((ns) => ns.label !== namespaceToDelete.label));
       
-      successToast('Data space deleted successfully');
+      successToast('Espace de données supprimé avec succès');
       handleCloseDeleteDialog();
     } catch (error: unknown) {
-      const errorMessage = (error as Error)?.message || 'Failed to delete data space. Please try again.';
+      const errorMessage = (error as Error)?.message || 'Impossible de supprimer l\'espace de données. Veuillez réessayer.';
       errorToast(errorMessage);
       throw error; // Re-throw to let dialog handle loading state
     }
@@ -162,7 +162,7 @@ const DataPoolPageContent: FC = () => {
         <div className="relative">
           <CustomInput
             isSearch={true}
-            placeholder="Search Data Space"
+            placeholder="Rechercher un espace de données"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleSearchChange(e.target.value)}
             value={searchQuery}
           />
@@ -173,7 +173,7 @@ const DataPoolPageContent: FC = () => {
           <CustomButton
             handleClick={() => setIsCreateModalOpen(true)}
             addIcon={true}
-            label="Add Data Space"
+            label="Ajouter un espace de données"
             disabled={credentialsLoading}
           />
         )}
@@ -196,10 +196,10 @@ const DataPoolPageContent: FC = () => {
               {namespaces.length === 0 ? (
                 <>
                   <h4 className="text-xl md:text-2xl font-medium text-black text-center mb-2">
-                    Create your first data space
+                    Créez votre premier espace de données
                   </h4>
                   <p className="mb-8 text-sm md:text-base text-gray-600">
-                    Use data space to import your external data into ZappStudio.
+                    Utilisez les espaces de données pour importer vos données externes dans ZappStudio.
                   </p>
                   <div className="flex justify-between items-center gap-4 mt-2 w-full flex-col md:flex-row">
                     <CustomButton
@@ -211,13 +211,13 @@ const DataPoolPageContent: FC = () => {
                         );
                       }}
                       className="flex-1 w-[190px] md:w-auto"
-                      label="Learn more"
+                      label="En savoir plus"
                       variant="secondary"
                     />
                     <CustomButton
                       handleClick={() => setIsCreateModalOpen(true)}
                       addIcon={true}
-                      label="Add Data Space"
+                      label="Ajouter un espace de données"
                       className="flex-1 w-[190px] md:w-auto"
                       disabled={credentialsLoading
                         //  || credentials.length === 0
@@ -234,10 +234,10 @@ const DataPoolPageContent: FC = () => {
               ) : (
                 <div className="text-center">
                   <h4 className="text-xl font-medium text-gray-700 mb-2">
-                    No matching data spaces found
+                    Aucun espace de données correspondant trouvé
                   </h4>
                   <p className="text-gray-600">
-                    No data spaces match your search query: &quot;{searchQuery}&quot;
+                    Aucun espace de données ne correspond à votre recherche : &quot;{searchQuery}&quot;
                   </p>
                 </div>
               )}
@@ -256,7 +256,7 @@ const DataPoolPageContent: FC = () => {
               type="button"
               className="text-gray-500 hover:underline"
             >
-              Load More
+              Charger plus
             </button>
           </div>
         )}

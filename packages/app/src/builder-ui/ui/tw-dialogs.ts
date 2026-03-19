@@ -79,10 +79,10 @@ export function editValuesDialog({
       },
       actions: [
         ...(!showCloseButton
-          ? [{ label: 'Cancel', cssClass: 'bg-gray-400', callback: (result) => resolve(null) }]
+          ? [{ label: 'Annuler', cssClass: 'bg-gray-400', callback: (result) => resolve(null) }]
           : []),
         {
-          label: btnSaveLabel || 'Save',
+          label: btnSaveLabel || 'Enregistrer',
           cssClass: PRIMARY_BUTTON_STYLE,
           requiresValidation: true,
           callback: (result) => resolve(result),
@@ -210,7 +210,7 @@ export async function twEditValues({
         //#region smyth validator
         const _this = event.target as HTMLButtonElement;
         const btnText = _this.textContent;
-        _this.textContent = 'Validating...';
+        _this.textContent = 'Validation...';
         _this.disabled = true;
 
         const isValid = await smythValidator.validateInputs(form);

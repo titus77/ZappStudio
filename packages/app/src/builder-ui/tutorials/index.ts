@@ -41,9 +41,9 @@ export const builderPageTutorialWorkflow = async () => {
     },
     animate: true,
     showButtons: true,
-    nextBtnText: 'Next',
-    prevBtnText: 'Previous',
-    closeBtnText: 'Close',
+    nextBtnText: 'Suivant',
+    prevBtnText: 'Precedent',
+    closeBtnText: 'Fermer',
     padding: 10,
     opacity: 0.7,
   });
@@ -52,9 +52,9 @@ export const builderPageTutorialWorkflow = async () => {
     {
       element: '#workspace-container',
       popover: {
-        title: '<strong>Welcome to ZappStudio Builder</strong>',
+        title: '<strong>Bienvenue dans ZappStudio Builder</strong>',
         description:
-          "Welcome to the <strong>ZappStudio Builder</strong>! This is your visual canvas where you'll create powerful AI agents by connecting components. Drag, drop, and connect elements to build sophisticated workflows.",
+          "Bienvenue dans le <strong>ZappStudio Builder</strong> ! Voici votre canevas visuel pour creer des agents IA puissants en connectant des composants. Faites glisser, deposer et connecter des elements pour construire des workflows sophistiques.",
         preferredPosition: 'center',
         alignment: 'center',
         className: 'welcome-builder',
@@ -65,7 +65,7 @@ export const builderPageTutorialWorkflow = async () => {
       popover: {
         title: '<strong>Agent Weaver</strong>',
         description:
-          'Use <strong>Agent Weaver</strong> to describe your agent in natural language. This AI assistant converts your requirements into functional workflows.',
+          'Utilisez <strong>Agent Weaver</strong> pour decrire votre agent en langage naturel. Cet assistant IA convertit vos besoins en workflows fonctionnels.',
         preferredPosition: 'right',
         alignment: 'start',
         className: 'weaver-intro',
@@ -74,9 +74,9 @@ export const builderPageTutorialWorkflow = async () => {
     {
       element: '[data-qa="sidebar-components-integrations-panel"]',
       popover: {
-        title: '<strong>Components & Integrations</strong>',
+        title: '<strong>Composants & Integrations</strong>',
         description:
-          'Access <strong>Components & Integrations</strong> to build your agent. Components provide building blocks with inputs, outputs, and settings, while integrations connect you to external services, APIs, databases, and third-party tools.',
+          'Accedez aux <strong>Composants & Integrations</strong> pour construire votre agent. Les composants fournissent des briques de base avec entrees, sorties et parametres, tandis que les integrations vous connectent a des services externes, APIs, bases de donnees et outils tiers.',
         preferredPosition: 'right',
         alignment: 'center',
         className: 'components-integrations-highlight',
@@ -85,9 +85,9 @@ export const builderPageTutorialWorkflow = async () => {
     {
       element: '[data-qa="builder-toolbar-actions"]',
       popover: {
-        title: '<strong>Debug, Test & Deploy</strong>',
+        title: '<strong>Debug, Test & Deployer</strong>',
         description:
-          'Use the toolbar to manage your agent lifecycle: <strong>Debug</strong> for component-level inspection and testing, <strong>Test</strong> for Form Preview and API testing, and <strong>Deploy</strong> to make your agent live with SSL/TLS certification and version control.',
+          'Utilisez la barre d\'outils pour gerer le cycle de vie de votre agent : <strong>Debug</strong> pour l\'inspection et le test au niveau des composants, <strong>Test</strong> pour la previsualisation du formulaire et les tests API, et <strong>Deployer</strong> pour mettre votre agent en ligne avec certification SSL/TLS et controle de version.',
         preferredPosition: 'bottom',
         alignment: 'center',
         className: 'toolbar-actions-highlight',

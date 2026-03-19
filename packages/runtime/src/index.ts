@@ -131,6 +131,62 @@ app.options('*', cors);
 // Serve static files first for optimal performance
 app.use('/static', [compression()], express.static(path.join(__dirname, '../static')));
 
+// =============================================================================
+// ZappImmo /wai path-based agent routing
+// Caddy sends full path: /wai/{agentId}/chatbot → extract agentId, rewrite URL
+// Static assets: /wai/static/* → rewrite to /static/* (shared, no agent)
+// Health/root: /wai/health, /wai/ → rewrite to /health, / (no agent)
+// Custom domains: no /wai prefix → skip (hostname-based resolution in agentLoader)
+// =============================================================================
+const WAI_PREFIX = '/wai/';
+const WAI_STATIC_RE = /^\/wai\/(static\/.*)$/;
+// cuid = 25 chars lowercase alphanumeric; also accept 20-30 range for flexibility
+const WAI_AGENT_RE = /^\/wai\/([a-z0-9]{20,30})\/(.*)/;
+// Non-agent /wai paths (health, root, etc.)
+const WAI_PASSTHROUGH_RE = /^\/wai\/(health|$)/;
+// Dangerous debug headers to strip on public /wai/* routes
+const DEBUG_HEADERS_TO_STRIP = [
+  'x-debug-run', 'x-debug-read', 'x-debug-inj', 'x-debug-stop', 'x-debug-skip',
+  'x-force-debugger', 'x-monitor-id',
+];
+
+app.use((req: any, res, next) => {
+  if (!req.url.startsWith(WAI_PREFIX)) {
+    return next();
+  }
+
+  // Strip dangerous debug headers on public /wai/* routes
+  for (const header of DEBUG_HEADERS_TO_STRIP) {
+    delete req.headers[header];
+  }
+
+  // /wai/static/* → /static/* (shared assets, no agent context)
+  const staticMatch = req.url.match(WAI_STATIC_RE);
+  if (staticMatch) {
+    req.url = '/' + staticMatch[1];
+    return next();
+  }
+
+  // /wai/health or /wai/ → passthrough without agent
+  const passthroughMatch = req.url.match(WAI_PASSTHROUGH_RE);
+  if (passthroughMatch) {
+    req.url = '/' + (passthroughMatch[1] || '');
+    return next();
+  }
+
+  // /wai/{agentId}/{rest} → extract agent, rewrite to /{rest}
+  const agentMatch = req.url.match(WAI_AGENT_RE);
+  if (agentMatch) {
+    req._pathAgentSlug = agentMatch[1];
+    req._waiRoute = true;
+    req.url = '/' + agentMatch[2];
+    return next();
+  }
+
+  // /wai/something-else (not a valid agent slug) → 404
+  res.status(404).json({ error: 'Not Found' });
+});
+
 // Request context middleware
 app.use((req, res, next) => {
   requestContext.run(() => {
@@ -149,6 +205,8 @@ app.use(
       maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
       sameSite: config.env.NODE_ENV === 'development' ? 'lax' : 'none',
       secure: config.env.NODE_ENV !== 'development',
+      // Scope cookie to /wai path to avoid conflicts with frontend on same domain (zap.immo)
+      path: config.env.WAI_COOKIE_PATH || '/',
     },
     resave: false,
     saveUninitialized: true,

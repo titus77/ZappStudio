@@ -54,7 +54,7 @@ const ModalHeaderEmbodiment: React.FC<ModalHeaderEmbodimentProps> = ({
         <button
           className="absolute -left-2 -top-2 p-[6px] text-[#222] hover:bg-gray-100 rounded"
           onClick={onBack}
-          aria-label="Back"
+          aria-label="Retour"
           style={{ lineHeight: 0 }}
         >
           <BackButtonWithTail width={16} height={14} />
@@ -64,7 +64,7 @@ const ModalHeaderEmbodiment: React.FC<ModalHeaderEmbodimentProps> = ({
       <button
         className="absolute -right-2 -top-2 p-2 text-[#222] hover:bg-gray-100 rounded"
         onClick={onClose}
-        aria-label="Close"
+        aria-label="Fermer"
       >
         <CloseIcon width={16} height={16} />
       </button>

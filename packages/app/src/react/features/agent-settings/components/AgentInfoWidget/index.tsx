@@ -19,17 +19,17 @@ const AgentInfoWidget = () => {
       <div className="px-4 pt-10 pb-6 flex flex-col bg-gray-50" data-qa="agent-name-container">
         <div className="mb-4 mt-4">
           <Input
-            label="Agent Name"
+            label="Nom de l'agent IA"
             labelClassName="text-sm font-semibold mb-2"
             type="text"
             name="name"
             value={formik.values.name || ''}
             onChange={(e) => formik.handleChange(e)}
-            placeholder="Enter agent name"
+            placeholder="Saisir le nom de l'agent IA"
             error={!!formik.errors.name}
             errorMessage={formik.errors.name as string}
             fullWidth
-            infoTooltip={<div>Enter a unique, descriptive name for your agent.</div>}
+            infoTooltip={<div>Saisissez un nom unique et descriptif pour votre agent IA.</div>}
           />
         </div>
 
@@ -40,12 +40,12 @@ const AgentInfoWidget = () => {
             name="shortDescription"
             value={formik.values.shortDescription || ''}
             onChange={(e) => formik.handleChange(e)}
-            placeholder="Describe your project"
+            placeholder="Décrivez votre projet"
             error={!!formik.errors.shortDescription}
             errorMessage={formik.errors.shortDescription as string}
             fullWidth
             infoTooltip={
-              <div>Provide a brief overview of what this agent does and its primary purpose.</div>
+              <div>Donnez un aperçu général de ce que fait cet agent IA et de son objectif principal.</div>
             }
           />
         </div>

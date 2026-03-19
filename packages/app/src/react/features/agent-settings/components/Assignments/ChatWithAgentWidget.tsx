@@ -70,18 +70,18 @@ const ChatWithAgentWidget = ({ isWriteAccess, isAgentDeployed }: Props) => {
           <div>
             <div className="flex items-center">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
-                Chat with Agent
+                Discuter avec l'agent IA
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Info className="w-4 h-4" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-[240px] text-center text-wrap">
-                    <p>Interact directly with your agent through a conversational interface.</p>
+                    <p>Interagissez directement avec votre agent IA via une interface conversationnelle.</p>
                   </TooltipContent>
                 </Tooltip>
               </label>
             </div>
-            <p className="text-sm text-gray-500">Message your agent, assign a task via chat.</p>
+            <p className="text-sm text-gray-500">Envoyez un message à votre agent IA, assignez-lui une tâche par chat.</p>
           </div>
 
           {!isAgentDeployed && (
@@ -112,7 +112,7 @@ const ChatWithAgentWidget = ({ isWriteAccess, isAgentDeployed }: Props) => {
               </TooltipTrigger>
               <TooltipContent side="top" className="max-w-[240px] text-center text-wrap">
                 <div style={{ width: '100%' }}>
-                  To chat with your agent, please deploy to production.{' '}
+                  Pour discuter avec votre agent IA, veuillez d'abord le déployer en production.{' '}
                   <Link
                     to={`/builder/${agentId}`}
                     target="_blank"
@@ -120,9 +120,9 @@ const ChatWithAgentWidget = ({ isWriteAccess, isAgentDeployed }: Props) => {
                     reloadDocument
                     onClick={(e) => e.stopPropagation()}
                   >
-                    Deploy
+                    Déployez
                   </Link>{' '}
-                  your agent now.
+                  votre agent IA maintenant.
                 </div>
               </TooltipContent>
             </Tooltip>

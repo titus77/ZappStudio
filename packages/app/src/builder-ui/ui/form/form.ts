@@ -249,7 +249,7 @@ export function createForm(entriesObject, displayType = 'block'): FormHTMLElemen
       'mt-4 mb-2 w-[200px] cursor-pointer float-right font-bold text-right text-blue-500 bg-transparent hover:text-smythos-blue focus:outline-none px-4 py-2 rounded-lg text-sm transition-colors',
     );
     testApiButton.innerHTML =
-      'Test API Endpoint <span id="test-api-endpoint-arrow" class="transition-transform duration-300">-></span>';
+      'Tester le point d\'acces API <span id="test-api-endpoint-arrow" class="transition-transform duration-300">-></span>';
     testApiButton.addEventListener('click', async (e) => {
       e.preventDefault();
       // Import the function dynamically to avoid circular dependencies

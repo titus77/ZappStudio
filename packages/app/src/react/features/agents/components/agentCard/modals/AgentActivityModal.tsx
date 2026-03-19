@@ -12,10 +12,10 @@ interface AgentActivityModalProps {
  */
 export function AgentActivityModal({ isOpen, activities, onClose }: AgentActivityModalProps) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Change log">
+    <Modal isOpen={isOpen} onClose={onClose} title="Journal des modifications">
       <div className="mt-6 space-y-6 min-w-[240px]">
         {activities.length === 0 ? (
-          <p className="text-gray-500 text-center py-4">No activity recorded</p>
+          <p className="text-gray-500 text-center py-4">Aucune activité enregistrée</p>
         ) : (
           activities.map((activity) => (
             <div className="flex items-center space-x-2 gap-3" key={activity.createdAt}>

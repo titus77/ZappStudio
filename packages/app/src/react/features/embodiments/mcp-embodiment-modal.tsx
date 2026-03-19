@@ -49,13 +49,13 @@ const McpEmbodimentModal: React.FC<McpEmbodimentModalProps> = ({ onClose }) => {
 
         {/* Description */}
         <p className="text-sm text-gray-700 mb-4">
-          Seamlessly connect your agent to MCP-compatible workbenches, IDEs, and enterprise environments.
+          Connectez facilement votre agent IA aux environnements compatibles MCP : outils de travail, IDE et environnements d'entreprise.
         </p>
 
         {/* Dev URL */}
         {devUrl && (
           <>
-            <div className="text-sm text-gray-900 -mb-4">MCP Dev URL</div>
+            <div className="text-sm text-gray-900 -mb-4">URL MCP de développement</div>
             <div className="relative flex items-center mt-1 group w-full">
               <Input
                 type="text"
@@ -81,7 +81,7 @@ const McpEmbodimentModal: React.FC<McpEmbodimentModalProps> = ({ onClose }) => {
         {/* Prod URL */}
         {prodUrl && (
           <>
-            <div className="text-sm text-gray-900 -mb-4">MCP Prod URL</div>
+            <div className="text-sm text-gray-900 -mb-4">URL MCP de production</div>
             <div className="relative flex items-center mt-1 group w-full">
               <Input
                 type="text"

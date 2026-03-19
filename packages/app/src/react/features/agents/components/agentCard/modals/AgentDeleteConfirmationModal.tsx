@@ -29,7 +29,7 @@ export function AgentDeleteConfirmationModal({
       onClose={handleClose}
       applyMaxWidth={false}
       panelWidthClasses="max-w-[600px] w-[calc(100vw_-_-20px)]"
-      title="Are you sure you want to delete this agent?"
+      title="Êtes-vous sûr de vouloir supprimer cet agent IA ?"
     >
       <div className="mt-6 space-y-6">
         <div className="pt-4">
@@ -37,7 +37,7 @@ export function AgentDeleteConfirmationModal({
             <CustomButton
               className="ml-auto rounded-sm"
               handleClick={onConfirm}
-              label={isDeleting ? 'Deleting...' : 'Delete'}
+              label={isDeleting ? 'Suppression...' : 'Supprimer'}
               addIcon
               Icon={<img className="mr-2" src="/img/icons/Delete-White.svg" />}
               disabled={isDeleting}

@@ -181,9 +181,9 @@ export const Input = () => {
                 maxLength={maxLength}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
-                aria-label="Message input"
+                aria-label="Zone de saisie du message"
                 onClick={(e) => e.stopPropagation()}
-                placeholder={`Message ${agentData?.name || ''}...`}
+                placeholder={`Message à ${agentData?.name || ''}...`}
                 className="w-full min-h-12 max-h-96 bg-white border-none outline-none ring-0 focus:outline-none focus:border-none flex-1 resize-none ph-no-capture text-gray-900 placeholder:text-gray-500 px-1"
               />
             </div>
@@ -195,7 +195,7 @@ export const Input = () => {
                   type="file"
                   ref={fileInputRef}
                   className="hidden"
-                  aria-label="File attachment input"
+                  aria-label="Entrée de pièce jointe"
                   onClick={(e) => e.stopPropagation()}
                   onChange={(e) => {
                     if (e.target.files?.length) {
@@ -209,7 +209,7 @@ export const Input = () => {
                   aria-haspopup="menu"
                   onClick={toggleMenu}
                   ref={menuTriggerRef}
-                  aria-label="Upload files"
+                  aria-label="Envoyer des fichiers"
                   aria-expanded={isMenuOpen}
                   className="border-[0.5px] transition-all h-8 flex items-center group cursor-pointer overflow-hidden px-1.5 min-w-8 rounded-lg justify-center text-gray-400 border-gray-200 hover:text-gray-600 hover:bg-gray-50 active:scale-[0.98] "
                 >

@@ -14,7 +14,8 @@ export default async function agentLoader(req, res, next) {
   if (req.path.startsWith('/static/')) {
     return next();
   }
-  let agentId = req.header('X-AGENT-ID');
+  // ZappImmo /wai: path-based agent resolution takes priority
+  let agentId = req._pathAgentSlug || req.header('X-AGENT-ID');
   const agentVersion = req.header('X-AGENT-VERSION') || '';
   const isAgentChatRequest = req.header('x-conversation-id') !== undefined;
   const isAgentFileParsingRequest = isAgentChatRequest || req.header('X-AGENT-REMOTE-CALL') !== undefined;

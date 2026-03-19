@@ -5,11 +5,11 @@ export async function importPostman(workspace, jsonData, dropX, dropY) {
   //console.log(JSON.stringify(result));
 
   const confirmPostmanImport = await confirm(
-    'Postman Collection Detected',
-    'Do you want to import the Postman collection?',
+    'Collection Postman detectee',
+    'Souhaitez-vous importer la collection Postman ?',
     {
-      btnYesLabel: 'Yes, Import',
-      btnNoLabel: 'No, Cancel',
+      btnYesLabel: 'Oui, importer',
+      btnNoLabel: 'Non, annuler',
     },
   );
   if (!confirmPostmanImport) return;
@@ -23,19 +23,19 @@ export async function importSmythFile(workspace, jsonData, bypassContentCheck = 
   const components = [...workspace.domElement.querySelectorAll('.component')];
   if (components.length > 0 && !bypassContentCheck) {
     await alert(
-      'Please clear the workspace before importing a Smyth Agent file.',
-      'Workspace not empty',
+      'Veuillez vider le canevas avant d\'importer un fichier Agent Smyth.',
+      'Canevas non vide',
     );
     return;
   }
 
   if (!bypassContentCheck) {
     const confirmAgentImport = await confirm(
-      'Smyth Agent File Detected',
-      'Do you want to import it ?',
+      'Fichier Agent Smyth detecte',
+      'Souhaitez-vous l\'importer ?',
       {
-        btnYesLabel: 'Yes, Import',
-        btnNoLabel: 'No, Cancel',
+        btnYesLabel: 'Oui, importer',
+        btnNoLabel: 'Non, annuler',
       },
     );
     if (!confirmAgentImport) return;
@@ -46,7 +46,7 @@ export async function importSmythFile(workspace, jsonData, bypassContentCheck = 
 
   await workspace.import(jsonData);
   workspace.agent.name =
-    jsonData.name || jsonData.templateInfo?.name || workspace.agent.name || 'Untitled Agent';
+    jsonData.name || jsonData.templateInfo?.name || workspace.agent.name || 'Agent sans titre';
   workspace.agent.description = jsonData.description;
   workspace.agent.data.description = jsonData.description;
   workspace.agent.data.templateInfo = jsonData.templateInfo;

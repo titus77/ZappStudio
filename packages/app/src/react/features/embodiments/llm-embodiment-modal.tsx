@@ -308,15 +308,15 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
     if (activeTab === 'create-key') {
       return (
         <span className="block text-2xl font-semibold leading-tight text-[#222] text-left">
-          Create a new key
+          Créer une nouvelle clé
         </span>
       );
     }
     return (
       <span className="block text-lg font-semibold leading-tight text-[#222] text-left">
-        Integrating Agent as an
+        Intégrer l'agent IA comme
         <br />
-        OpenAI-Compatible LLM
+        LLM compatible OpenAI
       </span>
     );
   };
@@ -334,7 +334,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
       {activeTab === 'keys' && (
         <div className="mb-2">
           <span className="text-sm text-[#222]">
-            Use these keys to authenticate your API requests
+            Utilisez ces clés pour authentifier vos requêtes API
           </span>
         </div>
       )}
@@ -350,7 +350,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
               Code
             </TabsTrigger>
             <TabsTrigger value="keys" className="text-sm rounded-sm">
-              Keys
+              Clés
             </TabsTrigger>
           </TabsList>
         )}
@@ -358,7 +358,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
           {/* Add API key text and dropdown */}
           <div className="flex flex-col gap-2">
             <span className="text-base font-medium text-[#222]">
-              Add API key below to your environment or CI pipeline.
+              Ajoutez une clé API à votre environnement ou pipeline CI.
             </span>
             {/* API Key Dropdown with custom chevron icon */}
             <div className="w-full">
@@ -366,11 +366,11 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
                 value={selectedApiKey === '' ? '__none__' : selectedApiKey}
                 onValueChange={(v) => setSelectedApiKey(v === '__none__' ? '' : v)}
               >
-                <SelectTrigger className={selectTriggerClass} aria-label="API Key">
-                  <SelectValue placeholder="None" />
+                <SelectTrigger className={selectTriggerClass} aria-label="Clé API">
+                  <SelectValue placeholder="Aucune" />
                 </SelectTrigger>
                 <SelectContent onClick={(e) => e.stopPropagation()}>
-                  <SelectItem value="__none__">None</SelectItem>
+                  <SelectItem value="__none__">Aucune</SelectItem>
                   {apiKeys.map((key) => (
                     <SelectItem key={key.id} value={key.key}>
                       {key.name}
@@ -384,12 +384,12 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
               <div className="flex items-center gap-2 text-xs">
                 <InfoIcon className="text-smyth-red w-4 h-4" />
                 <span>
-                  No API keys detected.{' '}
+                  Aucune clé API détectée.{' '}
                   <span
                     className="underline cursor-pointer text-blue-600"
                     onClick={() => setActiveTab('create-key')}
                   >
-                    Create an API key here.
+                    Créez une clé API ici.
                   </span>
                 </span>
               </div>
@@ -398,8 +398,8 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
           {/* Instructional text */}
           <div className="text-xs text-[#888]">
             <div className="mt-[-12px]">
-              In your application code, initialize your agent with the OpenAI chat completions code
-              snippet below:
+              Dans le code de votre application, initialisez votre agent IA avec le snippet de code
+              de complétion OpenAI ci-dessous :
             </div>
           </div>
           {/* Code/Version/Language Dropdowns */}
@@ -409,7 +409,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
                 htmlFor="code-language-select"
                 className="text-md font-medium text-gray-700 mb-1"
               >
-                Code
+                Langage
               </label>
               <Select
                 value={selectedLanguage}
@@ -434,6 +434,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
               <label htmlFor="version-select" className="text-md font-medium text-gray-700 mb-1">
                 Version
               </label>
+
               <Select value={selectedVersion} onValueChange={setSelectedVersion}>
                 <SelectTrigger
                   id="version-select"
@@ -443,7 +444,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent onClick={(e) => e.stopPropagation()}>
-                  <SelectItem value="dev">Development</SelectItem>
+                  <SelectItem value="dev">Développement</SelectItem>
                   <SelectItem value="prod">Production</SelectItem>
                 </SelectContent>
               </Select>
@@ -460,16 +461,16 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
           />
           {/* Bonus text */}
           <div className="text-xs text-[#888] mt-1">
-            Bonus: Customize the model version and language.
+            Astuce : Personnalisez la version du modèle et le langage.
           </div>
           {/* Copy Code button */}
           <div className="flex justify-end">
             <Button
-              label={copyState === 'copied' ? 'Copied' : 'Copy Code'}
+              label={copyState === 'copied' ? 'Copié !' : 'Copier le code'}
               variant="primary"
               className="px-4 py-2"
               handleClick={handleCopyCode}
-              aria-label="Copy Code"
+              aria-label="Copier le code"
               type="button"
             />
           </div>
@@ -479,26 +480,26 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
           <TabsContent value="keys" className="space-y-4">
             <div className="space-y-2">
               {isLoadingKeys ? (
-                <div className="text-center text-gray-400">Loading keys...</div>
+                <div className="text-center text-gray-400">Chargement des clés...</div>
               ) : apiKeys.length === 0 ? (
                 <div className="flex flex-col items-start w-full">
                   <div className="w-full bg-gray-50 rounded-lg px-3 py-8 text-center text-gray-400 font-extralight">
-                    No API keys found.
+                    Aucune clé API trouvée.
                   </div>
                   <div className="flex justify-end w-full mt-4">
                     <Button
-                      label="Create a new key"
+                      label="Créer une nouvelle clé"
                       variant="primary"
                       className="px-6 py-2"
                       handleClick={handleOpenCreateKey}
-                      aria-label="Create a new key"
+                      aria-label="Créer une nouvelle clé"
                       type="button"
                     />
                   </div>
                 </div>
               ) : (
                 <>
-                  <div className="text-base font-normal text-gray-900">Keys</div>
+                  <div className="text-base font-normal text-gray-900">Clés</div>
                   {apiKeys.map((key) => (
                     <div
                       key={key.id}
@@ -561,11 +562,11 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
                   {/* Right-aligned Create a new key button (primary) */}
                   <div className="flex justify-end mt-4">
                     <Button
-                      label="Create a new key"
+                      label="Créer une nouvelle clé"
                       variant="primary"
                       className="px-6 py-2 text-sm"
                       handleClick={handleOpenCreateKey}
-                      aria-label="Create a new key"
+                      aria-label="Créer une nouvelle clé"
                       type="button"
                     />
                   </div>
@@ -579,16 +580,16 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
           <TabsContent value="create-key" className="space-y-2">
             {/* Section Title */}
             <div className="mb-3 -mt-4">
-              <span className="text-md font-normal">Keys</span>
+              <span className="text-md font-normal">Clés</span>
             </div>
             {/* Key Name Input */}
             <div className="mb-4">
               <Input
-                label="Key Name"
-                placeholder="API key"
+                label="Nom de la clé"
+                placeholder="Clé API"
                 value={createKeyName}
                 onChange={(e) => setCreateKeyName(e.target.value)}
-                aria-label="Key Name"
+                aria-label="Nom de la clé"
                 disabled={isCreatingKey}
                 fullWidth
               />
@@ -596,11 +597,11 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
             {/* Right-aligned Add Key button */}
             <div className="flex justify-end">
               <Button
-                label={isCreatingKey ? 'Adding...' : 'Add Key'}
+                label={isCreatingKey ? 'Ajout en cours...' : 'Ajouter la clé'}
                 variant="primary"
                 className="px-6 py-2 text-base"
                 handleClick={handleCreateKey}
-                aria-label="Add Key"
+                aria-label="Ajouter la clé"
                 type="button"
                 disabled={isCreatingKey || !createKeyName.trim()}
               />

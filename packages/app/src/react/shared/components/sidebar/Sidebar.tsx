@@ -240,7 +240,7 @@ export const Sidebar: React.FC = () => {
           </button>
           {isCollapsed && (
             <div className="sidebar-tooltip" style={collapseTooltipStyle}>
-              {isCollapsed ? 'Expand' : 'Collapse'}
+              {isCollapsed ? 'Agrandir' : 'Réduire'}
             </div>
           )}
         </div>
@@ -259,8 +259,8 @@ export const Sidebar: React.FC = () => {
           )}
           style={borderTooltipStyle}
         >
-          <span className="font-bold">{isCollapsed ? 'Expand' : 'Collapse'}</span>
-          <span className="text-gray-300"> Click</span>
+          <span className="font-bold">{isCollapsed ? 'Agrandir' : 'Réduire'}</span>
+          <span className="text-gray-300"> Cliquer</span>
         </div>
       </div>
     </div>

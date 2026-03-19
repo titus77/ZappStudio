@@ -10,7 +10,7 @@ export function registerGlobalVars(workspace) {
 
   globalVarsButton.className =
     'mt-2 w-9 px-3 py-2 hover:opacity-75 relative bg-primary-100 text-white text-sm duration-200 font-bold text-center';
-  globalVarsButton.innerHTML = `Manage`;
+  globalVarsButton.innerHTML = `Gerer`;
   const globalVarsTextarea = document.createElement('textarea');
   globalVarsTextarea.className = 'hidden';
   globalVarsTextarea.setAttribute('readonly', 'true');
@@ -54,19 +54,19 @@ export function registerGlobalVars(workspace) {
     globalVarsButton.onclick = async () => {
       console.log('Agent Loaded : handling global vars', agent);
       const globalVarsValues: any = await editValuesDialog({
-        title: `Agent Variables`,
+        title: `Variables de l'Agent`,
         content:
-          '<div class="px-2 py-2">The declared Agent Variables are available to all components</div>',
+          '<div class="px-2 py-2">Les variables de l\'agent declarees sont disponibles pour tous les composants</div>',
         fields: {
           _globalVars: {
             type: 'key-value',
             rel: '#global-vars-textarea',
             //attributes: { 'data-template-vars': 'true' },
             keyField: {
-              attributes: { placeholder: 'Name' },
+              attributes: { placeholder: 'Nom' },
             },
             valueField: {
-              attributes: { placeholder: 'Value', 'data-vault': 'ALL_NON_GLOBAL_KEYS' },
+              attributes: { placeholder: 'Valeur', 'data-vault': 'ALL_NON_GLOBAL_KEYS' },
             },
           },
         },

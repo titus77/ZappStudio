@@ -15,242 +15,242 @@ export interface ComponentDocumentation {
  * Value: Component documentation data
  */
 export const COMPONENT_DOCUMENTATION: Record<string, ComponentDocumentation> = {
-  // Base Components
+  // Composants de base
   APIEndpoint: {
     description:
-      'Define a reusable skill your agent can call across workflows. Describe what it does, the inputs it needs, and the result it returns so assistants pick it at the right time.',
+      'Definissez une competence reutilisable que votre agent peut appeler dans tous les workflows. Decrivez ce qu\'elle fait, les entrees dont elle a besoin et le resultat qu\'elle retourne afin que les assistants la selectionnent au bon moment.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   APIOutput: {
     description:
-      'Set the final return for your workflow as clean JSON. Choose a format and map fields so callers always get the same structure in production.',
+      'Definissez le retour final de votre workflow sous forme de JSON propre. Choisissez un format et mappez les champs pour que les appelants obtiennent toujours la meme structure en production.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   Note: {
     description:
-      'Add annotations and lightweight docs on the Canvas to explain decisions, label sections, and help teammates move faster.',
+      'Ajoutez des annotations et une documentation legere sur le canevas pour expliquer les decisions, etiqueter les sections et aider les membres de l\'equipe a aller plus vite.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   Classifier: {
     description:
-      'Sort unstructured text into clear categories using a simple prompt. Pick a suitable model, define labels, and test edge cases for consistency.',
+      'Classez du texte non structure dans des categories claires a l\'aide d\'un prompt simple. Choisissez un modele adapte, definissez les etiquettes et testez les cas limites pour garantir la coherence.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   ImageGenerator: {
     description:
-      'Create or edit images from text with controls for size, quality, and style. Write clear prompts and iterate quickly to refine results.',
+      'Creez ou modifiez des images a partir de texte avec des reglages de taille, qualite et style. Redigez des prompts clairs et iterez rapidement pour affiner les resultats.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   GenAILLM: {
     description:
-      'Give your agent the ability to summarize, generate, extract, or classify text by choosing a model, adding a prompt, and tuning length, quality, and cost.',
+      'Donnez a votre agent la capacite de resumer, generer, extraire ou classifier du texte en choisissant un modele, en ajoutant un prompt et en ajustant la longueur, la qualite et le cout.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
-  // Advanced Components
+  // Composants avances
   FSleep: {
     description:
-      'Use Sleep to pause a workflow for a set time so you can respect API rate limits, wait for slow external work, or add natural pacing. Set the delay in seconds, then the flow resumes and passes its input through unchanged.',
+      'Utilisez Pause pour interrompre un workflow pendant une duree determinee afin de respecter les limites de debit d\'API, d\'attendre un traitement externe lent ou d\'ajouter une cadence naturelle. Definissez le delai en secondes, puis le flux reprend et transmet son entree sans modification.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   LLMAssistant: {
     description:
-      'Build a chat assistant that remembers the conversation and gives coherent replies across turns. Pick a model, set the behaviour, wire the inputs, then choose how replies stream.',
+      'Construisez un assistant de conversation qui memorise l\'echange et fournit des reponses coherentes au fil des tours. Choisissez un modele, configurez le comportement, connectez les entrees, puis selectionnez le mode de diffusion des reponses.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   Await: {
     description:
-      'Use Await to pause your flow until background jobs finish so you can use their results. Set how many jobs to wait for and a time limit so the flow stays responsive.',
+      'Utilisez Attente pour suspendre votre flux jusqu\'a ce que les taches en arriere-plan soient terminees afin d\'en utiliser les resultats. Definissez combien de taches attendre et une limite de temps pour que le flux reste reactif.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   Async: {
     description:
-      'Start long running work in a background branch while the main flow continues; returns a JobID, passes your inputs to that branch, and pairs with Await to get results in the same run.',
+      'Lancez un traitement long dans une branche en arriere-plan pendant que le flux principal continue ; retourne un identifiant de tache, transmet vos entrees a cette branche et s\'associe a Attente pour recuperer les resultats dans la meme execution.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   ForEach: {
     description:
-      'Use ForEach to loop through a list and run the same steps for each item. It aggregates every run into one result you can pass to the next step.',
+      'Utilisez Pour Chaque pour iterer sur une liste et executer les memes etapes pour chaque element. Il agrege chaque execution en un seul resultat que vous pouvez transmettre a l\'etape suivante.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   JSONFilter: {
     description:
-      'Use JSON Filter to keep only the parts of a JSON object you need and drop the rest. This trims noisy API responses, speeds later steps, and saves tokens when sending data to an LLM.',
+      'Utilisez Filtre JSON pour ne conserver que les parties d\'un objet JSON dont vous avez besoin et supprimer le reste. Cela allege les reponses d\'API bruyantes, accelere les etapes suivantes et economise des jetons lors de l\'envoi de donnees a un LLM.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   FileStore: {
     description:
-      'Use Filestore to save binary data and get a public link you can share. Name the file as users will download it, then set how long the link should stay valid.',
+      'Utilisez Stockage Fichier pour sauvegarder des donnees binaires et obtenir un lien public partageables. Nommez le fichier tel que les utilisateurs le telechargeront, puis definissez la duree de validite du lien.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   Code: {
     description:
-      'Use the Code component to run JavaScript, transform data, add logic, and return results with _output or errors with _error without any external service.',
+      'Utilisez le composant Code pour executer du JavaScript, transformer des donnees, ajouter de la logique et retourner des resultats avec _output ou des erreurs avec _error sans aucun service externe.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   APICall: {
     description:
-      'Use API Call to connect your flow to any HTTP API. Set the method, URL, headers, body, and auth, then test and reuse the result in later steps.',
+      'Utilisez Appel API pour connecter votre flux a n\'importe quelle API HTTP. Definissez la methode, l\'URL, les en-tetes, le corps et l\'authentification, puis testez et reutilisez le resultat dans les etapes suivantes.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
-  // Tools Components
+  // Composants Outils
   ComputerUse: {
     description:
-      'Gives your agent a virtual computer that can browse, click, type, and gather data from the web. Describe the task in plain steps and the result you expect, then the agent runs it and returns structured output.',
+      'Donne a votre agent un ordinateur virtuel capable de naviguer, cliquer, saisir du texte et collecter des donnees sur le web. Decrivez la tache en etapes simples et le resultat attendu, puis l\'agent l\'execute et retourne une sortie structuree.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   ServerlessCode: {
     description:
-      'Run custom JavaScript with NPM packages in a safe, serverless runtime. Use it when built-in steps are not enough and you need full control.',
+      'Executez du JavaScript personnalise avec des packages NPM dans un environnement serverless securise. Utilisez-le lorsque les etapes integrees ne suffisent pas et que vous avez besoin d\'un controle total.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   WebSearch: {
-    description: 'Search the web for information and return relevant results with citations.',
+    description: 'Recherchez des informations sur le web et retournez les resultats pertinents avec leurs sources.',
   },
 
   WebScrape: {
     description:
-      'Pull clean content from webpages into your flow. Choose the format you need and turn on extras for sites that load data with JavaScript or on scroll.',
+      'Extrayez le contenu propre des pages web dans votre flux. Choisissez le format dont vous avez besoin et activez les options supplementaires pour les sites qui chargent des donnees en JavaScript ou au defilement.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   MCPClient: {
     description:
-      'Connect your agent to an MCP server so it can use external tools through one standard interface. Enter the server URL, write a clear prompt, and choose the model that will call tools.',
+      'Connectez votre agent a un serveur MCP pour utiliser des outils externes via une interface standard unique. Entrez l\'URL du serveur, redigez un prompt clair et choisissez le modele qui appellera les outils.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
-  // Crypto Components
+  // Composants Cryptographie
   FHash: {
     description:
-      'Create a fixed-size fingerprint of your data for checks and IDs. Pick an algorithm, choose an output encoding, then pass the hash downstream.',
+      'Creez une empreinte de taille fixe de vos donnees pour les verifications et identifiants. Choisissez un algorithme, selectionnez un encodage de sortie, puis transmettez le hachage en aval.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   FEncDec: {
     description:
-      'Converts data between text and binary encodings for safe storage, transport, and API compatibility. Supports Base64, Base64URL, hex, UTF-8, and Latin-1 with encode or decode actions.',
+      'Convertit les donnees entre encodages texte et binaires pour un stockage, un transport et une compatibilite API securises. Supporte Base64, Base64URL, hex, UTF-8 et Latin-1 avec des actions d\'encodage ou de decodage.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   FSign: {
     description:
-      'Generates a digital signature with HMAC or RSA for webhook payloads and API requests. Verifiers must use the same method, key, hash, and encoding to match.',
+      'Genere une signature numerique HMAC ou RSA pour les charges utiles de webhook et les requetes API. Les verificateurs doivent utiliser la meme methode, cle, hachage et encodage pour correspondre.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   FTimestamp: {
     description:
-      'Emits the server UTC time as a Unix timestamp in milliseconds at execution for logging, timing, and time-based IDs.',
+      'Emet l\'heure UTC du serveur sous forme d\'horodatage Unix en millisecondes lors de l\'execution, pour la journalisation, la mesure du temps et les identifiants bases sur l\'heure.',
   },
 
-  // RAG Data Components
+  // Composants Donnees RAG
   DataSourceLookup: {
     description:
-      'Retrieves relevant text from indexed knowledge using semantic search. Searches a chosen namespace and returns top matches with optional metadata and scores.',
+      'Recupere le texte pertinent d\'une base de connaissances indexee par recherche semantique. Recherche dans un espace de noms choisi et retourne les meilleures correspondances avec des metadonnees et scores optionnels.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   DataSourceIndexer: {
     description:
-      'Adds or updates content in the agent’s knowledge base. Stores text and optional metadata in a selected data space with a stable source ID, enabling later search, updates, or deletion.',
+      'Ajoute ou met a jour du contenu dans la base de connaissances de l\'agent. Stocke le texte et les metadonnees optionnelles dans un espace de donnees selectionne avec un identifiant de source stable, permettant une recherche, des mises a jour ou une suppression ulterieures.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   DataSourceCleaner: {
     description:
-      'Deletes a specific source from a data space using its exact source identifier. Operation is permanent and intended for data hygiene and compliance workflows.',
+      'Supprime une source specifique d\'un espace de donnees a l\'aide de son identifiant exact. L\'operation est permanente et destinee aux workflows de nettoyage des donnees et de conformite.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
-  // Memory Components
+  // Composants Memoire
   MemoryWriteObject: {
     description:
-      'Save multiple keys in one shot with a flat JSON object. Keep flows tidy and consistent while updating several fields at once.',
+      'Enregistrez plusieurs cles en une seule operation avec un objet JSON plat. Gardez les flux ordonnes et coherents en mettant a jour plusieurs champs simultanement.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   MemoryWriteKeyVal: {
     description:
-      'Store a single key and value in a named memory. Pick Request or TTL scope to control lifetime and shareability across workflows.',
+      'Stockez une cle et une valeur uniques dans une memoire nommee. Choisissez la portee Requete ou TTL pour controler la duree de vie et la partageabilite entre les workflows.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   MemoryReadKeyVal: {
     description:
-      'Retrieve a stored value from memory by key. Use it to pass saved state forward in your workflow or reuse data across steps.',
+      'Recuperez une valeur stockee en memoire par cle. Utilisez-la pour transmettre l\'etat sauvegarde dans votre workflow ou reutiliser des donnees entre les etapes.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   MemoryDeleteKeyVal: {
     description:
-      'Remove a specific key from a named memory to prevent stale data. Works for Request and TTL scopes so you can clean up mid run or purge persistent values.',
+      'Supprimez une cle specifique d\'une memoire nommee pour eviter les donnees obsoletes. Fonctionne pour les portees Requete et TTL afin de nettoyer en cours d\'execution ou de purger les valeurs persistantes.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
-  // Legacy Components
+  // Composants Legacy
   PromptGenerator: {
     description:
-      'Generates a single, stateless completion from a text prompt using the selected model. Supports templated variables and an optional passthrough of the original input. This is a legacy component; for multi-turn chat or newer controls, see <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">LLM Assistant</a> and <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">GenAI LLM</a>.',
+      'Genere une completion unique et sans etat a partir d\'un prompt texte en utilisant le modele selectionne. Supporte les variables de gabarit et un transfert optionnel de l\'entree originale. Composant legacy ; pour les conversations multi-tours ou les controles recents, voir <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">Assistant LLM</a> et <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">GenAI LLM</a>.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   MultimodalLLM: {
     description:
-      'Runs a single completion from mixed inputs like images, video, audio, and text. Supports Google multimodal models, file URLs or Base64, and basic output length control. This is a legacy component; see <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">LLM Assistant</a> and <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">GenAI LLM</a>.',
+      'Effectue une completion unique a partir d\'entrees mixtes comme des images, videos, sons et textes. Supporte les modeles multimodaux Google, les URL de fichiers ou Base64, et un controle de base de la longueur de sortie. Composant legacy ; voir <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">Assistant LLM</a> et <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">GenAI LLM</a>.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },
 
   VisionLLM: {
     description:
-      'Processes images with a vision model to extract text, detect objects, or describe scenes. Accepts one or more image inputs and returns a structured result. This is a legacy component; see <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">LLM Assistant</a> and <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">GenAI LLM</a>.',
+      'Traite des images avec un modele de vision pour extraire du texte, detecter des objets ou decrire des scenes. Accepte une ou plusieurs images en entree et retourne un resultat structure. Composant legacy ; voir <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">Assistant LLM</a> et <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">GenAI LLM</a>.',
     docsLink:
       'https://zapp.immo/docs/studio/composants',
   },

@@ -784,7 +784,7 @@ export default function createFormField(entry, displayType = 'block', entryIndex
     clearButton.className =
       'absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors';
     clearButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
-    clearButton.title = 'Clear template variables';
+    clearButton.title = 'Effacer les variables de modele';
     clearButton.style.display = 'none';
 
     clearButton.addEventListener('click', (e) => {
@@ -936,7 +936,7 @@ function createTemplateVarToggle(
   const templateVarInput = document.createElement('input');
   templateVarInput.type = 'text';
   templateVarInput.value = value || '';
-  templateVarInput.placeholder = 'Click to select a template variable';
+  templateVarInput.placeholder = 'Cliquer pour selectionner une variable de modele';
   templateVarInput.autocomplete = 'off';
   templateVarInput.classList.add('template-var-input');
   templateVarInput.style.paddingRight = '36px';
@@ -1009,8 +1009,8 @@ function createTemplateVarToggle(
   const templateVarToggle = document.createElement('input');
   templateVarToggle.type = 'checkbox';
   templateVarToggle.className = 'sr-only peer';
-  templateVarToggle.title = 'Use template variable';
-  templateVarToggle.setAttribute('aria-label', 'Use template variable');
+  templateVarToggle.title = 'Utiliser une variable de modele';
+  templateVarToggle.setAttribute('aria-label', 'Utiliser une variable de modele');
   templateVarToggle.id = `template-toggle-${entry.name}`;
   templateVarToggle.checked = templateVarModeDefault;
   templateVarToggle.disabled = entry.readonly;
@@ -1019,7 +1019,7 @@ function createTemplateVarToggle(
   const toggleLabel = document.createElement('label');
   toggleLabel.className =
     'text-xs font-medium text-gray-600 cursor-pointer select-none hover:text-gray-800 transition-colors';
-  toggleLabel.textContent = 'Use Template Vars';
+  toggleLabel.textContent = 'Utiliser des variables de modele';
   toggleLabel.htmlFor = `template-toggle-${entry.name}`;
 
   const toggleSwitch = document.createElement('div');
@@ -1633,7 +1633,7 @@ function setupMutuallyExclusiveField(
   registerMutuallyExclusiveField(fieldElement, group, defaultValue);
 
   // Create hint message explaining the mutual exclusivity
-  const hintMessage = reason || 'Only one field in this group can have a value at a time.';
+  const hintMessage = reason || 'Un seul champ de ce groupe peut avoir une valeur a la fois.';
 
   // Create the hint element
   const mutualExclusiveHint = document.createElement('div');

@@ -35,11 +35,11 @@ export const DeleteApiKeyDialog: FC<DeleteApiKeyDialogProps> = ({ isOpen, apiKey
   const { mutate: deleteKey, isLoading } = useDeleteKey(
     apiKey,
     () => {
-      successToast('The API key has been deleted successfully');
+      successToast('La clé API a été supprimée avec succès');
       onClose();
     },
     () => {
-      errorToast('Failed to delete API key');
+      errorToast('Échec de la suppression de la clé API');
     },
   );
 
@@ -54,10 +54,10 @@ export const DeleteApiKeyDialog: FC<DeleteApiKeyDialogProps> = ({ isOpen, apiKey
   return (
     <ConfirmModal
       onClose={onClose}
-      label={isLoading ? 'Deleting...' : 'Delete'}
+      label={isLoading ? 'Suppression...' : 'Supprimer'}
       handleConfirm={handleDelete}
-      message="Are you sure?"
-      lowMsg="This action cannot be undone. This will permanently delete the API key."
+      message="Êtes-vous sûr ?"
+      lowMsg="Cette action est irréversible. La clé API sera définitivement supprimée."
       isLoading={isLoading}
       width="max-w-[600px] w-[calc(100vw_-_-20px)]"
       confirmBtnClasses="bg-red-600 hover:bg-red-700 text-white"
@@ -83,10 +83,10 @@ const validationRules = {
 };
 
 const errorMessages = {
-  key: 'Key is required and must be less than 10000 characters.',
+  key: 'La clé est requise et doit comporter moins de 10 000 caractères.',
   keyName:
-    'Name is required, must be less than 300 characters, and can only contain letters, numbers, spaces, and the following special characters: _()-@.',
-  scope: 'At least one scope must be selected.',
+    'Le nom est requis, doit comporter moins de 300 caractères et ne peut contenir que des lettres, chiffres, espaces et les caractères spéciaux suivants : _()-@.',
+  scope: 'Au moins un périmètre doit être sélectionné.',
 };
 
 export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
@@ -129,10 +129,10 @@ export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
 
     if (field === 'keyName') {
       if (!value) {
-        error = 'Name is required';
+        error = 'Le nom est requis';
       } else if (typeof value === 'string') {
         if (value.length > validationRules.keyName.maxLength) {
-          error = `Name must be less than ${validationRules.keyName.maxLength} characters`;
+          error = `Le nom doit comporter moins de ${validationRules.keyName.maxLength} caractères`;
         } else if (!validationRules.keyName.pattern.test(value)) {
           error = errorMessages.keyName;
         }
@@ -141,7 +141,7 @@ export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
 
     if (field === 'key') {
       if (!value) {
-        error = 'Key is required';
+        error = 'La clé est requise';
       } else if (typeof value === 'string' && value.length > validationRules.key.maxLength) {
         error = errorMessages.key;
       }
@@ -171,21 +171,21 @@ export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
 
   const { mutate: updateKey, isLoading: isUpdateLoading } = useUpdateKey(
     () => {
-      successToast('The API key has been updated successfully');
+      successToast('La clé API a été mise à jour avec succès');
       onClose();
     },
     (error) => {
-      errorToast(error.message || 'Failed to update API key');
+      errorToast(error.message || 'Échec de la mise à jour de la clé API');
     },
   );
 
   const { mutate: addKey, isLoading: isAddLoading } = useAddKey(
     () => {
-      successToast('The API key has been added successfully');
+      successToast('La clé API a été ajoutée avec succès');
       onClose();
     },
     (error) => {
-      errorToast(error.message || 'Failed to add API key');
+      errorToast(error.message || 'Échec de l\'ajout de la clé API');
     },
   );
 
@@ -257,7 +257,7 @@ export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-xl text-[#1E1E1E]">
-            {mode === 'edit' ? 'Edit API Key' : 'Add API Key'}
+            {mode === 'edit' ? 'Modifier la clé API' : 'Ajouter une clé API'}
           </DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 pb-4">
@@ -266,7 +266,7 @@ export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
               htmlFor="name"
               className="text-left text-base font-normal min-w-[50px] max-w-[50px] text-[#1E1E1E]"
             >
-              Name <span className="text-red-500">*</span>
+              Nom <span className="text-red-500">*</span>
             </Label>
             <Input
               id="keyName"
@@ -275,7 +275,7 @@ export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
               fullWidth
               error={!!errors.keyName}
               errorMessage={errors.keyName}
-              placeholder="API Key Name"
+              placeholder="Nom de la clé API"
               className="mt-2"
             />
           </div>
@@ -284,7 +284,7 @@ export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
               htmlFor="key"
               className="text-left mb-2 text-base font-normal min-w-[50px] max-w-[50px] text-[#1E1E1E]"
             >
-              Key <span className="text-red-500">*</span>
+              Clé <span className="text-red-500">*</span>
             </Label>
 
             <TextArea
@@ -295,7 +295,7 @@ export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
               error={!!errors.key}
               errorMessage={errors.key}
               fullWidth
-              placeholder="Add Key"
+              placeholder="Ajouter une clé"
             />
           </div>
           <div>
@@ -348,13 +348,13 @@ export const UpdateApiKeyDialog: FC<UpdateApiKeyDialogProps> = ({
             variant="secondary"
             handleClick={onClose}
             disabled={isLoading}
-            label="Cancel"
+            label="Annuler"
             className="hidden"
           />
           <CustomButton
             handleClick={handleSubmit}
             disabled={isLoading || !isFormValid()}
-            label={isLoading ? 'Saving...' : 'Save'}
+            label={isLoading ? 'Enregistrement...' : 'Enregistrer'}
             className={cn('w-[100px]')}
           />
         </DialogFooter>
@@ -401,15 +401,15 @@ export function ApiKeys({ pageAccess }: { pageAccess: { write: boolean } }) {
       <div className="p-6">
         <div className="flex items-center justify-between mb-4 pr-2 flex-wrap">
           <h2 className="flex items-center gap-2 text-lg font-semibold">
-            API Keys
+            Clés API
             <Tooltip>
               <TooltipTrigger asChild>
                 <Info className="w-4 h-4 cursor-help" />
               </TooltipTrigger>
               <TooltipContent className="max-w-[240px] text-center text-wrap">
                 <p>
-                  Add API keys by providing a token (up to 10,000 characters), a unique name, and
-                  selecting a scope: All, API Call, Hugging Face, or Zapier Action.
+                  Ajoutez des clés API en fournissant un jeton (jusqu'à 10 000 caractères), un nom unique et
+                  en sélectionnant un périmètre : Tout, Appel API, Hugging Face ou Action Zapier.
                 </p>
               </TooltipContent>
             </Tooltip>
@@ -418,7 +418,7 @@ export function ApiKeys({ pageAccess }: { pageAccess: { write: boolean } }) {
             <CustomButton
               variant="tertiary"
               handleClick={() => setAddModalOpen(true)}
-              label="Add Key"
+              label="Ajouter une clé"
               addIcon
               Icon={<FaPlus className="inline mr-1" />}
             />
@@ -428,10 +428,10 @@ export function ApiKeys({ pageAccess }: { pageAccess: { write: boolean } }) {
           <table className="w-full min-w-[500px] text-sm text-left table-fixed">
             <thead className="text-xs text-muted-foreground">
               <tr>
-                <th className="pr-4 py-2 w-1/6">Name</th>
-                <th className="px-4 py-2 w-1/6">Owner</th>
-                <th className="px-4 py-2 w-1/6">Scope</th>
-                <th className="px-4 py-2 w-1/6">Key</th>
+                <th className="pr-4 py-2 w-1/6">Nom</th>
+                <th className="px-4 py-2 w-1/6">Propriétaire</th>
+                <th className="px-4 py-2 w-1/6">Périmètre</th>
+                <th className="px-4 py-2 w-1/6">Clé</th>
                 <th className="px-4 py-2 w-1/3 text-right"></th>
               </tr>
             </thead>
@@ -462,7 +462,7 @@ export function ApiKeys({ pageAccess }: { pageAccess: { write: boolean } }) {
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>{copiedKeyId === key.id ? 'Copied!' : 'Copy'}</p>
+                            <p>{copiedKeyId === key.id ? 'Copié !' : 'Copier'}</p>
                           </TooltipContent>
                         </Tooltip>
                         {pageAccess?.write && (
@@ -481,7 +481,7 @@ export function ApiKeys({ pageAccess }: { pageAccess: { write: boolean } }) {
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Edit</p>
+                              <p>Modifier</p>
                             </TooltipContent>
                           </Tooltip>
                         )}
@@ -501,7 +501,7 @@ export function ApiKeys({ pageAccess }: { pageAccess: { write: boolean } }) {
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Delete</p>
+                              <p>Supprimer</p>
                             </TooltipContent>
                           </Tooltip>
                         )}
@@ -512,7 +512,7 @@ export function ApiKeys({ pageAccess }: { pageAccess: { write: boolean } }) {
               ) : (
                 <tr className="border-t">
                   <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
-                    No API keys found. Add your first key to get started.
+                    Aucune clé API trouvée. Ajoutez votre première clé pour commencer.
                   </td>
                 </tr>
               )}

@@ -131,13 +131,13 @@ export async function deleteSelectionWithConfirm(workspace: Workspace): Promise<
   const components = list.map((c: any) => c._control);
   deleteConfirmationActive = true;
   try {
-    const confirmText = list.length === 1 ? 'component' : 'components';
+    const confirmText = list.length === 1 ? 'composant' : 'composants';
     const shouldDelete = await confirm(
-      `Are you sure you want to delete selected ${confirmText}?`,
-      `This action cannot be undone. Deleting will remove the ${confirmText} permanently.`,
+      `Etes-vous sur de vouloir supprimer le${list.length === 1 ? '' : 's'} ${confirmText} selectionne${list.length === 1 ? '' : 's'} ?`,
+      `Cette action est irreversible. La suppression retirera definitivement le${list.length === 1 ? '' : 's'} ${confirmText}.`,
       {
-        btnYesLabel: 'Delete',
-        btnNoLabel: 'Cancel',
+        btnYesLabel: 'Supprimer',
+        btnNoLabel: 'Annuler',
         btnNoClass: 'hidden',
         btnYesType: 'danger',
       },

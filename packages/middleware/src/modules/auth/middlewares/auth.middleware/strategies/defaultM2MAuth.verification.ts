@@ -12,7 +12,7 @@ export default class DefaultM2MAuth implements AuthStrategy {
   async verifyToken(token: string) {
     if (!token) {
       LOGGER.error(new Error('M2M auth failed: No token found in request header'));
-      return { error: 'Access token is required', success: false };
+      return { error: `Un jeton d'acces est requis`, success: false };
     }
 
     // Accept internal trusted secret (for app -> middleware intra-container calls)
@@ -32,6 +32,6 @@ export default class DefaultM2MAuth implements AuthStrategy {
     }
 
     LOGGER.error(new Error('M2M auth failed: token is not a valid internal secret or JWT'));
-    return { error: 'Access token is invalid', success: false };
+    return { error: `Le jeton d'acces est invalide`, success: false };
   }
 }

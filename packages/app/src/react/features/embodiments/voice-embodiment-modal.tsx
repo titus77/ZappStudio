@@ -86,7 +86,7 @@ const VoiceEmbodimentModal: React.FC<VoiceEmbodimentModalProps> = ({
       <div className="relative bg-white rounded-2xl shadow-lg w-full p-6 flex flex-col overflow-auto max-h-[90vh] max-w-[480px]">
         {/* Header with back and close buttons */}
         <ModalHeaderEmbodiment
-          title="Voice Integration"
+          title="Intégration Vocale"
           onBack={onClose}
           onClose={onClose}
         />
@@ -95,7 +95,7 @@ const VoiceEmbodimentModal: React.FC<VoiceEmbodimentModalProps> = ({
           <>
             <div className="flex items-center justify-between mt-4">
               <label className="block text-base font-semibold text-gray-700">
-                Voice Integration
+                Intégration Vocale
               </label>
               <a
                 href={`${voiceProdUrl || voiceDevUrl}/emb/voice`}
@@ -103,25 +103,23 @@ const VoiceEmbodimentModal: React.FC<VoiceEmbodimentModalProps> = ({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-[13px] text-[#707070]"
               >
-                Preview <ArrowRightIcon className="w-4 h-4" />
+                Aperçu <ArrowRightIcon className="w-4 h-4" />
               </a>
             </div>
             <div className="bg-amber-50 border border-amber-200 rounded-md p-3 my-2 mb-4">
               <p className="text-amber-800 text-xs">
-                <strong>Note:</strong> To use voice embodiment, you need to provide personal OpenAI
-                API key via{' '}
+                <strong>Remarque :</strong> Pour utiliser le canal de diffusion vocal, vous devez fournir votre clé API OpenAI personnelle via le{' '}
                 <a href="/vault" target="_blank" rel="noopener noreferrer" className="underline">
-                  Vault
+                  Coffre-fort
                 </a>
                 .
               </p>
             </div>
             <label htmlFor="code-snippet" className="text-sm text-gray-900">
-              Code Snippet
+              Snippet de code
             </label>
             <p className="text-sm text-gray-700 my-2">
-              To integrate voice embodiment, copy and paste this snippet into your website before
-              the closing <code>&lt;/body&gt;</code> tag.
+              Pour intégrer le canal de diffusion vocal, copiez et collez ce snippet dans votre site web juste avant la balise <code>&lt;/body&gt;</code>.
             </p>
             <div className="relative flex items-center mt-1 group w-full">
               <textarea

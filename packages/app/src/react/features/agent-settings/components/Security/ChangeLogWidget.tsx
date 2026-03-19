@@ -16,10 +16,10 @@ const ChangeLogWidget = ({ isWriteAccess, allDeployments }: Props) => {
         <div className="flex justify-between items-center">
           <div>
             <div className="flex items-center mb-2">
-              <h3 className="text-sm font-semibold text-gray-700">Changelog</h3>
+              <h3 className="text-sm font-semibold text-gray-700">Journal des modifications</h3>
             </div>
             <p className="text-sm text-gray-500">
-              These are the workflows you've trained your agent on.
+              Voici les workflows sur lesquels vous avez entraîné votre agent IA.
             </p>
           </div>
         </div>
@@ -38,17 +38,17 @@ const ChangeLogWidget = ({ isWriteAccess, allDeployments }: Props) => {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-sm">Version: {deployment.version}</span>
+                      <span className="font-bold text-sm">Version : {deployment.version}</span>
                       {deployment === allDeployments.data.deployments[0] && (
-                        <span className="text-green-800 text-xs px-2 py-1">Live</span>
+                        <span className="text-green-800 text-xs px-2 py-1">En ligne</span>
                       )}
                     </div>
                     <div className="text-sm text-gray-500 mt-2">
-                      Release date: {new Date(deployment.createdAt).toLocaleDateString()}
+                      Date de publication : {new Date(deployment.createdAt).toLocaleDateString()}
                     </div>
                     {deployment.releaseNotes.trim() && (
                       <div className="text-sm text-gray-500">
-                        Release notes: {deployment.releaseNotes}
+                        Notes de publication : {deployment.releaseNotes}
                       </div>
                     )}
                   </div>
@@ -57,7 +57,7 @@ const ChangeLogWidget = ({ isWriteAccess, allDeployments }: Props) => {
             ))}
           </div>
         ) : (
-          <div className="text-center text-gray-500 p-4">No deployments found</div>
+          <div className="text-center text-gray-500 p-4">Aucun déploiement trouvé</div>
         )}
       </div>
     </WidgetCard>

@@ -156,7 +156,7 @@ function runDebugBarUIExperiment() {
 }
 
 export default async function scripts() {
-  showOverlay('Initializing ...');
+  showOverlay('Initialisation ...');
   const container = document.getElementById('workspace-container');
   if (!container) {
     const overlay = document.getElementById('overlay');
@@ -237,8 +237,8 @@ export default async function scripts() {
     $(container).css('opacity', 0);
     await delay(200);
     createRightSidebar(
-      'Generating workflow explanation',
-      'Please wait...<br><center><div data-role="activity" data-type="atom" data-style="color"></div></center>',
+      'Generation de l\'explication du workflow',
+      'Veuillez patienter...<br><center><div data-role="activity" data-type="atom" data-style="color"></div></center>',
       null,
     );
     $(container).css('opacity', 1);
@@ -247,10 +247,10 @@ export default async function scripts() {
       res.json(),
     );
     if (result.success) {
-      createRightSidebar('Workflow explanation', result.data, {
+      createRightSidebar('Explication du workflow', result.data, {
         ok: {
           cls: 'success',
-          text: 'Close',
+          text: 'Fermer',
           click: async () => {
             $(container).css('opacity', 0);
             closeRightSidebar();

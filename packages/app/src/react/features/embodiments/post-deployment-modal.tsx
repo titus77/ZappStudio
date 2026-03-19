@@ -281,11 +281,11 @@ function PostDeploymentModal({
       buttons.push(
         <Button
           key="get-code"
-          label="Get Code"
+          label="Obtenir le code"
           variant="tertiary"
           className="px-3 py-1 h-8 text-xs"
           handleClick={() => onOpenCustomGptModal()}
-          aria-label="Get Code"
+          aria-label="Obtenir le code"
           type="button"
         />,
       );
@@ -309,11 +309,11 @@ function PostDeploymentModal({
         buttons.push(
           <Button
             key="get-code"
-            label="Get Code"
+            label="Obtenir le code"
             variant="tertiary"
             className="px-3 py-1 h-8 text-xs"
             handleClick={() => onOpenChatbotPanel()}
-            aria-label="Get Code"
+            aria-label="Obtenir le code"
             type="button"
           />,
         );
@@ -338,11 +338,11 @@ function PostDeploymentModal({
         buttons.push(
           <Button
             key="get-code"
-            label="Get Code"
+            label="Obtenir le code"
             variant="tertiary"
             className="px-3 py-1 h-8 text-xs"
             handleClick={() => onOpenFormPanel()}
-            aria-label="Get Code"
+            aria-label="Obtenir le code"
             type="button"
           />,
         );
@@ -353,22 +353,22 @@ function PostDeploymentModal({
       buttons.push(
         <Button
           key={'api-keys-' + EMBODIMENT_TYPE.LLM}
-          label="API Keys"
+          label="Clés API"
           variant="tertiary"
           className="px-3 py-1 h-8 text-xs"
           handleClick={() => onOpenLlmModal('keys')}
-          aria-label="API Keys"
+          aria-label="Clés API"
           type="button"
         />,
       );
       buttons.push(
         <Button
           key={'get-code-' + EMBODIMENT_TYPE.LLM}
-          label="Get Code"
+          label="Obtenir le code"
           variant="tertiary"
           className="px-3 py-1 h-8 text-xs"
           handleClick={() => onOpenLlmModal('code')}
-          aria-label="Get Code"
+          aria-label="Obtenir le code"
           type="button"
         />,
       );
@@ -378,11 +378,11 @@ function PostDeploymentModal({
       buttons.push(
         <Button
           key="get-endpoints"
-          label="Get Endpoints"
+          label="Voir les endpoints"
           variant="tertiary"
           className="px-3 py-1 h-8 text-xs"
           handleClick={onOpenApiPanel}
-          aria-label="Get Endpoints"
+          aria-label="Voir les endpoints"
           type="button"
         />,
       );
@@ -392,11 +392,11 @@ function PostDeploymentModal({
       buttons.push(
         <Button
           key={'get-url-' + EMBODIMENT_TYPE.MCP}
-          label="Get URL"
+          label="Obtenir l'URL"
           variant="tertiary"
           className="px-3 py-1 h-8 text-xs"
           handleClick={onOpenMcpPanel}
-          aria-label="Get URL"
+          aria-label="Obtenir l'URL"
           type="button"
         />,
       );
@@ -406,11 +406,11 @@ function PostDeploymentModal({
       buttons.push(
         <Button
           key={'get-endpoints-' + key}
-          label="Get Endpoints"
+          label="Voir les endpoints"
           variant="tertiary"
           className="px-3 py-1 h-8 text-xs"
           handleClick={key === EMBODIMENT_TYPE.ALEXA ? onOpenAlexaPanel : onOpenVoicePanel}
-          aria-label="Get Endpoints"
+          aria-label="Voir les endpoints"
           type="button"
         />,
       );
@@ -418,17 +418,17 @@ function PostDeploymentModal({
       buttons.push(
         <Button
           key={'get-endpoints-' + EMBODIMENT_TYPE.LOVABLE}
-          label="Get Code"
+          label="Obtenir le code"
           variant="tertiary"
           className="px-3 py-1 h-8 text-xs"
           handleClick={onOpenLovablePanel}
-          aria-label="Get Code"
+          aria-label="Obtenir le code"
           type="button"
         />,
       );
     }
     const embodimentName = capitalizeFirstLetter(
-      key === EMBODIMENT_TYPE.CHAT_GPT ? 'Custom GPT' : setting.embTitle || 'Untitled Embodiment',
+      key === EMBODIMENT_TYPE.CHAT_GPT ? 'Custom GPT' : setting.embTitle || 'Canal sans titre',
     );
     const isSettingEnabled = setting?.value?.['isEnabled'] || setting.value == 'true';
     return {
@@ -453,16 +453,16 @@ function PostDeploymentModal({
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6 h-auto">
           <TabsTrigger value="embed" className="px-10 py-2.5 text-sm rounded-sm">
-            Embed
+            Intégrer
           </TabsTrigger>
           <TabsTrigger value="domains-keys" className="px-10 py-2.5 text-sm rounded-sm">
-            Domains
+            Domaines
           </TabsTrigger>
         </TabsList>
         <TabsContent value="embed" className="space-y-2">
           <div className="space-y-2">
             {agentSettingsLoading ? (
-              <div className="text-center text-gray-400">Loading embodiments...</div>
+              <div className="text-center text-gray-400">Chargement des canaux de diffusion...</div>
             ) : state.availableEmbodiments.length > 0 ? (
               sortedAvailableEmbodiments.map((item: string) => {
                 const { setting, buttons, embodimentName, isSettingEnabled } =
@@ -508,7 +508,7 @@ function PostDeploymentModal({
                           </div>
                         </TooltipTrigger>
                         <TooltipContent side="top" className="max-w-[240px] text-center text-wrap">
-                          <p>Premium Embodiment. Upgrade your plan</p>
+                          <p>Canal de diffusion Premium. Améliorez votre offre</p>
                         </TooltipContent>
                       </Tooltip>
                     ) : isSettingEnabled ? (
@@ -527,7 +527,7 @@ function PostDeploymentModal({
                 );
               })
             ) : (
-              <div className="text-center text-gray-400">No embodiments found.</div>
+              <div className="text-center text-gray-400">Aucun canal de diffusion trouvé.</div>
             )}
           </div>
         </TabsContent>

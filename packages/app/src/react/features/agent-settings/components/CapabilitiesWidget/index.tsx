@@ -34,13 +34,13 @@ const CapabilitiesWidget = ({ isOnPaidPlan: isSubscribedToPlan, isWriteAccess }:
           <div className="w-full flex items-center justify-between">
             <div className="w-full">
               <h3 className="flex items-center gap-2 text-gray-700 text-sm font-semibold mb-1">
-                Agent Skills
+                Compétences de l'agent IA
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Info className="w-4 h-4" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-[240px] text-center text-wrap">
-                    <p>Agent Skills in ZappStudio define the capabilities of an agent. Each skill is added through the Agent Skill component</p>
+                    <p>Les compétences de l'agent IA dans ZappStudio définissent les capacités d'un agent. Chaque compétence est ajoutée via le composant Compétence d'agent.</p>
                   </TooltipContent>
                 </Tooltip>
               </h3>
@@ -77,12 +77,12 @@ const CapabilitiesWidget = ({ isOnPaidPlan: isSubscribedToPlan, isWriteAccess }:
                 {latestAgentDeploymentQuery.isSuccess &&
                   (!latestAgentDeploymentQuery.data.deployment ? (
                     <div className="flex items-center justify-center h-20">
-                      <p className="text-sm text-gray-500">Deploy your agent to use skills</p>
+                      <p className="text-sm text-gray-500">Déployez votre agent IA pour utiliser les compétences</p>
                     </div>
                   ) : latestAgentDeploymentQuery.data.deployment?.aiAgentData?.components.length ===
                     0 ? (
                     <div className="flex items-center justify-center h-20">
-                      <p className="text-sm text-gray-500">No skills available</p>
+                      <p className="text-sm text-gray-500">Aucune compétence disponible</p>
                     </div>
                   ) : null)}
               </div>
@@ -134,7 +134,7 @@ function Endpoint({ component }: { component: Component }) {
             }}
           >
             <FaPlay className="w-3 h-3" color="#1a73e8" />
-            <p className=" text-[#1A73E8] text-sm ml-1 font-semibold">Call </p>
+            <p className=" text-[#1A73E8] text-sm ml-1 font-semibold">Appeler </p>
           </button>
           {skillWidgetBtns}
         </div>

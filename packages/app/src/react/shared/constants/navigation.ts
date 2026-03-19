@@ -29,14 +29,14 @@ export const getSidebarMenuItems = (): SidebarMenuItem[] => {
   ).flatMap((item) => item.config);
 
   return [
-    { url: '/agents', name: 'Home', icon: HomeIcon, visible: true, order: 1 },
-    { url: '/vault', name: 'Vault', icon: KeyIcon, visible: true, order: 5 },
+    { url: '/agents', name: 'Accueil', icon: HomeIcon, visible: true, order: 1 },
+    { url: '/vault', name: 'Coffre-fort', icon: KeyIcon, visible: true, order: 5 },
     ...pluginItems,
   ].sort((a, b) => (a.order || 0) - (b.order || 0));
 };
 
 export const bottomLinks = [
-  { title: 'Docs', path: SMYTHOS_DOCS_URL, icon: BookIcon, isExternal: true },
+  { title: 'Documentation', path: SMYTHOS_DOCS_URL, icon: BookIcon, isExternal: true },
   // TODO: Delete this commented block once removal is confirmed. Discord & Academy links were removed from the app; code kept for traceability.
   // {
   //   title: 'Discord Support',
@@ -57,6 +57,6 @@ export const profileDropdownItems = () => {
     // { url: '/account', name: 'Account' },
     // { url: '/teams/members', name: 'User Management' },
     ...pluginItems,
-    { url: '/teams/settings', name: 'User Management' },
+    { url: '/teams/settings', name: 'Gestion des utilisateurs' },
   ];
 };

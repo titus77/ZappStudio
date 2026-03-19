@@ -204,9 +204,9 @@ export class Workspace extends EventEmitter {
       info.connection.bind('click', async (connection) => {
         if (this.collapsed) return;
         if (this.locked) return false;
-        const confirmed = await confirm('', 'Are you sure you want to delete this connection?', {
-          btnNoLabel: 'No, Cancel',
-          btnYesLabel: "Yes, I'm sure",
+        const confirmed = await confirm('', 'Etes-vous sur de vouloir supprimer cette connexion ?', {
+          btnNoLabel: 'Non, annuler',
+          btnYesLabel: 'Oui, je confirme',
           btnYesClass: 'bg-smyth-red-500 border-smyth-red-500',
         });
         if (confirmed) {
@@ -763,7 +763,7 @@ export class Workspace extends EventEmitter {
     if (!data) data = await this.export(fireEvent);
     if (!domain) domain = this.agent?.domain;
     if (fireEvent) this.emit('AgentSaving', this.agent, data);
-    this.updateAgentSaveStatus('Saving...', 'progress');
+    this.updateAgentSaveStatus('Enregistrement...', 'progress');
 
     try {
       const result = await this.agent.save(name, domain, data, id);
@@ -785,7 +785,7 @@ export class Workspace extends EventEmitter {
         second: '2-digit',
       });
 
-      this.updateAgentSaveStatus(`Auto-Saved ${timeString}`, 'success');
+      this.updateAgentSaveStatus(`Enregistre automatiquement ${timeString}`, 'success');
       // console.log('Agent saved');
 
       if (name) {
@@ -804,23 +804,23 @@ export class Workspace extends EventEmitter {
       this._pendingSave = false; // Clear pending on error
       console.error('Error', error);
       if (error?.errorCode === 'LOCKED_AGENT' || error?.errorCode === 'LOCKED_AGENT_HANDLED') {
-        this.updateAgentSaveStatus('View Only', 'alert');
+        this.updateAgentSaveStatus('Lecture seule', 'alert');
         return null;
       }
 
       if (typeof error?.error === 'string') {
         if (error.error.includes('409') || error.error.toLowerCase().includes('lock')) {
-          this.updateAgentSaveStatus('View Only', 'alert');
+          this.updateAgentSaveStatus('Lecture seule', 'alert');
           return null;
         }
 
         if (error.error.includes('403')) {
-          errorToast('You are not authorized to save or create agent');
+          errorToast('Vous n\'etes pas autorise a enregistrer ou creer un agent');
         } else {
           errorToast(error.error);
         }
       }
-      this.updateAgentSaveStatus('Error', 'alert');
+      this.updateAgentSaveStatus('Erreur', 'alert');
     }
   }
 
@@ -917,7 +917,7 @@ export class Workspace extends EventEmitter {
         !error?.error?.includes('409') &&
         !error?.error?.toLowerCase?.()?.includes('lock')
       ) {
-        errorToast(error.message ?? 'Deleting Failed');
+        errorToast(error.message ?? 'Echec de la suppression');
       }
       return false;
     }
@@ -1743,7 +1743,7 @@ export class Workspace extends EventEmitter {
       //console.log('migrated config = ', configuration);
 
       this._loading = true;
-      showOverlay('Loading Agent Data ...');
+      showOverlay('Chargement des donnees de l\'agent ...');
       //const configuration = JSON.parse(document.getElementById('configuration').value);
 
       // Clear the current content
@@ -1752,7 +1752,7 @@ export class Workspace extends EventEmitter {
       this.jsPlumbInstance.deleteEveryConnection();
       this.jsPlumbInstance.deleteEveryEndpoint();
 
-      showOverlay('Importing Components ...');
+      showOverlay('Importation des composants ...');
       // Load the components
       const componentMap = {};
       for (const component of configuration.components) {
@@ -1779,7 +1779,7 @@ export class Workspace extends EventEmitter {
         componentMap[component.id] = newComponent.id;
       }
 
-      showOverlay('Connecting Components ...');
+      showOverlay('Connexion des composants ...');
 
       // Load the connections after a delay to ensure endpoints are registered properly
       await delay(300);
@@ -1818,7 +1818,7 @@ export class Workspace extends EventEmitter {
 
       await this.setComponentsTags();
 
-      showOverlay('Almost Ready ...');
+      showOverlay('Presque pret ...');
       await delay(200);
 
       this.redraw();
@@ -1856,7 +1856,7 @@ export class Workspace extends EventEmitter {
         !error?.error?.includes('409') &&
         !error?.error?.toLowerCase?.()?.includes('lock')
       ) {
-        errorToast('Loading failed');
+        errorToast('Echec du chargement');
       }
     }
   }
@@ -2199,8 +2199,8 @@ export class Workspace extends EventEmitter {
         // this.updateConnectionColors(newConnection);
 
         await alert(
-          'Connection Consistency Check Failed',
-          `Nested Async Component is not allowed ==> ${sourceComponent.drawSettings.displayName} -> ${targetComponent.drawSettings.displayName}`,
+          'Verification de coherence des connexions echouee',
+          `Les composants Async imbriques ne sont pas autorises ==> ${sourceComponent.drawSettings.displayName} -> ${targetComponent.drawSettings.displayName}`,
         );
         console.error(
           `Nested Async Component is not allowed ==> ${sourceComponent.drawSettings.displayName} -> ${targetComponent.drawSettings.displayName}`,
@@ -2234,8 +2234,8 @@ export class Workspace extends EventEmitter {
         // this.updateConnectionColors(newConnection);
 
         await alert(
-          'Connection Consistency Check Failed',
-          `Connection from Synchronous to Asynchronous component is not allowed ==> ${sourceComponent.drawSettings.displayName} -> ${targetComponent.drawSettings.displayName}`,
+          'Verification de coherence des connexions echouee',
+          `La connexion d\'un composant synchrone vers un composant asynchrone n\'est pas autorisee ==> ${sourceComponent.drawSettings.displayName} -> ${targetComponent.drawSettings.displayName}`,
         );
         console.error(
           `Connection from Synchronous to Asynchronous component is not allowed ==> ${sourceComponent.drawSettings.displayName} -> ${targetComponent.drawSettings.displayName}`,
@@ -2268,8 +2268,8 @@ export class Workspace extends EventEmitter {
         // this.updateConnectionColors(newConnection);
 
         await alert(
-          'Loop Branches Conflict Detected',
-          `Loop Branches cannot be connected to other branches ==> ${sourceComponent.drawSettings.displayName} -> ${targetComponent.drawSettings.displayName}`,
+          'Conflit de branches de boucle detecte',
+          `Les branches de boucle ne peuvent pas etre connectees a d\'autres branches ==> ${sourceComponent.drawSettings.displayName} -> ${targetComponent.drawSettings.displayName}`,
         );
         console.error(
           `Loop Branches cannot be connected to other branches ==> ${sourceComponent.drawSettings.displayName} -> ${targetComponent.drawSettings.displayName}`,

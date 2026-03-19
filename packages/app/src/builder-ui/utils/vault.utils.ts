@@ -66,16 +66,16 @@ export const addVaultKey = async (
         const credentialsUrl = 'https://actions.zapier.com/credentials/';
         fields['fields'] = {
           type: 'div',
-          html: `If you don't have the API key, get it from <a href="${credentialsUrl}" target="_blank" class="inner-link">here</a>`,
+          html: `Si vous n'avez pas la cle API, obtenez-la <a href="${credentialsUrl}" target="_blank" class="inner-link">ici</a>`,
           cls: 'bg-transparent border-0 p-0 m-0',
         };
-        label = 'Zapier AI Actions API Key';
+        label = 'Cle API Zapier AI Actions';
         _keyName = `ZAPIER_AI_ACTIONS_API_KEY`;
       } else if (scope.includes(EXTENSION_COMP_NAMES.huggingFaceModel)) {
-        label = 'Hugging Face Access Token';
+        label = 'Token d\'acces Hugging Face';
         _keyName = `HUGGING_FACE_ACCESS_TOKEN`;
       } else if (scope.includes(COMP_NAMES.apiCall)) {
-        label = 'API Key';
+        label = 'Cle API';
         _keyName = `API_KEY`;
       } else {
         _keyName = `KEY`;
@@ -85,11 +85,11 @@ export const addVaultKey = async (
     _keyName = await _ensureUniqueKeyName(_keyName);
 
     const values = (await editValues({
-      title: `Save ${label} to the Vault`,
+      title: `Enregistrer ${label} dans le coffre-fort`,
       entriesObject: {
         keyName: {
           type: 'text',
-          label: 'Name',
+          label: 'Nom',
           classOverride: 'p-2 w-full',
           validate: `required maxlength=300 custom=validVaultKeyName`,
           smythValidate: 'func=isUniqueVaultKeyName', // as Metro UI does not support async function
@@ -98,11 +98,11 @@ export const addVaultKey = async (
         },
         apiKey: {
           type: 'textarea',
-          label: 'Key',
+          label: 'Cle',
           fieldCls: 'max-h-64 min-h-[34px] px-3 py-1 resize-y',
           classOverride: 'p-2 w-full',
           validate: 'required maxlength=10000',
-          validateMessage: `Please provide a valid ${label} that is not empty and is less than 10000 characters.`,
+          validateMessage: `Veuillez fournir une ${label} valide, non vide et de moins de 10 000 caracteres.`,
           value: key || '',
           attributes: { 'data-auto-size': 'false', style: 'height: 34px;' }, // 'data-auto-size': 'false' to prevent set auto height initially
         },
@@ -402,7 +402,7 @@ export const renderVaultKeyBtnItems = ({
   // 1. The scope is not global
   const scope = targetField.getAttribute('data-vault') || 'All';
   if (scope !== 'global') {
-    const msgElm = _innerLink(targetField, !!keyBtns?.length ? '' : 'No Keys found ', keyNameToAdd);
+    const msgElm = _innerLink(targetField, !!keyBtns?.length ? '' : 'Aucune cle trouvee ', keyNameToAdd);
 
     dropdownContent.appendChild(msgElm);
   }

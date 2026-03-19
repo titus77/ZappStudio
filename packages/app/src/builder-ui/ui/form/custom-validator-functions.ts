@@ -206,7 +206,7 @@ window['isUniqueVaultKeyName'] = async (value: string): Promise<boolean> => {
     );
 
     if (!fetchKey?.success) {
-      throw new Error('Something went wrong. Please try again or contact support.');
+      throw new Error('Une erreur est survenue. Veuillez reessayer ou contacter le support.');
     }
 
     const keyObj = fetchKey?.data || {};
@@ -232,7 +232,7 @@ window['isUniqueCustomModelName'] = async (
     );
 
     if (!fetchModel?.success) {
-      throw new Error('Something went wrong. Please try again or contact support.');
+      throw new Error('Une erreur est survenue. Veuillez reessayer ou contacter le support.');
     }
 
     const modelInfo = fetchModel?.data || {};

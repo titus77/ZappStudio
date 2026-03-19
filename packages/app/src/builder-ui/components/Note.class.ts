@@ -73,7 +73,7 @@ export class Note extends Component {
         label: 'Text Color',
         class: 'w-full',
         value: this.data.textColor || '#000000',
-        help: 'Pick the color for your note’s text to make it readable or emphasize meaning.',
+        help: `Choisissez la couleur du texte de votre note pour le rendre lisible ou mettre en avant un point.`,
         tooltipClasses: 'w-56 ',
         arrowClasses: '-ml-11',
         hintPosition: 'bottom',

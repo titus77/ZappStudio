@@ -65,14 +65,14 @@ const AlexaEmbodimentModal: React.FC<AlexaEmbodimentModalProps> = ({
       <div className="relative bg-white rounded-2xl shadow-lg w-full p-6 flex flex-col overflow-auto max-h-[90vh] max-w-[480px]">
         {/* Header with back and close buttons */}
         <ModalHeaderEmbodiment
-          title="Alexa Integration"
+          title="Intégration Alexa"
           onBack={onClose}
           onClose={onClose}
         />
         {/* Dev URL */}
         {devUrl && (
           <>
-            <div className="text-sm text-gray-900">Alexa Dev URL</div>
+            <div className="text-sm text-gray-900">URL Alexa de développement</div>
             <div className="relative flex items-center my-1 mb-2 group w-full">
               <Input
                 type="text"
@@ -98,7 +98,7 @@ const AlexaEmbodimentModal: React.FC<AlexaEmbodimentModalProps> = ({
         {/* Prod URL */}
         {prodUrl && (
           <>
-            <div className="text-sm text-gray-900">Alexa Prod URL</div>
+            <div className="text-sm text-gray-900">URL Alexa de production</div>
             <div className="relative flex items-center mt-1 group w-full">
               <Input
                 type="text"

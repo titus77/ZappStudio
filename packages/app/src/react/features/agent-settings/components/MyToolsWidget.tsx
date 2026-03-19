@@ -30,10 +30,10 @@ const MyToolsWidget = (props: Props) => {
         <div className="flex justify-between items-center flex-col ">
           <div className="w-full">
             <h3 className="flex items-center gap-2 text-gray-700 text-sm font-semibold mb-2">
-              My Tools
+              Mes outils
             </h3>
             <p className="text-sm text-gray-500">
-              These are the tools your agent uses to complete their workflow.
+              Voici les outils que votre agent IA utilise pour accomplir ses tâches.
             </p>
           </div>
 
@@ -54,7 +54,7 @@ const MyToolsWidget = (props: Props) => {
             {/* Empty */}
             {distinctComponents.length === 0 && agentQuery.isSuccess && (
               <div className="flex items-center justify-center h-20">
-                <p className="text-sm text-gray-500">No tools available</p>
+                <p className="text-sm text-gray-500">Aucun outil disponible</p>
               </div>
             )}
           </div>

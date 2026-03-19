@@ -158,7 +158,7 @@ function toggleSwitch(on: boolean) {
     debugSwitcherMessage?.classList.remove('hidden');
     debugSwitcherMessage?.classList.add('block');
     pulsingDotContainer.classList.remove('hidden');
-    switcherText.textContent = 'Debug On';
+    switcherText.textContent = 'Debug Actif';
     mifBug.classList.add('hidden');
     debugSwitcher.classList.add('active');
     debugSwitcherContainer.classList.add('active');
@@ -167,7 +167,7 @@ function toggleSwitch(on: boolean) {
     // Reset the components state before toggling the debug switch
     resetComponentsState({ resetDebugMessages: true, resetPinned: true });
     // debugMenu.classList.add('hidden');
-    switcherText.textContent = 'Debug Off';
+    switcherText.textContent = 'Debug Inactif';
     debugSwitcher.classList.remove('active');
     debugSwitcherContainer.classList.remove('active');
     mifBug.classList.remove('hidden');
@@ -184,7 +184,7 @@ async function _openDebugDialog(event: Event, operation: 'step' | 'run' = 'step'
   const selectedComponent = workspace.domElement.querySelector('.component.selected');
 
   if (!selectedComponent) {
-    warningToast('No component selected', 'Please select a component');
+    warningToast('Aucun composant selectionne', 'Veuillez selectionner un composant');
     return;
   }
 
@@ -385,7 +385,7 @@ export async function init() {
 
     if (isRunning) {
       const runTooltipLabel = document.querySelector('#tooltip-run');
-      runTooltipLabel.innerHTML = 'Run';
+      runTooltipLabel.innerHTML = 'Lancer';
 
       runBtn.classList.remove('running');
       playIcon.classList.remove('hidden');
@@ -452,8 +452,8 @@ export async function init() {
         }
       } else {
         errorToast(
-          'Debug session terminated unexpectedly. Check logs for details.',
-          'Debug Interrupted',
+          'La session de debug s\'est terminee de maniere inattendue. Consultez les journaux pour plus de details.',
+          'Debug interrompu',
         );
         setDebugMessage();
       }
@@ -487,11 +487,11 @@ export async function init() {
 
     const dbgSession = await attachLiveDebugSession(agent.id, 1);
     if (dbgSession) {
-      successToast('Successfully attached to action', 'Debug Session Attached');
-      log('Successfully attached to action');
+      successToast('Connexion reussie a l\'action', 'Session de debug connectee');
+      log('Connexion reussie a l\'action');
     } else {
-      errorToast('Failed to attach debugger', 'No active session found');
-      log('Failed to attach debugger, No active session found');
+      errorToast('Echec de la connexion au debugger', 'Aucune session active trouvee');
+      log('Echec de la connexion au debugger, aucune session active trouvee');
     }
   });
 
@@ -507,7 +507,7 @@ export async function init() {
     attachBtn.removeAttribute('disabled');
     stopBtn.removeAttribute('disabled');
 
-    warningToast('Debug session stopped. Review and re-initiate if needed.', 'Debug Stopped');
+    warningToast('Session de debug arretee. Verifiez et relancez si necessaire.', 'Debug arrete');
     setDebugMessage();
   });
 
@@ -606,8 +606,8 @@ export async function runDebug() {
 
     if (!sessionID) {
       errorToast(
-        'Debug session terminated unexpectedly. Check logs for details.',
-        'Debug Interrupted',
+        'La session de debug s\'est terminee de maniere inattendue. Consultez les journaux pour plus de details.',
+        'Debug interrompu',
       );
       workflowStatus = 'failed';
       setDebugMessage();
@@ -634,7 +634,7 @@ export async function runDebug() {
     source: 'debugger',
   });
 
-  runTooltipLabel.innerHTML = 'Run';
+  runTooltipLabel.innerHTML = 'Lancer';
   runBtn.classList.remove('running');
   playIcon.classList.remove('hidden');
   stopIcon.classList.add('hidden');
@@ -669,7 +669,7 @@ function handleEmbodimentRPCDebug() {
       if (rpcFunctions.debugLastAction['running']) return;
       rpcFunctions.debugLastAction['running'] = true;
       try {
-        updateChatbotStatus('Debugger:Attaching...');
+        updateChatbotStatus('Debugger : Connexion en cours...');
         let retries = 3;
         console.log('Waiting for debugger to be ready ...');
         await waitRunningDebug();
@@ -685,12 +685,12 @@ function handleEmbodimentRPCDebug() {
 
         if (dbgSession) {
           updateChatbotStatus(
-            'Debug is attached. Interact with the debug controls to proceed with debugging your agent',
+            'Debug connecte. Utilisez les controles de debug pour poursuivre le debogage de votre agent',
           );
-          log('Successfully attached to action');
+          log('Connexion reussie a l\'action');
         } else {
-          errorToast('Failed to attach debugger', 'No active session found');
-          log('Failed to attach debugger');
+          errorToast('Echec de la connexion au debugger', 'Aucune session active trouvee');
+          log('Echec de la connexion au debugger');
         }
       } catch (e) {
         console.error('debugLastAction', e);
@@ -1922,10 +1922,10 @@ export async function processDebugStep(debugInfo, agentID, sessionID?, IDFilter?
             dbgCopyBtn.onclick = () => {
               try {
                 navigator.clipboard.writeText(log);
-                successToast('Copied to clipboard', 'Success');
+                successToast('Copie dans le presse-papiers', 'Succes');
               } catch (error) {
                 // in case clipboard API is not available or it fails for the lack of permission
-                warningToast('Please manually select and copy the log.', 'Failed to copy');
+                warningToast('Veuillez selectionner et copier le journal manuellement.', 'Echec de la copie');
                 console.error('debugger:copy', error);
               }
             };
@@ -2052,7 +2052,7 @@ export async function processDebugStep(debugInfo, agentID, sessionID?, IDFilter?
       ?.forEach((item) => item?.classList.remove('dbg-running'));
 
     if (errorOccurred) {
-      errorToast('Debug encountered an error. Please check the logs for details.', 'Debug Error');
+      errorToast('Le debug a rencontre une erreur. Veuillez consulter les journaux pour plus de details.', 'Erreur de debug');
       log('Debug session failed: Check the debug log for error details');
     } else {
       log('Debug session completed successfully');
@@ -2061,7 +2061,7 @@ export async function processDebugStep(debugInfo, agentID, sessionID?, IDFilter?
     stopDebugUI(false);
     //}
 
-    updateChatbotStatus('Debugger:Checking remaining debug jobs ...');
+    updateChatbotStatus('Debugger : Verification des taches de debug restantes...');
   }
   if (result.error) {
     // Remove all the 'dbg-running' after debug session is closed
@@ -2752,7 +2752,7 @@ export function createDebugInjectDialog(
           tooltipText,
         );
       }
-      warningToast('Cannot run with empty inputs', 'Please provide input values.');
+      warningToast('Impossible de lancer avec des entrees vides', 'Veuillez fournir des valeurs d\'entree.');
       component.domElement.classList.add('has-empty-inputs');
       return; // Prevent further execution
     }
@@ -3220,8 +3220,8 @@ export function checkWorkflowStatus(): 'inprogress' | 'success' | 'error' | 'def
 }
 
 function showDeployAgentToast() {
-  successToast('Debug run finished successfully. Ready to deploy?', 'Debug Complete', {
-    ctaText: 'Deploy Agent',
+  successToast('Execution de debug terminee avec succes. Pret a deployer ?', 'Debug termine', {
+    ctaText: 'Deployer l\'agent',
     ctaCallback: () => {
       const deployAgentBtn = document.querySelector('#deploy-button-topbar') as HTMLButtonElement;
       if (deployAgentBtn) {

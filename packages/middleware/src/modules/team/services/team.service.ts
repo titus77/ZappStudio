@@ -187,7 +187,7 @@ export const listMembers = async (
 export const isUserPartOfTeam = async (userId: number, teamId: string) => {
   if (!userId || !teamId) {
     LOGGER.error(new Error('isUserPartOfTeam: userId or teamId is missing'));
-    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Internal error');
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Erreur interne');
   }
   // check if the user is part of the team
   const user = await prisma.user.findUnique({
@@ -336,7 +336,7 @@ export const getTeamRole = async (roleId: number, teamId: string) => {
       },
     })
     .catch(err => {
-      if (err.code === PRISMA_ERROR_CODES.NON_EXISTENT_RECORD) throw new ApiError(httpStatus.NOT_FOUND, 'Role not found');
+      if (err.code === PRISMA_ERROR_CODES.NON_EXISTENT_RECORD) throw new ApiError(httpStatus.NOT_FOUND, 'Role introuvable');
       throw err;
     });
 
@@ -408,7 +408,7 @@ export const updateTeamRole = async ({
   });
 
   if (teamInitiatorRole?.sharedTeamRole.id === roleId) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'You cannot update the role of the team owner');
+    throw new ApiError(httpStatus.FORBIDDEN, `Vous ne pouvez pas modifier le role du proprietaire de l'equipe`);
   }
 
   const role = await prisma.teamRole.update({
@@ -454,7 +454,7 @@ export const deleteTeamRole = async (roleId: number, teamId: string) => {
   });
 
   if (role?._count?.userTeamRole) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'Cannot delete role. It is being used by some members');
+    throw new ApiError(httpStatus.FORBIDDEN, `Impossible de supprimer ce role. Il est utilise par certains membres`);
   }
 
   const deleted = await prisma.teamRole.deleteMany({
@@ -465,7 +465,7 @@ export const deleteTeamRole = async (roleId: number, teamId: string) => {
   });
 
   if (!deleted.count) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Role not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Role introuvable');
   }
 };
 
@@ -534,7 +534,7 @@ export const updateMemberRole = async ({
   });
 
   if (currentMemberTeamRole?.isTeamInitiator) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Team initiator role cannot be updated');
+    throw new ApiError(httpStatus.NOT_FOUND, `Le role du createur de l'equipe ne peut pas etre modifie`);
   }
 
   const currentTeamRole = await prisma.teamRole.findFirst({
@@ -581,13 +581,13 @@ export const updateMemberRole = async ({
   });
 
   if (!newTeamRole) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'New role not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Nouveau role introuvable');
   }
   //* Super Admin in this context means: anyone who cannot be removed from the team
 
   // if caller is trying to update their own role
   if (caller.userId === member.userId) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'You cannot update your own role');
+    throw new ApiError(httpStatus.FORBIDDEN, 'Vous ne pouvez pas modifier votre propre role');
   }
 
   // if (!callerTeamRole!.canManageTeam) {
@@ -596,7 +596,7 @@ export const updateMemberRole = async ({
 
   // if the member's new role is a can manage team and the caller cannot, throw an error
   if (newTeamRole.canManageTeam === true && callerTeamRole!.canManageTeam === false) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'You cannot update this member role');
+    throw new ApiError(httpStatus.FORBIDDEN, `Vous ne pouvez pas modifier le role de ce membre`);
   }
 
   const role = await prisma.userTeamRole.update({
@@ -681,7 +681,7 @@ export const checkMemberExistsOrThrow = async (memberId: number, teamId: string,
   });
 
   if (!member) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Member not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Membre introuvable');
   }
 
   return member;
@@ -703,7 +703,7 @@ export const checkIfCanManageTeamOrThrow = async (userId: number, teamId: string
   });
 
   if (!role) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'You do not have permission to perform this action', errKeys.NOT_ENOUGH_PERMISSIONS);
+    throw new ApiError(httpStatus.FORBIDDEN, `Vous n'avez pas la permission d'effectuer cette action`, errKeys.NOT_ENOUGH_PERMISSIONS);
   }
 
   return role;
@@ -730,7 +730,7 @@ export const checkTeamRoleExistsOrThrow = async (
   });
 
   if (!role) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Role not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Role introuvable');
   }
 
   return role;
@@ -1055,7 +1055,7 @@ export const getAllTeams = async (parentId: string, userId: number) => {
 
     if (error?.code === 'P2034') {
       // Prisma transaction timeout error code
-      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Database operation timed out. Please try again.');
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, `Delai d'attente depasse. Veuillez reessayer.`);
     }
 
     throw error;

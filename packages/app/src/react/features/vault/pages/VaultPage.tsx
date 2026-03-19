@@ -41,9 +41,9 @@ export default function VaultPage() {
       a.download = 'smythos_vault_structure.json';
       a.click();
 
-      successToast('Vault structure exported successfully');
+      successToast('Structure du coffre-fort exportée avec succès');
     } catch (error) {
-      errorToast('Failed to export vault structure');
+      errorToast('Échec de l\'exportation de la structure du coffre-fort');
     } finally {
       setIsExporting(false);
     }
@@ -86,7 +86,7 @@ export default function VaultPage() {
               )
             }
             addIcon
-            label={isExporting ? 'Exporting...' : 'Export Vault Structure'}
+            label={isExporting ? 'Exportation...' : 'Exporter la structure du coffre-fort'}
           />
         )}
       </div>
@@ -104,8 +104,8 @@ export default function VaultPage() {
       <VectorDatabases />
 
       <ErrorBoundarySuspense
-        loadingFallback={<div>Loading...</div>}
-        errorFallback={() => <div>Error loading API keys</div>}
+        loadingFallback={<div>Chargement...</div>}
+        errorFallback={() => <div>Erreur lors du chargement des clés API</div>}
       >
         <ApiKeys pageAccess={pageAccess} />
       </ErrorBoundarySuspense>

@@ -98,7 +98,7 @@ const EmbodimentsWidget = ({ agent, agentId, isWriteAccess }: IProps) => {
             <div className="flex gap-2 items-center">
               {itemSettings.embIcon && itemSettings.embIcon}
               <p className="text-[15px] capitalize font-medium tracking-tight text-gray-900 dark:text-white">
-                {itemSettings.embTitle || 'Untitled Embodiment'}
+                {itemSettings.embTitle || 'Canal sans titre'}
               </p>
             </div>
             {canUseEmbodiments ? (
@@ -121,7 +121,7 @@ const EmbodimentsWidget = ({ agent, agentId, isWriteAccess }: IProps) => {
                       </label>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {isReadOnlyAccess ? 'You don\'t have access to this feature' : 'Enable/Disable'}
+                      {isReadOnlyAccess ? 'Vous n\'avez pas accès à cette fonctionnalité' : 'Activer/Désactiver'}
                     </TooltipContent>
                   </Tooltip>
                 )}
@@ -134,14 +134,14 @@ const EmbodimentsWidget = ({ agent, agentId, isWriteAccess }: IProps) => {
                   </div>
                 </TooltipTrigger>
                 <TooltipContent side="top">
-                  <p>Premium Embodiment. Upgrade your plan</p>
+                  <p>Canal de diffusion Premium. Améliorez votre offre</p>
                 </TooltipContent>
               </Tooltip>
             )}
           </div>
 
           <p className="text-sm text-gray-500 mb-3 w-full">
-            {itemSettings.embDescription || 'No description available'}
+            {itemSettings.embDescription || 'Aucune description disponible'}
           </p>
 
           <div className="flex gap-6 items-center justify-end">
@@ -151,7 +151,7 @@ const EmbodimentsWidget = ({ agent, agentId, isWriteAccess }: IProps) => {
                 onClick={() => itemSettings.openCodeSnippet()}
               >
                 <FaCode />
-                <span>Integration</span>
+                <span>Intégration</span>
               </div>
             )}
             {itemSettings.configurationVisible && itemSettings.openModal && (
@@ -197,7 +197,7 @@ const EmbodimentsWidget = ({ agent, agentId, isWriteAccess }: IProps) => {
       <div className="p-4 bg-gray-50" data-qa="deploy-to-your-workflow-container">
         <div className="mb-6">
           <h3 className="flex items-center gap-2 text-gray-700 text-sm font-semibold mb-1">
-            Deploy to Your Workflow
+            Déployer sur votre Workflow
             <Tooltip>
               <TooltipTrigger asChild>
                 <div>
@@ -205,7 +205,7 @@ const EmbodimentsWidget = ({ agent, agentId, isWriteAccess }: IProps) => {
                 </div>
               </TooltipTrigger>
               <TooltipContent side="top">
-                <p>Choose how you want to deploy and integrate your agent.</p>
+                <p>Choisissez comment déployer et intégrer votre agent IA.</p>
               </TooltipContent>
             </Tooltip>
           </h3>

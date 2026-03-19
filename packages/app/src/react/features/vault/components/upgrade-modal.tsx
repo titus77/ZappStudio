@@ -10,7 +10,7 @@ export function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Upgrade Plan</DialogTitle>
+          <DialogTitle>Améliorer l'offre</DialogTitle>
         </DialogHeader>
         <div className="py-4">
           <p>Upgrade logic goes here</p>

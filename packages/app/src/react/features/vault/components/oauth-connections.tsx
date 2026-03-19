@@ -84,14 +84,14 @@ export function OAuthConnections() {
 
       if (type === 'oauth' || type === 'oauth2') {
         // console.log('[handleAuthMessage] Authentication successful for type:', type);
-        successToast('Authentication successful!');
+        successToast('Authentification réussie !');
         // Invalidate the query cache to refetch data AFTER successful auth
         // console.log('[handleAuthMessage] Invalidating OAuth queries to refetch data');
         queryClient.invalidateQueries({ queryKey: OAUTH_QUERY_KEY });
       } else if (type === 'error') {
         // console.log('[handleAuthMessage] Authentication error:', data);
         errorToast(
-          `Authentication Error: ${data?.message || 'An unknown error occurred during authentication.'}`,
+          `Erreur d'authentification : ${data?.message || 'Une erreur inconnue s\'est produite lors de l\'authentification.'}`,
         );
       }
       // Keep the listener persistent so multiple auth attempts are handled
@@ -155,12 +155,12 @@ export function OAuthConnections() {
           connectionId: editingConnection.id,
           updatedFields: formData,
         });
-        successToast('OAuth connection updated.');
+        successToast('Connexion OAuth mise à jour.');
       } else {
         // Create new connection
         // console.log('[OAuthConnections] Creating new connection');
         await createMutation.mutateAsync(formData);
-        successToast('OAuth connection created.');
+        successToast('Connexion OAuth créée.');
         // After creating, proactively initiate auth for oauth/oauth2 (not client creds)
         const service = formData.oauthService;
         if (service && service !== 'OAuth2 Client Credentials') {
@@ -191,7 +191,7 @@ export function OAuthConnections() {
     } catch (err: any) {
       console.error('Error saving connection:', err);
       errorToast(
-        `Failed to ${editingConnection ? 'update' : 'create'} connection: ${err.message || 'Unknown error'}`,
+        `Échec de ${editingConnection ? 'la mise à jour' : 'la création'} de la connexion : ${err.message || 'Erreur inconnue'}`,
       );
     } finally {
       setIsProcessing(false);
@@ -217,13 +217,13 @@ export function OAuthConnections() {
     setIsProcessing(true);
     try {
       await deleteMutation.mutateAsync({ connectionId: connection.id });
-      successToast('OAuth connection deleted.');
+      successToast('Connexion OAuth supprimée.');
       // Close modal and clear state *after* successful deletion
       setIsDeleteModalOpen(false);
       setConnectionToDelete(undefined);
     } catch (err: any) {
       console.error('Error deleting connection:', err);
-      errorToast(`Failed to delete connection: ${err.message || 'Unknown error'}`);
+      errorToast(`Échec de la suppression de la connexion : ${err.message || 'Erreur inconnue'}`);
       // Keep modal open on error? Or close? For now, we only close on success.
     } finally {
       // console.log('Finished handleDeleteConfirm.');
@@ -240,10 +240,10 @@ export function OAuthConnections() {
     setIsProcessing(true);
     try {
       await duplicateMutation.mutateAsync({ connectionToDuplicate: connection });
-      successToast(`Connection "${connection.name}" duplicated.`);
+      successToast(`Connexion "${connection.name}" dupliquée.`);
     } catch (err: any) {
       console.error('Error duplicating connection:', err);
-      errorToast(`Failed to duplicate connection: ${err.message || 'Unknown error'}`);
+      errorToast(`Échec de la duplication de la connexion : ${err.message || 'Erreur inconnue'}`);
     } finally {
       // console.log('Finished handleDuplicateClick.');
       setIsProcessing(false);
@@ -268,7 +268,7 @@ export function OAuthConnections() {
         //   connection.name,
         // );
         await authenticateClientCredsMutation.mutateAsync(connection.oauth_info);
-        successToast('Authenticated! Client Credentials authentication was successful.');
+        successToast('Authentifié ! L\'authentification par identifiants client a réussi.');
         // Reflect status in UI immediately
         queryClient.invalidateQueries({ queryKey: OAUTH_QUERY_KEY });
       } else {
@@ -277,7 +277,7 @@ export function OAuthConnections() {
       }
     } catch (err: any) {
       console.error('Error initiating authentication:', err);
-      errorToast(`Could not start authentication: ${err.message || 'Unknown error'}`);
+      errorToast(`Impossible de démarrer l'authentification : ${err.message || 'Erreur inconnue'}`);
     }
   };
 
@@ -292,11 +292,11 @@ export function OAuthConnections() {
       await signOutMutation.mutateAsync({
         connectionId: connection.id,
       });
-      successToast('Successfully signed out.');
+      successToast('Déconnexion réussie.');
       // No need to manually close modal or clear state here as it's an inline action
     } catch (err: any) {
       console.error('Error signing out:', err);
-      errorToast(`Failed to sign out: ${err.message || 'Unknown error'}`);
+      errorToast(`Échec de la déconnexion : ${err.message || 'Erreur inconnue'}`);
     } finally {
       // console.log('Finished handleSignOutClick.');
       setIsProcessing(false);
@@ -345,15 +345,15 @@ export function OAuthConnections() {
       <div className="p-6">
         <div className="flex items-center justify-between mb-4 pr-2 flex-wrap">
           <h2 className="flex items-center gap-2 text-lg font-semibold">
-            OAuth Connections
+            Connexions OAuth
             <Tooltip>
               <TooltipTrigger asChild>
                 <Info className="w-4 h-4 cursor-help" />
               </TooltipTrigger>
               <TooltipContent className="max-w-[240px] text-center text-wrap">
                 <p>
-                  Manage OAuth connections to authenticate and integrate with external services and
-                  APIs
+                  Gérez les connexions OAuth pour vous authentifier et intégrer des services externes et
+                  des APIs
                 </p>
               </TooltipContent>
             </Tooltip>
@@ -362,17 +362,17 @@ export function OAuthConnections() {
         <div className="overflow-x-auto">
           {/* Table */}
           {isLoading ? (
-            <div>Loading connections...</div>
+            <div>Chargement des connexions...</div>
           ) : connections.length === 0 ? (
-            <div className="py-4 text-center text-muted-foreground">No OAuth connections found</div>
+            <div className="py-4 text-center text-muted-foreground">Aucune connexion OAuth trouvée</div>
           ) : (
             <table className="w-full min-w-[500px] text-sm text-left table-fixed">
               <thead className="text-xs text-muted-foreground">
                 <tr>
-                  <th className="pr-4 py-2 w-1/6">Platform</th>
-                  <th className="px-4 py-2 w-1/3">Connection Name</th>
+                  <th className="pr-4 py-2 w-1/6">Plateforme</th>
+                  <th className="px-4 py-2 w-1/3">Nom de la connexion</th>
                   <th className="px-4 py-2 w-1/6">Type</th>
-                  <th className="px-4 py-2 w-1/6">Status</th>
+                  <th className="px-4 py-2 w-1/6">Statut</th>
                   <th className="px-4 py-2 w-1/6 text-right"></th>
                 </tr>
               </thead>
@@ -419,11 +419,11 @@ export function OAuthConnections() {
                       </td>
                       {/* Status Column */}
                       <td className="px-4 py-2">
-                        <div className="flex" title={isActive ? 'Active' : 'Inactive'}>
+                        <div className="flex" title={isActive ? 'Actif' : 'Inactif'}>
                           {isCheckingStatus ? (
                             <div
                               className="animate-spin rounded-full h-3 w-3 border-t-2 border-b-2 border-gray-400"
-                              title="Checking..."
+                              title="Vérification..."
                             ></div>
                           ) : (
                             <Circle
@@ -449,7 +449,7 @@ export function OAuthConnections() {
                                 disabled={
                                   signOutMutation.isLoading || isProcessing || isCheckingStatus
                                 }
-                                label="Sign Out"
+                                label="Se déconnecter"
                                 className="h-8 px-3 text-xs whitespace-nowrap"
                               />
                             ) : (
@@ -459,7 +459,7 @@ export function OAuthConnections() {
                                 disabled={
                                   initiateAuthMutation.isLoading || isProcessing || isCheckingStatus
                                 }
-                                label="Authenticate"
+                                label="S'authentifier"
                                 className="h-8 px-3 text-xs whitespace-nowrap"
                               />
                             ))}
@@ -477,7 +477,7 @@ export function OAuthConnections() {
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Duplicate</p>
+                              <p>Dupliquer</p>
                             </TooltipContent>
                           </Tooltip>
 
@@ -494,7 +494,7 @@ export function OAuthConnections() {
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Edit</p>
+                              <p>Modifier</p>
                             </TooltipContent>
                           </Tooltip>
 
@@ -511,7 +511,7 @@ export function OAuthConnections() {
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Delete</p>
+                              <p>Supprimer</p>
                             </TooltipContent>
                           </Tooltip>
                         </div>
@@ -534,7 +534,7 @@ export function OAuthConnections() {
               setEditingConnection(undefined);
               setIsCreateModalOpen(true);
             }}
-            label="Add OAuth Connection"
+            label="Ajouter une connexion OAuth"
             disabled={isLoading}
           />
         </div>
