@@ -40,29 +40,43 @@ export class SmythOsDeployer extends AbstractDeployer {
       select: { tenantId: true, name: true },
     });
 
+    // SEC: Validate tenant_id is a UUID before sending
+    if (team?.tenantId && !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(team.tenantId)) {
+      console.error('[SmythOsDeployer] Invalid tenant_id format, skipping webhook');
+      return;
+    }
+
+    // FIX GAP-4.1/4.2: Payload matches ZappImmo receiver expectations
+    // Receiver: frontend/src/app/api/connector/workflows-webhook/route.ts
     const payload = {
-      event: 'workflow.published',
-      agent_id: params.aiAgent.id,
-      agent_name: params.aiAgent.name,
-      team_id: params.aiAgent.teamId,
-      tenant_id: team?.tenantId || null,
-      version: `${deployment.majorVersion}.${deployment.minorVersion}`,
-      release_notes: deployment.releaseNotes,
-      deployed_at: new Date().toISOString(),
+      event: 'workflow.published' as const,
+      workflow_id: params.aiAgent.id,          // receiver expects workflow_id, not agent_id
+      name: params.aiAgent.name,               // receiver expects name, not agent_name
+      description: '',
+      content: params.aiAgent.snapshotData || {},  // receiver expects content (workflow data)
+      version: deployment.majorVersion,        // receiver expects number, not string
+      tenant_id: team?.tenantId || '',
     };
 
     const body = JSON.stringify(payload);
+
+    // FIX GAP-4.1: Header must be x-smythos-signature (lowercase, matches receiver)
     const signature = crypto
       .createHmac('sha256', WEBHOOK_SECRET)
       .update(body)
-      .digest('hex');
+      .digest('hex');  // receiver expects hex, not base64
+
+    // SEC: Only send to HTTPS in production
+    if (process.env.NODE_ENV === 'production' && !WEBHOOK_URL.startsWith('https://')) {
+      console.error('[SmythOsDeployer] WEBHOOK_URL must use HTTPS in production');
+      return;
+    }
 
     await fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Webhook-Signature': signature,
-        'X-Webhook-Event': 'workflow.published',
+        'x-smythos-signature': signature,      // matches receiver header name
       },
       body,
     });
