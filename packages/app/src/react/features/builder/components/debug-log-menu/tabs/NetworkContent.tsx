@@ -187,7 +187,7 @@ export const NetworkContent: FC = () => {
       className="flex flex-col h-full relative"
       ref={containerRef}
       onContextMenu={handleContextMenu}
-      title="Right-click for options"
+      title="Clic droit pour les options"
     >
       {/* Toolbar */}
       <Toolbar
@@ -212,7 +212,7 @@ export const NetworkContent: FC = () => {
       {/* Recording Status Banner (when not recording) */}
       {!isNetworkRecording && (
         <div className="bg-red-50 text-red-600 text-xs px-4 py-1 border-b border-red-200">
-          Network recording is paused. Click the record button to resume capturing network activity.
+          L'enregistrement réseau est en pause. Cliquez sur le bouton d'enregistrement pour reprendre la capture.
         </div>
       )}
 

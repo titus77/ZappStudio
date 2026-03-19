@@ -40,12 +40,12 @@ const DeploymentsHistory = () => {
           content: `
             <div class="text-center px-4 py-6">
               <h2 class="text-2xl font-bold text-gray-800 mb-2">
-                Unlock Version Control
+                Accéder au contrôle de versions
               </h2>
 
               <div class="mb-6">
                 <p class="text-base text-gray-600 leading-relaxed mx-auto max-w-md">
-                  Version history and restore features are not available on Free plans.
+                  L'historique des versions et la restauration ne sont pas disponibles sur les offres gratuites.
                     <a href="/plans"
                      target="_blank"
                      class="text-blue-600 underline hover:opacity-75"
@@ -53,8 +53,8 @@ const DeploymentsHistory = () => {
                        page_url: '/builder',
                        source: 'restoring previous version'
                      })">
-                    Upgrade
-                  </a> to unlock access to version control and much more.
+                    Mettre à niveau
+                  </a> pour accéder au contrôle de versions et bien plus encore.
                 </p>
               </div>
             </div>
@@ -129,14 +129,14 @@ const DeploymentsHistory = () => {
       )}
 
       {allDeployments.isSuccess && allDeployments.data?.deployments.length === 0 && (
-        <p className="text-sm text-gray-500">No deployments found</p>
+        <p className="text-sm text-gray-500">Aucun déploiement trouvé</p>
       )}
 
       {allDeployments.isError && (
-        <p className="text-sm text-gray-500">Failed to load deployments</p>
+        <p className="text-sm text-gray-500">Impossible de charger l'historique des déploiements</p>
       )}
 
-      {allDeployments.isLoading && <p className="text-sm text-gray-500">Loading...</p>}
+      {allDeployments.isLoading && <p className="text-sm text-gray-500">Chargement...</p>}
     </>
   );
 };
@@ -156,7 +156,7 @@ function DeploymentItem({
     <div className="flex flex-col relative [&:hover_span]:opacity-100">
       <p className="text-sm text-gray-500 leading-[38px]">
         <span className="font-semibold text-gray-900">Version: {deployment.version} </span>
-        {isActive && <span className="text-smyth-emerald-400 pl-4">Active</span>}
+        {isActive && <span className="text-smyth-emerald-400 pl-4">Actif</span>}
         {!isActive && (!isRestoring || isRestoring == deployment.id) && (
           <span
             onClick={() => restoreVersion(deployment.id)}
@@ -165,16 +165,16 @@ function DeploymentItem({
               { 'opacity-100': isRestoring },
             )}
           >
-            {!isRestoring && 'Restore'}
+            {!isRestoring && 'Restaurer'}
             {isRestoring && deployment.id === isRestoring && <Spinner classes="w-4 h-4" />}
           </span>
         )}
       </p>
       <p className="text-sm text-gray-500">
-        Release date: {Intl.DateTimeFormat('en-US').format(new Date(deployment.createdAt))}
+        Date de publication : {Intl.DateTimeFormat('fr-FR').format(new Date(deployment.createdAt))}
       </p>
       {deployment.releaseNotes.trim() && (
-        <p className="text-sm text-gray-500">Release notes: {deployment.releaseNotes}</p>
+        <p className="text-sm text-gray-500">Notes de version : {deployment.releaseNotes}</p>
       )}
     </div>
   );

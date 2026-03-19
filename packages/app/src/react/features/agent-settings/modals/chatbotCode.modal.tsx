@@ -80,7 +80,7 @@ const ChatbotCodeSnippetModal = (props: Props) => {
         {/* Modal header */}
         <div className="flex justify-between items-start p-2 border-b dark:border-gray-600">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Chatbot Integration Snippet
+            Snippet d'intégration Chatbot
           </h3>
           <button
             type="button"
@@ -95,13 +95,13 @@ const ChatbotCodeSnippetModal = (props: Props) => {
         <div className="px-2 pt-2 pb-4">
           {!isFullScreen ? (
             <p className="mb-4 text-sm text-gray-900 flex gap-2 items-center">
-              <FaCircleInfo className="min-w-4" /> Copy and paste this snippet into your website
-              before the closing <code> &lt;/body&gt; </code> tag.
+              <FaCircleInfo className="min-w-4" /> Copiez et collez ce snippet dans votre site web
+              avant la balise fermante <code> &lt;/body&gt; </code>.
             </p>
           ) : (
             <p className="mb-4 text-sm text-gray-900 flex gap-2 items-center">
-              <FaCircleInfo /> Place this snippet inside a container DOM element, and the chatbot
-              will occupy the full available space within it.
+              <FaCircleInfo /> Placez ce snippet dans un élément conteneur DOM, et le chatbot
+              occupera tout l'espace disponible dans celui-ci.
             </p>
           )}
           <TextArea
@@ -121,7 +121,7 @@ const ChatbotCodeSnippetModal = (props: Props) => {
           <Button
             variant="primary"
             handleClick={handleCopyClick}
-            label="Copy"
+            label="Copier"
             addIcon={true}
             Icon={<FaCopy className="mr-2" />}
             className="w-[100px] rounded-lg ml-auto"

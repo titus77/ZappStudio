@@ -214,7 +214,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, CustomTextAreaProp
               type="button"
               onClick={onExpand}
               className="absolute bottom-2 right-2 text-gray-500 hover:text-gray-700 opacity-50 hover:opacity-100 transition-opacity"
-              aria-label="Maximize behavior textarea"
+              aria-label="Agrandir la zone de saisie"
             >
               <BiExpandAlt className="fa-md" />
             </button>

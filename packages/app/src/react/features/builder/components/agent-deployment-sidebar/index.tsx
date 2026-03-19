@@ -9,7 +9,7 @@ type Props = {
 
 const AgentDeploymentSidebar = ({ workspace }: Props) => {
   return (
-    <DeploymentErrorBoundary fallback={<p>Something went wrong</p>}>
+    <DeploymentErrorBoundary fallback={<p>Une erreur s'est produite</p>}>
       <DeploymentSidebarProvider workspace={workspace}>
         <AgentDeploymentSidebarContent />
       </DeploymentSidebarProvider>

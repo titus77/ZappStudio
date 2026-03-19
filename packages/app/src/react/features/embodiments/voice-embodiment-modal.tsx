@@ -130,7 +130,7 @@ const VoiceEmbodimentModal: React.FC<VoiceEmbodimentModalProps> = ({
               />
               <button
                 type="button"
-                aria-label="Copy Voice Integration"
+                aria-label="Copier le snippet d'intégration vocale"
                 onClick={() => handleCopy(codeSnippet, 'voice')}
                 className={`absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity bg-white p-1 ${copied.voice ? 'opacity-100' : ''}`}
                 tabIndex={-1}

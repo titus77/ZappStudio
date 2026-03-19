@@ -96,7 +96,7 @@ const AgentInfoWidgetAvatar: React.FC<AgentInfoWidgetAvatarProps> = ({ data, too
       }
     },
     onError() {
-      errorToast('We could not generate an avatar. Please try again.');
+      errorToast('Impossible de générer un avatar. Veuillez réessayer.');
     },
   });
 
@@ -214,7 +214,7 @@ const AgentInfoWidgetAvatar: React.FC<AgentInfoWidgetAvatarProps> = ({ data, too
                 }
               }
             } catch (error) {
-              errorToast('Failed to upload avatar');
+              errorToast('Impossible d\'importer l\'avatar');
             } finally {
               setIsLoading(false);
             }

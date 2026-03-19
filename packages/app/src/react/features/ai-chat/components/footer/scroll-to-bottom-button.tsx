@@ -8,7 +8,7 @@ export const ScrollToBottomButton: FC<IProps> = ({ onClick }) => (
     <button
       className="bg-white border border-solid border-black border-opacity-10 text-gray-900 rounded-full p-2 shadow-lg hover:bg-slate-100 transition-colors duration-200 active:scale-95"
       onClick={onClick}
-      aria-label="Scroll to bottom"
+      aria-label="Défiler vers le bas"
     >
       <FaArrowDown size={12} />
     </button>

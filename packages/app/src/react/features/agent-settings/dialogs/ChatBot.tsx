@@ -131,7 +131,7 @@ const ChatBotDialog = ({
     }
 
     if (data.icon && !validateURL(data.icon)) {
-      warningToast('The URL entered for icon does not appear to be valid.');
+      warningToast("L'URL saisie pour l'icône ne semble pas valide.");
     }
 
     try {
@@ -167,10 +167,10 @@ const ChatBotDialog = ({
         // Invalidate the availableEmbodiments query
         queryClient.invalidateQueries({ queryKey: ['availableEmbodiments', agentId] });
 
-        successToast('Embodiment saved');
+        successToast('Canal de diffusion enregistré');
         closeModal();
       } catch (error) {
-        errorToast(extractError(error) || 'Embodiment not saved. Please try again.');
+        errorToast(extractError(error) || 'Canal de diffusion non enregistré. Veuillez réessayer.');
         console.log(error);
       }
 
@@ -211,7 +211,7 @@ const ChatBotDialog = ({
               <div className="w-[80vw] max-w-[1000px]">
                 <Dialog.Panel className="w-full relative transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title className="text-xl font-semibold leading-6 text-[#1E1E1E] mb-4 flex justify-between items-center">
-                    <span>Chatbot Configurations</span>
+                    <span>Configuration du Chatbot</span>
                     <div
                       className="cursor-pointer w-8 h-8 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 p-2 -mr-2 -mt-2"
                       onClick={() => closeModal()}
@@ -237,7 +237,7 @@ const ChatBotDialog = ({
                                   htmlFor="name"
                                   className="block text-[#1E1E1E] mb-1 text-base font-normal"
                                 >
-                                  Name
+                                  Nom
                                 </label>
                                 <Field
                                   type="text"
@@ -263,7 +263,7 @@ const ChatBotDialog = ({
                                   onChange={props.handleChange}
                                   onBlur={props.handleBlur}
                                   value={props.values?.name}
-                                  placeholder="Enter chatbot name"
+                                  placeholder="Saisir le nom du chatbot"
                                   disabled={true}
                                 />
                                 <ErrorMessage
@@ -277,7 +277,7 @@ const ChatBotDialog = ({
                                   htmlFor="introMessage"
                                   className="block text-[#1E1E1E] mb-1 text-base font-normal"
                                 >
-                                  Intro Message
+                                  Message d'introduction
                                 </label>
                                 <Field
                                   type="text"
@@ -303,7 +303,7 @@ const ChatBotDialog = ({
                                   onChange={props.handleChange}
                                   onBlur={props.handleBlur}
                                   value={props.values?.introMessage}
-                                  placeholder="Enter intro message"
+                                  placeholder="Saisir le message d'introduction"
                                 />
                                 <ErrorMessage
                                   name="introMessage"
@@ -357,7 +357,7 @@ const ChatBotDialog = ({
                                         return model.name + badge;
                                       })[0] || ''
                                   }
-                                  placeholder="Select GPT Model in Agent Settings"
+                                  placeholder="Sélectionner le modèle GPT dans les paramètres"
                                   disabled={true}
                                 >
                                 </Field>
@@ -370,7 +370,7 @@ const ChatBotDialog = ({
                               </div> */}
                               <div>
                                 <TextArea
-                                  label="Personality"
+                                  label="Personnalité"
                                   labelClassName="block text-[#1E1E1E] mb-1 text-base font-normal"
                                   name="personality"
                                   id="personality"
@@ -384,7 +384,7 @@ const ChatBotDialog = ({
                                   }}
                                   onBlur={props.handleBlur}
                                   value={props.values?.personality}
-                                  placeholder="Enter chatbot personality"
+                                  placeholder="Décrire la personnalité du chatbot"
                                   fullWidth
                                   className="mb-2"
                                 />
@@ -402,7 +402,7 @@ const ChatBotDialog = ({
                                       MODEL_DESCRIPTION_LIMIT -
                                         (props.values?.personality?.length || 0),
                                     )}
-                                    /{MODEL_DESCRIPTION_LIMIT} characters remaining
+                                    /{MODEL_DESCRIPTION_LIMIT} caractères restants
                                   </span>
                                 </div>
                                 <ErrorMessage
@@ -417,7 +417,7 @@ const ChatBotDialog = ({
                                   htmlFor="icon"
                                   className="block text-[#1E1E1E] mb-1 text-base font-normal"
                                 >
-                                  Icon
+                                  Icône
                                 </label>
 
                                 <div className="flex justify-between gap-4 items-center">
@@ -441,7 +441,7 @@ const ChatBotDialog = ({
                                   mb-4
                                 border-gray-300 border-b-gray-500 focus:border-b-2 focus:border-b-blue-500 focus-visible:border-b-2 focus-visible:border-b-blue-500"
                                     name="icon"
-                                    placeholder="Enter icon's URL"
+                                    placeholder="URL de l'icône"
                                     value={props.values?.icon}
                                     onChange={(event) => {
                                       props.setFieldValue('icon', event.target.value);
@@ -461,7 +461,7 @@ const ChatBotDialog = ({
                               </div>
                               <div className="mb-4">
                                 <label className="block text-[#1E1E1E] mb-1 text-base font-normal">
-                                  Code Syntax Highlight Theme
+                                  Thème de coloration syntaxique
                                 </label>
                                 <Field
                                   type="text"
@@ -488,7 +488,7 @@ const ChatBotDialog = ({
                                   onChange={props.handleChange}
                                   onBlur={props.handleBlur}
                                   value={props.values?.syntaxHighlightTheme}
-                                  placeholder="Enter intro message"
+                                  placeholder="Sélectionner un thème"
                                 >
                                   {SYNTAX_HIGHLIGHT_THEMES.map((theme) => (
                                     <option key={theme.name} value={theme.name}>
@@ -542,7 +542,7 @@ const ChatBotDialog = ({
                                     htmlFor="fullScreenChatBot"
                                     className="ml-2 text-sm font-normal text-[#1E1E1E]"
                                   >
-                                    Message View
+                                    Vue en mode message
                                   </label>
                                 </div>
                               </div>
@@ -579,7 +579,7 @@ const ChatBotDialog = ({
                                     htmlFor="allowFileAttachments"
                                     className="ml-2 text-sm font-normal text-[#1E1E1E]"
                                   >
-                                    Allow file attachments
+                                    Autoriser les pièces jointes
                                   </label>
                                 </div>
                               </div>
@@ -613,7 +613,7 @@ const ChatBotDialog = ({
                                     htmlFor="enableMetaMessages"
                                     className="ml-2 text-sm font-normal text-[#1E1E1E]"
                                   >
-                                    Enable Meta Messages
+                                    Activer les méta-messages
                                   </label>
                                 </div>
                               </div>
@@ -631,7 +631,7 @@ const ChatBotDialog = ({
                                   <Info className="mr-1 w-5 h-5" />
                                   <span className="sr-only">Info</span>
                                   <div className="text-sm">
-                                    Click on the color picker to change the style.
+                                    Cliquez sur le sélecteur de couleur pour modifier le style.
                                   </div>
                                 </div>
                                 <div className="rounded-lg overflow-hidden border border-solid border-[#D1D5DB]">
@@ -916,7 +916,7 @@ const ChatBotDialog = ({
                                     </button>
 
                                     <div className="w-3/4 mb-5">
-                                      <Suspense fallback={<div>Loading...</div>}>
+                                      <Suspense fallback={<div>Chargement...</div>}>
                                         <SyntaxHighlighter
                                           language="javascript"
                                           style={
@@ -972,7 +972,7 @@ const ChatBotDialog = ({
                                         id="input-group-1"
                                         readOnly
                                         className=" bg-transparent border-none  text-gray-900 text-sm rounded-lg focus:ring-white focus:border-white block w-full pr-10 p-2.5  dark:bg-gray-700 dark:border-none dark:placeholder-gray-400 dark:text-white dark:focus:ring-current dark:focus:border-none"
-                                        placeholder="Type a message..."
+                                        placeholder="Saisir un message..."
                                       />
                                       <div
                                         className="w-11 h-9 border-solid border-gray-300 rounded-md flex items-center justify-center"
@@ -1081,7 +1081,7 @@ const ChatBotDialog = ({
                           <div className="flex justify-end w-full mt-4">
                             <Button
                               handleClick={() => submitForm(props.values)}
-                              label="Save"
+                              label="Enregistrer"
                               addIcon={isSubmitting}
                               Icon={<Spinner classes="w-4 h-4 mr-2" />}
                               disabled={isSubmitting}

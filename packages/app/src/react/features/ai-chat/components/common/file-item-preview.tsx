@@ -42,7 +42,7 @@ const RemoveButton: FC<TRemoveButtonProps> = memo(({ onRemove }) => (
   <button
     onClick={onRemove}
     className="size-6 flex justify-center items-center bg-white rounded-full text-[#6B7280] border border-[#E5E7EB] opacity-0 transition-opacity duration-200 z-10 cursor-pointer hover:text-[#374151] pt-0.5"
-    aria-label="Remove file"
+    aria-label="Supprimer le fichier"
   >
     <FaXmark />
   </button>
@@ -152,7 +152,7 @@ export const FileItemPreview: FC<TFileItemPreviewProps> = memo(
             />
           ) : (
             <div className="w-full h-full bg-gray-200 rounded-lg flex flex-col items-center justify-center">
-              <span className="text-xs text-gray-500">Preview unavailable</span>
+              <span className="text-xs text-gray-500">Aperçu non disponible</span>
             </div>
           )}
           {isUploading && (

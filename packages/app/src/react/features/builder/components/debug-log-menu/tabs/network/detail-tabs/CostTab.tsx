@@ -49,7 +49,7 @@ export const CostTab: FC<CostTabProps> = ({ request }) => {
     return (
       <div className="flex flex-col p-4">
         <div className="text-sm text-gray-500 text-center py-8">
-          No cost information available for this request.
+          Aucune information de coût disponible pour cette requête.
         </div>
       </div>
     );
@@ -64,25 +64,25 @@ export const CostTab: FC<CostTabProps> = ({ request }) => {
         <div className="flex items-center gap-2 mb-2">
           <FaMoneyBillWave className="text-yellow-500" size={16} />
           <h3 className="text-sm font-medium text-blue-700">
-            Usage Summary
+            Résumé d'utilisation
           </h3>
         </div>
         <div className="text-sm text-blue-800">
-          Total Cost: $<span className="font-medium">{totalCost.toFixed(8)}</span>
+          Coût total : $<span className="font-medium">{totalCost.toFixed(8)}</span>
         </div>
       </div>
 
       <div className="border rounded-lg overflow-hidden shadow-sm">
         <div className="bg-gray-50 px-4 py-3 border-b">
-          <h3 className="text-sm font-medium text-gray-700">Cost Breakdown</h3>
+          <h3 className="text-sm font-medium text-gray-700">Détail des coûts</h3>
         </div>
         <table className="w-full">
           <thead>
             <tr className="bg-gray-50 border-b">
               <th className="text-left p-3 text-xs font-medium text-gray-500">Source</th>
               {/* We are reporting dollars */}
-              <th className="text-right p-3 text-xs font-medium text-gray-500">Cost</th>
-              <th className="text-right p-3 text-xs font-medium text-gray-500">Percentage</th>
+              <th className="text-right p-3 text-xs font-medium text-gray-500">Coût</th>
+              <th className="text-right p-3 text-xs font-medium text-gray-500">Pourcentage</th>
             </tr>
           </thead>
           <tbody>
@@ -117,7 +117,7 @@ export const CostTab: FC<CostTabProps> = ({ request }) => {
       <div className="mt-4 p-3 bg-gray-50 rounded-lg border text-xs text-gray-500 flex items-start gap-2">
         <FaInfoCircle className="text-blue-400 mt-0.5 flex-shrink-0" />
         <div>
-          <p>Cost data represents computational resource usage for this request. Cost is typically reported in dollars, depending on the service used.</p>
+          <p>Les données de coût représentent l'utilisation des ressources de calcul pour cette requête. Le coût est généralement exprimé en dollars, selon le service utilisé.</p>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { JSONTree } from 'react-json-tree';
 export const RequestTab: FC<DetailTabProps> = ({ request }) => {
   return (
     <div className="p-3 text-xs">
-      <h3 className="font-medium text-gray-700 mb-2">Request Body</h3>
+      <h3 className="font-medium text-gray-700 mb-2">Corps de la requête</h3>
 
       <div className="bg-white p-3 rounded border border-gray-200">
         {request.requestBody ? (
@@ -20,18 +20,18 @@ export const RequestTab: FC<DetailTabProps> = ({ request }) => {
             shouldExpandNodeInitially={() => true}
           />
         ) : (
-          <div className="text-gray-500">No request body</div>
+          <div className="text-gray-500">Aucun corps de requête</div>
         )}
       </div>
 
-      <h3 className="font-medium text-gray-700 mt-4 mb-2">Request Headers</h3>
+      <h3 className="font-medium text-gray-700 mt-4 mb-2">En-têtes de la requête</h3>
       <div className="bg-white p-3 rounded border border-solid border-gray-200">
         {Object.keys(request.requestHeaders || {}).length > 0 ? (
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-solid border-gray-200">
-                <th className="text-left py-1 font-medium text-gray-600">Name</th>
-                <th className="text-left py-1 font-medium text-gray-600">Value</th>
+                <th className="text-left py-1 font-medium text-gray-600">Nom</th>
+                <th className="text-left py-1 font-medium text-gray-600">Valeur</th>
               </tr>
             </thead>
             <tbody>
@@ -44,7 +44,7 @@ export const RequestTab: FC<DetailTabProps> = ({ request }) => {
             </tbody>
           </table>
         ) : (
-          <div className="text-gray-500">No request headers</div>
+          <div className="text-gray-500">Aucun en-tête de requête</div>
         )}
       </div>
     </div>

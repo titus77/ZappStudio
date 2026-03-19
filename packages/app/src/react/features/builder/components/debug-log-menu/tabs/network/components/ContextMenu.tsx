@@ -105,7 +105,7 @@ export const ContextMenu: FC<ContextMenuProps> = ({
         className="px-3 py-1.5 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
         onClick={handleWaterfallToggle}
       >
-        <span>Waterfall View</span>
+        <span>Vue en cascade</span>
         {showWaterfall && <FaCheck className="text-blue-500 text-xs" />}
       </div>
 
@@ -116,7 +116,7 @@ export const ContextMenu: FC<ContextMenuProps> = ({
           onClick={handleNavigateToComponent}
         >
           <span className="flex items-center gap-2">
-            <span>Navigate To Component</span>
+            <span>Accéder au composant</span>
           </span>
         </div>
       )}

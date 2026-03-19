@@ -136,7 +136,7 @@ const UserInfoCard = () => {
                 <p className="mt-3 ">
                   <b className="text-xs">Membre depuis : </b>
                   <span className="text-xs">
-                    {Intl.DateTimeFormat('en-US', {
+                    {Intl.DateTimeFormat('fr-FR', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',

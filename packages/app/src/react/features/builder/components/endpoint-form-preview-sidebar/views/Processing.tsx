@@ -43,7 +43,7 @@ const Processing: FC<{ showBackButton?: boolean; onBackButtonClick?: () => void 
     <div className="home-view">
       {showBackButton && (
         <button onClick={onBackButtonClick} className="mb-4 cursor-pointer flex items-center gap-2">
-          <ArrowLeftIcon className="w-4 h-4 text-smythos-blue-500" /> Skills List
+          <ArrowLeftIcon className="w-4 h-4 text-smythos-blue-500" /> Liste des compétences
         </button>
       )}
       <div className={classNames('', callSkillMutation.isLoading && 'hidden')}>
@@ -58,7 +58,7 @@ const Processing: FC<{ showBackButton?: boolean; onBackButtonClick?: () => void 
             view !== 'view_response' && 'cursor-default pointer-events-none',
           )}
         >
-          <h3 className="font-semibold">Inputs and Files</h3>
+          <h3 className="font-semibold">Entrées et fichiers</h3>
           {view === 'view_response' && (
             <svg
               className={`w-4 h-4 transition-transform duration-200 ${
@@ -94,7 +94,7 @@ const Processing: FC<{ showBackButton?: boolean; onBackButtonClick?: () => void 
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span>Processing...</span>
+              <span>Traitement en cours...</span>
               <PiSpinnerLight className="animate-spin" size={18} />
             </div>
           </div>
@@ -107,7 +107,7 @@ const Processing: FC<{ showBackButton?: boolean; onBackButtonClick?: () => void 
             }}
             className="bg-transparent font-bold border border-gray-300 text-gray-500 px-4 py-3 rounded-md w-full mt-8"
           >
-            Stop Testing
+            Arrêter le test
           </button>
         </div>
       )}

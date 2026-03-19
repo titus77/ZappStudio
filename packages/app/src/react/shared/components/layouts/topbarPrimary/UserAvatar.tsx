@@ -13,7 +13,7 @@ export const UserAvatar = ({ user, profilePages }) => {
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="flex text-sm rounded-full" data-qa="user-profile-button" >
-        <span className="sr-only">Open user menu</span>
+        <span className="sr-only">Ouvrir le menu utilisateur</span>
         {user?.avatar ? (
           <img
             className="w-[38px] h-[38px] rounded-full"
@@ -57,7 +57,7 @@ export const UserAvatar = ({ user, profilePages }) => {
                 href="#"
                 className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100' : 'text-gray-700'}`}
               >
-                Sign Out
+                Se déconnecter
               </a>
             )}
           </Menu.Item>

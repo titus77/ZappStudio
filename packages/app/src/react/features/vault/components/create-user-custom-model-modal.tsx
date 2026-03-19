@@ -484,7 +484,7 @@ export function CreateUserCustomModelModal({
                     />
                   </TooltipTrigger>
                   <TooltipContent side="right" className="max-w-[200px] text-center text-wrap">
-                    <p>The name that will appear in the model dropdown list</p>
+                    <p>Le nom qui apparaîtra dans la liste déroulante des modèles</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
@@ -493,7 +493,7 @@ export function CreateUserCustomModelModal({
                 type="text"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
-                placeholder="My Custom Model"
+                placeholder="Mon modèle personnalisé"
                 fullWidth
                 className="w-full"
               />
@@ -588,7 +588,7 @@ export function CreateUserCustomModelModal({
                 onValueChange={(value) => handleInputChange('provider', value)}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a provider" />
+                  <SelectValue placeholder="Sélectionner un fournisseur" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="OpenAI">OpenAI</SelectItem>
@@ -630,13 +630,12 @@ export function CreateUserCustomModelModal({
                       variant="secondary"
                       handleClick={() => setShouldRemoveApiKey(false)}
                       className="whitespace-nowrap"
-                      label="Undo"
+                      label="Annuler"
                     />
                   </div>
                   <p className="text-xs text-gray-500">
-                    Click &apos;Undo&apos; to cancel the removal, or &apos;
-                    {editModel ? 'Update Model' : 'Create Model'}&apos; to confirm and delete the
-                    key from vault.
+                    Cliquez sur &apos;Annuler&apos; pour revenir en arrière, ou sur &apos;
+                    {editModel ? 'Mettre à jour le modèle' : 'Créer le modèle'}&apos; pour confirmer et supprimer la clé du coffre-fort.
                   </p>
                 </div>
               ) : isApiKeyFromVault && !showApiKey ? (
@@ -658,20 +657,18 @@ export function CreateUserCustomModelModal({
                       className="whitespace-nowrap"
                       addIcon={isLoadingApiKey}
                       Icon={isLoadingApiKey ? <Spinner size="sm" /> : undefined}
-                      label={isLoadingApiKey ? 'Loading...' : 'Reveal Key'}
+                      label={isLoadingApiKey ? 'Chargement...' : 'Afficher la clé'}
                     />
                     <CustomButton
                       type="button"
                       variant="secondary"
                       handleClick={handleRemoveApiKey}
                       className="whitespace-nowrap bg-red-50 text-red-600 hover:bg-red-100"
-                      label="Remove Key"
+                      label="Supprimer la clé"
                     />
                   </div>
                   <p className="text-xs text-gray-500">
-                    This API key is stored securely in the vault as a template variable. Click
-                    &apos;Reveal Key&apos; to view or update it, or &apos;Remove Key&apos; to delete
-                    it.
+                    Cette clé API est stockée de manière sécurisée dans le coffre-fort comme variable de modèle. Cliquez sur &apos;Afficher la clé&apos; pour la consulter ou la modifier, ou sur &apos;Supprimer la clé&apos; pour la supprimer.
                   </p>
                 </div>
               ) : (
@@ -858,7 +855,7 @@ export function CreateUserCustomModelModal({
                       onValueChange={(value) => handleInputChange('fallbackLLM', value)}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a model" />
+                        <SelectValue placeholder="Sélectionner un modèle" />
                       </SelectTrigger>
                       <SelectContent>
                         {fallbackOptions.map((model) => (
@@ -872,7 +869,7 @@ export function CreateUserCustomModelModal({
 
                   <div className="space-y-3">
                     <div className="mb-2 flex items-center gap-2">
-                      <Label className="text-base font-normal text-[#1E1E1E]">Features</Label>
+                      <Label className="text-base font-normal text-[#1E1E1E]">Fonctionnalités</Label>
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <div
@@ -919,7 +916,7 @@ export function CreateUserCustomModelModal({
               handleClick={handleClose}
               disabled={isProcessing}
               className="flex-1"
-              label="Cancel"
+              label="Annuler"
             />
             <CustomButton
               className="flex-1"

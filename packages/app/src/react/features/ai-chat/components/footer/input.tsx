@@ -159,7 +159,7 @@ export const Input = () => {
             {attachments.length > 0 && (
               <div
                 role="list"
-                aria-label="Attached files"
+                aria-label="Fichiers joints"
                 className="flex flex-nowrap gap-2 w-full h-full overflow-x-auto attachments-container-enter"
               >
                 {attachments.map((file, index) => (

@@ -111,7 +111,7 @@ const VariablesWidget = ({ agentId, workspace }: { agentId: string; workspace: W
     // Don't refetch on component mount if data exists
     refetchOnMount: false,
     onError: () => {
-      errorToast('Failed to load vault keys');
+      errorToast('Impossible de charger les clés du coffre-fort');
     },
   });
 
@@ -153,7 +153,7 @@ const VariablesWidget = ({ agentId, workspace }: { agentId: string; workspace: W
       setShowVaultKeys(null);
     },
     onError: () => {
-      errorToast('Failed to save key. Please try again.');
+      errorToast('Impossible de sauvegarder la clé. Veuillez réessayer.');
     },
     onSettled: () => {
       setIsSavingKey(false);
@@ -189,7 +189,7 @@ const VariablesWidget = ({ agentId, workspace }: { agentId: string; workspace: W
       queryClient.invalidateQueries({ queryKey: ['agent', agentId] });
     },
     onError: () => {
-      errorToast('Failed to update agent variables. Please try again.');
+      errorToast('Impossible de mettre à jour les variables de l\'agent IA. Veuillez réessayer.');
     },
     onSettled: async (_, __, variables) => {
       await agentSettingsUtils
@@ -357,14 +357,14 @@ const VariablesWidget = ({ agentId, workspace }: { agentId: string; workspace: W
         setVarChanged(false);
       }
 
-      successToast('Variables saved successfully');
+      successToast('Variables enregistrées avec succès');
     } catch (e) {
       if (e.errKey === errKeys.AGENT_LOCK_FAIL) {
         errorToast(
-          'Failed to update agent variables as the agent is being edited by another user. Please try again later.',
+          'Impossible de mettre à jour les variables : l\'agent IA est en cours de modification par un autre utilisateur. Veuillez réessayer ultérieurement.',
         );
       } else {
-        errorToast('Failed to update agent variables. Please try again.');
+        errorToast('Impossible de mettre à jour les variables de l\'agent IA. Veuillez réessayer.');
       }
     }
   }
@@ -494,19 +494,19 @@ const VariablesWidget = ({ agentId, workspace }: { agentId: string; workspace: W
                 </div>
               </TooltipTrigger>
               <TooltipContent side="top">
-                <p>Close</p>
+                <p>Fermer</p>
               </TooltipContent>
             </Tooltip>
           </div>
         </div>
-        <p className="text-sm mb-4">Define reusable values to use across your workflow.</p>
+        <p className="text-sm mb-4">Définissez des valeurs réutilisables dans votre flux de travail.</p>
         <div className="space-y-2">
           {pairs.map((pair, index) => (
             <div key={index} className="flex gap-2 group relative">
               <div className="relative flex-1">
                 <input
                   type="text"
-                  placeholder="Key"
+                  placeholder="Clé"
                   value={pair.key}
                   onChange={(e) => handleInputChange(index, 'key', e.target.value)}
                   className={`w-full bg-white border text-gray-900 rounded block outline-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-shadow-none text-sm font-normal placeholder:text-sm placeholder:font-normal ${pair.error
@@ -519,7 +519,7 @@ const VariablesWidget = ({ agentId, workspace }: { agentId: string; workspace: W
                     onClick={(e) => handleDelete(e, index)}
                     className="absolute right-2 top-3.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-500 hover:text-red-500"
                     type="button"
-                    aria-label="Delete variable"
+                    aria-label="Supprimer la variable"
                   >
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -528,7 +528,7 @@ const VariablesWidget = ({ agentId, workspace }: { agentId: string; workspace: W
                         </div>
                       </TooltipTrigger>
                       <TooltipContent side="top">
-                        <div>Delete Variable</div>
+                        <div>Supprimer la variable</div>
                       </TooltipContent>
                     </Tooltip>
                   </button>
@@ -538,7 +538,7 @@ const VariablesWidget = ({ agentId, workspace }: { agentId: string; workspace: W
                 <div className="relative">
                   <TextArea
                     ref={(el) => (textareaRefs.current[index] = el)}
-                    placeholder="Value"
+                    placeholder="Valeur"
                     value={pair.value}
                     onChange={(e) => handleInputChange(index, 'value', e.target.value)}
                     onFocus={(e) => adjustTextareaHeight(e.target, true)}
@@ -636,14 +636,14 @@ const VariablesWidget = ({ agentId, workspace }: { agentId: string; workspace: W
         >
           <div className="bg-[#FFFF] text-[#5A5A5A] rounded-xl p-6 w-full max-w-md modal-content">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-base font-semibold">Save Key to the Vault</h2>
+              <h2 className="text-base font-semibold">Enregistrer la clé dans le Coffre-fort</h2>
               <button
                 onClick={(e) => {
                   e?.stopPropagation();
                   setShowAddKeyModal(false);
                 }}
                 className="p-2 hover:bg-gray-100 rounded-lg -mr-2 text-gray-400 hover:text-gray-600 transition-colors"
-                aria-label="Close modal"
+                aria-label="Fermer la fenêtre"
               >
                 <CloseIcon width={16} height={16} />
               </button>

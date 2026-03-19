@@ -401,9 +401,9 @@ export const WaterfallView: FC<WaterfallViewProps> = ({
               zoomPercentage > 100 ? 'visible' : 'invisible'
             }`}
             onClick={handleResetZoom}
-            title="Reset zoom"
+            title="Réinitialiser le zoom"
           >
-            Reset
+            Réinitialiser
           </button>
         </div>
         <div>{formatTimestamp(range[1])}</div>
@@ -465,9 +465,9 @@ export const WaterfallView: FC<WaterfallViewProps> = ({
 
               // Create tooltip text
               const tooltipText = `${request.componentName} (${request.componentTitle})
-Status: ${request.status}
-Duration: ${formatDuration(request.duration)}
-URL: ${request.url}`;
+Statut : ${request.status}
+Durée : ${formatDuration(request.duration)}
+URL : ${request.url}`;
 
               return (
                 <div

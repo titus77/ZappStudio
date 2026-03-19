@@ -110,7 +110,7 @@ const RoutesWrapper = ({ pages }: { pages: IPageRoute[] }) => {
               <Spinner />
             </div>
           ) : userInfoCtx.error && !page.skipAuth ? (
-            <p>Application Error</p>
+            <p>Erreur de l'application</p>
           ) : (
             <ComponentWithDocumentTitle>{page.component}</ComponentWithDocumentTitle>
           );

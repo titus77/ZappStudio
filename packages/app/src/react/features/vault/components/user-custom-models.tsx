@@ -41,18 +41,18 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
     );
 
     if (existingModel) {
-      errorToast('A custom model with this name already exists. Please choose a different name.');
+      errorToast('Un modèle personnalisé avec ce nom existe déjà. Veuillez en choisir un autre.');
       return;
     }
 
     setIsProcessing(true);
     try {
       await createModel.mutateAsync(data);
-      successToast('Custom model created successfully');
+      successToast('Modèle personnalisé créé avec succès');
       setIsCreateModalOpen(false);
     } catch (error) {
       console.error('Error creating user custom model:', error);
-      errorToast('Failed to create user custom model');
+      errorToast('Impossible de créer le modèle personnalisé');
     } finally {
       setIsProcessing(false);
     }
@@ -70,7 +70,7 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
     );
 
     if (existingModel) {
-      errorToast('A custom model with this name already exists. Please choose a different name.');
+      errorToast('Un modèle personnalisé avec ce nom existe déjà. Veuillez en choisir un autre.');
       return;
     }
 
@@ -81,13 +81,13 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
         updatedFields: data,
       });
 
-      successToast('Custom model updated successfully');
+      successToast('Modèle personnalisé mis à jour avec succès');
 
       // Close modal - the cache has been updated with complete data including credentials
       setEditingModel(undefined);
     } catch (error) {
       console.error('Error updating user custom model:', error);
-      errorToast('Failed to update user custom model');
+      errorToast('Impossible de mettre à jour le modèle personnalisé');
     } finally {
       setIsProcessing(false);
     }
@@ -99,12 +99,12 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
     setIsProcessing(true);
     try {
       await deleteModel.mutateAsync({ modelId: modelToDelete.id });
-      successToast('Custom model deleted successfully');
+      successToast('Modèle personnalisé supprimé avec succès');
       setIsDeleteModalOpen(false);
       setModelToDelete(undefined);
     } catch (error) {
       console.error('Error deleting user custom model:', error);
-      errorToast('Failed to delete user custom model');
+      errorToast('Impossible de supprimer le modèle personnalisé');
     } finally {
       setIsProcessing(false);
     }
@@ -137,10 +137,10 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
       <div className="rounded-lg border border-red-200 bg-red-50 p-4">
         <div className="flex items-center gap-2 text-red-800">
           <Info className="h-4 w-4" />
-          <span className="font-medium">Error loading custom models</span>
+          <span className="font-medium">Erreur lors du chargement des modèles personnalisés</span>
         </div>
         <p className="mt-1 text-sm text-red-600">
-          {error instanceof Error ? error.message : 'An unexpected error occurred'}
+          {error instanceof Error ? error.message : 'Une erreur inattendue s\'est produite'}
         </p>
       </div>
     );
@@ -150,15 +150,14 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
     <div className="w-full p-6 rounded-lg border border-solid border-[#d9d9d9] flex-col justify-start items-start gap-3 flex">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2 self-stretch text-[#1e1e1e] text-lg font-semibold leading-snug">
-          Custom Models
+          Modèles personnalisés
           <Tooltip>
             <TooltipTrigger asChild>
               <Info className="w-4 h-4 cursor-help" />
             </TooltipTrigger>
             <TooltipContent className="max-w-[240px] text-center text-wrap">
               <p>
-                Custom models allow you to connect to your own LLM instances running locally or on
-                your infrastructure
+                Les modèles personnalisés vous permettent de vous connecter à vos propres instances LLM hébergées localement ou sur votre infrastructure
               </p>
             </TooltipContent>
           </Tooltip>
@@ -167,11 +166,11 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
 
       <div className="w-full space-y-4 pb-2">
         {isLoading ? (
-          <div className="py-4 text-center text-gray-500">Loading models...</div>
+          <div className="py-4 text-center text-gray-500">Chargement des modèles...</div>
         ) : (
           <>
             {models.length === 0 ? (
-              <div className="py-4 text-center text-gray-500">No custom models found</div>
+              <div className="py-4 text-center text-gray-500">Aucun modèle personnalisé trouvé</div>
             ) : (
               <div className="overflow-x-auto overflow-y-visible">
                 <div className="min-w-[500px] space-y-4">
@@ -179,7 +178,7 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
                     <div key={model.id} className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="inline-flex h-5 items-center rounded-md px-2 text-xs font-medium bg-[#BFECE8] text-[#0F5257]">
-                          Custom
+                          Personnalisé
                         </span>
                         <span className="font-medium text-[#374151] max-w-[200px] truncate">
                           {model.name}
@@ -206,7 +205,7 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
                                 </Button>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Edit</p>
+                                <p>Modifier</p>
                               </TooltipContent>
                             </Tooltip>
                             <Tooltip>
@@ -221,7 +220,7 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
                                 </Button>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Delete</p>
+                                <p>Supprimer</p>
                               </TooltipContent>
                             </Tooltip>
                           </>
@@ -239,7 +238,7 @@ export function UserCustomModels({ pageAccess }: { pageAccess: { write: boolean 
                   addIcon
                   Icon={<PlusCircle className="mr-2 h-4 w-4" />}
                   handleClick={() => setIsCreateModalOpen(true)}
-                  label="Add Custom Model"
+                  label="Ajouter un modèle personnalisé"
                 />
               </div>
             )}

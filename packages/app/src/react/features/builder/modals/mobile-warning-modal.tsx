@@ -96,11 +96,11 @@ export function MobileHandler({
                   .writeText(window.location.href)
                   .then(() => {
                     // Show a toast or temporary message
-                    successToast('Link copied! Share this with your desktop device.', 'Success');
+                    successToast('Lien copié ! Partagez-le avec votre ordinateur de bureau.', 'Succès');
                   })
                   .catch(() => {
                     // Fallback if clipboard API fails
-                    warningToast('Please manually select and copy the link.', 'Failed to copy');
+                    warningToast('Veuillez sélectionner et copier le lien manuellement.', 'Échec de la copie');
                   });
               }}
             >

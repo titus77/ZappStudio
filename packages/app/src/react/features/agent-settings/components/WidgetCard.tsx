@@ -41,7 +41,7 @@ const WidgetCard = ({ hasBorder = true, ...props }: Props) => {
         </div>
       </TooltipTrigger>
       <TooltipContent side="top">
-        <p>You do not have permission to make changes to this widget</p>
+        <p>Vous n'avez pas la permission de modifier ce widget</p>
       </TooltipContent>
     </Tooltip>
   ) : (

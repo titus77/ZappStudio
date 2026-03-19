@@ -279,7 +279,7 @@ const AllowedDomainsWidget = ({ isWriteAccess }: Props) => {
                     onClick={() => handleRemoveDomain(domain)}
                     disabled={!isWriteAccess || isSaving}
                     className="ml-0.5 p-0.5 text-green-600 hover:text-red-500 hover:bg-red-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    title="Remove domain"
+                    title="Supprimer le domaine"
                   >
                     <X className="w-3 h-3" />
                   </button>

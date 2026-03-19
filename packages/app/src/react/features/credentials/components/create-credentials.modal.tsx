@@ -443,7 +443,7 @@ export function CreateCredentialsModal({
                         className="w-full"
                         disabled={isProcessing || isResolvingVaultKeys}
                       >
-                        <SelectValue placeholder="Choose a provider..." />
+                        <SelectValue placeholder="Choisir un fournisseur..." />
                       </SelectTrigger>
                       <SelectContent>
                         {availableProviders.length === 0 ? (
@@ -485,7 +485,7 @@ export function CreateCredentialsModal({
                   {/* Connection Name */}
                   <div>
                     <Input
-                      label="Connection Name"
+                      label="Nom de la connexion"
                       required
                       fullWidth
                       // placeholder="e.g
@@ -643,7 +643,7 @@ export function CreateCredentialsModal({
                 type="button"
                 handleClick={handleBack}
                 disabled={isProcessing}
-                label="Back"
+                label="Retour"
               />
             )}
             <CustomButton
@@ -656,7 +656,7 @@ export function CreateCredentialsModal({
                 (step === 1 && !selectedProviderId && !isEditMode) ||
                 (step === 2 && (!connectionName.trim() || Object.keys(errors).length > 0))
               }
-              label={isEditMode ? 'Save Changes' : step === 1 ? 'Continue' : 'Create Connection'}
+              label={isEditMode ? 'Enregistrer les modifications' : step === 1 ? 'Continuer' : 'Créer la connexion'}
             />
           </DialogFooter>
         </form>

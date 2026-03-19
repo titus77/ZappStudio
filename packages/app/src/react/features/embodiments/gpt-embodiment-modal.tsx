@@ -80,11 +80,11 @@ const GptEmbodimentModal: React.FC<GptEmbodimentModalProps> = ({ onClose }) => {
                 readOnly
                 fullWidth
                 className="w-full border-[#D1D5DB] border-b-gray-900 text-xs text-gray-700 hover:pr-10"
-                aria-label="Dev OpenAPI URL"
+                aria-label="URL OpenAPI de développement"
               />
               <button
                 type="button"
-                aria-label="Copy Dev OpenAPI URL"
+                aria-label="Copier l'URL OpenAPI de développement"
                 onClick={() => handleCopy(devUrl)}
                 className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-white p-1"
                 tabIndex={-1}
@@ -104,11 +104,11 @@ const GptEmbodimentModal: React.FC<GptEmbodimentModalProps> = ({ onClose }) => {
                 readOnly
                 fullWidth
                 className="w-full border-[#D1D5DB] border-b-gray-900 text-xs text-gray-700 hover:pr-10"
-                aria-label="Prod OpenAPI URL"
+                aria-label="URL OpenAPI de production"
               />
               <button
                 type="button"
-                aria-label="Copy Prod OpenAPI URL"
+                aria-label="Copier l'URL OpenAPI de production"
                 onClick={() => handleCopy(prodUrl)}
                 className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-white p-1"
                 tabIndex={-1}

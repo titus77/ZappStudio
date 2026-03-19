@@ -49,11 +49,11 @@ export const TopbarPrimary = () => {
 
         // If team name ends with "Team", just append "Dashboard"
         // Otherwise, append "Team Dashboard"
-        const suffix = endsWithTeam ? 'Dashboard' : PAGE_TITLE_MAP[matchingPath];
-        return `${teamName}'s ${suffix}`;
+        const suffix = endsWithTeam ? 'Tableau de bord' : PAGE_TITLE_MAP[matchingPath];
+        return `Tableau de bord de ${teamName}`;
       }
 
-      return `Your ${PAGE_TITLE_MAP[matchingPath]}`;
+      return `Votre ${PAGE_TITLE_MAP[matchingPath]}`;
     }
 
     return PAGE_TITLE_MAP[matchingPath];

@@ -200,7 +200,7 @@ export const AgentSettingsPageBody = () => {
   }
 
   const breadcrumb = (
-    <Breadcrumb aria-label="Breadcrumb" className="mb-2 sm:mb-0">
+    <Breadcrumb aria-label="Fil d'Ariane" className="mb-2 sm:mb-0">
       <Breadcrumb.Item icon={FaHome}>
         <Link to="/agents">Accueil</Link>
       </Breadcrumb.Item>

@@ -15,13 +15,13 @@ const FullScreenError = ({ error }: Props) => {
             {error.code && (
               <h1 className="text-9xl font-bold text-emerald-400">{error.code}</h1>
             )}
-            <h1 className="text-4xl font-medium py-8">oops! An Error happened</h1>
+            <h1 className="text-4xl font-medium py-8">Oups ! Une erreur s'est produite</h1>
             <p className="text-4xl pb-8 px-12 font-bold text-red-800">{error.message}</p>
             <a
               href="/"
               className="mt-4 inline-block rounded bg-smyth-emerald-400 hover:opacity-75 px-4 py-2 font-semibold text-white"
             >
-              Go back to Home{' '}
+              Retour à l'accueil{' '}
             </a>
           </div>
         </div>

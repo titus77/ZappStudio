@@ -107,7 +107,7 @@ export function ComponentInputEditor({ config, onSubmit }: ComponentInputEditorP
       onSubmit?.(values);
     } catch (error) {
       console.error('Form submission error:', error);
-      errorToast('An error occurred while submitting the form');
+      errorToast('Une erreur s\'est produite lors de l\'envoi du formulaire');
     } finally {
       setSubmitting(false);
     }
@@ -178,7 +178,7 @@ export function ComponentInputEditor({ config, onSubmit }: ComponentInputEditorP
 
               <div className="flex justify-end gap-4 mt-6">
                 <Button color="gray" onClick={() => onSubmit?.(null)} type="button">
-                  Cancel
+                  Annuler
                 </Button>
                 <Button
                   type="submit"

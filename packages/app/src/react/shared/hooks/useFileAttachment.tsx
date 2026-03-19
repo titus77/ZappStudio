@@ -20,7 +20,7 @@ export const useFileAttachment = ({
 
   const handleFileSelect = (file: File) => {
     if (file.size > maxSize) {
-      errorToast('File exceeds 5MB size limit');
+      errorToast('Le fichier dépasse la limite de 5 Mo');
       return false;
     }
 
@@ -30,7 +30,7 @@ export const useFileAttachment = ({
         return ext === '*' ? file.type.startsWith(category) : file.type === type;
       })
     ) {
-      errorToast('Unsupported file type');
+      errorToast('Type de fichier non pris en charge');
       return false;
     }
 

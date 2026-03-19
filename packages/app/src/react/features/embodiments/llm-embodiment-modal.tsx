@@ -126,14 +126,14 @@ const fetchAgentKeys = async (agentId: string): Promise<ApiKey[]> => {
       name: keyData.name,
       key: keyData.key,
       createdAt: keyData.metadata?.created_time
-        ? new Date(keyData.metadata.created_time).toLocaleString('en-US', {
+        ? new Date(keyData.metadata.created_time).toLocaleString('fr-FR', {
             month: 'long',
             year: 'numeric',
             day: 'numeric',
             hour: 'numeric',
             minute: 'numeric',
           })
-        : 'Unknown date',
+        : 'Date inconnue',
     }));
   }
   return [];
@@ -192,7 +192,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create API key');
+        throw new Error('Impossible de créer la clé API');
       }
 
       return response.json();
@@ -219,7 +219,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
       });
 
       if (!response.ok) {
-        throw new Error('Failed to revoke API key');
+        throw new Error('Impossible de révoquer la clé API');
       }
 
       return response.json();
@@ -418,7 +418,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
                 <SelectTrigger
                   id="code-language-select"
                   className={selectTriggerClass}
-                  aria-label="Code Language"
+                  aria-label="Langage de code"
                 >
                   <SelectValue />
                 </SelectTrigger>
@@ -457,7 +457,7 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
             readOnly
             className="w-full min-h-[250px] max-h-[400px] p-2 font-mono text-xs resize-none overflow-auto"
             fullWidth
-            aria-label="Code Sample"
+            aria-label="Exemple de code"
           />
           {/* Bonus text */}
           <div className="text-xs text-[#888] mt-1">
@@ -515,8 +515,8 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
                             onClick={async () => {
                               await navigator.clipboard.writeText(key.key);
                             }}
-                            aria-label="Copy API Key"
-                            title="Copy"
+                            aria-label="Copier la clé API"
+                            title="Copier"
                             type="button"
                           >
                             <CopyKeyIcon
@@ -531,8 +531,8 @@ const LlmEmbodimentModal: React.FC<LlmEmbodimentModalProps> = ({
                             className="p-1 rounded group hover:bg-gray-200"
                             onClick={() => handleRevokeKey(key.id)}
                             disabled={isRevokingKey === key.id}
-                            aria-label="Delete Key"
-                            title="Delete"
+                            aria-label="Supprimer la clé"
+                            title="Supprimer"
                             type="button"
                           >
                             {isRevokingKey === key.id ? (

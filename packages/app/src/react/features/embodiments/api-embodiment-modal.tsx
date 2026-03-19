@@ -72,7 +72,7 @@ const ApiEmbodimentModal: React.FC<ApiEmbodimentModalProps> = ({ onClose }) => {
     <div className="fixed inset-0 bg-black/25 flex items-center justify-center z-50">
       <div className="relative bg-white rounded-2xl shadow-lg w-full p-6 flex flex-col gap-4 overflow-auto max-h-[90vh] max-w-[800px]">
         {/* Header with back and close buttons */}
-        <ModalHeaderEmbodiment title="API Endpoints" onBack={onClose} onClose={onClose} />
+        <ModalHeaderEmbodiment title="Points d'accès API" onBack={onClose} onClose={onClose} />
 
         {/* Description */}
         <div>
@@ -92,11 +92,11 @@ const ApiEmbodimentModal: React.FC<ApiEmbodimentModalProps> = ({ onClose }) => {
                 readOnly
                 fullWidth
                 className="w-full border-[#D1D5DB] border-b-gray-900 text-xs text-gray-700 hover:pr-10"
-                aria-label="Dev API URL"
+                aria-label="URL API de développement"
               />
               <button
                 type="button"
-                aria-label="Copy Dev API URL"
+                aria-label="Copier l'URL API de développement"
                 onClick={() => handleCopy(swaggerUrl)}
                 className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-white p-1"
                 tabIndex={-1}
@@ -118,11 +118,11 @@ const ApiEmbodimentModal: React.FC<ApiEmbodimentModalProps> = ({ onClose }) => {
                 readOnly
                 fullWidth
                 className="w-full border-[#D1D5DB] border-b-gray-900 text-xs text-gray-700 hover:pr-10"
-                aria-label="Prod API URL"
+                aria-label="URL API de production"
               />
               <button
                 type="button"
-                aria-label="Copy Prod API URL"
+                aria-label="Copier l'URL API de production"
                 onClick={() => handleCopy(swaggerUrlProd)}
                 className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-white p-1"
                 tabIndex={-1}

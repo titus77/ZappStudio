@@ -36,8 +36,8 @@ export const AttachmentButton: FC<IProps> = (props) => {
       onClick={handleClick}
       disabled={isDisabled || isMaxFilesUploaded}
       className="text-gray-500 hover:text-gray-700 mr-2 transition-colors disabled:text-gray-300 disabled:cursor-not-allowed"
-      title={!isMaxFilesUploaded ? 'Attach file' : undefined}
-      aria-label="Attach file"
+      title={!isMaxFilesUploaded ? 'Joindre un fichier' : undefined}
+      aria-label="Joindre un fichier"
     >
       <AttachmentIcon />
     </button>
@@ -53,7 +53,7 @@ export const AttachmentButton: FC<IProps> = (props) => {
         accept={CHAT_ACCEPTED_FILE_TYPES.input}
         className="hidden"
         multiple
-        aria-label="File attachment input"
+        aria-label="Champ de sélection de fichier"
         onClick={(e) => e.stopPropagation()}
       />
       {isMaxFilesUploaded ? (

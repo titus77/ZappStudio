@@ -335,7 +335,7 @@ export function OAuthConnections() {
   if (fetchError) {
     return (
       <div className="rounded-lg bg-white text-gray-800 border border-solid border-gray-200 shadow-sm p-6">
-        <div className="text-red-500">Error loading OAuth connections: {fetchError.message}</div>
+        <div className="text-red-500">Erreur lors du chargement des connexions OAuth : {fetchError.message}</div>
       </div>
     );
   }

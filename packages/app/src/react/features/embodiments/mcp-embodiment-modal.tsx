@@ -42,7 +42,7 @@ const McpEmbodimentModal: React.FC<McpEmbodimentModalProps> = ({ onClose }) => {
       <div className="relative bg-white rounded-2xl shadow-lg w-full p-6 flex flex-col gap-4 overflow-auto max-h-[90vh] max-w-[480px]">
         {/* Header with back and close buttons */}
         <ModalHeaderEmbodiment
-          title="MCP Integration"
+          title="Intégration MCP"
           onBack={onClose}
           onClose={onClose}
         />
@@ -63,11 +63,11 @@ const McpEmbodimentModal: React.FC<McpEmbodimentModalProps> = ({ onClose }) => {
                 readOnly
                 fullWidth
                 className="w-full border-[#D1D5DB] border-b-gray-900 text-xs text-gray-700 hover:pr-10"
-                aria-label="MCP Dev URL"
+                aria-label="URL MCP de développement"
               />
               <button
                 type="button"
-                aria-label="Copy MCP Dev URL"
+                aria-label="Copier l'URL MCP de développement"
                 onClick={() => handleCopy(devUrl)}
                 className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-white p-1"
                 tabIndex={-1}
@@ -89,11 +89,11 @@ const McpEmbodimentModal: React.FC<McpEmbodimentModalProps> = ({ onClose }) => {
                 readOnly
                 fullWidth
                 className="w-full border-[#D1D5DB] border-b-gray-900 text-xs text-gray-700 hover:pr-10"
-                aria-label="MCP Prod URL"
+                aria-label="URL MCP de production"
               />
               <button
                 type="button"
-                aria-label="Copy MCP Prod URL"
+                aria-label="Copier l'URL MCP de production"
                 onClick={() => handleCopy(prodUrl)}
                 className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-white p-1"
                 tabIndex={-1}

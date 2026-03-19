@@ -148,6 +148,8 @@ const WAI_PASSTHROUGH_RE = /^\/wai\/(health|$)/;
 const DEBUG_HEADERS_TO_STRIP = [
   'x-debug-run', 'x-debug-read', 'x-debug-inj', 'x-debug-stop', 'x-debug-skip',
   'x-force-debugger', 'x-monitor-id',
+  // SEC: Prevent header-based agent resolution/version override on public /wai routes
+  'x-agent-id', 'x-agent-version',
 ];
 
 // Publication cache: agentId → { isPublic, expiresAt }
@@ -252,18 +254,20 @@ app.use(async (req: any, res, next) => {
     req._waiRoute = true;
     req.url = '/' + agentMatch[2];
 
-    // Fire-and-forget analytics (non-blocking)
+    // Fire-and-forget analytics via SECURITY DEFINER RPC (non-blocking)
+    // SEC: Uses record_wai_analytics() RPC instead of direct INSERT to prevent
+    // fake analytics injection. RPC validates agent is published and resolves tenant_id.
     const restPath = agentMatch[2];
     const eventType = restPath.includes('chat') ? 'message_sent'
       : restPath === 'chatbot' || restPath === '' ? 'view'
       : null;
     if (eventType) {
       const ipHash = crypto.createHash('sha256').update(String(clientIp)).digest('hex').slice(0, 16);
-      const rpcUrl = `${process.env.POSTGREST_INTERNAL_URL || 'http://localhost:3000'}/wai_agent_analytics`;
+      const rpcUrl = `${process.env.POSTGREST_INTERNAL_URL || 'http://localhost:3000'}/rpc/record_wai_analytics`;
       fetch(rpcUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ agent_id: agentId, tenant_id: '', event_type: eventType, ip_hash: ipHash }),
+        body: JSON.stringify({ p_agent_id: agentId, p_event_type: eventType, p_ip_hash: ipHash }),
       }).catch(() => { /* ignore analytics errors */ });
     }
 

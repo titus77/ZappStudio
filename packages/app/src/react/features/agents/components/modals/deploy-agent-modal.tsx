@@ -292,7 +292,7 @@ function DeployAgentModal({ userInfo, deploymentSidebarCtx }) {
         errorToast('Échec de la mise à jour du domaine');
       }
     } catch (error) {
-      errorToast('Domain Update failed');
+      errorToast('Échec de la mise à jour du domaine');
       throw error;
     }
   }

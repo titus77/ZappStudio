@@ -144,7 +144,7 @@ const getOAuthFullInfo = useCallback(async () => {
   // --- Event Handlers ---
   const handleAuthenticateClick = async () => {
     if (!connection.id) {
-      errorToast('OAuth configuration not found for this connection.');
+      errorToast('Configuration OAuth introuvable pour cette connexion.');
       return;
     }
 
@@ -153,15 +153,15 @@ const getOAuthFullInfo = useCallback(async () => {
       const oauthInfo = await getOAuthFullInfo();
       if (oauthInfo.service === 'oauth2_client_credentials') {
         await authenticateClientCredsMutation.mutateAsync(oauthInfo);
-        successToast('Authenticated! Client Credentials authentication was successful.');
+        successToast('Authentifié ! L\'authentification par identifiants client a réussi.');
         setIsAuthenticated(true);
         onAuthStatusChange && onAuthStatusChange(true);
       } else {
         await initiateAuthMutation.mutateAsync(oauthInfo);
       }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      errorToast(`Could not start authentication: ${errorMessage}`);
+      const errorMessage = err instanceof Error ? err.message : 'Erreur inconnue';
+      errorToast(`Impossible de démarrer l'authentification : ${errorMessage}`);
     } finally {
       setIsProcessing(false);
     }
@@ -171,7 +171,7 @@ const getOAuthFullInfo = useCallback(async () => {
     setIsProcessing(true);
     try {
       await signOutMutation.mutateAsync({ connectionId: connection.id });
-      successToast('Successfully signed out.');
+      successToast('Déconnexion réussie.');
       hasCheckedAuth.current = false; // Allow re-checking
       setIsAuthenticated(false);
       onAuthStatusChange && onAuthStatusChange(false);
@@ -202,7 +202,7 @@ const getOAuthFullInfo = useCallback(async () => {
           {connection.isManaged && (
             <span
               className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 border border-blue-200 shadow-sm"
-              title="This is an internal connection automatically managed by ZappStudio"
+              title="Cette connexion est interne et gérée automatiquement par ZappStudio"
             >
               <svg className="w-3 h-3 mr-1 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.93 12.412a.75.75 0 11-1.86 0l-1.406-5.624A.75.75 0 017.38 7h5.24a.75.75 0 01.716.788l-1.406 5.624zm-.93-7.162a1 1 0 110-2 1 1 0 010 2z" />
@@ -225,7 +225,7 @@ const getOAuthFullInfo = useCallback(async () => {
 
       {/* Status */}
       <td className="px-4 py-3">
-        <div className="flex" title={isAuthenticated ? 'Active' : 'Inactive'}>
+        <div className="flex" title={isAuthenticated ? 'Actif' : 'Inactif'}>
           {/* {isCheckingStatus ? (
             <div className="animate-spin rounded-full h-3 w-3 border-t-2 border-b-2 border-gray-400" title="Checking..." />
           ) : (
@@ -245,7 +245,7 @@ const getOAuthFullInfo = useCallback(async () => {
                   variant="secondary"
                   handleClick={handleSignOutClick}
                   disabled={isDisabled}
-                  label="Sign Out"
+                  label="Se déconnecter"
                   className="h-8 px-3 text-xs whitespace-nowrap"
                 />
               ) : (
@@ -253,7 +253,7 @@ const getOAuthFullInfo = useCallback(async () => {
                   variant="secondary"
                   handleClick={handleAuthenticateClick}
                   disabled={isDisabled}
-                  label="Authenticate"
+                  label="S'authentifier"
                   className="h-8 px-3 text-xs whitespace-nowrap"
                 />
               )
@@ -266,7 +266,7 @@ const getOAuthFullInfo = useCallback(async () => {
                   <Pencil className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent><p>Edit</p></TooltipContent>
+              <TooltipContent><p>Modifier</p></TooltipContent>
             </Tooltip>
 
             {/* Delete Button */}
@@ -276,7 +276,7 @@ const getOAuthFullInfo = useCallback(async () => {
                   <Trash2 className="h-4 w-4 hover:text-red-500" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent><p>Delete</p></TooltipContent>
+              <TooltipContent><p>Supprimer</p></TooltipContent>
             </Tooltip>
           </div>
         </td>

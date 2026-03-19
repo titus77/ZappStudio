@@ -5,44 +5,44 @@ import { useParams, useSearchParams } from 'react-router-dom';
 // Define error mappings
 const ERROR_MAPPINGS: Record<string, { title: string; message: string }> = {
   '400': {
-    title: 'Bad Request',
-    message: 'The server cannot process the request due to a client error.',
+    title: 'Requête incorrecte',
+    message: 'Le serveur ne peut pas traiter la requête en raison d\'une erreur client.',
   },
   '401': {
-    title: 'Unauthorized',
-    message: 'Authentication is required and has failed or has not been provided.',
+    title: 'Non autorisé',
+    message: 'Une authentification est requise et a échoué ou n\'a pas été fournie.',
   },
   '403': {
-    title: 'Forbidden',
-    message: 'You do not have permission to access this resource.',
+    title: 'Accès refusé',
+    message: 'Vous n\'avez pas la permission d\'accéder à cette ressource.',
   },
   '404': {
-    title: 'Page Not Found',
-    message: 'The page you are looking for does not exist or has been moved.',
+    title: 'Page introuvable',
+    message: 'La page que vous recherchez n\'existe pas ou a été déplacée.',
   },
   '500': {
-    title: 'Internal Server Error',
-    message: 'Something went wrong on our end. Please try again later.',
+    title: 'Erreur interne du serveur',
+    message: 'Une erreur s\'est produite de notre côté. Veuillez réessayer ultérieurement.',
   },
   '502': {
-    title: 'Bad Gateway',
-    message: 'The server received an invalid response from an upstream server.',
+    title: 'Passerelle incorrecte',
+    message: 'Le serveur a reçu une réponse invalide d\'un serveur en amont.',
   },
   '503': {
-    title: 'Service Unavailable',
-    message: 'The server is currently unable to handle the request due to temporary overloading or maintenance.',
+    title: 'Service indisponible',
+    message: 'Le serveur est momentanément incapable de traiter la requête en raison d\'une surcharge ou d\'une maintenance.',
   },
   '504': {
-    title: 'Gateway Timeout',
-    message: 'The server did not receive a timely response from an upstream server.',
+    title: 'Délai de passerelle dépassé',
+    message: 'Le serveur n\'a pas reçu de réponse dans le délai imparti d\'un serveur en amont.',
   },
 };
 
 // Fallback error (404)
 const FALLBACK_ERROR = {
   code: '500',
-  title: 'Internal Server Error',
-  message: 'Something went wrong on our end. Please try again later.',
+  title: 'Erreur interne du serveur',
+  message: 'Une erreur s\'est produite de notre côté. Veuillez réessayer ultérieurement.',
 };
 
 export default function ErrorPage({ code: enforcedCode }: { code?: string }) {
@@ -107,18 +107,18 @@ export default function ErrorPage({ code: enforcedCode }: { code?: string }) {
                 className="group flex items-center gap-2 rounded-full bg-emerald-500 cursor-pointer select-none hover:bg-emerald-600 px-6 py-3 font-semibold text-white transition-all duration-300 shadow-lg hover:shadow-emerald-200/50"
               >
                 <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                Return to Home
+                Retour à l'accueil
               </a>
 
               <button
                 onClick={handleGoBack}
                 className="flex items-center gap-2 rounded-full bg-gray-100 hover:bg-gray-200 px-6 py-3 font-semibold text-gray-700 transition-all duration-300"
               >
-                Go Back
+                Retour
               </button>
             </div>
 
-            <div className="mt-12 text-sm text-gray-500">If you believe this is an error, please contact support.</div>
+            <div className="mt-12 text-sm text-gray-500">Si vous pensez qu'il s'agit d'une erreur, veuillez contacter le support.</div>
           </div>
         </div>
       </div>

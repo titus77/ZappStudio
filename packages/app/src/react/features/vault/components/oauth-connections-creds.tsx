@@ -54,7 +54,7 @@ export function OAuthConnectionsCredentials() {
       console.log('[handleAuthTabMessage] Message received:', event.data);
 
       if (type === 'oauth' || type === 'oauth2') {
-        successToast('Authentication successful!');
+        successToast('Authentification réussie !');
         refetch();
       } else if (type === 'error') {
         errorToast(`Authentication Error: ${data?.message || 'An unknown error occurred'}`);
@@ -128,7 +128,7 @@ export function OAuthConnectionsCredentials() {
                 <Info className="w-4 h-4 cursor-help" />
               </TooltipTrigger>
               <TooltipContent className="w-72 text-center">
-                <p>Manage connections to OAuth services for storing and retrieving credentials</p>
+                <p>Gérez les connexions aux services OAuth pour stocker et récupérer vos identifiants</p>
               </TooltipContent>
             </Tooltip>
           </h2>
@@ -140,16 +140,16 @@ export function OAuthConnectionsCredentials() {
             <CredentialsListSkeleton rows={3} />
           ) : credentials.length === 0 ? (
             <div className="py-8 text-center">
-              <p className="text-muted-foreground mb-2">No OAuth connections found</p>
-              <p className="text-sm text-gray-500">Get started by adding your first connection</p>
+              <p className="text-muted-foreground mb-2">Aucune connexion OAuth trouvée</p>
+              <p className="text-sm text-gray-500">Commencez par ajouter votre première connexion</p>
             </div>
           ) : (
             <table className="w-full min-w-[500px] text-sm text-left table-fixed">
               <thead className="text-xs text-muted-foreground">
                 <tr>
-                  <th className="pr-4 py-2 w-1/4">Connection Name</th>
-                  <th className="px-4 py-2 w-1/4">Provider</th>
-                  <th className="px-4 py-2 w-1/6">Status</th>
+                  <th className="pr-4 py-2 w-1/4">Nom de la connexion</th>
+                  <th className="px-4 py-2 w-1/4">Fournisseur</th>
+                  <th className="px-4 py-2 w-1/6">Statut</th>
                   <th className="px-4 py-2 w-1/3 text-right">Actions</th>
                 </tr>
               </thead>
@@ -178,7 +178,7 @@ export function OAuthConnectionsCredentials() {
               setEditingConnection(undefined);
               setIsCreateModalOpen(true);
             }}
-            label="Add OAuth Connection"
+            label="Ajouter une connexion OAuth"
             disabled={isLoading}
           />
         </div>

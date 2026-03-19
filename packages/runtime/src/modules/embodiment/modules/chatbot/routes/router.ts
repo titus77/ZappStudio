@@ -18,6 +18,27 @@ import { buildConversationId } from '@embodiment/utils/chat.utils';
 
 const console = Logger('[Embodiment] Router: Chatbot');
 
+// SEC: HTML escaping to prevent XSS in agent name/description/introMessage
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// SEC: JavaScript string escaping for inline <script> contexts
+function escapeJs(str: string): string {
+  return str
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/"/g, '\\"')
+    .replace(/<\/script/gi, '<\\/script')
+    .replace(/\n/g, '\\n')
+    .replace(/\r/g, '\\r');
+}
+
 // Import ChatbotResponse type for proper typing
 type ChatbotResponse = {
   content?: string;
@@ -49,8 +70,8 @@ router.get('/', async (req, res) => {
 
   const _chatbotName = agent.agentSettings?.embodiments?.get(EMBODIMENT_TYPES.ChatBot, 'name') || agent.name;
   let introMessage = agent.agentSettings?.embodiments?.get(EMBODIMENT_TYPES.ChatBot, 'introMessage') || '';
-  // escape string for javascript
-  introMessage = introMessage.replace(/'/g, "\\'").replace(/"/g, '\\"');
+  // SEC: escape for JavaScript string context (prevents XSS via </script> injection)
+  introMessage = escapeJs(introMessage);
 
   const logo = agent.agentSettings?.embodiments?.get(EMBODIMENT_TYPES.ChatBot, 'icon') || 'https://proxy-02.api.smyth.ai/static/img/icon.svg';
   const colors = agent.agentSettings?.embodiments?.get(EMBODIMENT_TYPES.ChatBot, 'colors');
@@ -68,12 +89,16 @@ router.get('/', async (req, res) => {
     : `//domain:'${agent.id}.${config.env.DEFAULT_AGENT_DOMAIN}',`;
 
   // OG metadata for social sharing (zap.immo/wai/{agentId})
+  // SEC: HTML-escape all user-controlled values in OG tags
+  const safeName = escapeHtml(name);
+  const safeDescription = escapeHtml(description || `Discutez avec ${name}`);
+  const safeLogo = escapeHtml(logo);
   const ogTags = isWaiRoute ? `
-    <meta property="og:title" content="${name}" />
-    <meta property="og:description" content="${description || `Discutez avec ${name}`}" />
+    <meta property="og:title" content="${safeName}" />
+    <meta property="og:description" content="${safeDescription}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://${config.env.PROD_AGENT_DOMAIN}/${waiSlug}" />
-    ${logo ? `<meta property="og:image" content="${logo}" />` : ''}
+    ${safeLogo ? `<meta property="og:image" content="${safeLogo}" />` : ''}
     <meta name="twitter:card" content="summary" />
     <meta name="robots" content="noindex" />` : '';
 
@@ -92,7 +117,7 @@ initDebug('${config.env.UI_SERVER}', '${agent.id}');
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${name}</title>${ogTags}
+    <title>${safeName}</title>${ogTags}
 </head>
 <body style="height: 100%;margin: 0;padding: 0;">
     <div id="smyth-chatbot-page" style="height: 100%;"></div>

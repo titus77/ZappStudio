@@ -6,16 +6,16 @@ import { FC } from 'react';
  */
 export const HeadersTab: FC<DetailTabProps> = ({ request }) => {
   const generalHeaders = [
-    { name: 'Request Method', value: request.method },
-    { name: 'Status Code', value: request.status.toString() },
-    { name: 'Component', value: request.componentName },
-    { name: 'Component Title', value: request.componentTitle },
+    { name: 'Méthode de requête', value: request.method },
+    { name: 'Code de statut', value: request.status.toString() },
+    { name: 'Composant', value: request.componentName },
+    { name: 'Titre du composant', value: request.componentTitle },
   ];
 
   return (
     <div className="p-3 text-xs">
       <div className="mb-4">
-        <h3 className="font-medium text-gray-700 mb-2">General</h3>
+        <h3 className="font-medium text-gray-700 mb-2">Général</h3>
         <div className="bg-white rounded border border-gray-200">
           {generalHeaders.map((header, i) => (
             <div

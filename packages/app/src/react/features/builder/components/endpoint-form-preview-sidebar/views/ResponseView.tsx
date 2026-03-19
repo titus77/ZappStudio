@@ -44,7 +44,7 @@ const ResponseView = () => {
 
   const ControlDebugMessage = () => (
     <>
-      Something went wrong? try{' '}
+      Une erreur s'est produite ? Essayez le{' '}
       <span
         className="font-semibold border-b border-solid pb-0.5 cursor-pointer text-blue-500 border-blue-500"
         onClick={() => {
@@ -55,9 +55,9 @@ const ResponseView = () => {
           handleDebugClick();
         }}
       >
-        debugging
+        débogage
       </span>{' '}
-      to fix errors.
+      pour corriger les erreurs.
     </>
   );
 
@@ -73,7 +73,7 @@ const ResponseView = () => {
           handleDebugClick();
         }}
       >
-        Something went wrong? Try Debugging{' '}
+        Une erreur s'est produite ? Essayer le débogage{' '}
         <span
           className="transition-transform duration-300"
           style={{ transform: 'translateX(10px)' }}
@@ -158,7 +158,7 @@ const ResponseView = () => {
       <div className="mt-8">
         {lastResponse && (
           <div>
-            <h3 className="font-semibold">Agent Output</h3>
+            <h3 className="font-semibold">Résultat de l'agent IA</h3>
             <div className="text-sm">
               <div>
                 {previewableAssets.map((asset) => (
@@ -210,11 +210,11 @@ const ResponseView = () => {
         <div className="py-4 text-gray-500">{getDebugComponent()}</div>
         {callSkillMutation.isError && (
           <div>
-            <h3 className="font-semibold">Error</h3>
+            <h3 className="font-semibold">Erreur</h3>
             <div>
               {typeof (callSkillMutation?.error as any)?.error === 'string'
                 ? (callSkillMutation?.error as any)?.error
-                : 'We encountered an error while processing your request. Please try again later.'}
+                : 'Une erreur s\'est produite lors du traitement de votre requête. Veuillez réessayer ultérieurement.'}
             </div>
           </div>
         )}

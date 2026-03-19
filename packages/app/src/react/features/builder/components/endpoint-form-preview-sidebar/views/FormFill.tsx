@@ -82,7 +82,7 @@ const FormFill = ({ setIsFormVisible }: { setIsFormVisible: (value: boolean) => 
               {selectedSkill?.inputsTypes.map((input) => {
                 return (
                   <AgentComponentInput
-                    placeholder="value"
+                    placeholder="valeur"
                     // addTypeBadge
                     input={input}
                     key={input.name}
@@ -127,7 +127,7 @@ const FormFill = ({ setIsFormVisible }: { setIsFormVisible: (value: boolean) => 
                     callSkillMutation.isLoading || agentSkillErrors.length > 0
                   }
                   btnRef={runButtonRef}
-                  label="Run"
+                  label="Lancer"
                   variant="primary"
                   fullWidth
                   dataAttributes={{ 'data-test': 'form-preview-run-button' }}

@@ -172,7 +172,7 @@ export function useAgentOperations({
       }
     } catch (error) {
       console.error('Failed to duplicate agent:', error);
-      errorToast('Failed to duplicate agent');
+      errorToast('Impossible de dupliquer l\'agent IA');
     }
   }, [createDuplicateAgent, onAgentDuplicated]);
 
@@ -192,7 +192,7 @@ export function useAgentOperations({
       console.error('Lock acquisition failed:', error);
 
       if (error && typeof error === 'object' && 'status' in error && error.status === 403) {
-        errorToast('You do not have access to delete this agent.');
+        errorToast('Vous n\'avez pas les droits pour supprimer cet agent IA.');
       } else if (
         error &&
         typeof error === 'object' &&
@@ -200,10 +200,10 @@ export function useAgentOperations({
         error.error === 'Request failed with status code 409'
       ) {
         errorToast(
-          'Failed to delete agent as the agent is being edited by another user. Please try again later.',
+          'Impossible de supprimer l\'agent IA : il est en cours de modification par un autre utilisateur. Veuillez réessayer ultérieurement.',
         );
       } else {
-        errorToast('Unable to delete agent. Please try again later.');
+        errorToast('Impossible de supprimer l\'agent IA. Veuillez réessayer ultérieurement.');
       }
       return;
     }
@@ -216,14 +216,14 @@ export function useAgentOperations({
       const result = await response.json();
 
       if (result.success) {
-        successToast('Agent deleted successfully');
+        successToast('Agent IA supprimé avec succès');
         onAgentDeleted?.();
       } else {
-        errorToast('Failed to delete agent');
+        errorToast('Impossible de supprimer l\'agent IA');
       }
     } catch (error) {
       console.error('Failed to delete agent:', error);
-      errorToast('Failed to delete agent');
+      errorToast('Impossible de supprimer l\'agent IA');
     }
   }, [agent.id, onAgentDeleted]);
 

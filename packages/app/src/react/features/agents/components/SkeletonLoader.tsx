@@ -43,7 +43,7 @@ export function SkeletonLoader({ count = 4 }: SkeletonLoaderProps) {
               </div>
             </div>
 
-            <span className="sr-only">Loading...</span>
+            <span className="sr-only">Chargement...</span>
           </div>
         ))}
     </>

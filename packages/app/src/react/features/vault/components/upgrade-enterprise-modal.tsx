@@ -11,10 +11,10 @@ export function UpgradeEnterpriseModal({ isOpen, onClose }: UpgradeEnterpriseMod
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Upgrade to Enterprise Plan</DialogTitle>
+          <DialogTitle>Passer à l'offre Enterprise</DialogTitle>
         </DialogHeader>
         <div className="py-4">
-          <p>Upgrade to enterprise plan logic goes here</p>
+          <p>Mise à niveau vers l'offre Enterprise à configurer ici</p>
         </div>
       </DialogContent>
     </Dialog>

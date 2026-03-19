@@ -27,7 +27,7 @@ export function CredentialFormSkeleton() {
       <div className="flex items-center justify-center py-4">
         <div className="flex items-center gap-3 text-muted-foreground">
           <div className="animate-spin rounded-full h-5 w-5 border-2 border-primary border-t-transparent"></div>
-          <p className="text-sm">Loading credential data...</p>
+          <p className="text-sm">Chargement des données d'identifiant...</p>
         </div>
       </div>
     </div>

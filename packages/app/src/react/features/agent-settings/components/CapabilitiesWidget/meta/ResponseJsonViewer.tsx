@@ -41,7 +41,7 @@ const ResponseJsonViewer = ({ response, SyntaxHighlighter }: Props) => {
           </TooltipContent>
         </Tooltip>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Chargement...</div>}>
         <SyntaxHighlighter language="json">
           {isText ? response : JSON.stringify(response, null, 2)}
         </SyntaxHighlighter>

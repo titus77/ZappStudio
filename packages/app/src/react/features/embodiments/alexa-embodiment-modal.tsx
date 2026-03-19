@@ -80,11 +80,11 @@ const AlexaEmbodimentModal: React.FC<AlexaEmbodimentModalProps> = ({
                 readOnly
                 fullWidth
                 className="w-full border-[#D1D5DB] border-b-gray-900 text-xs text-gray-700 hover:pr-10"
-                aria-label="Alexa Dev URL"
+                aria-label="URL Alexa de développement"
               />
               <button
                 type="button"
-                aria-label="Copy Alexa Dev URL"
+                aria-label="Copier l'URL Alexa de développement"
                 onClick={() => handleCopy(devUrl, 'alexaDev')}
                 className={`absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-white p-1 ${copied.alexaDev ? 'opacity-100' : ''}`}
                 tabIndex={-1}
@@ -106,11 +106,11 @@ const AlexaEmbodimentModal: React.FC<AlexaEmbodimentModalProps> = ({
                 readOnly
                 fullWidth
                 className="w-full border-[#D1D5DB] border-b-gray-900 text-xs text-gray-700 hover:pr-10"
-                aria-label="Alexa Prod URL"
+                aria-label="URL Alexa de production"
               />
               <button
                 type="button"
-                aria-label="Copy Alexa Prod URL"
+                aria-label="Copier l'URL Alexa de production"
                 onClick={() => handleCopy(prodUrl, 'alexaProd')}
                 className={`absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-white p-1 ${copied.alexaProd ? 'opacity-100' : ''}`}
                 tabIndex={-1}

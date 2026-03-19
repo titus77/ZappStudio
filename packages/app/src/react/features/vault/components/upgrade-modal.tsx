@@ -13,7 +13,7 @@ export function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
           <DialogTitle>Améliorer l'offre</DialogTitle>
         </DialogHeader>
         <div className="py-4">
-          <p>Upgrade logic goes here</p>
+          <p>Amélioration de l'offre à configurer ici</p>
         </div>
       </DialogContent>
     </Dialog>

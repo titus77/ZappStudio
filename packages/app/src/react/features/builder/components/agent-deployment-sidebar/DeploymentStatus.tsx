@@ -24,12 +24,12 @@ const DeploymentStatus = ({ onNavigate }) => {
               d="M0 32C0 14.3 14.3 0 32 0H64 320h32c17.7 0 32 14.3 32 32s-14.3 32-32 32V75c0 42.4-16.9 83.1-46.9 113.1L237.3 256l67.9 67.9c30 30 46.9 70.7 46.9 113.1v11c17.7 0 32 14.3 32 32s-14.3 32-32 32H320 64 32c-17.7 0-32-14.3-32-32s14.3-32 32-32V437c0-42.4 16.9-83.1 46.9-113.1L146.7 256 78.9 188.1C48.9 158.1 32 117.4 32 75V64C14.3 64 0 49.7 0 32zM96 64V75c0 25.5 10.1 49.9 28.1 67.9L192 210.7l67.9-67.9c18-18 28.1-42.4 28.1-67.9V64H96zm0 384H288V437c0-25.5-10.1-49.9-28.1-67.9L192 301.3l-67.9 67.9c-18 18-28.1 42.4-28.1 67.9v11z"
             />
           </svg>
-          <p className="font-semibold text-gray-500">Pushing Updates</p>
+          <p className="font-semibold text-gray-500">Déploiement en cours...</p>
         </div>
       ) : deployMutation.isSuccess ? (
         <div className="flex items-center gap-3 mb-4">
           <FaCheckCircle className="text-emerald-500" />
-          <p className="text-emerald-500 font-semibold">Deployment Successful</p>
+          <p className="text-emerald-500 font-semibold">Déploiement réussi</p>
         </div>
       ) : deployMutation.isError ? (
         <div className="flex flex-col gap-1 mb-4">
@@ -38,8 +38,8 @@ const DeploymentStatus = ({ onNavigate }) => {
             <p className="text-red-500 font-semibold">
               {(deployMutation.error as { error?: { message?: string } })?.error?.message ===
               DEPLOYMENT_LIMIT_REACHED_MESSAGE
-                ? 'Agent Deployment Limit Reached'
-                : 'Deployment Failed'}
+                ? 'Limite de déploiements atteinte'
+                : 'Échec du déploiement'}
             </p>
           </div>
           {/* @ts-ignore */}
@@ -48,13 +48,13 @@ const DeploymentStatus = ({ onNavigate }) => {
               <p className="text-red-500">
                 {(deployMutation.error as { error?: { message: string } })?.error?.message ===
                 DEPLOYMENT_LIMIT_REACHED_MESSAGE
-                  ? 'Unlock unlimited deployments and elevate your possibilities with the Starter Plan.'
+                  ? 'Déverrouillez des déploiements illimités avec l\'offre Starter.'
                   : (deployMutation.error as { error?: { message: string } })?.error?.message}
               </p>
               {(deployMutation.error as { error?: { message: string } })?.error?.message ===
                 DEPLOYMENT_LIMIT_REACHED_MESSAGE && (
                 <Button className="mt-3" variant="primary" handleClick={() => onNavigate('/plans')}>
-                  Upgrade for Unlimited Deployments
+                  Passer à l'offre pour des déploiements illimités
                 </Button>
               )}
             </>

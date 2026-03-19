@@ -82,11 +82,11 @@ export const DeleteCredentialsModal: FC<DeleteCredentialsModalProps> = ({
       }
 
       // Success - no warnings
-      successToast('Credential deleted successfully.');
+      successToast('Identifiant supprimé avec succès.');
       onClose();
       onSuccess?.();
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to delete credential. Please try again.';
+      const errorMessage = err instanceof Error ? err.message : 'Impossible de supprimer l\'identifiant. Veuillez réessayer.';
       errorToast(errorMessage);
       setIsDeleting(false);
     }
@@ -101,14 +101,14 @@ export const DeleteCredentialsModal: FC<DeleteCredentialsModalProps> = ({
       const result = await credentialsClient.deleteCredential(credentialId, group, true);
 
       if (result.success) {
-        successToast('Credential deleted successfully.');
+        successToast('Identifiant supprimé avec succès.');
         onClose();
         onSuccess?.();
       } else {
-        throw new Error('Failed to delete credential');
+        throw new Error('Impossible de supprimer l\'identifiant');
       }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to delete credential. Please try again.';
+      const errorMessage = err instanceof Error ? err.message : 'Impossible de supprimer l\'identifiant. Veuillez réessayer.';
       errorToast(errorMessage);
       setIsDeleting(false);
     }
@@ -126,7 +126,7 @@ export const DeleteCredentialsModal: FC<DeleteCredentialsModalProps> = ({
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>
-            {showWarnings ? 'Confirm Deletion with Warnings' : 'Delete Credential'}
+            {showWarnings ? 'Confirmer la suppression malgré les avertissements' : 'Supprimer l\'identifiant'}
           </DialogTitle>
         </DialogHeader>
 
@@ -135,20 +135,19 @@ export const DeleteCredentialsModal: FC<DeleteCredentialsModalProps> = ({
           <div className="py-4 space-y-4">
             <div className="bg-red-50 border border-red-200 rounded-md p-4">
               <p className="text-sm text-red-800">
-                <strong>Warning:</strong> This action cannot be undone. This will permanently delete
-                the credential connection and may affect any resources using it.
+                <strong>Attention :</strong> Cette action est irréversible. Elle supprimera définitivement la connexion d'identifiant et pourrait affecter toutes les ressources qui l'utilisent.
               </p>
             </div>
 
             <div className="space-y-2">
               <p className="text-sm text-gray-700">
-                Please type <strong className="font-semibold text-gray-900">{credentialName}</strong>{' '}
-                to confirm deletion.
+                Veuillez saisir <strong className="font-semibold text-gray-900">{credentialName}</strong>{' '}
+                pour confirmer la suppression.
               </p>
               <Input
                 fullWidth
                 type="text"
-                placeholder="Type credential name"
+                placeholder="Saisir le nom de l'identifiant"
                 value={confirmText}
                 onChange={handleConfirmTextChange}
                 disabled={isDeleting}
@@ -180,10 +179,10 @@ export const DeleteCredentialsModal: FC<DeleteCredentialsModalProps> = ({
                 </div>
                 <div className="flex-1">
                   <h4 className="text-sm font-semibold text-amber-800 mb-2">
-                    ⚠️ Dependencies Detected
+                    ⚠️ Dépendances détectées
                   </h4>
                   <p className="text-sm text-amber-700 mb-3">
-                    This credential is currently being used by the following resources:
+                    Cet identifiant est actuellement utilisé par les ressources suivantes :
                   </p>
                   <ul className="space-y-1.5">
                     {warnings.map((warning, index) => (
@@ -194,7 +193,7 @@ export const DeleteCredentialsModal: FC<DeleteCredentialsModalProps> = ({
                     ))}
                   </ul>
                   <p className="text-sm text-amber-700 mt-3 font-medium">
-                    Are you sure you want to proceed? This may break existing functionality.
+                    Êtes-vous sûr de vouloir continuer ? Cela pourrait affecter des fonctionnalités existantes.
                   </p>
                 </div>
               </div>
@@ -208,7 +207,7 @@ export const DeleteCredentialsModal: FC<DeleteCredentialsModalProps> = ({
             <>
               <CustomButton
                 variant="primary"
-                label={isDeleting ? 'Checking...' : 'Delete Credential'}
+                label={isDeleting ? 'Vérification...' : 'Supprimer l\'identifiant'}
                 handleClick={handleConfirm}
                 disabled={!isValid || isDeleting}
                 loading={isDeleting}
@@ -219,7 +218,7 @@ export const DeleteCredentialsModal: FC<DeleteCredentialsModalProps> = ({
             <>
               <CustomButton
                 variant="primary"
-                label={isDeleting ? 'Deleting...' : 'Delete Anyway'}
+                label={isDeleting ? 'Suppression...' : 'Supprimer quand même'}
                 handleClick={handleConfirmWithWarnings}
                 disabled={isDeleting}
                 loading={isDeleting}

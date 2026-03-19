@@ -57,7 +57,7 @@ export const isValid = async ({ field, value, keyId, functions }: IsValidParams)
           isValid = false;
         }
       } catch (error) {
-        errorToast('Something went wrong. Please try again later.');
+        errorToast('Une erreur s\'est produite. Veuillez réessayer ultérieurement.');
         console.error(error);
       }
 

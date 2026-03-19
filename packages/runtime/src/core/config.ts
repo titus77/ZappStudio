@@ -55,7 +55,8 @@ const config = {
     SMYTHOS_SERVER_TYPE: process.env.SMYTHOS_SERVER_TYPE || 'combined',
 
     // ZappImmo /wai path-based routing
-    WAI_COOKIE_PATH: process.env.WAI_COOKIE_PATH || '/',
+    // SEC: Default to /wai to prevent cookie leaking to frontend on same domain
+    WAI_COOKIE_PATH: process.env.WAI_COOKIE_PATH || '/wai',
   },
 };
 

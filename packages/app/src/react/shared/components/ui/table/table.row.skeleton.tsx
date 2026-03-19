@@ -12,7 +12,7 @@ const TableRowSkeleton = ({ className }: SkeletonComponent) => (
         className,
       )}
     />
-    <span className="sr-only">Loading...</span>
+    <span className="sr-only">Chargement...</span>
   </>
 );
 

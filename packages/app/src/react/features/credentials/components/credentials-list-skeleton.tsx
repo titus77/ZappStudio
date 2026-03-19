@@ -58,7 +58,7 @@ export function CredentialsListSkeleton({ rows = 3 }: CredentialsListSkeletonPro
       <div className="flex items-center justify-center py-6 border-t">
         <div className="flex items-center gap-3 text-muted-foreground">
           <div className="animate-spin rounded-full h-4 w-4 border-2 border-primary border-t-transparent"></div>
-          <p className="text-sm">Loading connections...</p>
+          <p className="text-sm">Chargement des connexions...</p>
         </div>
       </div>
     </div>

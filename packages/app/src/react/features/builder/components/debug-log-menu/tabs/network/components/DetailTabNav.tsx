@@ -10,11 +10,11 @@ interface DetailTabNavProps {
  */
 export const DetailTabNav: FC<DetailTabNavProps> = ({ activeTab, onTabChange }) => {
   const tabs = [
-    { id: 'headers', label: 'Headers' },
-    { id: 'request', label: 'Request' },
-    { id: 'response', label: 'Response' },
-    { id: 'timing', label: 'Timing' },
-    { id: 'cost', label: 'Cost' },
+    { id: 'headers', label: 'En-têtes' },
+    { id: 'request', label: 'Requête' },
+    { id: 'response', label: 'Réponse' },
+    { id: 'timing', label: 'Chronologie' },
+    { id: 'cost', label: 'Coût' },
   ];
 
   return (

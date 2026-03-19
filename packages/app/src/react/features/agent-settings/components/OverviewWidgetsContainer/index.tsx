@@ -294,7 +294,7 @@ const OverviewWidgetsContainer = ({ isWriteAccess }: { isWriteAccess: boolean })
           currentFormValues.current.chatGptModel,
           agentId,
         ).catch((e) => {
-          errorToast('Failed to save model');
+          errorToast('Impossible de sauvegarder le modèle');
           failedFields.push(SETTINGS_KEYS.chatGptModel);
         }),
       );
@@ -387,10 +387,10 @@ const OverviewWidgetsContainer = ({ isWriteAccess }: { isWriteAccess: boolean })
 
       if (error?.errKey == errKeys.AGENT_LOCK_FAIL) {
         errorToast(
-          'Failed to update agent behavior as the agent is being edited by another user. Please try again later.',
+          'Impossible de mettre à jour le comportement : l\'agent IA est en cours de modification par un autre utilisateur. Veuillez réessayer ultérieurement.',
         );
       } else {
-        errorToast('Failed to save settings');
+        errorToast('Impossible de sauvegarder les paramètres');
       }
 
       initialFormValues.current = { ...tempInitialFormValues };
@@ -563,14 +563,14 @@ const FloatingButtonContainer = ({ savingState }: { savingState: 'idle' | 'savin
               fill="currentFill"
             />
           </svg>
-          <span className="text-sm text-gray-500">Saving...</span>
+          <span className="text-sm text-gray-500">Enregistrement...</span>
         </div>
       )}
 
       {savingState === 'saved' && (
         <div role="status" className="flex items-center">
           <FaCheck className="w-4 h-4 me-2 text-v2-blue" />
-          <span className="text-sm text-gray-500">Saved</span>
+          <span className="text-sm text-gray-500">Enregistré</span>
         </div>
       )}
     </div>

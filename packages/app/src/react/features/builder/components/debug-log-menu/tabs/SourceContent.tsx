@@ -51,7 +51,7 @@ export const SourceContent: FC = () => {
               </button>
             </TooltipTrigger>
             <TooltipContent side="top" className="text-xs">
-              <p>{copied ? 'Copied!' : 'Copy'}</p>
+              <p>{copied ? 'Copié !' : 'Copier'}</p>
             </TooltipContent>
           </Tooltip>
           <Tooltip>
@@ -64,7 +64,7 @@ export const SourceContent: FC = () => {
               </button>
             </TooltipTrigger>
             <TooltipContent side="top" className="text-xs">
-              <p>Download JSON</p>
+              <p>Télécharger en JSON</p>
             </TooltipContent>
           </Tooltip>
         </div>

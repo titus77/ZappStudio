@@ -67,7 +67,7 @@ const FormPreviewDialog = ({
     }
 
     if (data.icon && !validateURL(data.icon)) {
-      warningToast('The URL entered for icon does not appear to be valid.');
+      warningToast('L\'URL saisie pour l\'icône ne semble pas valide.');
     }
 
     try {
@@ -98,10 +98,10 @@ const FormPreviewDialog = ({
         // Invalidate the availableEmbodiments query
         queryClient.invalidateQueries({ queryKey: ['availableEmbodiments', agentId] });
 
-        successToast('Embodiment saved');
+        successToast('Canal de diffusion enregistré');
         closeModal();
       } catch (error) {
-        errorToast(extractError(error) || 'Embodiment not saved. Please try again.');
+        errorToast(extractError(error) || 'Canal de diffusion non enregistré. Veuillez réessayer.');
         console.log(error);
       }
 
@@ -140,7 +140,7 @@ const FormPreviewDialog = ({
               <div className="w-[80vw] max-w-[600px]">
                 <Dialog.Panel className="w-full relative transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title className="text-xl font-semibold leading-6 text-[#1E1E1E] mb-4 flex justify-between items-center">
-                    <span>Form Preview Configuration</span>
+                    <span>Configuration de l'aperçu de formulaire</span>
                     <div
                       className="cursor-pointer w-8 h-8 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 p-2 -mr-2 -mt-2"
                       onClick={() => closeModal()}
@@ -165,7 +165,7 @@ const FormPreviewDialog = ({
                                 htmlFor="name"
                                 className="block text-[#1E1E1E] mb-1 text-base font-normal"
                               >
-                                Name
+                                Nom
                               </label>
                               <Field
                                 type="text"
@@ -191,7 +191,7 @@ const FormPreviewDialog = ({
                                 onChange={props.handleChange}
                                 onBlur={props.handleBlur}
                                 value={props.values?.name}
-                                placeholder="Enter form preview name"
+                                placeholder="Saisir le nom de l'aperçu de formulaire"
                                 disabled={true}
                               />
                               <ErrorMessage
@@ -207,15 +207,15 @@ const FormPreviewDialog = ({
                                 htmlFor="outputPreview"
                                 className="text-[#1E1E1E] mb-1 text-base font-normal flex items-center"
                               >
-                                Output Preview
+                                Aperçu de la sortie
                                 <Tooltip>
                                   <TooltipTrigger asChild>
                                     <Info className="w-5 h-5 ml-1 cursor-pointer" />
                                   </TooltipTrigger>
                                   <TooltipContent className="max-w-[240px] text-center text-wrap">
                                     <div>
-                                      Enabling output preview will hide the download and copy
-                                      options for the output.
+                                      Activer l'aperçu de la sortie masquera les options de
+                                      téléchargement et de copie pour le résultat.
                                     </div>
                                   </TooltipContent>
                                 </Tooltip>
@@ -235,7 +235,7 @@ const FormPreviewDialog = ({
                           <div className="flex justify-end w-full mt-4">
                             <Button
                               handleClick={() => submitForm(props.values)}
-                              label="Save"
+                              label="Enregistrer"
                               addIcon={isSubmitting}
                               Icon={<Spinner classes="w-4 h-4 mr-2" />}
                               disabled={isSubmitting}

@@ -41,12 +41,12 @@ export const TimingTab: FC<DetailTabProps> = ({ request }) => {
   return (
     <div className="p-3 text-xs">
       <div className="mb-4">
-        <h3 className="font-medium text-gray-700 mb-2">Timing</h3>
-        
+        <h3 className="font-medium text-gray-700 mb-2">Chronologie</h3>
+
         <div className="bg-white rounded border border-gray-200 p-3">
           <div className="mb-4">
             <div className="flex justify-between mb-1">
-              <span className="font-medium">Total Duration</span>
+              <span className="font-medium">Durée totale</span>
               <span>{formatDuration(duration)}</span>
             </div>
             
@@ -78,12 +78,12 @@ export const TimingTab: FC<DetailTabProps> = ({ request }) => {
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <div className="font-medium mb-1">Started</div>
+              <div className="font-medium mb-1">Démarré</div>
               <div>{new Date(request.startTime).toLocaleTimeString()}</div>
             </div>
             {request.endTime && (
               <div>
-                <div className="font-medium mb-1">Ended</div>
+                <div className="font-medium mb-1">Terminé</div>
                 <div>{new Date(request.endTime).toLocaleTimeString()}</div>
               </div>
             )}
@@ -94,7 +94,7 @@ export const TimingTab: FC<DetailTabProps> = ({ request }) => {
           {!request.endTime && (
             <div className="text-yellow-500 text-xs">
               <IoWarningOutline className="inline-block mr-1" />
-              This request did not yet end. It may still be ongoing.
+              Cette requête n'est pas encore terminée. Elle est peut-être toujours en cours.
             </div>
           )}
         </div>

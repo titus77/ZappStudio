@@ -28,7 +28,7 @@ const DetailedLogInfo = ({ info }: { info: string }) => {
         <span 
           className="ml-1 text-blue-500 cursor-pointer hover:underline" 
           onClick={handleCopyFullContent}
-          title="Copy full content to clipboard"
+          title="Copier tout le contenu dans le presse-papiers"
         >
           ...
         </span>
@@ -149,7 +149,7 @@ export const LogsContent: FC = () => {
               </button>
             </TooltipTrigger>
             <TooltipContent className="text-xs">
-              <p>{copied ? 'Copied!' : 'Copy'}</p>
+              <p>{copied ? 'Copié !' : 'Copier'}</p>
             </TooltipContent>
           </Tooltip>
           <Tooltip>
@@ -162,7 +162,7 @@ export const LogsContent: FC = () => {
               </button>
             </TooltipTrigger>
             <TooltipContent className="text-xs">
-              <p>Download</p>
+              <p>Télécharger</p>
             </TooltipContent>
           </Tooltip>
           <Tooltip>
@@ -175,7 +175,7 @@ export const LogsContent: FC = () => {
               </button>
             </TooltipTrigger>
             <TooltipContent className="text-xs">
-              <p>Clear</p>
+              <p>Effacer</p>
             </TooltipContent>
           </Tooltip>
         </div>
@@ -216,7 +216,7 @@ export const LogsContent: FC = () => {
               ))}
             {log.data.action === 'usage' && log.data.cost && (
               <div className="pl-4 text-xs">
-                <span className="text-yellow-600">Cost breakdown:</span>
+                <span className="text-yellow-600">Détail des coûts :</span>
                 {log.data.cost.map((item, idx) => (
                   <div key={idx} className="pl-2 text-gray-500">
                     • {item.sourceId}: ${item.units.toFixed(8)}
@@ -226,7 +226,7 @@ export const LogsContent: FC = () => {
             )}
           </div>
         ))}
-        {logs.length === 0 && <div className="text-gray-500">Debug your agent to see logs</div>}
+        {logs.length === 0 && <div className="text-gray-500">Déboguez votre agent IA pour voir les journaux</div>}
       </div>
     </div>
   );

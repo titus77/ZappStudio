@@ -1,103 +1,235 @@
-import { ConnectorService, SRE } from '@smythos/sre';
-import fs from 'fs';
-import path from 'path';
-import { config } from '../../../../config/config';
+/**
+ * Vault Service — Nango-backed secret storage for ZappStudio
+ *
+ * Delegates API key storage to Nango (our OAuth/API key hub).
+ * Connection ID format: tenant_{teamId}_pool_{secretId}
+ *
+ * The ZappImmo stack already manages BYOK keys via:
+ * - Nango: stores API keys and OAuth tokens per tenant
+ * - byok-resolver.ts (Genkit): resolves keys at LLM execution time
+ *
+ * This service maintains the same vault API interface used by the Studio UI
+ * while using Nango as the backend instead of a JSON file.
+ *
+ * For the SRE runtime: keys are resolved via env vars (OPENAI_API_KEY, etc.)
+ * passed through docker-compose. User-added BYOK keys are resolved by Genkit
+ * at execution time via the byok-resolver middleware.
+ */
+
 import { vaultMessages } from '../constants/vault.constants';
+import { prisma } from '../../../../prisma/prisma-client';
 
-prepareSREConfigFiles();
-process.env.SMYTH_PATH = config.variables.SRE_STORAGE_PATH; // needed for SRE initialization
-SRE.init({
-  Vault: {
-    Connector: 'JSONFileVault',
-  },
-});
+const NANGO_HOST = process.env.NANGO_URL || process.env.NANGO_HOST || 'http://immo-nango:3003';
+const NANGO_SECRET_KEY = process.env.NANGO_SECRET_KEY || '';
 
-export function formatSecretData(secret, secretId) {
-  let key = '';
-  let value = '';
-  for (const k in secret.data.data) {
-    // since we only store single key in a path, so it will run only 1 time and fetch the key
-    key = k;
-    value = secret.data.data[k];
+// =============================================================================
+// Nango API helpers (direct HTTP calls, no @nangohq/node dependency needed)
+// =============================================================================
+
+async function nangoFetch(path: string, options: RequestInit = {}): Promise<Response> {
+  return fetch(`${NANGO_HOST}${path}`, {
+    ...options,
+    headers: {
+      'Authorization': `Bearer ${NANGO_SECRET_KEY}`,
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+}
+
+async function nangoSetApiKey(
+  providerConfigKey: string,
+  connectionId: string,
+  apiKey: string,
+): Promise<boolean> {
+  const response = await nangoFetch('/connection', {
+    method: 'POST',
+    body: JSON.stringify({
+      provider_config_key: providerConfigKey,
+      connection_id: connectionId,
+      credentials: { apiKey },
+    }),
+  });
+  return response.ok;
+}
+
+async function nangoGetApiKey(
+  providerConfigKey: string,
+  connectionId: string,
+): Promise<string | null> {
+  try {
+    const response = await nangoFetch(`/connection/${connectionId}?provider_config_key=${providerConfigKey}`);
+    if (!response.ok) return null;
+    const data = await response.json() as { credentials?: { apiKey?: string; access_token?: string } };
+    return data.credentials?.apiKey || data.credentials?.access_token || null;
+  } catch {
+    return null;
   }
-  const metadata = {
-    version: secret.data.metadata.version,
-    created_time: secret.data.metadata.created_time,
-    ...secret.data.metadata.custom_metadata,
-  };
+}
 
+async function nangoDeleteConnection(
+  providerConfigKey: string,
+  connectionId: string,
+): Promise<boolean> {
+  const response = await nangoFetch(`/connection/${connectionId}?provider_config_key=${providerConfigKey}`, {
+    method: 'DELETE',
+  });
+  return response.ok;
+}
+
+async function nangoListConnections(prefix: string): Promise<Array<{ connection_id: string; provider_config_key: string }>> {
+  try {
+    const response = await nangoFetch('/connection');
+    if (!response.ok) return [];
+    const data = await response.json() as { connections?: Array<{ connection_id: string; provider_config_key: string }> };
+    return (data.connections || []).filter(c => c.connection_id.startsWith(prefix));
+  } catch {
+    return [];
+  }
+}
+
+// =============================================================================
+// Vault Service — Same interface, Nango backend
+// =============================================================================
+
+/** Build Nango connection ID from team and secret */
+function buildConnectionId(teamId: string, secretId: string): string {
+  return `tenant_${teamId}_pool_${secretId}`;
+}
+
+/** Derive Nango provider config key from secret ID */
+function deriveProviderKey(secretId: string): string {
+  // Map common key names to Nango provider config keys
+  const mapping: Record<string, string> = {
+    openai: 'openai',
+    anthropic: 'anthropic',
+    groq: 'groq',
+    googleai: 'google-ai',
+    togetherai: 'together-ai',
+    xai: 'xai',
+    deepseek: 'deepseek',
+    tavily: 'tavily',
+  };
+  return mapping[secretId.toLowerCase()] || 'api-key';
+}
+
+export function formatSecretData(secret: any, secretId: string) {
   return {
     id: secretId,
-    key,
-    value,
-    metadata,
+    key: secretId,
+    value: secret,
+    metadata: {},
   };
 }
 
-export async function createSecret({ teamId, secretId, key, value, metadata }) {
-  try {
-    // create secret in JSON vault
-    const vaultConnector = await getVaultConnector();
-    let filePath = vaultConnector.vaultFile;
+export async function createSecret({ teamId, secretId, key, value, metadata }: {
+  teamId: string;
+  secretId: string;
+  key: string;
+  value: string;
+  metadata?: any;
+}) {
+  const providerKey = deriveProviderKey(secretId);
+  const connectionId = buildConnectionId(teamId, secretId);
 
-    const currentData = fs.readFileSync(filePath, 'utf8');
-    const newData = JSON.parse(currentData || '{}');
-    if (!newData[teamId]) {
-      newData[teamId] = {};
-    }
-    newData[teamId][secretId] = value;
-    fs.writeFileSync(filePath, JSON.stringify(newData));
+  const success = await nangoSetApiKey(providerKey, connectionId, value);
 
-    // Create metadata in JSON vault
-    const metadataPath = getMetadataPath(filePath);
-    const updatedMetadata = await setSecretMetadata(teamId, secretId, metadataPath, metadata);
-
-    return {
-      success: vaultMessages.SUCCESS_CREATE_SECRET,
-      secret: {
-        id: secretId,
-        key,
-        value,
-        metadata: updatedMetadata,
-      },
-    };
-  } catch (error: any) {
-    console.error(error.message);
-    throw error;
+  if (!success) {
+    // Fallback: store in zs_team_setting if Nango is unavailable
+    await prisma.teamSetting.upsert({
+      where: { teamId_settingKey: { teamId, settingKey: `vault:${secretId}` } },
+      update: { settingValue: value },
+      create: { teamId, settingKey: `vault:${secretId}`, settingValue: value },
+    });
   }
+
+  // Store metadata in DB (lightweight, Nango doesn't support custom metadata)
+  if (metadata) {
+    await prisma.teamSetting.upsert({
+      where: { teamId_settingKey: { teamId, settingKey: `vault-meta:${secretId}` } },
+      update: { settingValue: JSON.stringify({ created_time: new Date().toISOString(), version: 1, ...metadata }) },
+      create: { teamId, settingKey: `vault-meta:${secretId}`, settingValue: JSON.stringify({ created_time: new Date().toISOString(), version: 1, ...metadata }) },
+    });
+  }
+
+  return {
+    success: vaultMessages.SUCCESS_CREATE_SECRET,
+    secret: { id: secretId, key, value, metadata: metadata || {} },
+  };
 }
 
-export async function updateSecretMetadata({ teamId, secretId, metadata }) {
-  try {
-    const vaultConnector = await getVaultConnector();
-    const secretFilePath = vaultConnector.vaultFile;
-    const metadataFilePath = getMetadataPath(secretFilePath);
+export async function updateSecretMetadata({ teamId, secretId, metadata }: {
+  teamId: string;
+  secretId: string;
+  metadata: any;
+}) {
+  const updatedMeta = { created_time: new Date().toISOString(), version: 1, ...metadata };
 
-    const updatedMetadata = await setSecretMetadata(teamId, secretId, metadataFilePath, metadata);
-    const secretData = await getSecretById(teamId, secretId);
-    return {
-      success: vaultMessages.SUCCESS_UPDATE_SECRET_METADATA,
-      secret: {
-        id: secretId,
-        key: secretId,
-        value: secretData.secret.value,
-        metadata: updatedMetadata,
-      },
-    };
-  } catch (error: any) {
-    console.error(error.message);
-    throw error;
-  }
+  await prisma.teamSetting.upsert({
+    where: { teamId_settingKey: { teamId, settingKey: `vault-meta:${secretId}` } },
+    update: { settingValue: JSON.stringify(updatedMeta) },
+    create: { teamId, settingKey: `vault-meta:${secretId}`, settingValue: JSON.stringify(updatedMeta) },
+  });
+
+  const secretData = await getSecretById(teamId, secretId);
+  return {
+    success: vaultMessages.SUCCESS_UPDATE_SECRET_METADATA,
+    secret: {
+      id: secretId,
+      key: secretId,
+      value: secretData.secret?.value || '',
+      metadata: updatedMeta,
+    },
+  };
 }
 
 export async function getAllSecrets(teamId: string, metadataFilter: string = '') {
   try {
-    const vaultConnector = await getVaultConnector();
-    const allSecrets = await vaultConnector.team(teamId).listKeys();
-    let secretsResponse = await Promise.all(allSecrets.map(secret => getSecret(teamId, secret)));
-    let secrets = secretsResponse?.filter(secret => secret !== null);
+    const prefix = `tenant_${teamId}_pool_`;
+    const connections = await nangoListConnections(prefix);
+
+    let secrets = connections.map(c => {
+      const secretId = c.connection_id.replace(prefix, '');
+      return { id: secretId, key: secretId, value: '***', metadata: {} as any };
+    });
+
+    // Also check DB fallback secrets
+    const dbSettings = await prisma.teamSetting.findMany({
+      where: { teamId, settingKey: { startsWith: 'vault:' } },
+      select: { settingKey: true },
+    });
+    for (const s of dbSettings) {
+      const secretId = s.settingKey.replace('vault:', '');
+      if (!secrets.find(sec => sec.id === secretId)) {
+        secrets.push({ id: secretId, key: secretId, value: '***', metadata: {} });
+      }
+    }
+
+    // Load metadata from DB
+    const metaSettings = await prisma.teamSetting.findMany({
+      where: { teamId, settingKey: { startsWith: 'vault-meta:' } },
+      select: { settingKey: true, settingValue: true },
+    });
+    const metaMap = new Map(metaSettings.map(m => [m.settingKey.replace('vault-meta:', ''), m.settingValue]));
+
+    for (const secret of secrets) {
+      const metaStr = metaMap.get(secret.id);
+      if (metaStr) {
+        try { secret.metadata = JSON.parse(metaStr); } catch {}
+      }
+    }
+
+    // Apply metadata filter
     if (metadataFilter) {
-      secrets = filterSecrets(secretsResponse, metadataFilter);
+      try {
+        const filterObj = JSON.parse(metadataFilter);
+        secrets = secrets.filter(s => {
+          for (const key in filterObj) {
+            if (s.metadata[key] !== filterObj[key]) return false;
+          }
+          return true;
+        });
+      } catch {}
     }
 
     return { success: vaultMessages.SUCCESS_GET_ALL_SECRETS, secrets };
@@ -106,206 +238,73 @@ export async function getAllSecrets(teamId: string, metadataFilter: string = '')
   }
 }
 
-async function getSecretMetadata(teamId: string, secretId: string, metadataFilePath: string) {
-  const metadataData = fs.readFileSync(metadataFilePath, 'utf8');
-  const metadataNewData = JSON.parse(metadataData);
-  return metadataNewData[teamId]?.[secretId] || {};
-}
-
 export async function getSecretById(teamId: string, secretId: string) {
-  const secret = await getSecret(teamId, secretId);
-  if (secret) {
+  // Try Nango first
+  const providerKey = deriveProviderKey(secretId);
+  const connectionId = buildConnectionId(teamId, secretId);
+  const apiKey = await nangoGetApiKey(providerKey, connectionId);
+
+  if (apiKey) {
+    let metadata = {};
+    const metaSetting = await prisma.teamSetting.findUnique({
+      where: { teamId_settingKey: { teamId, settingKey: `vault-meta:${secretId}` } },
+      select: { settingValue: true },
+    });
+    if (metaSetting) {
+      try { metadata = JSON.parse(metaSetting.settingValue); } catch {}
+    }
+
     return {
       success: vaultMessages.SUCCESS_GET_SECRET_BY_ID,
-      secret,
+      secret: { id: secretId, key: secretId, value: apiKey, metadata },
     };
   }
-  return {
-    error: vaultMessages.ERROR_SECRET_NOT_FOUND,
-    secret: null,
-  };
+
+  // Fallback: check DB
+  const setting = await prisma.teamSetting.findUnique({
+    where: { teamId_settingKey: { teamId, settingKey: `vault:${secretId}` } },
+    select: { settingValue: true },
+  });
+
+  if (setting) {
+    return {
+      success: vaultMessages.SUCCESS_GET_SECRET_BY_ID,
+      secret: { id: secretId, key: secretId, value: setting.settingValue, metadata: {} },
+    };
+  }
+
+  return { error: vaultMessages.ERROR_SECRET_NOT_FOUND, secret: null };
 }
 
 export async function checkSecretExistsById(teamId: string, secretId: string) {
-  try {
-    const existingSecret = await getSecret(teamId, secretId);
-    return existingSecret ? true : false;
-  } catch (error: any) {
-    return false;
-  }
+  const result = await getSecretById(teamId, secretId);
+  return !!result.secret;
 }
 
 export async function getSecretByName(teamId: string, secretName: string) {
-  try {
-    const secretData = await getSecretById(teamId, secretName);
-    if (secretData.secret) {
-      return {
-        success: vaultMessages.SUCCESS_GET_SECRET_BY_NAME,
-        secret: secretData.secret,
-      };
-    }
-    return {
-      error: vaultMessages.ERROR_SECRET_NOT_FOUND,
-      secret: null,
-    };
-  } catch (error: any) {
-    console.error(error.message);
-    throw error;
-  }
+  return getSecretById(teamId, secretName);
 }
 
-export async function checkSecretExistsByName(teamId: string, secretName: string, excludeId = null) {
-  try {
-    const existingSecretResponse = await getSecretByName(teamId, secretName);
-    return existingSecretResponse.secret && existingSecretResponse.secret.id !== excludeId ? true : false;
-  } catch (error: any) {
-    return false;
-  }
+export async function checkSecretExistsByName(teamId: string, secretName: string, excludeId: string | null = null) {
+  const result = await getSecretById(teamId, secretName);
+  return result.secret && result.secret.id !== excludeId;
 }
 
 export async function deleteSecretById(teamId: string, secretId: string) {
-  const vaultConnector = await getVaultConnector();
-  const secretFilePath = vaultConnector.vaultFile;
-  const metadataFilePath = getMetadataPath(secretFilePath);
+  // Delete from Nango
+  const providerKey = deriveProviderKey(secretId);
+  const connectionId = buildConnectionId(teamId, secretId);
+  await nangoDeleteConnection(providerKey, connectionId);
 
-  const currentData = fs.readFileSync(secretFilePath, 'utf8');
-  const newData = JSON.parse(currentData);
-  delete newData[teamId][secretId];
-  fs.writeFileSync(secretFilePath, JSON.stringify(newData));
+  // Delete from DB (fallback + metadata)
+  await prisma.teamSetting.deleteMany({
+    where: { teamId, settingKey: { in: [`vault:${secretId}`, `vault-meta:${secretId}`] } },
+  });
 
-  await deleteSecretMetadata(teamId, secretId, metadataFilePath);
   return { success: vaultMessages.SUCCESS_DELETE_SECRET };
 }
 
-async function deleteSecretMetadata(teamId: string, secretId: string, metadataFilePath: string) {
-  try {
-    const metadataData = fs.readFileSync(metadataFilePath, 'utf8');
-    const metadataNewData = JSON.parse(metadataData);
-    delete metadataNewData[teamId][secretId];
-    fs.writeFileSync(metadataFilePath, JSON.stringify(metadataNewData));
-    return;
-  } catch (error: any) {
-    console.error(error.message);
-    throw error;
-  }
-}
-
-async function setSecretMetadata(teamId: string, secretId: string, metadataFilePath: string, metadata) {
-  try {
-    const updatedMetadata = {
-      created_time: new Date().toISOString(),
-      version: 1,
-      ...metadata,
-    };
-
-    const metadataData = fs.readFileSync(metadataFilePath, 'utf8');
-    const metadataNewData = JSON.parse(metadataData || '{}');
-    if (!metadataNewData[teamId]) {
-      metadataNewData[teamId] = {};
-    }
-    metadataNewData[teamId][secretId] = updatedMetadata;
-    fs.writeFileSync(metadataFilePath, JSON.stringify(metadataNewData));
-
-    return updatedMetadata;
-  } catch (error: any) {
-    console.error(error.message);
-    throw error;
-  }
-}
-
 export async function getSecretsCount(teamId: string) {
-  try {
-    const vaultConnector = await getVaultConnector();
-    const allSecrets = await vaultConnector.team(teamId).listKeys();
-    return { success: vaultMessages.SUCCESS_GET_ALL_SECRETS_COUNT, count: allSecrets.length };
-  } catch (error: any) {
-    console.error(error.message);
-    throw error;
-  }
-}
-
-async function getSecret(teamId: string, secretId: string) {
-  try {
-    const vaultConnector = await getVaultConnector();
-    const secret = await vaultConnector.team(teamId).get(secretId);
-    const metadataFilePath = getMetadataPath(vaultConnector.vaultFile);
-    const metadata = await getSecretMetadata(teamId, secretId, metadataFilePath);
-    return {
-      id: secretId,
-      key: secretId,
-      value: secret,
-      metadata,
-    };
-  } catch (error) {
-    console.error(`Error getting secret ${secretId} for team ${teamId}`);
-    return null;
-  }
-}
-
-function filterSecrets(secrets, metadataFilter = '{}') {
-  let filterObj = {};
-  try {
-    let metadatafilterObj = JSON.parse(metadataFilter);
-    filterObj = { ...filterObj, ...metadatafilterObj };
-  } catch (error) {}
-  return secrets.filter(secret => {
-    for (const key in filterObj) {
-      if (secret.metadata[key] !== filterObj[key]) {
-        return false;
-      }
-    }
-    return true;
-  });
-}
-
-function getMetadataPath(filePath: string) {
-  const basePath = path.dirname(filePath);
-  const metadataFilePath = path.join(basePath, 'vault-metadata.json');
-  if (!fs.existsSync(metadataFilePath)) {
-    fs.writeFileSync(metadataFilePath, '{}');
-  }
-  return metadataFilePath;
-}
-
-async function getVaultConnector() {
-  const vaultConnector = ConnectorService.getVaultConnector();
-  // let filePath = vaultConnector.vaultFile;
-  // if (!filePath) {
-  //   throw new Error('Vault file path is not set');
-  // }
-
-  return vaultConnector;
-}
-
-function prepareSREConfigFiles() {
-  // setup base dir for SRE
-  const srePath = config.variables.SRE_STORAGE_PATH;
-  if (!fs.existsSync(srePath)) {
-    fs.mkdirSync(srePath, { recursive: true });
-  }
-
-  //  setup base vault content
-  const baseVaultContent = {
-    development: {
-      echo: '',
-      openai: '$env(OPENAI_API_KEY)',
-      anthropic: '',
-      googleai: '',
-      groq: '',
-      togetherai: '',
-      xai: '',
-      deepseek: '',
-      tavily: '',
-      scrapfly: '',
-    },
-  };
-
-  const vaultFilePath = path.join(config.variables.SRE_STORAGE_PATH, '.sre', 'vault.json');
-  const dir = path.dirname(vaultFilePath);
-  fs.mkdirSync(dir, { recursive: true });
-
-  // Write the file
-  if (!fs.existsSync(vaultFilePath)) {
-    fs.writeFileSync(vaultFilePath, JSON.stringify(baseVaultContent, null, 2));
-  }
+  const result = await getAllSecrets(teamId);
+  return { success: vaultMessages.SUCCESS_GET_ALL_SECRETS_COUNT, count: result.secrets.length };
 }

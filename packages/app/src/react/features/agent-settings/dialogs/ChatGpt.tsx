@@ -125,10 +125,10 @@ const ChatGptDialog = ({
       return;
     }
     if (data?.logoUrl && !validateURL(data?.logoUrl)) {
-      errorToast('The URL entered for logo does not appear to be valid.');
+      errorToast('L\'URL saisie pour le logo ne semble pas valide.');
     }
     if (data?.legalInfoUrl && !validateURL(data?.legalInfoUrl)) {
-      errorToast('The URL entered for legal info does not appear to be valid.');
+      errorToast('L\'URL saisie pour les mentions légales ne semble pas valide.');
     }
 
     try {
@@ -161,12 +161,12 @@ const ChatGptDialog = ({
             queryClient.invalidateQueries({ queryKey: ['agent_embodiments', agentId] });
             queryClient.invalidateQueries({ queryKey: ['availableEmbodiments', agentId] });
             refreshEmbodiments(agentId, currentData?.id);
-            successToast('Embodiment saved');
+            successToast('Canal de diffusion enregistré');
             closeModal();
           });
         })
         .catch((error) => {
-          errorToast(error || 'Embodiment not saved');
+          errorToast(error || 'Canal de diffusion non enregistré');
           console.log(error);
         })
         .finally(() => {
@@ -181,10 +181,10 @@ const ChatGptDialog = ({
     const errors: FormErrors = {};
 
     if (values.logoUrl && !validateURL(values.logoUrl)) {
-      errors.logoUrl = 'Please enter a valid URL for logo';
+      errors.logoUrl = 'Veuillez saisir une URL valide pour le logo';
     }
     if (values.legalInfoUrl && !validateURL(values.legalInfoUrl)) {
-      errors.legalInfoUrl = 'Please enter a valid URL for legal info';
+      errors.legalInfoUrl = 'Veuillez saisir une URL valide pour les mentions légales';
     }
 
     return errors;
@@ -219,7 +219,7 @@ const ChatGptDialog = ({
               <div className="w-[70%] min-w-[600px] max-w-[1200px]">
                 <Dialog.Panel className="w-full relative transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title className="text-xl font-semibold leading-6 text-[#1E1E1E] mb-4 flex justify-between items-center">
-                    <span>ChatGPT Configurations</span>
+                    <span>Configuration ChatGPT</span>
                     <div
                       className="cursor-pointer w-8 h-8 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 p-2 -mr-2 -mt-2"
                       onClick={() => closeModal()}
@@ -244,7 +244,7 @@ const ChatGptDialog = ({
                                 htmlFor="humanName"
                                 className="block text-[#1E1E1E] mb-1 text-base font-normal"
                               >
-                                Name for Human:
+                                Nom pour l'humain :
                               </label>
                               <Field
                                 type="text"
@@ -268,7 +268,7 @@ const ChatGptDialog = ({
                                 onChange={props.handleChange}
                                 onBlur={props.handleBlur}
                                 value={props.values?.humanName}
-                                placeholder="Enter human name"
+                                placeholder="Saisir le nom pour l'humain"
                               />
                             </div>
                             <div className="flex-1 mb-4">
@@ -276,7 +276,7 @@ const ChatGptDialog = ({
                                 htmlFor="modelName"
                                 className="block text-[#1E1E1E] mb-1 text-base font-normal"
                               >
-                                Name for Model:
+                                Nom pour le modèle :
                               </label>
                               <Field
                                 type="text"
@@ -300,7 +300,7 @@ const ChatGptDialog = ({
                                 onChange={props.handleChange}
                                 onBlur={props.handleBlur}
                                 value={props.values?.modelName}
-                                placeholder="Enter model name"
+                                placeholder="Saisir le nom du modèle"
                               />
                             </div>
                           </div>
@@ -308,7 +308,7 @@ const ChatGptDialog = ({
                             <div className="flex-1 mb-2">
                               <TextArea
                                 ref={humanDescriptionRef}
-                                label="Description for Human:"
+                                label="Description pour l'humain :"
                                 labelClassName="block text-[#1E1E1E] mb-1 text-base font-normal"
                                 name="humanDescription"
                                 id="humanDescription"
@@ -324,7 +324,7 @@ const ChatGptDialog = ({
                                 }}
                                 onBlur={props.handleBlur}
                                 value={props.values?.humanDescription}
-                                placeholder="Enter Human Description"
+                                placeholder="Saisir la description pour l'humain"
                                 fullWidth
                                 autoGrow={true}
                                 style={{ minHeight: syncMinHeight }}
@@ -343,14 +343,14 @@ const ChatGptDialog = ({
                                     HUMAN_DESCRIPTION_LIMIT -
                                       (props.values?.humanDescription?.length || 0),
                                   )}
-                                  /{HUMAN_DESCRIPTION_LIMIT} characters remaining
+                                  /{HUMAN_DESCRIPTION_LIMIT} caractères restants
                                 </span>
                               </div>
                             </div>
                             <div className="flex-1 mb-2">
                               <TextArea
                                 ref={modelDescriptionRef}
-                                label="Description for Model:"
+                                label="Description pour le modèle :"
                                 labelClassName="block text-[#1E1E1E] mb-1 text-base font-normal"
                                 name="modelDescription"
                                 id="modelDescription"
@@ -366,7 +366,7 @@ const ChatGptDialog = ({
                                 }}
                                 onBlur={props.handleBlur}
                                 value={props.values?.modelDescription}
-                                placeholder="Enter Model Description"
+                                placeholder="Saisir la description pour le modèle"
                                 fullWidth
                                 autoGrow={true}
                                 style={{ minHeight: syncMinHeight }}
@@ -385,7 +385,7 @@ const ChatGptDialog = ({
                                     MODEL_DESCRIPTION_LIMIT -
                                       (props.values?.modelDescription?.length || 0),
                                   )}
-                                  /{MODEL_DESCRIPTION_LIMIT} characters remaining
+                                  /{MODEL_DESCRIPTION_LIMIT} caractères restants
                                 </span>
                               </div>
                             </div>
@@ -395,7 +395,7 @@ const ChatGptDialog = ({
                               htmlFor="logoUrl"
                               className="block text-[#1E1E1E] mb-1 text-base font-normal"
                             >
-                              Logo Url:
+                              URL du logo :
                             </label>
                             <div className="flex justify-between gap-4 items-center">
                               <Field
@@ -417,7 +417,7 @@ const ChatGptDialog = ({
                                   placeholder:font-normal
                                 border-gray-300 border-b-gray-500 focus:border-b-2 focus:border-b-blue-500 focus-visible:border-b-2 focus-visible:border-b-blue-500"
                                 name="logoUrl"
-                                placeholder="Enter logoUrl's URL"
+                                placeholder="Saisir l'URL du logo"
                                 value={props.values?.logoUrl}
                                 onChange={(event) => {
                                   props.setFieldValue('logoUrl', event.target.value);
@@ -451,7 +451,7 @@ const ChatGptDialog = ({
                                 htmlFor="contactEmail"
                                 className="block text-[#1E1E1E] mb-1 text-base font-normal"
                               >
-                                Email:
+                                E-mail :
                               </label>
                               <Field
                                 type="text"
@@ -475,7 +475,7 @@ const ChatGptDialog = ({
                                 onChange={props.handleChange}
                                 onBlur={props.handleBlur}
                                 value={props.values?.contactEmail}
-                                placeholder="Enter email"
+                                placeholder="Saisir l'e-mail"
                               />
                             </div>
                             <div className="flex-1">
@@ -483,22 +483,22 @@ const ChatGptDialog = ({
                                 htmlFor="legalInfoUrl"
                                 className="block text-[#1E1E1E] mb-1 text-base font-normal"
                               >
-                                Legal Info Url:
+                                URL des mentions légales :
                               </label>
                               <Field
                                 type="text"
-                                className=" bg-white 
+                                className=" bg-white
                                   border
                                   text-gray-900
                                   rounded
-                                  block 
+                                  block
                                   w-full
                                   outline-none
                                   focus:outline-none
                                   focus:ring-0
                                   focus:ring-offset-0
                                   focus:ring-shadow-none
-                                  text-sm 
+                                  text-sm
                                   font-normal
                                   placeholder:text-sm
                                   placeholder:font-normal
@@ -507,7 +507,7 @@ const ChatGptDialog = ({
                                 onChange={props.handleChange}
                                 onBlur={props.handleBlur}
                                 value={props.values?.legalInfoUrl}
-                                placeholder="Enter email"
+                                placeholder="Saisir l'URL des mentions légales"
                               />
                               <ErrorMessage
                                 name="legalInfoUrl"
@@ -521,7 +521,7 @@ const ChatGptDialog = ({
                             <Button
                               className="w-[100px] rounded-sm"
                               handleClick={() => submitForm(props.values)}
-                              label="Save"
+                              label="Enregistrer"
                               addIcon={isSubmitting}
                               Icon={<Spinner classes="w-4 h-4 mr-2" />}
                               disabled={isSubmitting}

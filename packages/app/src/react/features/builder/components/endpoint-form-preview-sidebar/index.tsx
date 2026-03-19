@@ -149,14 +149,14 @@ const FormPreviewSidebar = ({ mode }: Props) => {
       ) : availableSkills.length === 0 ? (
         <div className="text-gray-600 py-4">
           <p>
-            <b>No testable skills available.</b>
+            <b>Aucune compétence testable disponible.</b>
             <br />
-            Please add skills to your agent and configure inputs to test.
+            Veuillez ajouter des compétences à votre agent et configurer les entrées pour tester.
           </p>
         </div>
       ) : (
         <div>
-          <p className="pb-2">Select one of your agent's skills from the list, then click Test.</p>
+          <p className="pb-2">Sélectionnez l'une des compétences de votre agent dans la liste, puis cliquez sur Tester.</p>
           <div className="flex gap-2">
             <select
               className="w-full bg-white border text-gray-900 rounded block outline-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-shadow-none text-sm font-light placeholder:text-sm placeholder:font-normal px-[10px] border-gray-300 border-b-gray-500 focus:border-b-2 focus:border-b-blue-500 focus-visible:border-b-2 focus-visible:border-b-blue-500 appearance-none cursor-pointer"
@@ -173,7 +173,7 @@ const FormPreviewSidebar = ({ mode }: Props) => {
               handleClick={() => handleTestClick(targetSkill?.skillId || '')}
               disabled={!targetSkill}
             >
-              Test
+              Tester
             </Button>
           </div>
         </div>

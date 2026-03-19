@@ -94,7 +94,7 @@ const DeploymentSidebarContent = () => {
                 </button>
               </TooltipTrigger>
               <TooltipContent side="left">
-                <p>Close</p>
+                <p>Fermer</p>
               </TooltipContent>
             </Tooltip>
           </div>

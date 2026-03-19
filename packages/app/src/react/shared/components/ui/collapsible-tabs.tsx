@@ -292,7 +292,7 @@ export function CollapsibleTabs({
       ref={containerRef}
       className={cn('relative flex', className)}
       role="tablist"
-      aria-label="Settings tabs"
+      aria-label="Onglets de paramètres"
     >
       {/* Visible tabs */}
       <div ref={navRef} className="flex flex-1 justify-around overflow-hidden">
@@ -326,7 +326,7 @@ export function CollapsibleTabs({
         <button
           ref={moreButtonRef}
           className="inline-flex items-center justify-center px-2 py-1 text-lg font-bold text-gray-500 hover:text-gray-700 flex-shrink-0"
-          aria-label="More tabs"
+          aria-label="Plus d'onglets"
           aria-expanded={isDropdownOpen}
           aria-haspopup="menu"
           onClick={toggleDropdown}
@@ -345,7 +345,7 @@ export function CollapsibleTabs({
           className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[120px]"
           role="menu"
           aria-orientation="vertical"
-          aria-label="Hidden tabs menu"
+          aria-label="Menu des onglets masqués"
           onKeyDown={handleDropdownKeyDown}
         >
           <div className="py-1">

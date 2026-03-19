@@ -146,7 +146,7 @@ const DatasourcesPage: FC = () => {
   };
 
   const breadcrumb = (
-    <Breadcrumb aria-label="Breadcrumb" className="mb-4">
+    <Breadcrumb aria-label="Fil d'Ariane" className="mb-4">
       <Breadcrumb.Item icon={HiHome}>
         <Link to="/">Accueil</Link>
       </Breadcrumb.Item>

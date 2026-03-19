@@ -90,7 +90,7 @@ export const TabNavigation: FC = () => {
           tabIndex={0}
           data-testid="network-tab"
         >
-          Network
+          Réseau
         </div>
         <div
           className={getTabClasses(DebugMenuTab.SOURCE)}
@@ -112,7 +112,7 @@ export const TabNavigation: FC = () => {
           className="text-[#757575] hover:bg-gray-100 rounded-lg p-2"
           onClick={toggleBottomBar}
           data-testid="close-button"
-          aria-label="Close debug menu"
+          aria-label="Fermer le menu de débogage"
         >
           <svg
             width="16"

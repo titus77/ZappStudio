@@ -56,26 +56,26 @@ const FilterDropdown: FC<FilterDropdownProps> = ({ isOpen, onClose, filters, upd
   return (
     <div className="absolute top-full right-0 mt-1 bg-white shadow-lg rounded-md border border-solid border-gray-200 z-50 w-80 animate-fadeIn">
       <div className="p-2 border-b border-solid border-gray-200 flex justify-between items-center">
-        <span className="font-medium text-sm">Filter by Component</span>
+        <span className="font-medium text-sm">Filtrer par composant</span>
         <div className="flex gap-2">
           <button
             className="text-xs text-blue-500 hover:underline"
             onClick={() => handleToggleAll(true)}
           >
-            Select All
+            Tout sélectionner
           </button>
           <button
             className="text-xs text-blue-500 hover:underline"
             onClick={() => handleToggleAll(false)}
           >
-            Clear All
+            Tout effacer
           </button>
         </div>
       </div>
 
       <div className="max-h-60 overflow-y-auto p-2">
         {filters.componentNames.length === 0 ? (
-          <div className="text-sm text-gray-500 p-2">No components found</div>
+          <div className="text-sm text-gray-500 p-2">Aucun composant trouvé</div>
         ) : (
           filters.componentNames.map((name) => (
             <div key={name} className="flex items-center py-1">
@@ -99,7 +99,7 @@ const FilterDropdown: FC<FilterDropdownProps> = ({ isOpen, onClose, filters, upd
           className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
           onClick={handleApply}
         >
-          Apply
+          Appliquer
         </button>
       </div>
     </div>
@@ -135,7 +135,7 @@ export const Toolbar: FC<ToolbarProps> = ({
           />
           <input
             type="text"
-            placeholder="Filter requests..."
+            placeholder="Filtrer les requêtes..."
             className="pl-8 pr-4 py-1 w-full text-sm border border-solid border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -147,7 +147,7 @@ export const Toolbar: FC<ToolbarProps> = ({
               activeFilterCount > 0 ? 'text-blue-500' : 'text-gray-500'
             } hover:text-gray-700 hover:bg-gray-100 rounded flex items-center`}
             onClick={() => setIsFilterOpen(!isFilterOpen)}
-            title="Filter components"
+            title="Filtrer les composants"
           >
             <MdFilterList size={18} />
             {activeFilterCount > 0 && (
@@ -165,7 +165,7 @@ export const Toolbar: FC<ToolbarProps> = ({
         </div>
         <button
           className="p-1 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded"
-          title={isRecording ? 'Stop recording' : 'Start recording'}
+          title={isRecording ? 'Arrêter l\'enregistrement' : 'Démarrer l\'enregistrement'}
           onClick={toggleRecording}
         >
           <IoStopCircle size={18} color={isRecording ? 'red' : 'gray'} />
@@ -175,21 +175,21 @@ export const Toolbar: FC<ToolbarProps> = ({
       <div className="flex gap-1">
         <button
           onClick={onCopy}
-          title="Copy"
+          title="Copier"
           className="p-1 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
         >
           <FaRegCopy size={14} />
         </button>
         <button
           onClick={onDownload}
-          title="Download"
+          title="Télécharger"
           className="p-1 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
         >
           <HiOutlineDownload size={15} />
         </button>
         <button
           onClick={onClear}
-          title="Clear"
+          title="Effacer"
           className="p-1 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
         >
           <IoMdTrash size={15} />

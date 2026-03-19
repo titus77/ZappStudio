@@ -28,7 +28,7 @@ export const RequestList: FC<RequestListProps> = ({
   if (requests.length === 0) {
     return (
       <div className="flex items-center justify-center h-full text-gray-500">
-        No network requests recorded
+        Aucune requête réseau enregistrée
       </div>
     );
   }
@@ -37,13 +37,13 @@ export const RequestList: FC<RequestListProps> = ({
     <>
       {/* Table Header */}
       <div className="grid grid-cols-12 text-xs font-medium text-gray-500 bg-gray-50 border-b border-solid border-gray-200 px-4 py-2 z-10">
-        <div className={isDetailOpen ? 'col-span-12' : 'col-span-4'}>Component</div>
+        <div className={isDetailOpen ? 'col-span-12' : 'col-span-4'}>Composant</div>
         {!isDetailOpen && (
           <>
-            <div className="col-span-2">Status</div>
+            <div className="col-span-2">Statut</div>
             <div className="col-span-2">Type</div>
-            <div className="col-span-2">Size</div>
-            <div className="col-span-2">Time</div>
+            <div className="col-span-2">Taille</div>
+            <div className="col-span-2">Durée</div>
           </>
         )}
       </div>
@@ -78,7 +78,7 @@ export const RequestList: FC<RequestListProps> = ({
                   <div className="font-medium flex items-center gap-1">
                     {request.componentTitle}
                     {hasCostData && (
-                      <span title="Has cost information" className="inline-flex text-yellow-500">
+                      <span title="Contient des informations de coût" className="inline-flex text-yellow-500">
                         <FaMoneyBillWave size={10} />
                       </span>
                     )}
@@ -91,14 +91,14 @@ export const RequestList: FC<RequestListProps> = ({
                 <>
                   <div className="col-span-2 flex items-center">
                     {request.state === 'pending' ? (
-                      <span className="text-blue-500">Pending</span>
+                      <span className="text-blue-500">En attente</span>
                     ) : request.status >= 200 && request.status < 300 ? (
                       <span className="text-green-600">{request.status}</span>
                     ) : (
-                      <span className="text-red-500">{request.status || 'Error'}</span>
+                      <span className="text-red-500">{request.status || 'Erreur'}</span>
                     )}
                   </div>
-                  <div className="col-span-2 flex items-center text-gray-600">Component</div>
+                  <div className="col-span-2 flex items-center text-gray-600">Composant</div>
                   <div className="col-span-2 flex items-center text-gray-600">
                     {formatSize(totalSize)}
                   </div>
@@ -106,7 +106,7 @@ export const RequestList: FC<RequestListProps> = ({
                     <IoMdTime size={14} className="text-gray-400" />
                     {formatDuration(request.duration)}
                     {hasCostData && (
-                      <span title="Has cost information" className="ml-1 text-yellow-500">
+                      <span title="Contient des informations de coût" className="ml-1 text-yellow-500">
                         <FaMoneyBillWave size={12} />
                       </span>
                     )}

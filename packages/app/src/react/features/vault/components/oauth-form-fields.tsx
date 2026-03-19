@@ -120,7 +120,7 @@ export function OAuthFormFields({
             name="name"
             value={formData.name || ''}
             onChange={handleChange}
-            placeholder="e.g., My Google Connection"
+            placeholder="ex. : Ma connexion Google"
             required
             disabled={isDisabled}
             fullWidth
@@ -131,7 +131,7 @@ export function OAuthFormFields({
       {/* Platform Field */}
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="platform">
-          Platform <span className="text-red-500">*</span>
+          Plateforme <span className="text-red-500">*</span>
         </Label>
         <div className="col-span-3">
           <Input
@@ -139,7 +139,7 @@ export function OAuthFormFields({
             name="platform"
             value={formData.platform || ''}
             onChange={handleChange}
-            placeholder="e.g., Google Mail, HubSpot CRM"
+            placeholder="ex. : Google Mail, HubSpot CRM"
             required
             disabled={isDisabled}
             fullWidth
@@ -161,7 +161,7 @@ export function OAuthFormFields({
             disabled={isDisabled}
           >
             <SelectTrigger className="h-9 w-full">
-              <SelectValue placeholder="Select a service" />
+              <SelectValue placeholder="Sélectionner un service" />
             </SelectTrigger>
             <SelectContent>
               {OAUTH_SERVICES.map((service) => (
@@ -182,14 +182,14 @@ export function OAuthFormFields({
             <>
               {showOAuth2Fields && (
                 <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="authorizationURL">Auth URL</Label>
+                  <Label htmlFor="authorizationURL">URL d'autorisation</Label>
                   <div className="col-span-3">
                     <Input
                       id="authorizationURL"
                       name="authorizationURL"
                       value={formData.authorizationURL || ''}
                       onChange={handleChange}
-                      placeholder="Authorization Endpoint URL"
+                      placeholder="URL du point d'autorisation"
                       disabled={isDisabled}
                       fullWidth
                     />
@@ -197,35 +197,35 @@ export function OAuthFormFields({
                 </div>
               )}
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="tokenURL">Token URL</Label>
+                <Label htmlFor="tokenURL">URL du jeton</Label>
                 <div className="col-span-3">
                   <Input
                     id="tokenURL"
                     name="tokenURL"
                     value={formData.tokenURL || ''}
                     onChange={handleChange}
-                    placeholder="Token Endpoint URL"
+                    placeholder="URL du point de jeton"
                     disabled={isDisabled}
                     fullWidth
                   />
                 </div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="clientID">Client ID</Label>
+                <Label htmlFor="clientID">Identifiant client</Label>
                 <div className="col-span-3">
                   <Input
                     id="clientID"
                     name="clientID"
                     value={formData.clientID || ''}
                     onChange={handleChange}
-                    placeholder="OAuth Client ID"
+                    placeholder="Identifiant client OAuth"
                     disabled={isDisabled}
                     fullWidth
                   />
                 </div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="clientSecret">Client Secret</Label>
+                <Label htmlFor="clientSecret">Secret client</Label>
                 <div className="col-span-3">
                   <Input
                     id="clientSecret"
@@ -233,7 +233,7 @@ export function OAuthFormFields({
                     type="password"
                     value={formData.clientSecret || ''}
                     onChange={handleChange}
-                    placeholder="OAuth Client Secret"
+                    placeholder="Secret client OAuth"
                     disabled={isDisabled}
                     fullWidth
                   />
@@ -242,13 +242,13 @@ export function OAuthFormFields({
               {showClientCredentialsFields && (
                 <div className="grid grid-cols-4 items-center gap-4">
                   <div className="flex items-center">
-                    <Label htmlFor="audience">Audience</Label>
+                    <Label htmlFor="audience">Audience (API)</Label>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Info className="w-4 h-4 cursor-help ml-2" />
                       </TooltipTrigger>
                       <TooltipContent className="w-64 text-center" side="right">
-                        <p>API identifier (required by Auth0 and some providers). Usually the API URL or identifier.</p>
+                        <p>Identifiant de l'API (requis par Auth0 et certains fournisseurs). Généralement l'URL ou l'identifiant de l'API.</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
@@ -258,7 +258,7 @@ export function OAuthFormFields({
                       name="audience"
                       value={formData.audience || ''}
                       onChange={handleChange}
-                      placeholder="e.g., https://api.example.com or https://your-api.auth0.com"
+                      placeholder="ex. : https://api.exemple.com ou https://your-api.auth0.com"
                       disabled={isDisabled}
                       fullWidth
                     />
@@ -267,7 +267,7 @@ export function OAuthFormFields({
               )}
               {showOAuth2Fields && oauth2CallbackURL && (
                 <div className="grid grid-cols-4 items-center gap-4">
-                  <Label>Callback URL</Label>
+                  <Label>URL de rappel</Label>
                   <div className="col-span-3 text-sm text-gray-500 break-all">
                     {oauth2CallbackURL}
                   </div>
@@ -280,63 +280,63 @@ export function OAuthFormFields({
           {showOAuth1Fields && (
             <>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="requestTokenURL">Request Token URL</Label>
+                <Label htmlFor="requestTokenURL">URL du jeton de requête</Label>
                 <div className="col-span-3">
                   <Input
                     id="requestTokenURL"
                     name="requestTokenURL"
                     value={formData.requestTokenURL || ''}
                     onChange={handleChange}
-                    placeholder="Request Token URL"
+                    placeholder="URL du jeton de requête"
                     disabled={isDisabled}
                     fullWidth
                   />
                 </div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="accessTokenURL">Access Token URL</Label>
+                <Label htmlFor="accessTokenURL">URL du jeton d'accès</Label>
                 <div className="col-span-3">
                   <Input
                     id="accessTokenURL"
                     name="accessTokenURL"
                     value={formData.accessTokenURL || ''}
                     onChange={handleChange}
-                    placeholder="Access Token URL"
+                    placeholder="URL du jeton d'accès"
                     disabled={isDisabled}
                     fullWidth
                   />
                 </div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="userAuthorizationURL">User Auth URL</Label>
+                <Label htmlFor="userAuthorizationURL">URL d'autorisation</Label>
                 <div className="col-span-3">
                   <Input
                     id="userAuthorizationURL"
                     name="userAuthorizationURL"
                     value={formData.userAuthorizationURL || ''}
                     onChange={handleChange}
-                    placeholder="User Authorization URL"
+                    placeholder="URL d'autorisation utilisateur"
                     disabled={isDisabled}
                     fullWidth
                   />
                 </div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="consumerKey">Consumer Key</Label>
+                <Label htmlFor="consumerKey">Clé consommateur</Label>
                 <div className="col-span-3">
                   <Input
                     id="consumerKey"
                     name="consumerKey"
                     value={formData.consumerKey || ''}
                     onChange={handleChange}
-                    placeholder="OAuth Consumer Key"
+                    placeholder="Clé consommateur OAuth"
                     disabled={isDisabled}
                     fullWidth
                   />
                 </div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="consumerSecret">Consumer Secret</Label>
+                <Label htmlFor="consumerSecret">Secret consommateur</Label>
                 <div className="col-span-3">
                   <Input
                     id="consumerSecret"
@@ -344,7 +344,7 @@ export function OAuthFormFields({
                     type="password"
                     value={formData.consumerSecret || ''}
                     onChange={handleChange}
-                    placeholder="OAuth Consumer Secret"
+                    placeholder="Secret consommateur OAuth"
                     disabled={isDisabled}
                     fullWidth
                   />
@@ -352,7 +352,7 @@ export function OAuthFormFields({
               </div>
               {oauth1CallbackURL && (
                 <div className="grid grid-cols-4 items-center gap-4">
-                  <Label>Callback URL</Label>
+                  <Label>URL de rappel</Label>
                   <div className="col-span-3 text-sm text-gray-500 break-all">
                     {oauth1CallbackURL}
                   </div>
@@ -365,13 +365,13 @@ export function OAuthFormFields({
           {showScopeField && (
             <div className="grid grid-cols-4 items-center gap-4">
               <div className="flex items-center">
-                <Label htmlFor="scope">Scopes</Label>
+                <Label htmlFor="scope">Permissions</Label>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Info className="w-4 h-4 cursor-help ml-2" />
                   </TooltipTrigger>
                   <TooltipContent className="w-52 text-center" side="right">
-                    <p>Enter scopes separated by spaces (e.g., read write profile)</p>
+                    <p>Saisir les scopes séparés par des espaces (ex. : read write profile)</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
@@ -381,7 +381,7 @@ export function OAuthFormFields({
                   name="scope"
                   value={formData.scope || ''}
                   onChange={handleChange}
-                  placeholder="Enter scopes separated by spaces (e.g., read write profile)"
+                  placeholder="Saisir les scopes séparés par des espaces (ex. : read write profile)"
                   disabled={isDisabled}
                   fullWidth={true}
                 />

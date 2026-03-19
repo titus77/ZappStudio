@@ -72,26 +72,26 @@ export function OAuthFormSkeleton({ serviceType = 'none' }: OAuthFormSkeletonPro
         <>
           {showOAuth2Fields && (
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="authorizationURL">Auth URL</Label>
+              <Label htmlFor="authorizationURL">URL d'autorisation</Label>
               <div className="col-span-3">
                 <FieldSkeleton />
               </div>
             </div>
           )}
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="tokenURL">Token URL</Label>
+            <Label htmlFor="tokenURL">URL du jeton</Label>
             <div className="col-span-3">
               <FieldSkeleton />
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="clientID">Client ID</Label>
+            <Label htmlFor="clientID">Identifiant client</Label>
             <div className="col-span-3">
               <FieldSkeleton />
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="clientSecret">Client Secret</Label>
+            <Label htmlFor="clientSecret">Secret client</Label>
             <div className="col-span-3">
               <FieldSkeleton />
             </div>
@@ -103,31 +103,31 @@ export function OAuthFormSkeleton({ serviceType = 'none' }: OAuthFormSkeletonPro
       {showOAuth1Fields && (
         <>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="requestTokenURL">Request Token URL</Label>
+            <Label htmlFor="requestTokenURL">URL du jeton de requête</Label>
             <div className="col-span-3">
               <FieldSkeleton />
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="accessTokenURL">Access Token URL</Label>
+            <Label htmlFor="accessTokenURL">URL du jeton d'accès</Label>
             <div className="col-span-3">
               <FieldSkeleton />
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="userAuthorizationURL">User Auth URL</Label>
+            <Label htmlFor="userAuthorizationURL">URL d'autorisation utilisateur</Label>
             <div className="col-span-3">
               <FieldSkeleton />
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="consumerKey">Consumer Key</Label>
+            <Label htmlFor="consumerKey">Clé consommateur</Label>
             <div className="col-span-3">
               <FieldSkeleton />
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="consumerSecret">Consumer Secret</Label>
+            <Label htmlFor="consumerSecret">Secret consommateur</Label>
             <div className="col-span-3">
               <FieldSkeleton />
             </div>
@@ -138,7 +138,7 @@ export function OAuthFormSkeleton({ serviceType = 'none' }: OAuthFormSkeletonPro
       {/* Scope Field */}
       {showScopeField && (
         <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="scope">Scopes</Label>
+          <Label htmlFor="scope">Permissions</Label>
           <div className="col-span-3">
             <div className="h-20 w-full bg-gray-200 animate-pulse rounded-md"></div>
           </div>
@@ -147,7 +147,7 @@ export function OAuthFormSkeleton({ serviceType = 'none' }: OAuthFormSkeletonPro
 
       {/* Loading message */}
       <div className="text-center text-sm text-gray-500 py-2">
-        Loading connection details...
+        Chargement des détails de la connexion...
       </div>
     </div>
   );

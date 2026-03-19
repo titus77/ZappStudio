@@ -12,19 +12,19 @@ export const ResponseTab: FC<DetailTabProps> = ({ request }) => {
   return (
     <div className="p-3 text-xs">
       <div className="flex justify-between items-center mb-2">
-        <h3 className="font-medium text-gray-700">Response Body</h3>
+        <h3 className="font-medium text-gray-700">Corps de la réponse</h3>
         <div className="flex text-xs bg-gray-100 rounded overflow-hidden">
           <button
             className={`px-3 py-1 ${view === 'preview' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
             onClick={() => setView('preview')}
           >
-            Preview
+            Aperçu
           </button>
           <button
             className={`px-3 py-1 ${view === 'raw' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
             onClick={() => setView('raw')}
           >
-            Raw
+            Brut
           </button>
         </div>
       </div>
@@ -44,18 +44,18 @@ export const ResponseTab: FC<DetailTabProps> = ({ request }) => {
             </pre>
           )
         ) : (
-          <div className="text-gray-500">No response body</div>
+          <div className="text-gray-500">Aucun corps de réponse</div>
         )}
       </div>
 
-      <h3 className="font-medium text-gray-700 mt-4 mb-2">Response Headers</h3>
+      <h3 className="font-medium text-gray-700 mt-4 mb-2">En-têtes de la réponse</h3>
       <div className="bg-white p-3 rounded border border-solid border-gray-200">
         {Object.keys(request.responseHeaders || {}).length > 0 ? (
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-solid border-gray-200">
-                <th className="text-left py-1 font-medium text-gray-600">Name</th>
-                <th className="text-left py-1 font-medium text-gray-600">Value</th>
+                <th className="text-left py-1 font-medium text-gray-600">Nom</th>
+                <th className="text-left py-1 font-medium text-gray-600">Valeur</th>
               </tr>
             </thead>
             <tbody>
@@ -68,7 +68,7 @@ export const ResponseTab: FC<DetailTabProps> = ({ request }) => {
             </tbody>
           </table>
         ) : (
-          <div className="text-gray-500">No response headers</div>
+          <div className="text-gray-500">Aucun en-tête de réponse</div>
         )}
       </div>
     </div>
