@@ -45,6 +45,33 @@ app.get('/health', (_, res) => {
   });
 });
 
+// CORS for iframe cross-origin (ZappImmo embeds ZappStudio)
+const ALLOWED_ORIGINS = [
+  'https://zapp.immo',
+  'https://smythos.zapp.immo',
+  process.env.APP_URL,
+  process.env.UI_SERVER,
+].filter(Boolean) as string[];
+
+// In dev, allow localhost origins
+if (process.env.NODE_ENV !== 'production') {
+  ALLOWED_ORIGINS.push('http://localhost:3100', 'http://localhost:6060', 'http://localhost:5050');
+}
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Smyth-Team-Id');
+  }
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
 app.use(authentikAuthMiddleware);
 
 app.use(cookieParser());
@@ -56,11 +83,18 @@ if (!config.env.SESSION_SECRET) {
   console.warn('SESSION_SECRET is not set, using default secret for sessions');
 }
 
+const isProd = process.env.NODE_ENV === 'production';
+
 app.use(
   session({
     store: config.flags.useRedis ? redisStore : undefined,
     secret: config.env.SESSION_SECRET || 'secret123',
-    cookie: { maxAge: cookieDays * 24 * 60 * 60 * 1000 },
+    cookie: {
+      maxAge: cookieDays * 24 * 60 * 60 * 1000,
+      sameSite: isProd ? 'none' : 'lax',  // 'none' for cross-origin iframe in prod
+      secure: isProd,                       // secure required with sameSite=none
+      domain: isProd ? '.zapp.immo' : undefined,
+    },
     saveUninitialized: false,
     resave: false,
   }),

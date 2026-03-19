@@ -66,6 +66,42 @@ app.get('/health', (_req, res) => {
   });
 });
 
+// Prometheus metrics endpoint for Grafana monitoring
+const metricsCounters = {
+  requests_total: 0,
+  auth_failures: 0,
+  deployments_total: 0,
+  agents_created: 0,
+};
+
+// Track requests
+app.use((_req, _res, next) => {
+  metricsCounters.requests_total++;
+  next();
+});
+
+app.get('/metrics', (_req, res) => {
+  const lines = [
+    '# HELP zs_requests_total Total HTTP requests to ZappStudio middleware',
+    '# TYPE zs_requests_total counter',
+    `zs_requests_total ${metricsCounters.requests_total}`,
+    '# HELP zs_auth_failures_total Authentication failures',
+    '# TYPE zs_auth_failures_total counter',
+    `zs_auth_failures_total ${metricsCounters.auth_failures}`,
+    '# HELP zs_deployments_total Agent deployments',
+    '# TYPE zs_deployments_total counter',
+    `zs_deployments_total ${metricsCounters.deployments_total}`,
+    '# HELP zs_agents_created_total Agents created',
+    '# TYPE zs_agents_created_total counter',
+    `zs_agents_created_total ${metricsCounters.agents_created}`,
+  ];
+  res.set('Content-Type', 'text/plain; version=0.0.4');
+  res.send(lines.join('\n') + '\n');
+});
+
+// Export counters for other modules to increment
+export { metricsCounters };
+
 app.use((_req, _res, next) => {
   console.log(`IP ${_req.ip} tried to call ${_req.originalUrl}`);
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));

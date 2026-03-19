@@ -46,6 +46,26 @@
 
   <% if (env !== 'DEV' && typeof includeTracking !==
     'undefined' && includeTracking) { %> <%- include('tracking/head-tracking'); -%> <% } %>
+
+  <!-- ZappImmo iframe SSO: receive renewed JWT tokens via postMessage -->
+  <script>
+    (function() {
+      var ALLOWED_ORIGINS = ['https://zapp.immo', 'http://localhost:3100'];
+      window.addEventListener('message', function(event) {
+        if (ALLOWED_ORIGINS.indexOf(event.origin) === -1) return;
+        if (event.data && event.data.type === 'zappimmo_token_refresh') {
+          var token = event.data.token;
+          if (token) {
+            // Store token for API calls
+            window.__ZAPPIMMO_TOKEN = token;
+            window.__ZAPPIMMO_URL = event.origin;
+            // Notify parent that token was received
+            event.source && event.source.postMessage({ type: 'zappimmo_token_ack' }, event.origin);
+          }
+        }
+      });
+    })();
+  </script>
 </head>
 
 <body>
