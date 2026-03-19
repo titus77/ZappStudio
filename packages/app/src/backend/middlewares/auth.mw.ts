@@ -8,8 +8,7 @@ export async function pageAuth(
   next: express.NextFunction,
 ) {
   if (!req.user.isAuthenticated) {
-    req.session.pendingPath = req.originalUrl;
-    return res.redirect('/logto/sign-in');
+    return res.status(401).json({ error: 'Authentication required' });
   }
   if (req.session.pendingPath) {
     const pendingPath = req.session.pendingPath;

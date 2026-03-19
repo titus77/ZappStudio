@@ -75,18 +75,12 @@ const config = {
     SMYTH_STAFF_EMAILS: process.env.SMYTH_STAFF_EMAILS || '',
     SMYTH_ALPHA_EMAILS: process.env.SMYTH_ALPHA_EMAILS || '',
     SMYTH_AGENT_BUILDER_BASE_URL: process.env.SMYTH_AGENT_BUILDER_BASE_URL, // to be removed
-    LOGTO_SERVER: process.env.LOGTO_SERVER,
-    LOGTO_APP_ID: process.env.LOGTO_APP_ID,
-    LOGTO_APP_SECRET: process.env.LOGTO_APP_SECRET,
-    LOGTO_API_RESOURCE: process.env.LOGTO_API_RESOURCE,
-    LOGTO_M2M_APP_ID: process.env.LOGTO_M2M_APP_ID,
-    LOGTO_M2M_APP_SECRET: process.env.LOGTO_M2M_APP_SECRET,
-    POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
+    // Authentik/ZappImmo auth
+    TRUSTED_JWT_SECRET: process.env.TRUSTED_JWT_SECRET,
+    INTERNAL_TRUSTED_SECRET: process.env.INTERNAL_TRUSTED_SECRET,
     PUB_API_SERVER: process.env.PUB_API_SERVER,
     IS_AWS_ENVIRONMENT: process.env.IS_AWS_ENVIRONMENT || false,
     DISABLE_DATA_POOL_V1: process.env.DISABLE_DATA_POOL_V1 || false,
-
-    INTERNAL_TRUSTED_SECRET: process.env.INTERNAL_TRUSTED_SECRET,
   },
   api: {
     SMYTH_USER_API_URL: `${MW_BASE_URL}/v1`,

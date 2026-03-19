@@ -1,6 +1,5 @@
 import { Response } from 'express';
 import ApiError from '../../../utils/apiError';
-import { LogtoUser } from '../../../../types';
 
 export const authExpressHelpers = {
   getUserId: (res: Response) => {
@@ -15,9 +14,9 @@ export const authExpressHelpers = {
     return user;
   },
 
-  _getLogtoUser: (res: Response): LogtoUser => {
+  getAuthUser: (res: Response) => {
     const user = res.locals.logtoUser;
-    if (!user) throw new ApiError(500, 'User not found');
+    if (!user) throw new ApiError(500, 'Auth user not found');
     return user;
   },
 
@@ -32,12 +31,6 @@ export const authExpressHelpers = {
     if (!teamId) throw new ApiError(500, 'Target team id not found');
     return teamId;
   },
-
-  // getChosenTeamId: (res: Response) => {
-  //   const teamId = res.locals.targetTeamId || res.locals.user.teamId; // fallback to user's team id
-  //   if (!teamId) throw new ApiError(500, 'Target team id not found');
-  //   return teamId;
-  // },
 
   getParentTeamId: (res: Response) => {
     const teamId = res.locals.user.teamId;

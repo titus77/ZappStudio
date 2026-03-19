@@ -1,7 +1,10 @@
 /* eslint-disable no-else-return */
+import * as jose from 'jose';
 import { AuthStrategy } from '.';
 import { LOGGER } from '../../../../../../config/logging';
 import { userService } from '../../../../user/services';
+
+const TRUSTED_JWT_SECRET = process.env.TRUSTED_JWT_SECRET || process.env.PGRST_JWT_SECRET;
 
 interface UserTokenData {
   logtoUser?: any;
@@ -23,32 +26,42 @@ export default class DefaultUIAuth implements AuthStrategy {
       return { error: 'Access token is required', data: null, success: false };
     }
 
-    const userAuth = {
-      sub: 'sub_1',
-      name: 'Admin',
-      picture: undefined,
-      updated_at: Date.now(),
-      username: null,
-      created_at: Date.now(),
-      email: 'admin@smythos.com',
-      email_verified: true,
-      primaryEmail: 'admin@smythos.com',
-      avatar: undefined,
-    };
-    data.logtoUser = userAuth;
-    const logtoUser = data.logtoUser;
+    // Verify JWT with PGRST_JWT_SECRET (ZappImmo trusted secret)
+    let decoded: jose.JWTPayload;
+    try {
+      if (!TRUSTED_JWT_SECRET) {
+        LOGGER.error(new Error('TRUSTED_JWT_SECRET is not configured'));
+        return { error: 'Server misconfigured: no JWT secret', data: null, success: false };
+      }
+      const secret = new TextEncoder().encode(TRUSTED_JWT_SECRET);
+      const { payload } = await jose.jwtVerify(token, secret);
+      decoded = payload;
+    } catch (err: any) {
+      LOGGER.error(new Error(`JWT verification failed: ${err.message}`));
+      return { error: 'Access token is invalid or expired', data: null, success: false };
+    }
 
-    if (!logtoUser.primaryEmail) logtoUser.primaryEmail = logtoUser.email;
-    if (!logtoUser.avatar) logtoUser.avatar = logtoUser.picture;
-    // LOGGER.info(`User ${logtoUser.primaryEmail} is logging in (name: ${logtoUser.name})`);
+    const userAuth = {
+      sub: (decoded.sub || decoded.user_id) as string,
+      name: (decoded.name || (decoded.email as string)?.split('@')[0] || 'User') as string,
+      email: decoded.email as string,
+      email_verified: true,
+      primaryEmail: decoded.email as string,
+      avatar: (decoded.picture || decoded.avatar) as string | undefined,
+      tenant_id: decoded.tenant_id as string | undefined,
+    };
+
+    data.logtoUser = userAuth;
+
+    // Find or create user in ZappStudio DB
     const user = await userService.findOrCreateUser({
-      email: logtoUser.primaryEmail,
-      name: logtoUser.name,
-      avatar: logtoUser.avatar,
-    }); //* check if user exists in our DB, if not, create one
+      email: userAuth.primaryEmail,
+      name: userAuth.name,
+      avatar: userAuth.avatar,
+    });
 
     if (!user.teamId) {
-      LOGGER.info(`User ${logtoUser.primaryEmail} is logging without a team`);
+      LOGGER.info(`User ${userAuth.primaryEmail} is logging without a team`);
       return { error: 'User does not belong to a team', data: null, success: false };
     }
 

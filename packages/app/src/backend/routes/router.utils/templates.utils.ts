@@ -5,7 +5,7 @@ import path from 'path';
 import { cacheClient } from '@src/backend/services/cache.service';
 import config from '../../config';
 import SmythFS from '../../services/SmythFS.class';
-import { getM2MToken } from '../../services/logto-helper';
+const INTERNAL_M2M_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET || 'M2M_TOKEN';
 import { isSmythStaff } from '../../utils';
 
 const smythFS = new SmythFS();
@@ -89,7 +89,7 @@ export async function getIntegrations() {
       return JSON.parse(cached);
     }
 
-    const token = await getM2MToken();
+    const token = INTERNAL_M2M_SECRET;
     const result = await axios.get(`${config.api.SMYTH_M2M_API_URL}/app-config/collections`, {
       headers: { Authorization: `Bearer ${token}` },
     });

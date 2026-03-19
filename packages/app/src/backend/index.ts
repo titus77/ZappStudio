@@ -22,7 +22,7 @@ import RedisStore from 'connect-redis';
 
 import passport from 'passport';
 import { version } from '../../package.json';
-import { defaultAuthMiddleware } from './middlewares/defaultAuthMiddleware.mw';
+import { authentikAuthMiddleware } from './middlewares/authentikAuth.mw';
 import { initializePassport } from './routes/oauth/helper/passportSetup';
 import { ModelsPollingService } from './services/ModelsPolling.service';
 import { cacheClient } from './services/cache.service';
@@ -45,7 +45,7 @@ app.get('/health', (_, res) => {
   });
 });
 
-app.use(defaultAuthMiddleware);
+app.use(authentikAuthMiddleware);
 
 app.use(cookieParser());
 

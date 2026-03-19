@@ -5,7 +5,8 @@ import { teamSettingKeys } from '../../shared/teamSettingKeys';
 import { userSettingKeys } from '../../shared/userSettingKeys';
 import config from '../config';
 import { TEAM_ID_HEADER } from '../constants';
-import { getM2MToken } from '../services/logto-helper';
+// Internal M2M secret for app -> middleware calls (replaces Logto M2M token)
+const INTERNAL_M2M_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET || 'M2M_TOKEN';
 import * as teamData from '../services/team-data.service';
 import * as userData from '../services/user-data.service';
 
@@ -174,7 +175,7 @@ export const forwardToSmythM2MAPIMiddleware = (options?: {
 
   return async (req: Request, res: Response, next?: NextFunction) => {
     try {
-      const token = await getM2MToken();
+      const token = INTERNAL_M2M_SECRET;
       const forwarded: AxiosRequestConfig<any> = {
         method: req.method.toLowerCase(),
         url: options?.endpointBuilder

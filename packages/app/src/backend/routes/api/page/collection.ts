@@ -1,12 +1,12 @@
 import express from 'express';
 import config from '../../../config';
-import { getM2MToken } from '../../../services/logto-helper';
+const INTERNAL_M2M_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET || 'M2M_TOKEN';
 import axios from 'axios';
 const router = express.Router();
 
 router.post('/create-collection', async (req, res) => {
   try {
-    const token = await getM2MToken();
+    const token = INTERNAL_M2M_SECRET;
     const result = await axios.post(
       `${config.api.SMYTH_M2M_API_URL}/app-config/collections`,
       { name: req.body.name, color: req.body.color, icon: req.body.icon },
