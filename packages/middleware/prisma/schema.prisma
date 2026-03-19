@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -14,7 +14,7 @@ model User {
   // firstName String?
   // lastName  String?
   name   String?
-  avatar String? @db.MediumText
+  avatar String? @db.Text
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -33,6 +33,7 @@ model User {
   agentConversations AiAgentConversation[]
 
   @@index([email])
+  @@map("zs_user")
 }
 
 model UserSetting {
@@ -42,14 +43,16 @@ model UserSetting {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int
   settingKey   String
-  settingValue String   @db.MediumText
+  settingValue String   @db.Text
 
   @@unique([userId, settingKey])
+  @@map("zs_user_setting")
 }
 
 model Team {
   id        String   @id @default(cuid())
   name      String
+  tenantId  String?  @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   salt      String   @unique @default(cuid()) // for M2M
@@ -73,18 +76,19 @@ model Team {
 
   agentConversations AiAgentConversation[]
 
-  // team hierarchy 
+  // team hierarchy
   parent   Team?   @relation("TeamParent", fields: [parentId], references: [id], onDelete: SetNull)
   parentId String?
   subTeams Team[]  @relation("TeamParent")
 
   @@index([externalCustomerId])
+  @@map("zs_team")
 }
 
 model TeamSetting {
   id           Int      @id @default(autoincrement())
   settingKey   String
-  settingValue String   @db.MediumText
+  settingValue String   @db.Text
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -92,6 +96,7 @@ model TeamSetting {
   teamId String
 
   @@unique([teamId, settingKey])
+  @@map("zs_team_setting")
 }
 
 model TeamRole {
@@ -111,6 +116,7 @@ model TeamRole {
   userTeamRole UserTeamRole[]
 
   @@unique([teamId, id])
+  @@map("zs_team_role")
 }
 
 model UserTeamRole {
@@ -123,6 +129,7 @@ model UserTeamRole {
   isTeamInitiator Boolean  @default(false)
 
   @@id([userId, roleId])
+  @@map("zs_user_team_role")
 }
 
 enum SubscriptionStatus {
@@ -149,6 +156,8 @@ model Subscription {
   object Json?
 
   team Team[]
+
+  @@map("zs_subscription")
 }
 
 model Plan {
@@ -157,7 +166,7 @@ model Plan {
   priceId       String
   name          String   @unique
   friendlyName  String?
-  description   String?  @db.MediumText
+  description   String?  @db.Text
   price         Float
   paid          Boolean  @default(true)
   isDefaultPlan Boolean  @default(false)
@@ -165,18 +174,20 @@ model Plan {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  HTMLDescription String? @db.MediumText
-  HTMLFeatures    String? @db.MediumText
+  HTMLDescription String? @db.Text
+  HTMLFeatures    String? @db.Text
 
   isCustomPlan Boolean @default(false)
 
   subscriptions Subscription[]
+
+  @@map("zs_plan")
 }
 
 model AiAgent {
   id          String   @id @default(cuid())
   name        String
-  description String?  @db.MediumText
+  description String?  @db.Text
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   salt        String   @unique @default(cuid()) // for M2M
@@ -210,6 +221,7 @@ model AiAgent {
 
   @@unique([teamId, id])
   @@index([createdAt])
+  @@map("zs_ai_agent")
 }
 
 model AiAgentActivity {
@@ -224,6 +236,8 @@ model AiAgentActivity {
 
   aiAgent   AiAgent @relation(fields: [aiAgentId], references: [id], onDelete: Cascade)
   aiAgentId String
+
+  @@map("zs_ai_agent_activity")
 }
 
 model AiAgentContributor {
@@ -238,17 +252,20 @@ model AiAgentContributor {
   aiAgentId String
 
   @@unique([userId, aiAgentId])
+  @@map("zs_ai_agent_contributor")
 }
 
 model AiAgentSettings {
   id        Int      @id @default(autoincrement())
   key       String
-  value     String   @db.MediumText
+  value     String   @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   aiAgent   AiAgent @relation(fields: [aiAgentId], references: [id], onDelete: Cascade)
   aiAgentId String
+
+  @@map("zs_ai_agent_settings")
 }
 
 model AiAgentData {
@@ -259,6 +276,8 @@ model AiAgentData {
 
   aiAgent   AiAgent @relation(fields: [aiAgentId], references: [id], onDelete: Cascade)
   aiAgentId String  @unique
+
+  @@map("zs_ai_agent_data")
 }
 
 model AiAgentDeployment {
@@ -276,10 +295,11 @@ model AiAgentDeployment {
   majorVersion Int
   minorVersion Int
 
-  releaseNotes String? @db.MediumText
+  releaseNotes String? @db.Text
 
   @@unique([aiAgentId, majorVersion, minorVersion])
   @@index([id, aiAgentId])
+  @@map("zs_ai_agent_deployment")
 }
 
 model AiAgentState {
@@ -291,6 +311,8 @@ model AiAgentState {
 
   aiAgent   AiAgent @relation(fields: [aiAgentId], references: [id], onDelete: Cascade)
   aiAgentId String
+
+  @@map("zs_ai_agent_state")
 }
 
 model Embodiment {
@@ -302,6 +324,8 @@ model Embodiment {
 
   aiAgent   AiAgent @relation(fields: [aiAgentId], references: [id], onDelete: Cascade)
   aiAgentId String
+
+  @@map("zs_embodiment")
 }
 
 model AiAgentConversation {
@@ -309,7 +333,7 @@ model AiAgentConversation {
   label     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  summary   String?  @db.MediumText
+  summary   String?  @db.Text
 
   chunkSize   Int?
   lastChunkID String?
@@ -322,4 +346,6 @@ model AiAgentConversation {
 
   user    User? @relation(fields: [ownerId], references: [id], onDelete: SetNull)
   ownerId Int?
+
+  @@map("zs_ai_agent_conversation")
 }
