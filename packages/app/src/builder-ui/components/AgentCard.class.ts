@@ -890,7 +890,7 @@ export class AgentCard extends EventEmitter {
     ) {
       alert(
         'Unsupported Connection',
-        'You can only connect skill components directly to the agent. Please add a skill component first and then connect it to the agent card. <a href="https://smythos.com/documentation/#/" target="_blank" class="text-v2-blue underline hover:text-v2-blue/80">Read documentation</a>.',
+        'You can only connect skill components directly to the agent. Please add a skill component first and then connect it to the agent card. <a href="#" target="_blank" class="text-v2-blue underline hover:text-v2-blue/80">Read documentation</a>.',
         'OK',
         'error',
       );

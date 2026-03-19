@@ -474,7 +474,7 @@ export async function loadDynamicCompMenu({
   resetPrevItems = false,
 }: LoadCompParams) {
   let apiUrl = `${uiServer}/api/component/${compName}`;
-  let placeholderLogo = '/img/smythos-logo.png';
+  let placeholderLogo = '/img/zappstudio-logo.svg';
   let apiKey = '';
 
   if (compName === EXTENSION_COMP_NAMES.zapierAction) {

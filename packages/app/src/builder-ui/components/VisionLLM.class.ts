@@ -112,7 +112,7 @@ export class VisionLLM extends Component {
       model: {
         type: 'select',
         label: 'Model',
-        help: 'Choose a vision model for image understanding. <a href="https://smythos.com/docs/agent-studio/components/legacy/vision-llm/?utm_source=app&utm_medium=tooltip&utm_campaign=docs&utm_content=vision-llm-model#step-1-select-a-model" target="_blank" class="text-blue-600 hover:text-blue-800">See Model details</a>',
+        help: 'Choose a vision model for image understanding. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See Model details</a>',
         value: this.defaultModel,
         options: this.modelOptions,
         events: {

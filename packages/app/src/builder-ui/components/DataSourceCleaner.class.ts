@@ -56,7 +56,7 @@ export class DataSourceCleaner extends Component {
       id: {
         type: 'input',
         label: `source identifier`,
-        help: 'Enter the exact ID used during indexing (a–z, A–Z, 0–9, -, _, .). <a href="https://smythos.com/docs/agent-studio/components/rag-data/rag-forget/?utm_source=studio&utm_medium=tooltip&utm_campaign=rag-forget&utm_content=source-identifier#step-1-specify-the-target-data" target="_blank" class="text-blue-600 hover:text-blue-800">See how to find the ID</a>',
+        help: 'Enter the exact ID used during indexing (a–z, A–Z, 0–9, -, _, .). <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See how to find the ID</a>',
         value: '',
         validate: `custom=isValidId`,
         validateMessage: `It should contain only 'a-z', 'A-Z', '0-9', '-', '_', '.', `,

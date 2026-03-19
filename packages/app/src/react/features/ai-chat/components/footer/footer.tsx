@@ -16,7 +16,7 @@ export const Footer: FC = () => {
       </div>
 
       <h6 className="py-4 text-center text-xs text-gray-500">
-        SmythOS can make mistakes, always check your work. We don&apos;t store chat history, save
+        ZappStudio can make mistakes, always check your work. We don&apos;t store chat history, save
         important work.
       </h6>
     </div>

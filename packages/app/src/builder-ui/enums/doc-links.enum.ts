@@ -51,7 +51,7 @@ export enum ComponentDocLinks {
   //OpenAPI Integration Component
   GPTPlugin = '/agent-studio/integrations/openapi-integration',
 
-  //SmythOS Agent Integration Component
+  //ZappStudio Agent Integration Component
   AgentPlugin = '/agent-studio/integrations/smythos-agents-integration',
 
   //HuggingFace Integration Component

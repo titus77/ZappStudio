@@ -54,7 +54,9 @@ const config = {
     REDIS_SENTINEL_HOSTS: process.env.REDIS_SENTINEL_HOSTS,
     REDIS_MASTER_NAME: process.env.REDIS_MASTER_NAME,
     REDIS_PASSWORD: process.env.REDIS_PASSWORD,
-    PROD_AGENT_DOMAIN: process.env.PROD_AGENT_DOMAIN || 'agent.pstage.smyth.ai',
+    // Workflow AI agent URLs: zap.immo/wai/(tag) — utilise le domaine court ZappImmo
+    // TODO P4-WAI: Configurer le routage zap.immo/wai/(tag) dans Caddy → SRE runtime
+    PROD_AGENT_DOMAIN: process.env.PROD_AGENT_DOMAIN || 'zap.immo/wai',
     REDIS_HOST: process.env.REDIS_HOST,
     REDIS_PORT: process.env.REDIS_PORT,
     SMYTHOS_EDITION: process.env.SMYTHOS_EDITION,

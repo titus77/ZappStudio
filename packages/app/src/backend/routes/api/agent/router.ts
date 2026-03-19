@@ -244,7 +244,7 @@ router.get('/:id/explain', async (req, res) => {
 
 async function explain(json) {
   console.log('explain', json);
-  const systemContent = `SmythOS allows building complex AI powered workflows to solve enterprise problems.
+  const systemContent = `ZappStudio allows building complex AI powered workflows to solve enterprise problems.
 The workflows combine logical, algorithmic and AI building blocks to achieve complex task while reducing human intervention.
 
 Component

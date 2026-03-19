@@ -20,7 +20,7 @@ function withDocumentTitle<T extends object>(
   return (props: T) => {
     const { isProtectedRoute } = useAuthCtx();
     useEffect(() => {
-      document.title = title ? `${title} | SmythOS` : 'SmythOS';
+      document.title = title ? `${title} | ZappStudio` : 'ZappStudio';
     }, []);
 
 

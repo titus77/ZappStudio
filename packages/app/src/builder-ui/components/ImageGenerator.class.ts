@@ -129,7 +129,7 @@ export class ImageGenerator extends Component {
             label: '$ View Pricing',
             icon: 'dollar-sign',
             classes: 'text-gray-600 top-[-8px] right-6 hover:underline _model_pricing_link hidden',
-            tooltip: 'SmythOS charges based on input and output tokens',
+            tooltip: 'ZappStudio charges based on input and output tokens',
             events: {
               click: () => {
                 window.open(
@@ -189,7 +189,7 @@ export class ImageGenerator extends Component {
         validateMessage: `The length of the prompt must be between 2 and 2000 characters.`,
         class: 'mt-1',
         value: '{{Prompt}}',
-        help: 'Describe what to generate by describing the subject, style, and constraints. <a href="https://smythos.com/docs/agent-studio/components/base/image-generator/?utm_source=studio&utm_medium=tooltip&utm_campaign=image-generator&utm_content=prompt#step-2-define-inputs" target="_blank" class="text-blue-600 hover:text-blue-800">See prompt tips</a>',
+        help: 'Describe what to generate by describing the subject, style, and constraints. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See prompt tips</a>',
         tooltipClasses: 'w-56',
         attributes: {
           'data-template-vars': 'true',
@@ -399,7 +399,7 @@ function getGoogleAISettings(savedData: Record<string, any>) {
       type: 'select',
       withoutSearch: true,
       label: 'Person Generation',
-      help: 'Control if people can appear and which age groups are included. <a href="https://smythos.com/docs/agent-studio/components/base/image-generator/?utm_source=studio&utm_medium=tooltip&utm_campaign=image-generator&utm_content=person-generation#model-verification-and-troubleshooting" target="_blank" class="text-blue-600 hover:text-blue-800">See prompt tips</a>',
+      help: 'Control if people can appear and which age groups are included. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See prompt tips</a>',
       tooltipClasses: 'w-56',
       arrowClasses: '-ml-11',
       value: savedData.personGeneration || 'dont_allow',

@@ -1274,7 +1274,7 @@ function setupZoomOutButton() {
 
 function isPremiumPlan() {
   const planName: string = workspace?.userData?.subscription?.plan?.name ?? '';
-  const FREE_PLANS = new Set(['SmythOS Free', 'Builder']);
+  const FREE_PLANS = new Set(['ZappStudio Free', 'Builder']);
   return !FREE_PLANS.has(planName);
 }
 
@@ -1286,9 +1286,9 @@ function isEnterprisePlan() {
 function isLegacyPlan() {
   const planName: string = workspace?.userData?.subscription?.plan?.name ?? '';
   // Return true if the plan is NOT in LEGACY_PLANS,
-  // is NOT a custom plan, and is NOT "SmythOS Free"
+  // is NOT a custom plan, and is NOT "ZappStudio Free"
   return (
-    (!LEGACY_PLANS.has(planName) || planName === 'SmythOS Free') &&
+    (!LEGACY_PLANS.has(planName) || planName === 'ZappStudio Free') &&
     !planName.toLowerCase().includes('custom')
   );
 }

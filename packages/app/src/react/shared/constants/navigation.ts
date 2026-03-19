@@ -3,9 +3,15 @@ import { SMYTHOS_DOCS_URL } from '@src/shared/constants/general';
 // TODO: Delete this commented block once removal is confirmed. Discord & Academy links were removed from the app; code kept for traceability.
 import { BookIcon, /* DiscordIcon, */ HomeIcon, KeyIcon } from '../components/svgs';
 
-export const PRICING_PLAN_REDIRECT = 'https://smythos.com/pricing/';
+// Redirige vers la page billing ZappImmo (plan Elite requis pour Studio)
+// Le Studio tourne sur smythos.zapp.immo, le billing est sur le frontend principal
+const ZAPPIMMO_BASE = typeof window !== 'undefined'
+  ? (window as any).__ZAPPIMMO_URL || 'https://zapp.immo'
+  : 'https://zapp.immo';
 
-export const NEW_ENTERPRISE_PLAN_REDIRECT = 'https://smythos.com/pricing-enquiry/';
+export const PRICING_PLAN_REDIRECT = `${ZAPPIMMO_BASE}/dashboard/settings/billing`;
+
+export const NEW_ENTERPRISE_PLAN_REDIRECT = `${ZAPPIMMO_BASE}/dashboard/settings/billing`;
 
 export type SidebarMenuItem = {
   url: string;

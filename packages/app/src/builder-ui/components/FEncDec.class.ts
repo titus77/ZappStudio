@@ -18,7 +18,7 @@ export class FEncDec extends FunctionComponent {
         label: 'encoding',
         value: 'hex',
         options: encodings,
-        help: 'Choose the scheme: Base64 for binary, hex for hashes, UTF-8 for text. <a href="https://smythos.com/docs/agent-studio/components/crypto/encode-decode/?utm_source=studio&utm_medium=tooltip&utm_campaign=encode-decode&utm_content=encoding#step-1-select-an-action-and-encoding-method" target="_blank" class="text-blue-600 hover:text-blue-800">See common schemes</a>',
+        help: 'Choose the scheme: Base64 for binary, hex for hashes, UTF-8 for text. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See common schemes</a>',
         tooltipClasses: 'w-56',
       },
     };

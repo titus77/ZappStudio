@@ -12,7 +12,7 @@ export class SmythOsDeployer extends AbstractDeployer {
 
     const aggregatedSettings = params.aiAgent.settings.reduce((acc, setting) => ({ ...acc, [setting.key]: setting.value }), {});
 
-    // if no distribution id is provided, deploy on SmythOS
+    // if no distribution id is provided, deploy on ZappStudio
     const _newDeployment = await params.tx.aiAgentDeployment.create({
       data: {
         aiAgent: {

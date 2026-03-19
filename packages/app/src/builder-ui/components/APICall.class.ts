@@ -232,7 +232,7 @@ export class APICall extends Component {
         label: 'Authentication Service',
         section: 'OAuth',
         sectionHelp:
-          'Sign in once and let tokens attach to your calls automatically. <a href="https://smythos.com/docs/agent-studio/components/advanced/api-call/?utm_source=studio&utm_medium=tooltip&utm_campaign=api-call&utm_content=url#step-3-add-authentication" target="_blank" class="text-blue-600 hover:text-blue-800">See OAuth setup</a>',
+          'Sign in once and let tokens attach to your calls automatically. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See OAuth setup</a>',
         sectionTooltipClasses: 'w-64',
         sectionArrowClasses: '-ml-11',
         options: [...OAUTH_SERVICES],

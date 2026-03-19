@@ -32,7 +32,7 @@ const learnCards: LearnCardProps[] = [
 export const Learn = () => {
   return (
     <div className="my-10 pb-3">
-      <h3 className="text-lg">Learn SmythOS</h3>
+      <h3 className="text-lg">Learn ZappStudio</h3>
       <div className="mt-4 flex flex-wrap gap-4">
         {learnCards.map((card) => (
           <LearnCard key={card.title} {...card} />

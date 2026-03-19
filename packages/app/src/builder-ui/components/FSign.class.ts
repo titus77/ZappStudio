@@ -18,7 +18,7 @@ export class FSign extends FunctionComponent {
       dataTransform: {
         type: 'select',
         label: 'Data Transform',
-        help: 'Prepare the data to sign: raw bytes, JSON stringify, or a canonical form. <a href="https://smythos.com/docs/agent-studio/components/crypto/sign/?utm_source=studio&utm_medium=tooltip&utm_campaign=sign&utm_content=data-transform#data-canonicalization" target="_blank" class="text-blue-600 hover:text-blue-800">See canonical formats</a>',
+        help: 'Prepare the data to sign: raw bytes, JSON stringify, or a canonical form. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See canonical formats</a>',
         //hint: 'Action to perform',
         value: 'Stringify',
         options: ['Stringify', 'Querystring'],

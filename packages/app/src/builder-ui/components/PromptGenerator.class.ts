@@ -296,7 +296,7 @@ export class PromptGenerator extends Component {
         class: 'mt-1',
         validateMessage: `Please provide a prompt. It's required!`,
         value: 'Summarize the input text\nInput : {{Input}}',
-        help: 'Write clear instructions with placeholders (e.g., {{input}}) and state the expected format. <a href="https://smythos.com/docs/agent-studio/components/advanced/llm-assistant/?utm_source=app&utm_medium=component&utm_campaign=docs&utm_content=llm-prompt-legacy#step-2-define-the-behavior" target="_blank" class="text-blue-600 hover:text-blue-800">See prompt templates</a>',
+        help: 'Write clear instructions with placeholders (e.g., {{input}}) and state the expected format. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See prompt templates</a>',
         attributes: { 'data-template-vars': 'true', 'data-supported-models': 'all' },
       },
       maxContextTokens: {

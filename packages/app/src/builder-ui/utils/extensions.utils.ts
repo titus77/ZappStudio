@@ -210,7 +210,7 @@ export async function renderExtensions({
   for (const extension of extensions) {
     const data = await _getExtensionInfo(compName, extension);
 
-    const placeholderLogo = '/img/smythos-logo.png';
+    const placeholderLogo = '/img/zappstudio-logo.svg';
 
     const isAdded = window['SMYTH_EXTENSION_IDS'][compName]?.includes(data?.id);
 
@@ -457,7 +457,7 @@ export const getExtensionCompLabel = (compName: string): string => {
       label = 'OpenAPI';
       break;
     case EXTENSION_COMP_NAMES.agentPlugin:
-      label = 'My SmythOS Agents';
+      label = 'My ZappStudio Agents';
       break;
     case EXTENSION_COMP_NAMES.huggingFaceModel:
       label = 'Hugging Face Model';

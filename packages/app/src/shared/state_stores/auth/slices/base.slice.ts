@@ -173,8 +173,8 @@ export const baseSlice: StateCreator<AuthStore, [], [], AuthSlice> = (set, get) 
           currentUserTeamMembers: thisTeamData.members,
           parentTeamRoles: thisTeamParentData.roles,
           parentTeamMembers: thisTeamParentData.members,
-          isStarterUser: subs.plan.name === 'SmythOS Starter',
-          isProUser: subs.plan.name === 'SmythOS PRO',
+          isStarterUser: subs.plan.name === 'ZappStudio Starter',
+          isProUser: subs.plan.name === 'ZappStudio PRO',
           isPremiumUser: subs.plan.name === 'Premium',
           isEnterpriseUser: subs.plan.name.includes('Enterprise'),
           isCustomUser:

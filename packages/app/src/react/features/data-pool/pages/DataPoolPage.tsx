@@ -199,7 +199,7 @@ const DataPoolPageContent: FC = () => {
                     Create your first data space
                   </h4>
                   <p className="mb-8 text-sm md:text-base text-gray-600">
-                    Use data space to import your external data into SmythOS.
+                    Use data space to import your external data into ZappStudio.
                   </p>
                   <div className="flex justify-between items-center gap-4 mt-2 w-full flex-col md:flex-row">
                     <CustomButton

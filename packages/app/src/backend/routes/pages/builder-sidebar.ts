@@ -88,7 +88,7 @@ const baseMenu: Menu = {
 
   /* Menu item empty means component will be added dynamically */
   GPTPlugin: { label: 'OpenAPI', type: 'dynamic', actionLabel: 'Import' },
-  AgentPlugin: { label: 'SmythOS Agents', type: 'dynamic', actionLabel: 'Import' },
+  AgentPlugin: { label: 'ZappStudio Agents', type: 'dynamic', actionLabel: 'Import' },
   HuggingFace: { label: 'Hugging Face', type: 'dynamic', actionLabel: 'Import' },
   ZapierAction: {
     label: 'Zapier AI Actions (AI alpha)',

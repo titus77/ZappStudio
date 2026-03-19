@@ -16,7 +16,7 @@ const OnboardingCompletedModal = (props: Props) => {
         <div className="text-3xl font-bold text-center">Congratulations!</div>
         <div className="mt-3 text-gray-900 text-lg text-center">
           You've successfully completed all the items on your checklist. This marks an important
-          milestone in your SmythOS journey.
+          milestone in your ZappStudio journey.
         </div>
       </div>
     </Modal>

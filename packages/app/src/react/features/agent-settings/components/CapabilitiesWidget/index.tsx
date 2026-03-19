@@ -40,7 +40,7 @@ const CapabilitiesWidget = ({ isOnPaidPlan: isSubscribedToPlan, isWriteAccess }:
                     <Info className="w-4 h-4" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-[240px] text-center text-wrap">
-                    <p>Agent Skills in SmythOS define the capabilities of an agent. Each skill is added through the Agent Skill component</p>
+                    <p>Agent Skills in ZappStudio define the capabilities of an agent. Each skill is added through the Agent Skill component</p>
                   </TooltipContent>
                 </Tooltip>
               </h3>

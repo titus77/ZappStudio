@@ -25,8 +25,8 @@ const AccountDeletedPage = () => {
 
         <p className="text-center mt-4">
           If you have any feedback or need help, please reach out to us at{' '}
-          <a href="mailto:hello@smythos.com" className="text-primary-100">
-            hello@smythos.com
+          <a href="mailto:hello@zapp.immo" className="text-primary-100">
+            hello@zapp.immo
           </a>
           .
         </p>

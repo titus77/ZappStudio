@@ -108,7 +108,7 @@ const statusBadgeConfigs: Record<ModelStatus, BadgeConfig> = {
       'text-gray-700 border-gray-700 [.drop-container_&]:bg-gray-700 [.drop-container_&]:text-gray-100',
   },
   smythos: {
-    label: 'SmythOS',
+    label: 'ZappStudio',
     icon: '',
     classes:
       'text-gray-700 border-gray-700 [.drop-container_&]:bg-gray-700 [.drop-container_&]:text-gray-100',

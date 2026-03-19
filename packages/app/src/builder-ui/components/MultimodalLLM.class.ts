@@ -119,7 +119,7 @@ export class MultimodalLLM extends Component {
       model: {
         type: 'select',
         label: 'Model',
-        help: 'Select a multimodal model for text plus images, audio, or video. <a href="https://smythos.com/docs/agent-studio/components/legacy/multimodal-llm/?utm_source=app&utm_medium=tooltip&utm_campaign=docs&utm_content=multimodal-llm" target="_blank" class="text-blue-600 hover:text-blue-800">See limits and file types</a>',
+        help: 'Select a multimodal model for text plus images, audio, or video. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See limits and file types</a>',
         value: this.defaultModel,
         options: this.modelOptions,
         events: {

@@ -5,12 +5,12 @@ export const defaultAuthMiddleware = (req: Request, res: Response, next: NextFun
   req.user = {
     id: '1',
     // @ts-ignore
-    email: 'admin@smythos.com',
+    email: 'admin@zapp.immo',
     role: 'admin',
     accessToken: 'UI_AUTH_TOKEN',
     isAuthenticated: true,
     claims: {
-      email: 'admin@smythos.com',
+      email: 'admin@zapp.immo',
       id: '1',
       sub: '1',
     },

@@ -177,18 +177,18 @@ export class LLMRegistry {
    *
    * Sorting priority (in order):
    * 1. Exclusion group: Non-excluded models come first, then Legacy, Deprecated, Retired, Removed
-   * 2. Regular tag priority: Enterprise → Custom → Personal → SmythOS → Default (maintained within each exclusion group)
+   * 2. Regular tag priority: Enterprise → Custom → Personal → ZappStudio → Default (maintained within each exclusion group)
    * 3. Provider order: OpenAI → Anthropic → GoogleAI → Perplexity → TogetherAI → Others
    * 4. 'new' tag priority: Models with 'new' tag come first within each group
    * 5. Alphabetically by label (tie-breaker)
    *
    * Example order:
    * - Personal GPT-4 (non-excluded)
-   * - SmythOS Claude (non-excluded)
+   * - ZappStudio Claude (non-excluded)
    * - Personal GPT-3 (Legacy)
-   * - SmythOS GPT-3.5 (Legacy)
+   * - ZappStudio GPT-3.5 (Legacy)
    * - Personal GPT-1 (Deprecated)
-   * - SmythOS GPT-2 (Deprecated)
+   * - ZappStudio GPT-2 (Deprecated)
    *
    * @param models - Array of LLMModel objects to sort
    * @returns New sorted array of models (does not mutate the original array)
@@ -276,7 +276,7 @@ export class LLMRegistry {
       }
 
       // Second level: Within the same exclusion group, sort by regular tag priority
-      // (Enterprise → Custom → Personal → SmythOS → Default)
+      // (Enterprise → Custom → Personal → ZappStudio → Default)
       const aRegularTagWeight = getHighestPriorityRegularTag(a.tags);
       const bRegularTagWeight = getHighestPriorityRegularTag(b.tags);
 

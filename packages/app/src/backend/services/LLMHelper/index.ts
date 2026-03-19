@@ -69,7 +69,7 @@ async function getUserLLMModels(req: Request) {
         enabled = false;
       }
 
-      // V2: only applicable for GenAI LLM and SmythOS models
+      // V2: only applicable for GenAI LLM and ZappStudio models
       if (modelEntryId.startsWith('smythos/')) {
         enabled = enabled && enabledSmythOSProviders.includes(modelTpl?.provider?.toLowerCase());
       }
@@ -106,7 +106,7 @@ async function getUserLLMModels(req: Request) {
 }
 
 /**
- * Gets the list of enabled SmythOS LLM providers for the team
+ * Gets the list of enabled ZappStudio LLM providers for the team
  * @param req - Express Request object containing team information
  * @returns Array of enabled provider names in lowercase
  */

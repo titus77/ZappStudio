@@ -188,7 +188,7 @@ export function VectorDatabases() {
                         {connection.isManaged && (
                           <span
                             className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 border border-blue-200 ml-2 shadow-sm"
-                            title="This is an internal connection automatically managed by SmythOS"
+                            title="This is an internal connection automatically managed by ZappStudio"
                           >
                             <svg
                               className="w-3 h-3 mr-1 text-blue-400"

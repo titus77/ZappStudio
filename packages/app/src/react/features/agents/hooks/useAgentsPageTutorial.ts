@@ -89,7 +89,7 @@ export function useAgentsPageTutorial(options: UseAgentsPageTutorialOptions = {}
           {
             element: 'main',
             popover: {
-              title: '<strong>Welcome to SmythOS</strong>',
+              title: '<strong>Welcome to ZappStudio</strong>',
               description:
                 'This is your team dashboard where you can manage AI agents, access templates, and organize your work.',
               position: 'center',
@@ -102,7 +102,7 @@ export function useAgentsPageTutorial(options: UseAgentsPageTutorialOptions = {}
             popover: {
               title: '<strong>Main Navigation</strong>',
               description:
-                'Use this sidebar to navigate between different sections of SmythOS including Home, Templates, Data Pool, Analytics, Vault, and more.',
+                'Use this sidebar to navigate between different sections of ZappStudio including Home, Templates, Data Pool, Analytics, Vault, and more.',
               position: 'right',
               align: 'start',
               highlight: true,

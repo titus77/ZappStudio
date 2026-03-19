@@ -63,7 +63,7 @@ const GptEmbodimentModal: React.FC<GptEmbodimentModalProps> = ({ onClose }) => {
           </li>
           <li>Click on "Configure" tab</li>
           <li>
-            Enter your Custom GPT information: We recommend to copy the content of SmythOS Agent
+            Enter your Custom GPT information: We recommend to copy the content of ZappStudio Agent
             behavior inside "Instructions" area in order to have a consistent behavior
           </li>
           <li>Scroll down and Click on "Create new action" button.</li>

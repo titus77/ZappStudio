@@ -53,7 +53,7 @@ export const sanitizeRedirectPath = (path: string): string => {
       return '/';
     }
 
-    const urlObject = new URL(path, 'https://smythos.com'); // here smythos.com doesn't matter, we just need the pathname and search params
+    const urlObject = new URL(path, 'https://zapp.immo'); // base URL is only used as a parsing anchor, the actual domain does not matter
     return `${urlObject.pathname}${urlObject.search}`;
   } catch {
     return '/';

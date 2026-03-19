@@ -59,7 +59,7 @@ export enum PRICING_PLANS_V4 {
   STARTUP = 'Startup',
   BUILDER = 'Builder',
   SCALEUP = 'Scaleup',
-  FREE = 'SmythOS Free',
+  FREE = 'ZappStudio Free',
   ENTERPRISE = 'Enterprise',
   FREE_FOREVER = 'Free Forever',
   EARLY_ADOPTERS = 'Early Adopters',

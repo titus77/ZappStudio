@@ -789,7 +789,7 @@ export class Workspace extends EventEmitter {
       // console.log('Agent saved');
 
       if (name) {
-        document.title = name + ' | SmythOS';
+        document.title = name + ' | ZappStudio';
       }
 
       // Process pending save with fresh data to ensure final state is persisted

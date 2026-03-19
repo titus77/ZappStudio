@@ -21,7 +21,7 @@ export const ImageSettingsConfig = {
         change: async (event: MouseEvent) => {
           const currentElement = event?.target as HTMLInputElement;
 
-          // #region Hide show pricing link for SmythOS models
+          // #region Hide show pricing link for ZappStudio models
           const formGroupElm = currentElement.closest('.form-group');
           const pricingLinkElm = formGroupElm?.querySelector(
             '.field-action-btn._model_pricing_link',
@@ -39,7 +39,7 @@ export const ImageSettingsConfig = {
           label: '$ View Pricing',
           icon: 'dollar-sign',
           classes: 'text-gray-600 top-[-8px] right-6 hover:underline _model_pricing_link hidden',
-          tooltip: 'SmythOS charges based on input and output tokens',
+          tooltip: 'ZappStudio charges based on input and output tokens',
           events: {
             click: () => {
               window.open(

@@ -370,7 +370,7 @@ export class GenAILLM extends Component {
       model: {
         type: 'select',
         label: 'Select a Model',
-        help: 'Choose the <a href="https://smythos.com/docs/agent-studio/components/base/gen-ai-llm/?utm_source=studio&utm_medium=tooltip&utm_campaign=genai-llm&utm_content=model#step-1-choose-a-model" target="_blank" class="text-blue-600 hover:text-blue-800">model</a> that will generate and interpret text.',
+        help: 'Choose the <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">model</a> that will generate and interpret text.',
         hintPosition: 'after_label',
         tooltipClasses: 'w-56 ',
         arrowClasses: '-ml-11',
@@ -385,7 +385,7 @@ export class GenAILLM extends Component {
             const currentElement = event.target as HTMLSelectElement;
             await this.modelChangeHandler(currentElement);
 
-            // #region Hide show pricing link for SmythOS models
+            // #region Hide show pricing link for ZappStudio models
             const formGroupElm = currentElement.closest('.form-group');
             const pricingLinkElm = formGroupElm?.querySelector(
               '.field-action-btn._model_pricing_link',
@@ -495,7 +495,7 @@ export class GenAILLM extends Component {
             classes:
               'text-gray-600 top-[-8px] right-[-80px] shadow-none hover:underline _model_pricing_link hidden',
             tooltip: {
-              text: 'SmythOS charges based on input and output tokens',
+              text: 'ZappStudio charges based on input and output tokens',
               position: 'left',
             },
             events: {
@@ -516,7 +516,7 @@ export class GenAILLM extends Component {
         validate: `required`, // Omit maximum length, as the tokens counted in backend may be different from the frontend.
         validateMessage: `Please provide a prompt. It's required!`,
         value: defaultPromptValue,
-        help: 'Write clear instructions with placeholders (e.g., {{input}}) and state the expected format. <a href="https://smythos.com/docs/agent-studio/components/base/gen-ai-llm/?utm_source=studio&utm_medium=tooltip&utm_campaign=genai-llm&utm_content=prompt#step-2-write-your-prompt" target="_blank" class="text-blue-600 hover:text-blue-800">Go to Docs</a>',
+        help: 'Write clear instructions with placeholders (e.g., {{input}}) and state the expected format. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">Go to Docs</a>',
         tooltipClasses: 'w-56 ',
         hintPosition: 'after_label',
         attributes: {
@@ -619,7 +619,7 @@ export class GenAILLM extends Component {
             'OpenAI,Anthropic,GoogleAI,Groq,xAI,TogetherAI,VertexAI,Bedrock,Perplexity,cohere,Ollama',
         },
         section: 'Advanced',
-        help: 'Limit reply length to manage cost and avoid cutoffs. <a href="https://smythos.com/docs/agent-studio/components/base/gen-ai-llm/?utm_source=studio&utm_medium=tooltip&utm_campaign=genai-llm&utm_content=context-window-size#step-4-configure-advanced-settings" target="_blank" class="text-blue-600 hover:text-blue-800">See token limits</a>',
+        help: 'Limit reply length to manage cost and avoid cutoffs. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See token limits</a>',
         tooltipClasses: 'w-56 ',
         arrowClasses: '-ml-11',
       },
@@ -638,7 +638,7 @@ export class GenAILLM extends Component {
           ].join(','),
         },
         section: 'Advanced',
-        help: 'End output when any of the stop strings (sequence of up to 4 strings) appear. <a href="https://smythos.com/docs/agent-studio/components/base/gen-ai-llm/?utm_source=studio&utm_medium=tooltip&utm_campaign=genai-llm&utm_content=stop-sequence#step-4-configure-advanced-settings" target="_blank" class="text-blue-600 hover:text-blue-800">See stopping examples</a>',
+        help: 'End output when any of the stop strings (sequence of up to 4 strings) appear. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See stopping examples</a>',
         tooltipClasses: 'w-56 ',
         arrowClasses: '-ml-11',
         hint: 'Input a sequence and press Enter, Space, or Comma to add it to the list.',
@@ -784,7 +784,7 @@ export class GenAILLM extends Component {
           'data-supported-models':
             'OpenAI,Anthropic,GoogleAI,Groq,xAI,TogetherAI,VertexAI,Bedrock,cohere,Ollama,Echo',
         }, // TODO: After implementing stream request with Perplexity, we can say 'all' for the supported models
-        help: 'Stream the response live to chat, or turn off for batch runs. <a href="https://smythos.com/docs/agent-studio/components/base/gen-ai-llm/?utm_source=studio&utm_medium=tooltip&utm_campaign=genai-llm&utm_content=passthrough#step-4-configure-advanced-settings" target="_blank" class="text-blue-600 hover:text-blue-800">See passthrough details</a>',
+        help: 'Stream the response live to chat, or turn off for batch runs. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See passthrough details</a>',
         section: 'Advanced',
         tooltipClasses: 'w-56 ',
         arrowClasses: '-ml-11',

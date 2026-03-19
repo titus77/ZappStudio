@@ -140,7 +140,7 @@ export const Sidebar: React.FC = () => {
           isCollapsed ? 'w-16' : 'w-64',
         )}
       >
-        <img src="/img/smythos-text.svg" alt="SmythOS" className="w-0 h-0 pointer-events-none" />
+        <img src="/img/zappstudio-logo.svg" alt="ZappStudio" className="w-0 h-0 pointer-events-none" />
         <div
           className={classNames('flex items-center h-16 p-5', {
             'items-center': !showCustomLogo,
@@ -169,16 +169,16 @@ export const Sidebar: React.FC = () => {
               ) : (
                 <>
                   <img
-                    src="/img/smythos-logo.png"
+                    src="/img/zappstudio-logo.svg"
                     className={classNames('h-6', {
                       'w-6': isCollapsed,
                       'w-28': !isCollapsed,
                     })}
-                    alt="SmythOS"
+                    alt="ZappStudio"
                   />
                   <img
-                    src="/img/smythos-text.svg"
-                    alt="SmythOS"
+                    src="/img/zappstudio-logo.svg"
+                    alt="ZappStudio"
                     className={classNames(
                       'ml-3 h-6 w-auto transition-all duration-300',
                       isCollapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto',

@@ -29,10 +29,10 @@ interface LovableEmbodimentModalProps {
 export default function LovableEmbodimentModal({
   onClose,
   workflowEndpoint = {
-    server: 'https://cmdrhk9f2kwomjn6vfrclmvhc.agent.a.smyth.ai',
+    server: 'https://zap.immo/wai/demo-agent',
     method: 'GET',
     endpointName: 'get_cat_fact',
-    fullUrl: 'https://cmdrhk9f2kwomjn6vfrclmvhc.agent.a.smyth.ai/api/get_cat_fact',
+    fullUrl: 'https://zap.immo/wai/demo-agent/api/get_cat_fact',
     description:
       'Use the below endpoint to retrieve a random cat fact. Send a GET request to the full URL. Parse the JSON response and extract the value of "cat_fact".',
     responseFormat: 'JSON',
@@ -97,7 +97,7 @@ ${workflowEndpoint.exampleResponse}`;
               <CollapsibleContent className="pl-6 pt-2">
                 <p className="text-sm text-muted-foreground">
                   Navigate to your Lovable project dashboard and open the project where you want to
-                  integrate this SmythOS agent.
+                  integrate this ZappStudio agent.
                 </p>
               </CollapsibleContent>
             </Collapsible>

@@ -52,9 +52,9 @@ export const builderPageTutorialWorkflow = async () => {
     {
       element: '#workspace-container',
       popover: {
-        title: '<strong>Welcome to SmythOS Builder</strong>',
+        title: '<strong>Welcome to ZappStudio Builder</strong>',
         description:
-          "Welcome to the <strong>SmythOS Builder</strong>! This is your visual canvas where you'll create powerful AI agents by connecting components. Drag, drop, and connect elements to build sophisticated workflows.",
+          "Welcome to the <strong>ZappStudio Builder</strong>! This is your visual canvas where you'll create powerful AI agents by connecting components. Drag, drop, and connect elements to build sophisticated workflows.",
         preferredPosition: 'center',
         alignment: 'center',
         className: 'welcome-builder',

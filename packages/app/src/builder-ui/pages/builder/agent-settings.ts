@@ -341,7 +341,7 @@ async function loadAgent(agentId = null) {
 
   // update tab title with agent name
   if (workspace.agent?.name) {
-    document.title = workspace.agent.name + ' | SmythOS';
+    document.title = workspace.agent.name + ' | ZappStudio';
   }
 
   //const pageName = document.location.pathname.startsWith('/builder') ? '/builder/' : '/studio/';
@@ -806,7 +806,7 @@ export async function openChatGPTEmbodiment() {
         <ul class="steps">
             <li><a href="https://chatgpt.com/gpts" target="_blank">Click Here</a> to Create a custom GPT from chatGPT interface.</li>
             <li>Click on "Configure" tab</li>
-            <li>Enter your Custom GPT information: We recommend to copy the content of SmythOS Agent behavior inside "Instructions" area in order to have a consistent behavior</li>
+            <li>Enter your Custom GPT information: We recommend to copy the content of ZappStudio Agent behavior inside "Instructions" area in order to have a consistent behavior</li>
             <li>Scroll down and Click on "Create new action" button.<br />
             ${testDomain
       ? '<li>Click Import URL and enter the following URL if you want to use your test agent: ' +
@@ -879,7 +879,7 @@ export async function openPostmanEmbodiment() {
         </div>
         &nbsp;<br />
         <p>
-        When you use the test agent, you can enable the debug mode to capture incoming requests to your agent, in this case, the request will remain stuck until you attach the debugger and run the workflow from SmythOS builder.<a href="${SMYTHOS_DOCS_URL}/agent-studio/build-agents/debugging" target="_blank"> Learn more</a>
+        When you use the test agent, you can enable the debug mode to capture incoming requests to your agent, in this case, the request will remain stuck until you attach the debugger and run the workflow from ZappStudio builder.<a href="${SMYTHOS_DOCS_URL}/agent-studio/build-agents/debugging" target="_blank"> Learn more</a>
         </p>
         &nbsp;<br />
         <h2>Importing Postman Collection to Agent</h2>

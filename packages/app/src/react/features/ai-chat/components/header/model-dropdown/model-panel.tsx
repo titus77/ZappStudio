@@ -41,7 +41,7 @@ export const ModelPanel: FC<IProps> = ({ models, currentModel, providerIndex, on
               <span
                 className={cn(
                   'text-[10px] rounded-full px-1.5',
-                  badge === 'SmythOS'
+                  badge === 'ZappStudio'
                     ? 'bg-primary-100/50 text-slate-700'
                     : 'bg-primary-300 text-slate-700',
                 )}

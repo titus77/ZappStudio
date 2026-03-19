@@ -29,7 +29,7 @@ export const GLOBAL_VAULT_KEYS = {
     name: 'OpenAI',
     key: '',
     placeholder:
-      'SmythOS provides the Key to get you started. Unlock full access by adding your API key.',
+      'ZappStudio provides the Key to get you started. Unlock full access by adding your API key.',
   },
   anthropic: {
     name: 'Anthropic',
@@ -197,9 +197,9 @@ export const COMP_NAMES = {
  */
 export const LEGACY_PLANS = new Set([
   'Early Adopters',
-  'SmythOS PRO',
-  'SmythOS Free',
-  'SmythOS Starter',
+  'ZappStudio PRO',
+  'ZappStudio Free',
+  'ZappStudio Starter',
   'Premium',
   'Enterprise',
 ]);
@@ -222,4 +222,7 @@ export const PAGE_TITLE_MAP: Record<string, string> = {
   '/agents': 'Team Dashboard', // Base title, will be customized with team name in component
 };
 
-export const SMYTHOS_DOCS_URL = `https://smythos.com/docs`;
+// TODO P4-DOCS: Mettre en place la documentation ZappStudio en français.
+// Structure cible: docs.zapp.immo/studio/ avec guides agent builder,
+// composants, déploiement, API, intégrations ZappImmo.
+export const SMYTHOS_DOCS_URL = `https://zapp.immo/docs/studio`;

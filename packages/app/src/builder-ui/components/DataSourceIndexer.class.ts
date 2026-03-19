@@ -57,7 +57,7 @@ export class DataSourceIndexer extends Component {
       id: {
         type: 'input',
         label: `source identifier`,
-        help: 'Stable unique ID for this source; allowed: a–z, A–Z, 0–9, -, _, .; reusing updates the existing entry. <a href="https://smythos.com/docs/agent-studio/components/rag-data/rag-remember/?utm_source=studio&utm_medium=tooltip&utm_campaign=rag-remember&utm_content=source-identifier#step-1-define-the-namespace-and-source-details" target="_blank" class="text-blue-600 hover:text-blue-800">See ID rules</a>',
+        help: 'Stable unique ID for this source; allowed: a–z, A–Z, 0–9, -, _, .; reusing updates the existing entry. <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800">See ID rules</a>',
         attributes: { 'data-template-vars': 'true' },
         validate: `custom=isValidId`,
         validateMessage: `It should contain only 'a-z', 'A-Z', '0-9', '-', '_', '.' `,

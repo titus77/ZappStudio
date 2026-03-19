@@ -52,7 +52,7 @@ export interface PlanProperties {
   };
 }
 
-export type PlanNames = 'Early Adopters' | 'SmythOS Starter' | 'SmythOS PRO' | 'SmythOS Free';
+export type PlanNames = 'Early Adopters' | 'ZappStudio Starter' | 'ZappStudio PRO' | 'ZappStudio Free';
 
 interface StripeObject {
   id: string;

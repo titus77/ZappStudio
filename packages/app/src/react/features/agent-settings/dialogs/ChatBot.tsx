@@ -652,7 +652,7 @@ const ChatBotDialog = ({
                                     }}
                                   >
                                     <img
-                                      src={props.values?.icon || '/img/smythos-logo.png'}
+                                      src={props.values?.icon || '/img/zappstudio-logo.svg'}
                                       alt="logo"
                                       width={40}
                                       height={40}

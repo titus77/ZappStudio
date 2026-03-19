@@ -31,4 +31,4 @@ export interface WebhookCommand {
   execute(event: Stripe.EventBase & { [key: string]: any }): Promise<{ success: boolean; [key: string]: any }>;
 }
 
-export type PlanNames = 'Early Adopters' | 'SmythOS Starter' | 'SmythOS PRO' | 'SmythOS Free';
+export type PlanNames = 'Early Adopters' | 'ZappStudio Starter' | 'ZappStudio PRO' | 'ZappStudio Free';

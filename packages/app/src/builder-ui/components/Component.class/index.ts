@@ -3635,7 +3635,7 @@ function addMissingKey({
       fields,
       content: `<span class="text-xs text-gray-500 block mb-4">The component <span class="font-bold">${
         component?.title || ''
-      }</span> requires an API key to function. Please retrieve your API key from the provider and securely store it in the SmythOS vault.</span>`,
+      }</span> requires an API key to function. Please retrieve your API key from the provider and securely store it in the ZappStudio vault.</span>`,
       actions: [setMockDataAction, saveAction],
       onCloseClick: (_, dialog) => {
         closeTwDialog(dialog);
