@@ -167,7 +167,7 @@ export class oAuthSettings {
         if (event.data?.data?.message) {
           errorToast(
             `Authentication failed. Recheck your configuration. ${event.data.data.message}`,
-            'Error',
+            'Erreur',
             'alert',
           );
         }
@@ -224,13 +224,13 @@ export class oAuthSettings {
    */
   private async collectAndConsoleOAuthValues(event: Event): Promise<void> {
     if (!this.oauthService || !this.uiHelper) {
-      errorToast('OAuth service not initialized', 'Error', 'alert');
+      errorToast('OAuth service not initialized', 'Erreur', 'alert');
       return;
     }
 
     const selectedConnectionId = this.component.data[this.setting_name];
     if (selectedConnectionId === 'None' || !selectedConnectionId) {
-      errorToast('Please select a valid OAuth Connection first', 'Error', 'alert');
+      errorToast('Please select a valid OAuth Connection first', 'Erreur', 'alert');
       return;
     }
 
@@ -279,7 +279,7 @@ export class oAuthSettings {
    */
   private async signOutFunction(button: HTMLButtonElement): Promise<void> {
     if (!this.oauthService || !this.uiHelper) {
-      errorToast('OAuth service not initialized', 'Error', 'alert');
+      errorToast('OAuth service not initialized', 'Erreur', 'alert');
       return;
     }
 
@@ -301,7 +301,7 @@ export class oAuthSettings {
    */
   private async handleOAuthConnectionAction(currentValue: string): Promise<void> {
     if (!this.oauthService || !this.uiHelper) {
-      errorToast('OAuth service not initialized', 'Error', 'alert');
+      errorToast('OAuth service not initialized', 'Erreur', 'alert');
       return;
     }
 
@@ -330,7 +330,7 @@ export class oAuthSettings {
       );
     } catch (error) {
       console.error('Error handling OAuth connection action:', error);
-      errorToast('Error managing connection. Please try again.', 'Error', 'alert');
+      errorToast('Error managing connection. Please try again.', 'Erreur', 'alert');
     }
   }
 

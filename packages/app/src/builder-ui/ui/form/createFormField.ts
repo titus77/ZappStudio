@@ -977,7 +977,7 @@ function createTemplateVarToggle(
       'End',
       'Tab',
       'Backspace',
-      'Delete',
+      'Supprimer',
     ];
     const isCtrlCmd = e.ctrlKey || e.metaKey;
     const isSelectionKey =

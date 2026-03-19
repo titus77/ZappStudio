@@ -178,7 +178,7 @@ async function _editValueDialog({
       fields: modelInfoFields,
       actions: [
         {
-          label: 'Next',
+          label: 'Suivant',
           cssClass: 'bg-smyth-emerald-400 cursor-pointer',
           requiresValidation: true,
           callback: async (modelInfo, modelInfoDialog) => {

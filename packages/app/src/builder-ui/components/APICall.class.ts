@@ -556,13 +556,13 @@ export class APICall extends Component {
   private async collectAndConsoleOAuthValues(event) {
     const selectedConnectionId = this.data.oauth_con_id;
     if (selectedConnectionId === 'None' || !selectedConnectionId) {
-      errorToast('Please select a valid OAuth Connection first', 'Error', 'alert');
+      errorToast('Please select a valid OAuth Connection first', 'Erreur', 'alert');
       return;
     }
 
     // Ensure connections are loaded (they should be by the time this is clicked)
     if (!this.oauthConnections) {
-      errorToast('OAuth connections not loaded. Please wait or refresh.', 'Error', 'alert');
+      errorToast('OAuth connections not loaded. Please wait or refresh.', 'Erreur', 'alert');
       console.error('OAuth connections not loaded.');
       return;
     }
@@ -575,7 +575,7 @@ export class APICall extends Component {
     // console.log('[OAuth Auth] Synthesized oauth_info:', synthesizedOauthInfo);
 
     if (!selectedConnection || !synthesizedOauthInfo) {
-      errorToast('Selected OAuth connection details not found.', 'Error', 'alert');
+      errorToast('Selected OAuth connection details not found.', 'Erreur', 'alert');
       console.error(
         'Selected connection or its oauth_info not found for ID:',
         selectedConnectionId,
@@ -590,7 +590,7 @@ export class APICall extends Component {
       console.error('[OAuth Auth] Missing service field in oauth_info:', synthesizedOauthInfo);
       errorToast(
         'OAuth connection is missing required service information. Please edit and save the connection again.',
-        'Error',
+        'Erreur',
         'alert',
       );
       return;
@@ -720,7 +720,7 @@ export class APICall extends Component {
     if (!isValid) {
       errorToast(
         `Selected connection is missing required fields: ${missingFields.join(', ')}`,
-        'Error',
+        'Erreur',
         'alert',
       );
       return;
@@ -760,7 +760,7 @@ export class APICall extends Component {
         window.addEventListener('message', this.boundHandleAuthMessage, false);
       } else if ('success' in data) {
         // Direct success/failure (e.g., client credentials)
-        successToast(data.message, data.success ? '' : 'Error', data.success ? '' : 'alert');
+        successToast(data.message, data.success ? '' : 'Erreur', data.success ? '' : 'alert');
         if (data.success) {
           // Manually update the local state for the connection to reflect success
           if (this.oauthConnections[selectedConnectionId]) {
@@ -828,7 +828,7 @@ export class APICall extends Component {
         throw new Error('Unexpected response from authentication server.');
       }
     } catch (error) {
-      errorToast(`Authentication Failed: ${error?.message || error}`, 'Error', 'alert');
+      errorToast(`Authentication Failed: ${error?.message || error}`, 'Erreur', 'alert');
       console.error('Error during OAuth initiation:', error);
       // Update local state to reflect failure
       if (this.oauthConnections[selectedConnectionId]) {
@@ -905,7 +905,7 @@ export class APICall extends Component {
         if (event.data?.data?.message) {
           errorToast(
             `Authentication failed. Recheck your configuration. ${event?.data?.data?.message}`,
-            'Error',
+            'Erreur',
             'alert',
           );
         }
@@ -1493,10 +1493,10 @@ export class APICall extends Component {
           oauth_button.innerHTML = 'Sign Out';
           oauth_button.disabled = false;
         }
-        errorToast(`${data.error}`, 'Error', 'alert');
+        errorToast(`${data.error}`, 'Erreur', 'alert');
       }
     } catch (error) {
-      errorToast(`Error during sign out: ${error.message}`, 'Error', 'alert');
+      errorToast(`Error during sign out: ${error.message}`, 'Erreur', 'alert');
       console.error('Error during sign out:', error);
 
       // Reset button state on error
@@ -1626,7 +1626,7 @@ export class APICall extends Component {
         this.oauthConnections = await builderStore.getState().getOAuthConnections(false, true);
       } catch (error) {
         console.error('Error fetching OAuth connections:', error);
-        errorToast('Error fetching connections. Please try again.', 'Error', 'alert');
+        errorToast('Error fetching connections. Please try again.', 'Erreur', 'alert');
         return;
       }
     } else {
@@ -1701,7 +1701,7 @@ export class APICall extends Component {
       // Modal was closed without saving
       if (error?.message !== 'Modal closed') {
         console.error('Error with OAuth modal:', error);
-        errorToast(`Error: ${error?.message}`, 'Error', 'alert');
+        errorToast(`Error: ${error?.message}`, 'Erreur', 'alert');
       }
     }
   }

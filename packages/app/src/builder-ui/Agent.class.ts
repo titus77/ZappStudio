@@ -217,7 +217,7 @@ export class Agent extends EventEmitter {
 
   private showViewOnlyOverlay() {
     showOverlay(
-      'View Only',
+      'Lecture seule',
       100,
       true,
       '<div class="absolute bottom-0 w-full h-8 text-xl">View Only</div>',

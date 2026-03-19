@@ -802,7 +802,7 @@ export class Workspace extends EventEmitter {
     } catch (error) {
       this._saving = false;
       this._pendingSave = false; // Clear pending on error
-      console.error('Error', error);
+      console.error('Erreur', error);
       if (error?.errorCode === 'LOCKED_AGENT' || error?.errorCode === 'LOCKED_AGENT_HANDLED') {
         this.updateAgentSaveStatus('Lecture seule', 'alert');
         return null;
@@ -1849,7 +1849,7 @@ export class Workspace extends EventEmitter {
     } catch (error) {
       hideOverlay();
       this._loading = false;
-      console.error('Error', error);
+      console.error('Erreur', error);
       if (
         error?.errorCode !== 'LOCKED_AGENT' &&
         error?.errorCode !== 'LOCKED_AGENT_HANDLED' &&

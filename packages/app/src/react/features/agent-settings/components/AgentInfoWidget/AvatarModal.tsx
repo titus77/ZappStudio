@@ -50,7 +50,7 @@ const AvatarModal: React.FC<AvatarModalProps> = ({
         </div>
         <div className="w-full flex gap-4 justify-between mt-6">
           <Button
-            label={'Upload'}
+            label={'Importer'}
             disabled={isUploading}
             Icon={<FaUpload />}
             variant="secondary"
@@ -58,7 +58,7 @@ const AvatarModal: React.FC<AvatarModalProps> = ({
             className="w-1/2  gap-2 text-center"
           />
           <Button
-            label={'Generate'}
+            label={'Générer'}
             disabled={isUploading}
             variant="secondary"
             Icon={<FaWandMagicSparkles />}

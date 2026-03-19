@@ -122,7 +122,7 @@ export class OAuthService {
     const oauthInfo = getConnectionOauthInfo(connection, connectionId) as OAuthInfo;
 
     if (!connection || !oauthInfo?.service) {
-      errorToast('OAuth connection details not found.', 'Error', 'alert');
+      errorToast('OAuth connection details not found.', 'Erreur', 'alert');
       return false;
     }
 
@@ -133,7 +133,7 @@ export class OAuthService {
     if (!validation.valid) {
       errorToast(
         `Missing required fields: ${validation.missingFields.join(', ')}`,
-        'Error',
+        'Erreur',
         'alert',
       );
       return false;
@@ -171,14 +171,14 @@ export class OAuthService {
           successToast(data.message);
         } else {
           this.clearConnectionTokens(connectionId);
-          errorToast(data.message, 'Error', 'alert');
+          errorToast(data.message, 'Erreur', 'alert');
         }
         return data.success;
       }
 
       throw new Error('Unexpected response from authentication server.');
     } catch (error) {
-      errorToast(`Authentication Failed: ${error?.message || error}`, 'Error', 'alert');
+      errorToast(`Authentication Failed: ${error?.message || error}`, 'Erreur', 'alert');
       this.clearConnectionTokens(connectionId);
       return false;
     }
@@ -209,11 +209,11 @@ export class OAuthService {
         if (data.message) successToast(data.message);
         return true;
       } else {
-        errorToast(data.error, 'Error', 'alert');
+        errorToast(data.error, 'Erreur', 'alert');
         return false;
       }
     } catch (error) {
-      errorToast(`Error during sign out: ${error.message}`, 'Error', 'alert');
+      errorToast(`Error during sign out: ${error.message}`, 'Erreur', 'alert');
       return false;
     }
   }

@@ -118,11 +118,19 @@ export const AgentSettingTabs = () => {
     }
   });
 
+  // Tab label translations
+  const tabLabelMap: Record<string, string> = {
+    Overview: 'Vue d\'ensemble',
+    Security: 'Sécurité',
+    Tasks: 'Tâches',
+    Deployments: 'Déploiements',
+  };
+
   // Build tab configurations for CollapsibleTabs component
   const tabConfigs: CollapsibleTabConfig[] = useMemo(() => {
     return Object.keys(mergedWidgets).map((name) => ({
       id: name,
-      label: name,
+      label: tabLabelMap[name] ?? name,
     }));
   }, [mergedWidgets]);
 
@@ -185,22 +193,22 @@ export const AgentSettingsPageBody = () => {
     } else if (agentQuery.isError) {
       // We need to disable the eslint rule because the message contains single quotes.
       // eslint-disable-next-line
-      return <FullScreenError error={{ message: "Agent doesn't exist", code: '404' }} />;
+      return <FullScreenError error={{ message: "L'agent IA n'existe pas", code: '404' }} />;
     } else if (agentTestDomainQuery.isError) {
-      return <FullScreenError error={{ message: 'Application Error', code: '500' }} />;
+      return <FullScreenError error={{ message: 'Erreur d\'application', code: '500' }} />;
     }
   }
 
   const breadcrumb = (
     <Breadcrumb aria-label="Breadcrumb" className="mb-2 sm:mb-0">
       <Breadcrumb.Item icon={FaHome}>
-        <Link to="/agents">Home</Link>
+        <Link to="/agents">Accueil</Link>
       </Breadcrumb.Item>
 
       {agentQuery.data?.name && (
         <Breadcrumb.Item>
           <Link to={`/agent-settings/${agentId}`}>
-            &apos;{agentQuery.data?.name}&apos; Settings
+            Paramètres de &apos;{agentQuery.data?.name}&apos;
           </Link>
         </Breadcrumb.Item>
       )}
@@ -220,7 +228,7 @@ export const AgentSettingsPageBody = () => {
       <div className="flex justify-between items-center">{breadcrumb}</div>
       <div className="mt-3 flex justify-between items-center">
         <h2 className="text-3xl font-semibold">
-          Agent Settings
+          Paramètres de l'agent IA
           {
             // TODO: Delete this commented block once removal is confirmed. Discord & Academy links were removed from the app; code kept for traceability.
             /*
@@ -238,7 +246,7 @@ export const AgentSettingsPageBody = () => {
             <CustomButton
               handleClick={handleUpgrade}
               variant="tertiary"
-              label="Upgrade"
+              label="Améliorer l'offre"
               className="px-6"
               type="button"
             />
@@ -247,7 +255,7 @@ export const AgentSettingsPageBody = () => {
             className="px-6"
             handleClick={() => window.location.replace(`/builder/${agentId}`)}
           >
-            My Workflow
+            Mon Workflow
           </CustomButton>
         </div>
       </div>

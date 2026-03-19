@@ -11,7 +11,7 @@ export class ClipboardManager {
     input.value = text;
     document.body.appendChild(input);
     input.select();
-    document.execCommand('Copy');
+    document.execCommand('Copier');
     document.body.removeChild(input);
   }
   async read() {

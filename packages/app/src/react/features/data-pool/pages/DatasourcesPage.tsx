@@ -44,7 +44,7 @@ const DatasourcesPage: FC = () => {
       setDatasources(fetchedDatasources);
     } catch (error: unknown) {
       const errorMessage =
-        (error as Error)?.message || 'Failed to fetch datasources. Please try again.';
+        (error as Error)?.message || 'Impossible de récupérer les sources de données. Veuillez réessayer.';
       errorToast(errorMessage);
     } finally {
       setLoading(false);
@@ -115,11 +115,11 @@ const DatasourcesPage: FC = () => {
       // Manually remove from list without refetching
       setDatasources((prev) => prev.filter((ds) => ds.id !== datasourceToDelete.id));
 
-      successToast('Datasource deleted successfully');
+      successToast('Source de données supprimée avec succès');
       handleCloseDeleteDialog();
     } catch (error: unknown) {
       const errorMessage =
-        (error as Error)?.message || 'Failed to delete datasource. Please try again.';
+        (error as Error)?.message || 'Impossible de supprimer la source de données. Veuillez réessayer.';
       errorToast(errorMessage);
       throw error; // Re-throw to let dialog handle loading state
     }
@@ -148,10 +148,10 @@ const DatasourcesPage: FC = () => {
   const breadcrumb = (
     <Breadcrumb aria-label="Breadcrumb" className="mb-4">
       <Breadcrumb.Item icon={HiHome}>
-        <Link to="/">Home</Link>
+        <Link to="/">Accueil</Link>
       </Breadcrumb.Item>
       <Breadcrumb.Item>
-        <Link to="/data">Data Spaces</Link>
+        <Link to="/data">Espaces de données</Link>
       </Breadcrumb.Item>
       <Breadcrumb.Item>{namespaceLabel}</Breadcrumb.Item>
     </Breadcrumb>
@@ -160,7 +160,7 @@ const DatasourcesPage: FC = () => {
   if (!namespaceLabel) {
     return (
       <div className="container mx-auto py-6">
-        <p className="text-red-600">Error: No namespace label provided</p>
+        <p className="text-red-600">Erreur : aucun identifiant d'espace de données fourni</p>
       </div>
     );
   }
@@ -173,9 +173,9 @@ const DatasourcesPage: FC = () => {
       {/* Header Section */}
       <div className="flex items-center justify-between flex-wrap md:flex-nowrap pb-6 gap-2">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Datasources</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">Sources de données</h1>
           <p className="text-sm text-gray-600 mt-1">
-            Manage datasources for <span className="font-medium">{namespaceLabel}</span>
+            Gérer les sources de données de <span className="font-medium">{namespaceLabel}</span>
           </p>
         </div>
 
@@ -184,7 +184,7 @@ const DatasourcesPage: FC = () => {
           <div className="relative">
             <CustomInput
               isSearch={true}
-              placeholder="Search datasources"
+              placeholder="Rechercher une source de données"
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleSearchChange(e.target.value)}
               value={searchQuery}
             />
@@ -195,7 +195,7 @@ const DatasourcesPage: FC = () => {
             <CustomButton
               handleClick={() => setIsUploadDialogOpen(true)}
               addIcon={true}
-              label="Upload Source"
+              label="Importer une source"
             />
           )}
         </div>
@@ -219,25 +219,25 @@ const DatasourcesPage: FC = () => {
               {datasources.length === 0 ? (
                 <>
                   <h4 className="text-xl md:text-2xl font-medium text-black text-center mb-2">
-                    Upload your first datasource
+                    Importez votre première source de données
                   </h4>
                   <p className="mb-8 text-sm md:text-base text-gray-600">
-                    Add files or text content to index in this data space.
+                    Ajoutez des fichiers ou du contenu textuel à indexer dans cet espace de données.
                   </p>
                   <CustomButton
                     handleClick={() => setIsUploadDialogOpen(true)}
                     addIcon={true}
-                    label="Upload Source"
+                    label="Importer une source"
                     className="w-[190px]"
                   />
                 </>
               ) : (
                 <div className="text-center">
                   <h4 className="text-xl font-medium text-gray-700 mb-2">
-                    No matching datasources found
+                    Aucune source de données correspondante trouvée
                   </h4>
                   <p className="text-gray-600">
-                    No datasources match your search query: &quot;{searchQuery}&quot;
+                    Aucune source de données ne correspond à votre recherche : &quot;{searchQuery}&quot;
                   </p>
                 </div>
               )}

@@ -168,7 +168,7 @@ function setupGPTExtension() {
 
               const createBtnElm = gptPluginDialog.querySelector('.clm-btn-create');
 
-              createBtnElm.textContent = 'Saving...';
+              createBtnElm.textContent = 'Enregistrement...';
               createBtnElm.disabled = true;
 
               const name = gptPluginInfo.name.trim();

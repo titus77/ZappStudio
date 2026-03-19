@@ -119,7 +119,7 @@ const FileOrUrlInput = ({
               }}
               className="shadow-sm opacity-0 group-hover:opacity-100 transition-opacity absolute -right-1 -top-1 border border-solid border-gray-200 rounded-full w-4 h-4 bg-gray-100 flex items-center justify-center group-hover:bg-white"
             >
-              <span className="sr-only">Remove attachment</span>
+              <span className="sr-only">Supprimer la pièce jointe</span>
               <i className="fas fa-times text-xs" />
             </button>
           </div>

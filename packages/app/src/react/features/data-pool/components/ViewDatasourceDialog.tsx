@@ -160,19 +160,19 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
                     <span className="text-xs text-indigo-600 font-medium">Taille des segments</span>
                     <p data-qa="chunk-size" className="text-lg font-semibold text-indigo-900 mt-1">
                       {datasource.chunkSize.toLocaleString()}{' '}
-                      <span className="text-sm font-normal">chars</span>
+                      <span className="text-sm font-normal">car.</span>
                     </p>
                   </div>
                 )}
                 {datasource.chunkOverlap !== undefined && (
                   <div>
-                    <span className="text-xs text-indigo-600 font-medium">Chunk Overlap</span>
+                    <span className="text-xs text-indigo-600 font-medium">Chevauchement des segments</span>
                     <p
                       data-qa="chunk-overlap"
                       className="text-lg font-semibold text-indigo-900 mt-1"
                     >
                       {datasource.chunkOverlap.toLocaleString()}{' '}
-                      <span className="text-sm font-normal">chars</span>
+                      <span className="text-sm font-normal">car.</span>
                     </p>
                   </div>
                 )}
@@ -183,10 +183,10 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
           {/* Metadata Section */}
           {metadata && (
             <div className="space-y-2">
-              <h3 className="text-lg font-semibold text-gray-900">Metadata</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Métadonnées</h3>
               <div className="relative bg-[#282c34] border border-gray-700 rounded-lg overflow-hidden">
                 <div className="absolute top-3 right-3 z-10">
-                  <Tooltip content={copied ? 'Copied!' : 'Copy'} placement="top">
+                  <Tooltip content={copied ? 'Copié !' : 'Copier'} placement="top">
                     <button
                       onClick={() => {
                         navigator.clipboard.writeText(JSON.stringify(metadata, null, 2));
@@ -198,7 +198,7 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
                     </button>
                   </Tooltip>
                 </div>
-                <Suspense fallback={<div className="p-4 text-sm text-gray-300">Loading...</div>}>
+                <Suspense fallback={<div className="p-4 text-sm text-gray-300">Chargement...</div>}>
                   <div className="overflow-x-auto">
                     <SyntaxHighlighter
                       language="json"
@@ -224,7 +224,7 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
           {/* Source Text Section */}
           {datasource.text && (
             <div className="space-y-2">
-              <h3 className="text-lg font-semibold text-gray-900">Source Text</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Texte source</h3>
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 max-h-64 overflow-y-auto overflow-x-hidden">
                 <pre className="text-sm text-gray-700 whitespace-pre-wrap break-words break-all font-mono overflow-wrap-anywhere">
                   {datasource.text}
@@ -237,7 +237,7 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
           {vectorCount > 0 && (
             <details className="space-y-2">
               <summary className="text-lg font-semibold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
-                Vector IDs ({vectorCount})
+                IDs de vecteurs ({vectorCount})
               </summary>
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 max-h-48 overflow-y-auto overflow-x-hidden">
                 <ul className="space-y-1">
@@ -256,10 +256,10 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
 
           {/* Additional Info */}
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-2">
-            <h3 className="text-sm font-semibold text-gray-900">Additional Information</h3>
+            <h3 className="text-sm font-semibold text-gray-900">Informations complémentaires</h3>
             <div className="text-sm">
               <div>
-                <span className="text-gray-600">Datasource ID:</span>
+                <span className="text-gray-600">ID de la source de données :</span>
                 <p className="font-mono text-xs text-gray-900 break-all mt-1" title={datasource.id}>
                   {datasource.id}
                 </p>

@@ -167,7 +167,7 @@ export function renderExtensionsSkeleton(elm: HTMLElement) {
                     <div class="h-2 w-[80%] bg-gray-200 rounded dark:bg-gray-700"></div>
                 </div>
             </div>
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">Chargement...</span>
         </div>
     `;
 

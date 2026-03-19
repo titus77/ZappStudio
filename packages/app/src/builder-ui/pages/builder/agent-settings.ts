@@ -936,7 +936,7 @@ export async function openVoiceEmbodiment() {
                 <circle cx="12" cy="12" r="10" stroke="#0366d6" stroke-width="4" fill="none"></circle>
                 <path fill="none" stroke="white" stroke-width="4" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              <span class="sr-only">Loading...</span>
+              <span class="sr-only">Chargement...</span>
             </div>
           </div>
           <iframe id="voice-iframe" src="" frameborder="0" allow="microphone; autoplay" class="hidden flex-1 w-full min-h-0"></iframe>
@@ -1360,7 +1360,7 @@ export async function openChatbotEmbodiment() {
             <circle cx="12" cy="12" r="10" stroke="#0366d6" stroke-width="4" fill="none"></circle>
             <path  fill="none" stroke="white" stroke-width="4" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          <span class="sr-only">Loading...</span>
+          <span class="sr-only">Chargement...</span>
         </div>
       </div>
         <iframe src="${url}" id="chatbot-iframe" frameborder="0" style="width:100%;height:calc(100% - 2rem);"></iframe>
@@ -1507,7 +1507,7 @@ export async function openAPIEmbodiment() {
             <circle cx="12" cy="12" r="10" stroke="#0366d6" stroke-width="4" fill="none"></circle>
             <path  fill="none" stroke="white" stroke-width="4" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          <span class="sr-only">Loading...</span>
+          <span class="sr-only">Chargement...</span>
         </div>
       </div>
       <iframe src="${url}" id="swagger-iframe" frameborder="0" style="width:100%;height:calc(100% - 3rem);display:none;"></iframe>

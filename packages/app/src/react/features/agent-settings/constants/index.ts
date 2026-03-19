@@ -43,9 +43,9 @@ export const EXPORT_LOGS_PLANS = [
 ];
 
 export const WIDGETS_PRICING_ALERT_TEXT = {
-  LOGS: 'You need a subscription to view logs.',
-  CAPABILITIES: 'You need a subscription to view agent skills.',
-  SCHEDULE: 'You need a subscription to schedule your agent.',
+  LOGS: 'Vous avez besoin d\'un abonnement pour consulter les journaux.',
+  CAPABILITIES: 'Vous avez besoin d\'un abonnement pour consulter les compétences de l\'agent IA.',
+  SCHEDULE: 'Vous avez besoin d\'un abonnement pour planifier votre agent IA.',
 };
 
 export const SETTINGS_KEYS = {

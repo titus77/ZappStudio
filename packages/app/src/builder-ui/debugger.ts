@@ -2606,7 +2606,7 @@ export function createDebugInjectDialog(
       workflows = await extractWorkflows(agentData);
     } catch (error) {
       console.error('Error extracting workflows:', error);
-      errorToast(error instanceof Error ? error.message : 'Unknown error occurred', 'Debug Failed');
+      errorToast(error instanceof Error ? error.message : 'Une erreur inconnue est survenue', 'Echec du debogage');
       return;
     }
 

@@ -2416,7 +2416,7 @@ export class Component extends EventEmitter {
     const deleteTooltip = document.createElement('div');
     deleteTooltip.className =
       'absolute left-[-20px] z-10 inline-block px-3 py-2 w-max text-sm font-medium text-white bg-gray-950 rounded-lg shadow-sm tooltip dark:bg-gray-700 opacity-0 group-hover/delete:opacity-100 transition-opacity duration-300 bottom-full right-0 mb-2 whitespace-nowrap pointer-events-none';
-    deleteTooltip.innerText = 'Delete';
+    deleteTooltip.innerText = 'Supprimer';
     deleteButton.appendChild(deleteTooltip);
     rightSideButtonContainer.appendChild(deleteButton);
 
@@ -2743,8 +2743,8 @@ export class Component extends EventEmitter {
         'Are you sure you want to delete this component?',
         'This action cannot be undone. Deleting will remove the component permanently.',
         {
-          btnYesLabel: 'Delete',
-          btnNoLabel: 'Cancel',
+          btnYesLabel: 'Supprimer',
+          btnNoLabel: 'Annuler',
           // btnYesClass: 'bg-smyth-red-500 border-smyth-red-500 rounded-lg px-8',
           btnYesType: 'danger',
           btnNoClass: 'hidden',

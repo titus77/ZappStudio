@@ -186,7 +186,7 @@ export function saveMockOutputs(component: Component) {
 
             saveBtn.disabled = true;
             saveBtn?.classList.add('cursor-not-allowed');
-            btnLabel.textContent = 'Saving...';
+            btnLabel.textContent = 'Enregistrement...';
 
             const outputFileValue = {};
             const outputs = Array.from(dialog.querySelectorAll('.outputs-input.input')).reduce(

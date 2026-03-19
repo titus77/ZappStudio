@@ -30,7 +30,7 @@ export const CodeBlock: FC<CodeBlock> = ({ language, children }) => {
           className="text-gray-400 rounded py-1 text-xs flex items-center"
         >
           {isCopied ? <FaCheck /> : <FaRegCopy />}
-          {isCopied ? ' Copied!' : ' Copy code'}
+          {isCopied ? ' Copié !' : ' Copier le code'}
         </button>
       </div>
       <SyntaxHighlighter

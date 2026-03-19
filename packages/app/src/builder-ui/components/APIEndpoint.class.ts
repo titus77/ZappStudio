@@ -213,7 +213,7 @@ export class APIEndpoint extends Component {
                 'Are you sure?',
                 'Enabling Advanced Request Parts will permanently expose headers, body, and query parameters. This setting cannot be disabled once enabled.',
                 {
-                  btnNoLabel: 'Cancel',
+                  btnNoLabel: 'Annuler',
                   btnYesLabel: 'Enable',
                   btnNoClass: 'hidden',
                   btnYesClass: 'rounded-lg px-8',

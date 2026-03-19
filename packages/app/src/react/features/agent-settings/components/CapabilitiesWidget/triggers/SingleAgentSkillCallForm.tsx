@@ -102,7 +102,7 @@ const SingleAgentSkillCallForm = ({ component }: Props) => {
           {/* {response json} */}
           {callSkillMutation.isSuccess && (
             <div>
-              <label className="mb-1">Response</label>
+              <label className="mb-1">Réponse</label>
               <ResponseJsonViewer
                 SyntaxHighlighter={Prism}
                 response={callSkillMutation.data?.response}
@@ -113,7 +113,7 @@ const SingleAgentSkillCallForm = ({ component }: Props) => {
           {/* {submission error span} */}
           {callSkillMutation.isError && (
             <span className="text-red-500 text-sm">
-              {(callSkillMutation?.error as any)?.error?.message ?? 'Something went wrong'}
+              {(callSkillMutation?.error as any)?.error?.message ?? 'Une erreur s\'est produite'}
             </span>
           )}
 
@@ -121,7 +121,7 @@ const SingleAgentSkillCallForm = ({ component }: Props) => {
             <Button
               type="submit"
               disabled={isSubmitting || callSkillMutation.isLoading || !isValid}
-              label={'Call Endpoint'}
+              label={'Appeler l\'endpoint'}
               loading={callSkillMutation.isLoading}
               variant="primary"
               className="px-8 rounded-lg"

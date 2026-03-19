@@ -150,7 +150,7 @@ export class UIHelper {
               this.setupModalHandlers(dialog, currentOauthInfo);
             } catch (error) {
               console.error('Error resolving vault keys:', error);
-              errorToast('Failed to load connection details. Please try again.', 'Error', 'alert');
+              errorToast('Failed to load connection details. Please try again.', 'Erreur', 'alert');
 
               // Show form anyway with placeholders
               const fallbackHTML = generateOAuthModalHTML(
@@ -212,7 +212,7 @@ export class UIHelper {
                 return;
               } catch (error) {
                 console.error('Error saving OAuth connection:', error);
-                errorToast(`Error: ${error?.message || error}`, 'Error', 'alert');
+                errorToast(`Error: ${error?.message || error}`, 'Erreur', 'alert');
                 // Don't close dialog on error - let user retry
               }
             },
@@ -374,7 +374,7 @@ export class UIHelper {
     for (const { field, message, invalidValue } of basicFields) {
       const value = formData[field]?.trim();
       if (!value || value === invalidValue) {
-        errorToast(message, 'Error', 'alert');
+        errorToast(message, 'Erreur', 'alert');
         return false; // Don't throw, just return false
       }
     }
@@ -389,15 +389,15 @@ export class UIHelper {
       if (isOAuth2) {
         // OAuth2 validation
         if (!formData.clientID?.trim()) {
-          errorToast('Client ID is required for OAuth2 services.', 'Error', 'alert');
+          errorToast('Client ID is required for OAuth2 services.', 'Erreur', 'alert');
           return false;
         }
         if (!formData.clientSecret?.trim()) {
-          errorToast('Client Secret is required for OAuth2 services.', 'Error', 'alert');
+          errorToast('Client Secret is required for OAuth2 services.', 'Erreur', 'alert');
           return false;
         }
         if (!formData.tokenURL?.trim()) {
-          errorToast('Token URL is required for OAuth2 services.', 'Error', 'alert');
+          errorToast('Token URL is required for OAuth2 services.', 'Erreur', 'alert');
           return false;
         }
 
@@ -406,36 +406,36 @@ export class UIHelper {
           if (!formData.authorizationURL?.trim()) {
             errorToast(
               'Authorization URL is required for OAuth2 authorization flows.',
-              'Error',
+              'Erreur',
               'alert',
             );
             return false;
           }
           if (!formData.scope?.trim()) {
-            errorToast('Scope is required for OAuth2 authorization flows.', 'Error', 'alert');
+            errorToast('Scope is required for OAuth2 authorization flows.', 'Erreur', 'alert');
             return false;
           }
         }
       } else if (isOAuth1) {
         // OAuth1 validation
         if (!formData.consumerKey?.trim()) {
-          errorToast('Consumer Key is required for OAuth1 services.', 'Error', 'alert');
+          errorToast('Consumer Key is required for OAuth1 services.', 'Erreur', 'alert');
           return false;
         }
         if (!formData.consumerSecret?.trim()) {
-          errorToast('Consumer Secret is required for OAuth1 services.', 'Error', 'alert');
+          errorToast('Consumer Secret is required for OAuth1 services.', 'Erreur', 'alert');
           return false;
         }
         if (!formData.requestTokenURL?.trim()) {
-          errorToast('Request Token URL is required for OAuth1 services.', 'Error', 'alert');
+          errorToast('Request Token URL is required for OAuth1 services.', 'Erreur', 'alert');
           return false;
         }
         if (!formData.accessTokenURL?.trim()) {
-          errorToast('Access Token URL is required for OAuth1 services.', 'Error', 'alert');
+          errorToast('Access Token URL is required for OAuth1 services.', 'Erreur', 'alert');
           return false;
         }
         if (!formData.userAuthorizationURL?.trim()) {
-          errorToast('User Authorization URL is required for OAuth1 services.', 'Error', 'alert');
+          errorToast('User Authorization URL is required for OAuth1 services.', 'Erreur', 'alert');
           return false;
         }
       }

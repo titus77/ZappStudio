@@ -1413,8 +1413,8 @@ export function confirm(
   message = '',
   {
     icon = '',
-    btnYesLabel = 'Ok',
-    btnNoLabel = 'Cancel',
+    btnYesLabel = 'Valider',
+    btnNoLabel = 'Annuler',
     btnYesClass = '',
     btnYesType = '',
     btnNoClass = '',
@@ -1546,8 +1546,8 @@ export function modalDialog(
 export const confirmYesNo = ({
   message,
   title = 'Confirm',
-  btnYesLabel = 'Yes',
-  btnNoLabel = 'No',
+  btnYesLabel = 'Oui',
+  btnNoLabel = 'Non',
   icon = 'default-icon-question',
 }: {
   message: string;
@@ -1873,7 +1873,7 @@ export async function extensionsDialog(compName: ExtensionCompNames): Promise<vo
     if (compName === EXTENSION_COMP_NAMES.huggingFaceModel) {
       const nextLink = btnElm.getAttribute('data-next');
 
-      btnElm.textContent = 'Loading...';
+      btnElm.textContent = 'Chargement...';
 
       if (!nextLink) return;
 
