@@ -18,6 +18,7 @@
 
 import { vaultMessages } from '../constants/vault.constants';
 import { prisma } from '../../../../prisma/prisma-client';
+import { encrypt, decryptSafe } from './vault-crypto';
 
 const NANGO_HOST = process.env.NANGO_URL || process.env.NANGO_HOST || 'http://immo-nango:3003';
 const NANGO_SECRET_KEY = process.env.NANGO_SECRET_KEY || '';
@@ -135,11 +136,12 @@ export async function createSecret({ teamId, secretId, key, value, metadata }: {
   const success = await nangoSetApiKey(providerKey, connectionId, value);
 
   if (!success) {
-    // Fallback: store in zs_team_setting if Nango is unavailable
+    // Fallback: store encrypted in zs_team_setting if Nango is unavailable
+    const encryptedValue = encrypt(value);
     await prisma.teamSetting.upsert({
       where: { teamId_settingKey: { teamId, settingKey: `vault:${secretId}` } },
-      update: { settingValue: value },
-      create: { teamId, settingKey: `vault:${secretId}`, settingValue: value },
+      update: { settingValue: encryptedValue },
+      create: { teamId, settingKey: `vault:${secretId}`, settingValue: encryptedValue },
     });
   }
 
@@ -267,9 +269,11 @@ export async function getSecretById(teamId: string, secretId: string) {
   });
 
   if (setting) {
+    // Decrypt (supports both encrypted and legacy plaintext values)
+    const decryptedValue = decryptSafe(setting.settingValue);
     return {
       success: vaultMessages.SUCCESS_GET_SECRET_BY_ID,
-      secret: { id: secretId, key: secretId, value: setting.settingValue, metadata: {} },
+      secret: { id: secretId, key: secretId, value: decryptedValue, metadata: {} },
     };
   }
 

@@ -22,7 +22,7 @@ export const getAgentById: ExpressHandler<
   const agent = await aiAgentService._getAgentWithSaltById(agentId, { include: includeArray });
 
   res.status(httpStatus.OK).json({
-    message: 'Agent retrieved successfully',
+    message: 'Agent IA recupere avec succes',
     agent,
   });
 };
@@ -39,7 +39,7 @@ export const getAgentByDomain: ExpressHandler<
   const agent = await aiAgentService.getAgentByDomain(domainName as string);
 
   res.status(httpStatus.OK).json({
-    message: 'Agent retrieved successfully',
+    message: 'Agent IA recupere avec succes',
     agent,
   });
 };
@@ -66,7 +66,7 @@ export const getState: ExpressHandlerWithParams<
   const state = await aiAgentService.getState(agentId, key);
 
   res.status(httpStatus.OK).json({
-    message: 'States retrieved successfully',
+    message: 'Etats recuperes avec succes',
     state,
   });
 };
@@ -88,7 +88,7 @@ export const createState: ExpressHandler<
   const state = await aiAgentService.createState(agentId, key, value);
 
   res.status(httpStatus.OK).json({
-    message: 'State created successfully',
+    message: 'Etat cree avec succes',
     state,
   });
 };
@@ -107,7 +107,7 @@ export const deleteState: ExpressHandlerWithParams<
   await aiAgentService.deleteState(agentId, key);
 
   res.status(httpStatus.OK).json({
-    message: 'State deleted successfully',
+    message: 'Etat supprime avec succes',
   });
 };
 
@@ -127,7 +127,7 @@ export const getStates: ExpressHandlerWithParams<
   const states = await aiAgentService.getStates(agentId);
 
   res.status(httpStatus.OK).json({
-    message: 'States retrieved successfully',
+    message: 'Etats recuperes avec succes',
     states,
   });
 };
@@ -212,7 +212,7 @@ export const getAgentSettings: ExpressHandlerWithParams<
 
   const settings = await aiAgentService.getAgentSettings(agentId, undefined, { anonymous: true });
   return res.json({
-    message: 'Settings retrieved successfully',
+    message: 'Parametres recuperes avec succes',
     settings,
   });
 };
@@ -309,7 +309,7 @@ export const updateConversation: ExpressHandlerWithParams<
   const updated = await aiAgentChatsService.updateConversationM2M(conversationId, conversation);
 
   res.status(httpStatus.OK).json({
-    message: 'Agent conversation updated successfully',
+    message: `Conversation de l'agent mise a jour avec succes`,
     conversation: updated,
   });
 };
@@ -326,7 +326,7 @@ export const deleteConversation: ExpressHandlerWithParams<
   await aiAgentChatsService.deleteConversationM2M(conversationId);
 
   res.status(httpStatus.OK).json({
-    message: 'Agent conversation deleted successfully',
+    message: `Conversation de l'agent supprimee avec succes`,
   });
 };
 

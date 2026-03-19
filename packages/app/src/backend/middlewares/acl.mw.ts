@@ -78,7 +78,7 @@ export async function pageACLCheck(
   next: express.NextFunction,
 ) {
   if (!req.user.isAuthenticated) {
-    return renderErrorPage(res, req, 401, 'Unauthorized');
+    return renderErrorPage(res, req, 401, 'Non autorise');
   }
 
   const curPage = req.url; //rely on this to check page access
@@ -92,7 +92,7 @@ export async function pageACLCheck(
 
   if (!userRole) {
     console.log('Forbidden: No userRole');
-    return renderErrorPage(res, req, 403, 'Forbidden');
+    return renderErrorPage(res, req, 403, 'Acces interdit');
   }
 
   const sharedTeamAcls = aclsUtils.isDefaultRole(userRole.sharedTeamRole?.acl)
@@ -104,7 +104,7 @@ export async function pageACLCheck(
 
   if (!userHasValidAcls) {
     console.log('Forbidden: No valid acls');
-    return renderErrorPage(res, req, 403, 'Forbidden');
+    return renderErrorPage(res, req, 403, 'Acces interdit');
   }
 
   // if admin, give full access
@@ -133,7 +133,7 @@ export async function pageACLCheck(
   if (rule?.access === 'rw' || rule?.access === 'r') {
     next();
   } else {
-    return renderErrorPage(res, req, 403, 'Forbidden');
+    return renderErrorPage(res, req, 403, 'Acces interdit');
   }
 }
 
@@ -147,7 +147,7 @@ export async function apiACLCheck(
   next: express.NextFunction,
 ) {
   if (!req.user.isAuthenticated) {
-    return res.status(401).send({ error: 'Unauthorized' });
+    return res.status(401).send({ error: 'Non autorise' });
   }
 
   const curPage = req.header('referrer')?.replace(config.env.UI_SERVER, ''); //rely on this to read the access level
@@ -173,7 +173,7 @@ export async function apiACLCheck(
   const userRole: TeamUserRole = teamInfo?.data?.role;
 
   if (!userRole) {
-    return res.status(403).send({ error: 'Forbidden' });
+    return res.status(403).send({ error: 'Acces interdit' });
   }
 
   const sharedTeamAcls = aclsUtils.isDefaultRole(userRole.sharedTeamRole?.acl)
@@ -184,7 +184,7 @@ export async function apiACLCheck(
     (userRole?.sharedTeamRole?.isOwnerRole ?? false) || aclsUtils.checkAclsValidity(sharedTeamAcls);
 
   if (!userHasValidAcls) {
-    return res.status(403).send({ error: 'Forbidden' });
+    return res.status(403).send({ error: 'Acces interdit' });
   }
 
   //* if admin, give full access
@@ -219,7 +219,7 @@ export async function apiACLCheck(
   } else if (rule?.access === 'rw') {
     next();
   } else {
-    return res.status(403).send({ error: 'Forbidden' });
+    return res.status(403).send({ error: 'Acces interdit' });
   }
 }
 
@@ -229,7 +229,7 @@ export async function appACLCheck(
   next: express.NextFunction,
 ) {
   if (!req.user.isAuthenticated) {
-    return res.status(401).send({ error: 'Unauthorized' });
+    return res.status(401).send({ error: 'Non autorise' });
   }
 
   const teamInfo: any = await smythAPIReq
@@ -254,7 +254,7 @@ export async function appACLCheck(
   const userRole: TeamUserRole = teamInfo?.data?.role;
 
   if (!userRole) {
-    return res.status(403).send({ error: 'Forbidden' });
+    return res.status(403).send({ error: 'Acces interdit' });
   }
 
   const sharedTeamAcls = aclsUtils.isDefaultRole(userRole.sharedTeamRole?.acl)
@@ -265,7 +265,7 @@ export async function appACLCheck(
     (userRole?.sharedTeamRole?.isOwnerRole ?? false) || aclsUtils.checkAclsValidity(sharedTeamAcls);
 
   if (!userHasValidAcls) {
-    return res.status(403).send({ error: 'Forbidden' });
+    return res.status(403).send({ error: 'Acces interdit' });
   }
 
   //* if admin, give full access
@@ -289,6 +289,6 @@ export async function appACLCheck(
   } else if (rule?.access === 'rw') {
     next();
   } else {
-    return res.status(403).send({ error: 'Forbidden' });
+    return res.status(403).send({ error: 'Acces interdit' });
   }
 }

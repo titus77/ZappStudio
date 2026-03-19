@@ -14,7 +14,7 @@ export const getModelAgents: ExpressHandler<null, any> = async (req, res: Respon
   const agents = await modelAgentService.listModelAgents(teamId);
 
   return res.status(httpStatus.OK).json({
-    message: 'Model Agents retrieved successfully',
+    message: `Modeles d'agents recuperes avec succes`,
     agents,
   });
 };
@@ -43,7 +43,7 @@ export const getAiAgents: ExpressHandler<null, any> = async (req, res: Response)
   });
 
   return res.status(httpStatus.OK).json({
-    message: 'Ai Agents retrieved successfully',
+    message: 'Agents IA recuperes avec succes',
     agents,
     total,
   });
@@ -109,7 +109,7 @@ export const getAgentById: ExpressHandler<
     console.log(`Acessing model agent with id ${agentId}`);
     const modelAgent = await modelAgentService.getModelAgentById(agentId, teamId, parentTeamId, { include: includeArray });
     return res.status(httpStatus.OK).json({
-      message: 'Agent retrieved successfully',
+      message: 'Agent IA recupere avec succes',
       agent: modelAgent,
     });
   }
@@ -135,7 +135,7 @@ export const getAgentById: ExpressHandler<
   }
 
   res.status(httpStatus.OK).json({
-    message: 'Agent retrieved successfully',
+    message: 'Agent IA recupere avec succes',
     agent,
   });
 };
@@ -237,7 +237,7 @@ export const deleteAgent: ExpressHandlerWithParams<{ agentId: string }, {}, {}> 
   await aiAgentService.deleteAgent(id, teamId);
 
   res.status(httpStatus.OK).json({
-    message: 'Agent deleted successfully',
+    message: 'Agent IA supprime avec succes',
   });
 };
 
@@ -262,7 +262,7 @@ export const getState: ExpressHandlerWithParams<
   const state = await aiAgentService.getState(agentId, key);
 
   res.status(httpStatus.OK).json({
-    message: 'States retrieved successfully',
+    message: 'Etats recuperes avec succes',
     state,
   });
 };
@@ -283,7 +283,7 @@ export const createState: ExpressHandler<
   const state = await aiAgentService.createState(agentId, key, value);
 
   res.status(httpStatus.OK).json({
-    message: 'State created successfully',
+    message: 'Etat cree avec succes',
     state,
   });
 };
@@ -301,7 +301,7 @@ export const deleteState: ExpressHandlerWithParams<
   await aiAgentService.deleteState(agentId, key);
 
   res.status(httpStatus.OK).json({
-    message: 'State deleted successfully',
+    message: 'Etat supprime avec succes',
   });
 };
 
@@ -320,7 +320,7 @@ export const getAgentSettings: ExpressHandlerWithParams<
 
   const settings = await aiAgentService.getAgentSettings(agentId, teamId);
   return res.json({
-    message: 'Settings retrieved successfully',
+    message: 'Parametres recuperes avec succes',
     settings,
   });
 };
@@ -341,7 +341,7 @@ export const getAgentSetting: ExpressHandlerWithParams<
   await checkAgentExistsOrThrow(agentId, teamId);
   const setting = await aiAgentService.getAgentSetting(agentId, key, teamId);
   res.json({
-    message: 'Setting retrieved successfully',
+    message: 'Parametre recupere avec succes',
     setting,
   });
 };
@@ -363,7 +363,7 @@ export const createAgentSetting: ExpressHandler<
 
   const newSetting = await aiAgentService.createAgentSetting(agentId, key, value, teamId);
   res.json({
-    message: 'Setting updated successfully',
+    message: 'Parametre mis a jour avec succes',
     setting: newSetting,
   });
 };
@@ -383,7 +383,7 @@ export const deleteAgentSetting: ExpressHandlerWithParams<
 
   await aiAgentService.deleteAgentSetting(agentId, key, teamId);
   res.json({
-    message: 'Setting deleted successfully',
+    message: 'Parametre supprime avec succes',
   });
 };
 
@@ -583,7 +583,7 @@ export const updateTeamConversation: ExpressHandlerWithParams<
   });
 
   res.status(httpStatus.OK).json({
-    message: 'Conversation updated successfully',
+    message: 'Conversation mise a jour avec succes',
   });
 };
 
@@ -605,7 +605,7 @@ export const deleteTeamConversation: ExpressHandlerWithParams<
   });
 
   res.status(httpStatus.OK).json({
-    message: 'Conversation deleted successfully',
+    message: 'Conversation supprimee avec succes',
   });
 };
 

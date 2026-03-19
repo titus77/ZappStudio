@@ -229,7 +229,7 @@ export const saveAgent = async ({
     });
 
     if (!agent) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Agent does not exist');
+      throw new ApiError(httpStatus.NOT_FOUND, `L'agent IA n'existe pas`);
     }
 
     if (agent.lockId !== lockId) {
@@ -381,7 +381,7 @@ export const getAgentById = async (
   },
 ) => {
   if (!options.anonymous && !teamId) {
-    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Internal error');
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Erreur interne');
   }
 
   const agent = await prisma.aiAgent.findFirst({
@@ -432,7 +432,7 @@ export const getAgentById = async (
   });
 
   if (!agent) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Agent not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Agent IA introuvable');
   }
 
   type ModifiedAgent = typeof agent & { domain: any[] };
@@ -527,7 +527,7 @@ export const _getAgentWithSaltById = async (
   });
 
   if (!agent) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Agent not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Agent IA introuvable');
   }
 
   const isLocked = agentHasValidLock(agent.lastLockBeat, agent.lastLockSaveOperation, agent.lockId, {
@@ -563,7 +563,7 @@ export const deleteAgent = async (id: string, teamId: string) => {
   });
 
   if (!agent) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Agent not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Agent IA introuvable');
   }
 
   //* for now bypass the lock check
@@ -626,7 +626,7 @@ export const accquireAgentLock = async ({ aiAgentId, teamId, userId }: { aiAgent
     });
 
     if (!agent) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Agent not found');
+      throw new ApiError(httpStatus.NOT_FOUND, 'Agent IA introuvable');
     }
 
     if (!agent.lockId || !agent.lastLockBeat || !agent.lastLockSaveOperation) {
@@ -722,7 +722,7 @@ export const releaseAgentLock = async ({ aiAgentId, teamId, lockId }: { aiAgentI
     });
 
     if (!agent) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Agent not found');
+      throw new ApiError(httpStatus.NOT_FOUND, 'Agent IA introuvable');
     }
 
     if (!agent.lockId) {
@@ -802,7 +802,7 @@ export const getAgentLockStatus = async ({ aiAgentId, teamId }: { aiAgentId: str
   });
 
   if (!agent) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Agent not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Agent IA introuvable');
   }
 
   const isLocked = agentHasValidLock(agent.lastLockBeat, agent.lastLockSaveOperation, agent.lockId);
@@ -852,7 +852,7 @@ export const checkAgentExistsOrThrow = async (
   });
 
   if (!agent) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Agent does not exist');
+    throw new ApiError(httpStatus.NOT_FOUND, `L'agent IA n'existe pas`);
   }
 
   return agent;
@@ -862,7 +862,7 @@ export const checkAgentExistsOrThrow = async (
 export const getAgentByDomain = async (domain: string) => {
   // DO NOT REMOVE for backward compatibility
 
-  throw new ApiError(httpStatus.NOT_FOUND, 'Agent not found');
+  throw new ApiError(httpStatus.NOT_FOUND, 'Agent IA introuvable');
 };
 
 // M2M: AGENT states
