@@ -150,7 +150,64 @@ const DEBUG_HEADERS_TO_STRIP = [
   'x-force-debugger', 'x-monitor-id',
 ];
 
-app.use((req: any, res, next) => {
+// Publication cache: agentId → { isPublic, expiresAt }
+// TTL 60s to avoid hitting PostgREST on every request
+const WAI_PUB_CACHE = new Map<string, { isPublic: boolean; expiresAt: number }>();
+const WAI_PUB_CACHE_TTL = 60_000; // 60 seconds
+
+// /wai rate limiting: per IP+agentId, 30 requests/minute (stricter than global)
+const WAI_RATE_STORE = new Map<string, number[]>();
+const WAI_RATE_LIMIT = 30;
+const WAI_RATE_WINDOW = 60_000; // 1 minute
+
+function checkWaiRateLimit(ip: string, agentId: string): boolean {
+  const key = `${ip}:${agentId}`;
+  const now = Date.now();
+  const timestamps = WAI_RATE_STORE.get(key) || [];
+  const recent = timestamps.filter(t => now - t < WAI_RATE_WINDOW);
+  if (recent.length >= WAI_RATE_LIMIT) {
+    WAI_RATE_STORE.set(key, recent);
+    return false; // rate limited
+  }
+  recent.push(now);
+  WAI_RATE_STORE.set(key, recent);
+  return true;
+}
+
+// Cleanup stale rate limit entries every 5 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, timestamps] of WAI_RATE_STORE.entries()) {
+    const recent = timestamps.filter(t => now - t < WAI_RATE_WINDOW);
+    if (recent.length === 0) WAI_RATE_STORE.delete(key);
+    else WAI_RATE_STORE.set(key, recent);
+  }
+}, 5 * 60_000);
+
+async function checkAgentPublished(agentId: string): Promise<boolean> {
+  const cached = WAI_PUB_CACHE.get(agentId);
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.isPublic;
+  }
+  try {
+    // Call PostgREST RPC (anon access, SECURITY DEFINER)
+    const postgrestUrl = config.env.MIDDLEWARE_API_BASE_URL?.replace(/:\d+$/, '') || 'http://localhost';
+    const rpcUrl = `${process.env.POSTGREST_INTERNAL_URL || 'http://localhost:3000'}/rpc/check_wai_agent_published`;
+    const resp = await fetch(rpcUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_agent_id: agentId }),
+    });
+    const isPublic = resp.ok ? (await resp.json()) === true : false;
+    WAI_PUB_CACHE.set(agentId, { isPublic, expiresAt: Date.now() + WAI_PUB_CACHE_TTL });
+    return isPublic;
+  } catch {
+    // On error, deny access (fail-closed)
+    return false;
+  }
+}
+
+app.use(async (req: any, res, next) => {
   if (!req.url.startsWith(WAI_PREFIX)) {
     return next();
   }
@@ -177,9 +234,39 @@ app.use((req: any, res, next) => {
   // /wai/{agentId}/{rest} → extract agent, rewrite to /{rest}
   const agentMatch = req.url.match(WAI_AGENT_RE);
   if (agentMatch) {
-    req._pathAgentSlug = agentMatch[1];
+    const agentId = agentMatch[1];
+
+    // Verify agent is published (fail-closed: 404 if not published or on error)
+    const isPublished = await checkAgentPublished(agentId);
+    if (!isPublished) {
+      return res.status(404).json({ error: 'Not Found' });
+    }
+
+    // Rate limit: 30 req/min per IP+agentId (no internal whitelist on public routes)
+    const clientIp = req.ip || req.headers['x-forwarded-for'] || 'unknown';
+    if (!checkWaiRateLimit(String(clientIp), agentId)) {
+      return res.status(429).json({ error: 'Too many requests', retryAfter: 60 });
+    }
+
+    req._pathAgentSlug = agentId;
     req._waiRoute = true;
     req.url = '/' + agentMatch[2];
+
+    // Fire-and-forget analytics (non-blocking)
+    const restPath = agentMatch[2];
+    const eventType = restPath.includes('chat') ? 'message_sent'
+      : restPath === 'chatbot' || restPath === '' ? 'view'
+      : null;
+    if (eventType) {
+      const ipHash = crypto.createHash('sha256').update(String(clientIp)).digest('hex').slice(0, 16);
+      const rpcUrl = `${process.env.POSTGREST_INTERNAL_URL || 'http://localhost:3000'}/wai_agent_analytics`;
+      fetch(rpcUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agent_id: agentId, tenant_id: '', event_type: eventType, ip_hash: ipHash }),
+      }).catch(() => { /* ignore analytics errors */ });
+    }
+
     return next();
   }
 

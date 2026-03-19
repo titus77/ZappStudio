@@ -110,12 +110,12 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
   const handleCreate = async () => {
     // Validation
     if (!name.trim()) {
-      setError('Please enter a name for the data space');
+      setError('Veuillez saisir un nom pour l\'espace de données');
       return;
     }
 
     if (!selectedCredentialId) {
-      setError('Please select a vector database provider');
+      setError('Veuillez sélectionner un fournisseur de base de données vectorielle');
       return;
     }
 
@@ -137,11 +137,11 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
         embeddings: embeddingsConfig,
       });
 
-      successToast('Data space created successfully');
+      successToast('Espace de données créé avec succès');
       onSuccess();
       onClose();
     } catch (err) {
-      const errorMessage = err?.message || 'Failed to create data space. Please try again.';
+      const errorMessage = err?.message || 'Impossible de créer l\'espace de données. Veuillez réessayer.';
       errorToast(errorMessage);
     } finally {
       setIsCreating(false);
@@ -209,7 +209,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
     // Auto-select the newly created credential
     if (data.id) {
       setSelectedCredentialId(data.id);
-      successToast('Connection created successfully. You can now use it.');
+      successToast('Connexion créée avec succès. Vous pouvez maintenant l\'utiliser.');
     }
   };
 
@@ -249,7 +249,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
               {/* Provider Selection */}
               <div className="space-y-2">
                 <label className="text-gray-700 mb-1 text-sm font-normal flex items-center">
-                  Vector Database Provider <span className="text-red-500 ml-1">*</span>
+                  Fournisseur de base de données vectorielle <span className="text-red-500 ml-1">*</span>
                 </label>
                 <Select
                   data-qa="provider-select"
@@ -258,7 +258,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
                   disabled={credentialsLoading || isCreating}
                 >
                   <SelectTrigger className="w-full" disabled={credentialsLoading || isCreating}>
-                    <SelectValue placeholder="Select a provider">
+                    <SelectValue placeholder="Sélectionner un fournisseur">
                       {selectedCredentialId &&
                         (() => {
                           const selectedCred = getCredentialById(selectedCredentialId);
@@ -276,7 +276,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
                               )}
                               <span>{selectedCred?.name}</span>
                               {selectedCred?.isManaged && (
-                                <span className="text-xs text-gray-500">Managed</span>
+                                <span className="text-xs text-gray-500">Géré</span>
                               )}
                             </div>
                           );
@@ -288,7 +288,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
                     <SelectItem value="__create_new__">
                       <div className="flex items-center gap-2 text-blue-600 font-medium">
                         <PlusCircle className="w-4 h-4" />
-                        <span>Create New Connection</span>
+                        <span>Créer une nouvelle connexion</span>
                       </div>
                     </SelectItem>
 
@@ -296,7 +296,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
                     <SelectItem value="__manage_connections__">
                       <div className="flex items-center gap-2 text-gray-600 font-medium">
                         <Settings className="w-4 h-4" />
-                        <span>Manage Connections</span>
+                        <span>Gérer les connexions</span>
                       </div>
                     </SelectItem>
 
@@ -306,7 +306,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
                     {/* Existing Credentials */}
                     {credentials.length === 0 ? (
                       <div className="px-2 py-1.5 text-sm text-muted-foreground">
-                        No connections found
+                        Aucune connexion trouvée
                       </div>
                     ) : (
                       credentials.map((cred) => {
@@ -323,7 +323,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
                               )}
                               <span>{cred.name}</span>
                               {cred.isManaged && (
-                                <span className="text-xs text-gray-500">Managed</span>
+                                <span className="text-xs text-gray-500">Géré</span>
                               )}
                             </div>
                           </SelectItem>
@@ -337,11 +337,11 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
               {/* Name Input */}
               <div className="space-y-2">
                 <Input
-                  label="Name"
+                  label="Nom"
                   required
                   fullWidth
                   type="text"
-                  placeholder="Name your data space"
+                  placeholder="Nommez votre espace de données"
                   value={name}
                   onChange={handleNameChange}
                   disabled={isCreating}
@@ -355,7 +355,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
                 {/* Embedding Model Selection */}
                 <div className="space-y-2">
                   <label className="text-gray-700 mb-1 text-sm font-normal flex items-center">
-                    Embedding Model <span className="text-red-500 ml-1">*</span>
+                    Modèle d'embedding <span className="text-red-500 ml-1">*</span>
                   </label>
                   <Select
                     value={selectedModelId}
@@ -367,16 +367,16 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
                     }}
                   >
                     <SelectTrigger className="w-full" disabled={isLoadingModels || isCreating}>
-                      <SelectValue placeholder="Select an embedding model" />
+                      <SelectValue placeholder="Sélectionner un modèle d'embedding" />
                     </SelectTrigger>
                     <SelectContent>
                       {isLoadingModels ? (
                         <div className="px-2 py-1.5 text-sm text-muted-foreground">
-                          Loading models...
+                          Chargement des modèles...
                         </div>
                       ) : embeddingModels.length === 0 ? (
                         <div className="px-2 py-1.5 text-sm text-muted-foreground">
-                          No models available
+                          Aucun modèle disponible
                         </div>
                       ) : (
                         embeddingModels.map((model) => (
@@ -392,15 +392,15 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
                 {/* Dimensions Input */}
                 <div className="space-y-2">
                   <label className="text-gray-700  text-sm font-normal flex items-center">
-                    Vector Dimensions
+                    Dimensions vectorielles
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Info className="w-4 h-4 cursor-help ml-1" />
                       </TooltipTrigger>
                       <TooltipContent side="right" className="max-w-[200px] text-center text-wrap">
                         <p>
-                          The dimension should match the one configured in your vector database
-                          provider.
+                          La dimension doit correspondre à celle configurée dans votre fournisseur
+                          de base de données vectorielle.
                         </p>
                       </TooltipContent>
                     </Tooltip>
@@ -422,7 +422,7 @@ export const CreateNamespaceModal: FC<CreateNamespaceModalProps> = ({
               <CustomButton
                 variant="primary"
                 type="submit"
-                label={isCreating ? 'Creating...' : 'Create'}
+                label={isCreating ? 'Création...' : 'Créer'}
                 disabled={!isFormValid || isCreating || credentialsLoading || isLoadingModels}
                 loading={isCreating}
               />

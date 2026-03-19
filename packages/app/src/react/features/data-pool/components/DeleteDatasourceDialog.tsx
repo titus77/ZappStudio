@@ -48,7 +48,7 @@ export const DeleteDatasourceDialog: FC<DeleteDatasourceDialogProps> = ({
 
   const handleConfirm = async () => {
     if (confirmText !== datasourceName) {
-      setError('Datasource name does not match');
+      setError('Le nom de la source de données ne correspond pas');
       return;
     }
 
@@ -68,26 +68,26 @@ export const DeleteDatasourceDialog: FC<DeleteDatasourceDialogProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Delete Datasource</DialogTitle>
+          <DialogTitle>Supprimer la source de données</DialogTitle>
         </DialogHeader>
 
         <div className="py-4 space-y-4">
           <div className="bg-red-50 border border-red-200 rounded-md p-4">
             <p className="text-sm text-red-800">
-              <strong>Warning:</strong> This action cannot be undone. This will permanently delete
-              the datasource and all associated data from the vector database.
+              <strong>Attention :</strong> Cette action est irréversible. Elle supprimera définitivement
+              la source de données et toutes les données associées de la base de données vectorielle.
             </p>
           </div>
 
           <div className="space-y-2">
             <p className="text-sm text-gray-700">
-              Please type <strong className="font-semibold text-gray-900">{datasourceName}</strong>{' '}
-              to confirm deletion.
+              Veuillez saisir <strong className="font-semibold text-gray-900">{datasourceName}</strong>{' '}
+              pour confirmer la suppression.
             </p>
             <Input
               fullWidth
               type="text"
-              placeholder="Type datasource name"
+              placeholder="Saisir le nom de la source de données"
               value={confirmText}
               onChange={handleConfirmTextChange}
               disabled={isDeleting}
@@ -101,7 +101,7 @@ export const DeleteDatasourceDialog: FC<DeleteDatasourceDialogProps> = ({
         <DialogFooter>
           <CustomButton
             variant="primary"
-            label={isDeleting ? 'Deleting...' : 'Delete Datasource'}
+            label={isDeleting ? 'Suppression...' : 'Supprimer la source de données'}
             handleClick={handleConfirm}
             disabled={!isValid || isDeleting}
             loading={isDeleting}

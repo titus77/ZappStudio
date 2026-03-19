@@ -91,12 +91,12 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
     const ext = selectedFile.name.toLowerCase().substring(selectedFile.name.lastIndexOf('.'));
 
     if (!allowedTypes.includes(selectedFile.type) && !allowedExtensions.includes(ext)) {
-      setError('Only .txt, .pdf, and .docx files are allowed');
+      setError('Seuls les fichiers .txt, .pdf et .docx sont acceptés');
       return;
     }
 
     if (selectedFile.size > 10 * 1024 * 1024) {
-      setError('File size must be less than 10MB');
+      setError('La taille du fichier doit être inférieure à 10 Mo');
       return;
     }
 
@@ -124,7 +124,7 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
 
   const handleUpload = async () => {
     if (!datasourceLabel.trim()) {
-      setError('Datasource label is required');
+      setError('Le nom de la source de données est requis');
       return;
     }
 
@@ -132,13 +132,13 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
 
     if (mode === 'file') {
       if (!file) {
-        setError('Please select a file');
+        setError('Veuillez sélectionner un fichier');
         return;
       }
       fileToUpload = file;
     } else {
       if (!rawText.trim()) {
-        setError('Please enter some text');
+        setError('Veuillez saisir du texte');
         return;
       }
       // Convert raw text to a file
@@ -152,11 +152,11 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
       try {
         parsedMetadata = JSON.parse(metadata);
         if (typeof parsedMetadata !== 'object' || parsedMetadata === null) {
-          setError('Metadata must be a valid JSON object');
+          setError('Les métadonnées doivent être un objet JSON valide');
           return;
         }
       } catch (err) {
-        setError('Invalid JSON in metadata: ' + (err as Error).message);
+        setError('JSON invalide dans les métadonnées : ' + (err as Error).message);
         return;
       }
     }
@@ -174,11 +174,11 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
           !isNaN(parsedChunkOverlap) && parsedChunkOverlap >= 0 ? parsedChunkOverlap : undefined,
         metadata: parsedMetadata,
       });
-      successToast('Datasource uploaded successfully');
+      successToast('Source de données importée avec succès');
       onSuccess();
       onClose();
     } catch (error: unknown) {
-      const errorMessage = (error as Error)?.message || 'Failed to upload datasource';
+      const errorMessage = (error as Error)?.message || 'Impossible d\'importer la source de données';
       errorToast(errorMessage);
     } finally {
       setIsUploading(false);
@@ -200,18 +200,18 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-hidden flex flex-col">
         <DialogHeader>
-          <DialogTitle>Upload Datasource</DialogTitle>
+          <DialogTitle>Importer une source de données</DialogTitle>
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto py-4 space-y-4 px-1">
           {/* Datasource Label */}
           <div className="space-y-2">
             <Input
-              label="Datasource Label"
+              label="Nom de la source de données"
               required
               fullWidth
               type="text"
-              placeholder="Enter a name for your datasource"
+              placeholder="Saisissez un nom pour votre source de données"
               value={datasourceLabel}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setDatasourceLabel(e.target.value);
@@ -236,7 +236,7 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
             >
               <div className="flex flex-col items-center gap-2">
                 <Upload className="w-5 h-5" />
-                <span className="font-medium">Upload File</span>
+                <span className="font-medium">Importer un fichier</span>
               </div>
             </button>
             <button
@@ -251,7 +251,7 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
             >
               <div className="flex flex-col items-center gap-2">
                 <FileText className="w-5 h-5" />
-                <span className="font-medium">Raw Text</span>
+                <span className="font-medium">Texte brut</span>
               </div>
             </button>
           </div>
@@ -271,8 +271,8 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
                   }`}
                 >
                   <Upload className="w-12 h-12 mx-auto text-gray-400 mb-3" />
-                  <p className="text-gray-700 font-medium mb-1">Drag and drop your file here</p>
-                  <p className="text-sm text-gray-500 mb-3">or</p>
+                  <p className="text-gray-700 font-medium mb-1">Glissez-déposez votre fichier ici</p>
+                  <p className="text-sm text-gray-500 mb-3">ou</p>
                   <label className="inline-block">
                     <input
                       type="file"
@@ -283,11 +283,11 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
                       data-qa="file-dropzone-input"
                     />
                     <span className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer inline-block">
-                      Browse Files
+                      Parcourir les fichiers
                     </span>
                   </label>
                   <p className="text-xs text-gray-500 mt-3">
-                    Supported formats: .txt, .pdf, .docx (Max 10MB)
+                    Formats acceptés : .txt, .pdf, .docx (max 10 Mo)
                   </p>
                 </div>
               ) : (
@@ -318,7 +318,7 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
           {mode === 'text' && (
             <div className="space-y-2">
               <label className="text-gray-700 text-sm font-normal">
-                Text Content <span className="text-red-500">*</span>
+                Contenu textuel <span className="text-red-500">*</span>
               </label>
               <textarea
                 value={rawText}
@@ -327,31 +327,31 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
                   setError(null);
                 }}
                 disabled={isUploading}
-                placeholder="Paste or type your text content here..."
+                placeholder="Collez ou saisissez votre contenu textuel ici..."
                 // make font size smaller: font-size-sm
                 className="w-full h-64 px-3 py-2 border text-sm border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed resize-none font-light"
               />
-              <p className="text-xs text-gray-500">This text will be saved as a .txt file</p>
+              <p className="text-xs text-gray-500">Ce texte sera enregistré sous forme de fichier .txt</p>
             </div>
           )}
 
           {/* Advanced Configuration - Collapsible */}
           <details className="border-t pt-4 mt-4">
             <summary className="text-md font-semibold mb-2 text-gray-900 cursor-pointer hover:text-blue-600 transition-colors flex items-center gap-2">
-              <span>⚙️</span> Advanced Configuration
+              <span>⚙️</span> Configuration avancée
             </summary>
             <div className="mt-3 space-y-6">
               {/* Chunking Configuration */}
               <div className="space-y-3">
                 <h4 className="text-sm font-medium text-gray-800 flex items-center gap-2">
-                  <span>📄</span> Chunking Settings
+                  <span>📄</span> Paramètres de découpage
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Chunk Size */}
                   <div className="space-y-2">
                     <label className="text-gray-700 text-sm font-normal flex items-center gap-1">
-                      Chunk Size
-                      <span className="text-gray-400 text-xs">(optional)</span>
+                      Taille des segments
+                      <span className="text-gray-400 text-xs">(optionnel)</span>
                     </label>
                     <input
                       type="number"
@@ -363,14 +363,14 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
                       placeholder="1000"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-sm"
                     />
-                    <p className="text-xs text-gray-500">Maximum characters per chunk</p>
+                    <p className="text-xs text-gray-500">Nombre maximum de caractères par segment</p>
                   </div>
 
                   {/* Chunk Overlap */}
                   <div className="space-y-2">
                     <label className="text-gray-700 text-sm font-normal flex items-center gap-1">
-                      Chunk Overlap
-                      <span className="text-gray-400 text-xs">(optional)</span>
+                      Chevauchement des segments
+                      <span className="text-gray-400 text-xs">(optionnel)</span>
                     </label>
                     <input
                       type="number"
@@ -384,14 +384,13 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
                       placeholder="200"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-sm"
                     />
-                    <p className="text-xs text-gray-500">Overlapping characters between chunks</p>
+                    <p className="text-xs text-gray-500">Caractères partagés entre les segments</p>
                   </div>
                 </div>
                 <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
                   <p className="text-xs text-blue-800">
-                    <strong>💡 Tip:</strong> Larger chunks preserve more context but may be less
-                    precise. Overlap helps maintain continuity between chunks. Use defaults for most
-                    cases.
+                    <strong>💡 Conseil :</strong> Des segments plus grands préservent davantage de contexte mais peuvent être moins
+                    précis. Le chevauchement aide à maintenir la continuité entre les segments. Utilisez les valeurs par défaut dans la plupart des cas.
                   </p>
                 </div>
               </div>
@@ -399,7 +398,7 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
               {/* Metadata Configuration */}
               <div className="space-y-3 border-t pt-4">
                 <h4 className="text-sm font-medium text-gray-800 flex items-center gap-2">
-                  <span>🏷️</span> Custom Metadata
+                  <span>🏷️</span> Métadonnées personnalisées
                 </h4>
                 <JsonEditor
                   value={metadata}
@@ -412,9 +411,9 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
                 />
                 <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
                   <p className="text-xs text-amber-800">
-                    <strong>📝 Note:</strong> Add custom metadata as JSON to enrich your datasource
-                    with additional information. This is optional and can be used for filtering and
-                    organization.
+                    <strong>📝 Note :</strong> Ajoutez des métadonnées personnalisées en JSON pour enrichir votre source de données
+                    avec des informations supplémentaires. C'est optionnel et peut être utilisé pour le filtrage et
+                    l'organisation.
                   </p>
                 </div>
               </div>
@@ -428,7 +427,7 @@ export const UploadDatasourceDialog: FC<UploadDatasourceDialogProps> = ({
         <DialogFooter className="shrink-0">
           <CustomButton
             variant="primary"
-            label={isUploading ? 'Uploading...' : 'Upload'}
+            label={isUploading ? 'Importation...' : 'Importer'}
             handleClick={handleUpload}
             disabled={!isValid || isUploading}
             loading={isUploading}

@@ -54,13 +54,33 @@ router.get('/', async (req, res) => {
 
   const logo = agent.agentSettings?.embodiments?.get(EMBODIMENT_TYPES.ChatBot, 'icon') || 'https://proxy-02.api.smyth.ai/static/img/icon.svg';
   const colors = agent.agentSettings?.embodiments?.get(EMBODIMENT_TYPES.ChatBot, 'colors');
+  const description = (agent as any).description || '';
 
   const { allowAttachments = true } = req.query;
+
+  // ZappImmo /wai: static assets and domain must use /wai prefix for correct routing
+  const isWaiRoute = !!(req as any)._waiRoute;
+  const waiSlug = (req as any)._pathAgentSlug || '';
+  const staticPrefix = isWaiRoute ? '/wai/static' : '/static';
+  // For /wai routes, pass the full path-based domain so chatbot-v2.js builds correct API URLs
+  const domainLine = isWaiRoute
+    ? `domain: '${config.env.PROD_AGENT_DOMAIN}/${waiSlug}',`
+    : `//domain:'${agent.id}.${config.env.DEFAULT_AGENT_DOMAIN}',`;
+
+  // OG metadata for social sharing (zap.immo/wai/{agentId})
+  const ogTags = isWaiRoute ? `
+    <meta property="og:title" content="${name}" />
+    <meta property="og:description" content="${description || `Discutez avec ${name}`}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://${config.env.PROD_AGENT_DOMAIN}/${waiSlug}" />
+    ${logo ? `<meta property="og:image" content="${logo}" />` : ''}
+    <meta name="twitter:card" content="summary" />
+    <meta name="robots" content="noindex" />` : '';
 
   let debugScript = '';
   if (isTestDomain || debugSessionEnabled) {
     debugScript = `
-<script src="/static/embodiment/chatBot/chatbot-debug.js"></script>
+<script src="${staticPrefix}/embodiment/chatBot/chatbot-debug.js"></script>
 <script>
 initDebug('${config.env.UI_SERVER}', '${agent.id}');
 </script>
@@ -72,17 +92,17 @@ initDebug('${config.env.UI_SERVER}', '${agent.id}');
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${name}</title>
+    <title>${name}</title>${ogTags}
 </head>
 <body style="height: 100%;margin: 0;padding: 0;">
     <div id="smyth-chatbot-page" style="height: 100%;"></div>
-    <script src="/static/embodiment/chatBot/chatbot-v2.js"></script>
+    <script src="${staticPrefix}/embodiment/chatBot/chatbot-v2.js"></script>
     <script>
         ChatBot.init({
             logo: '${logo}',
             introMessage: '${introMessage}',
             allowAttachments: ${allowAttachments},
-            //domain:'${agent.id}.${config.env.DEFAULT_AGENT_DOMAIN}',
+            ${domainLine}
             colors: ${JSON.stringify(colors, null, 2)},
             isChatOnly: true,
             containerId: 'smyth-chatbot-page',

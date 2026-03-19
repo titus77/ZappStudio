@@ -66,7 +66,7 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
     if (!dateString) return 'N/A';
     try {
       const date = new Date(dateString);
-      return date.toLocaleString('en-US', {
+      return date.toLocaleString('fr-FR', {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
@@ -93,7 +93,7 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto overflow-x-hidden">
         <DialogHeader>
-          <DialogTitle>Datasource Details</DialogTitle>
+          <DialogTitle>Détails de la source de données</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6 py-4 overflow-hidden">

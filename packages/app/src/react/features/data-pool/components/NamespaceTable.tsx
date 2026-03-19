@@ -57,8 +57,8 @@ export const NamespaceTable: FC<NamespaceTableProps> = ({ namespaces, onDelete }
       <table className="w-full min-w-[600px] text-sm text-left">
         <thead className="text-xs text-gray-500 uppercase bg-gray-50 border-b">
           <tr>
-            <th className="px-6 py-3">Data Space Name</th>
-            <th className="px-6 py-3">Provider</th>
+            <th className="px-6 py-3">Nom de l'espace de données</th>
+            <th className="px-6 py-3">Fournisseur</th>
             <th className="px-6 py-3 text-center">Actions</th>
           </tr>
         </thead>
@@ -124,9 +124,9 @@ export const NamespaceTable: FC<NamespaceTableProps> = ({ namespaces, onDelete }
                         className="w-5 h-5 object-contain"
                       />
                     )}
-                    <span>{credential?.name || 'Unknown'}</span>
+                    <span>{credential?.name || 'Inconnu'}</span>
                     {credential?.isManaged && (
-                      <span className="text-xs text-gray-500">Managed</span>
+                      <span className="text-xs text-gray-500">Géré</span>
                     )}
                   </div>
                 </td>
@@ -139,7 +139,7 @@ export const NamespaceTable: FC<NamespaceTableProps> = ({ namespaces, onDelete }
                   }}
                 >
                   <div className="flex items-center justify-center">
-                    <Tooltip content="Add Datasource">
+                    <Tooltip content="Ajouter une source de données">
                       <Button
                         variant="ghost"
                         size="sm"
@@ -149,7 +149,7 @@ export const NamespaceTable: FC<NamespaceTableProps> = ({ namespaces, onDelete }
                         <FilePlus className="h-4 w-4 text-[#242424] cursor-pointer hover:text-blue-600" />
                       </Button>
                     </Tooltip>
-                    <Tooltip content="Delete">
+                    <Tooltip content="Supprimer">
                       <Button
                         variant="ghost"
                         size="sm"

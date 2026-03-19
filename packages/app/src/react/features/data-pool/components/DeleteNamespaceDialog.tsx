@@ -48,7 +48,7 @@ export const DeleteNamespaceDialog: FC<DeleteNamespaceDialogProps> = ({
 
   const handleConfirm = async () => {
     if (confirmText !== namespaceName) {
-      setError('Data space name does not match');
+      setError('Le nom de l\'espace de données ne correspond pas');
       return;
     }
 
@@ -68,26 +68,26 @@ export const DeleteNamespaceDialog: FC<DeleteNamespaceDialogProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Delete Data Space</DialogTitle>
+          <DialogTitle>Supprimer l'espace de données</DialogTitle>
         </DialogHeader>
 
         <div className="py-4 space-y-4">
           <div className="bg-red-50 border border-red-200 rounded-md p-4">
             <p className="text-sm text-red-800">
-              <strong>Warning:</strong> This action cannot be undone. This will permanently delete
-              the data space and all associated data.
+              <strong>Attention :</strong> Cette action est irréversible. Elle supprimera définitivement
+              l'espace de données et toutes les données associées.
             </p>
           </div>
 
           <div className="space-y-2">
             <p className="text-sm text-gray-700">
-              Please type <strong className="font-semibold text-gray-900">{namespaceName}</strong>{' '}
-              to confirm deletion.
+              Veuillez saisir <strong className="font-semibold text-gray-900">{namespaceName}</strong>{' '}
+              pour confirmer la suppression.
             </p>
             <Input
               fullWidth
               type="text"
-              placeholder="Type data space name"
+              placeholder="Saisir le nom de l'espace de données"
               value={confirmText}
               onChange={handleConfirmTextChange}
               disabled={isDeleting}
@@ -101,7 +101,7 @@ export const DeleteNamespaceDialog: FC<DeleteNamespaceDialogProps> = ({
         <DialogFooter>
           <CustomButton
             variant="primary"
-            label={isDeleting ? 'Deleting...' : 'Delete Data Space'}
+            label={isDeleting ? 'Suppression...' : 'Supprimer l\'espace de données'}
             handleClick={handleConfirm}
             disabled={!isValid || isDeleting}
             loading={isDeleting}

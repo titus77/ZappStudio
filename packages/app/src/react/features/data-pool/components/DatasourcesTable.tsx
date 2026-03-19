@@ -36,7 +36,7 @@ export const DatasourcesTable: FC<DatasourcesTableProps> = ({ datasources, onDel
     if (!dateString) return 'N/A';
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', {
+      return date.toLocaleDateString('fr-FR', {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
@@ -55,9 +55,9 @@ export const DatasourcesTable: FC<DatasourcesTableProps> = ({ datasources, onDel
       <table className="w-full min-w-[600px] text-sm text-left">
         <thead className="text-xs text-gray-500 uppercase bg-gray-50 border-b">
           <tr>
-            <th className="px-6 py-3">Name</th>
-            <th className="px-6 py-3">Size</th>
-            <th className="px-6 py-3">Created</th>
+            <th className="px-6 py-3">Nom</th>
+            <th className="px-6 py-3">Taille</th>
+            <th className="px-6 py-3">Créé le</th>
             <th className="px-6 py-3 text-center">Actions</th>
           </tr>
         </thead>
@@ -87,7 +87,7 @@ export const DatasourcesTable: FC<DatasourcesTableProps> = ({ datasources, onDel
               {/* Actions */}
               <td className="px-6 py-4">
                 <div className="flex items-center justify-center gap-2">
-                  <Tooltip content="View Details">
+                  <Tooltip content="Voir les détails">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -97,7 +97,7 @@ export const DatasourcesTable: FC<DatasourcesTableProps> = ({ datasources, onDel
                       <Eye className="h-4 w-4" />
                     </Button>
                   </Tooltip>
-                  <Tooltip content="Delete">
+                  <Tooltip content="Supprimer">
                     <Button
                       variant="ghost"
                       size="sm"
