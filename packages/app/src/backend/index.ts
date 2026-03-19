@@ -79,16 +79,23 @@ app.use(cookieParser());
 const redisStore = new RedisStore({ client: cacheClient.client, prefix: 'smyth_ui_backend:' });
 const cookieDays = 30;
 
+const isProd = process.env.NODE_ENV === 'production';
+
+// SEC: Refuse to start in production without SESSION_SECRET
 if (!config.env.SESSION_SECRET) {
-  console.warn('SESSION_SECRET is not set, using default secret for sessions');
+  if (isProd) {
+    console.error('FATAL: SESSION_SECRET is not set in production!');
+    process.exit(1);
+  }
+  console.warn('SESSION_SECRET is not set, using random secret (dev only)');
 }
 
-const isProd = process.env.NODE_ENV === 'production';
+const sessionSecret = config.env.SESSION_SECRET || require('crypto').randomBytes(32).toString('hex');
 
 app.use(
   session({
     store: config.flags.useRedis ? redisStore : undefined,
-    secret: config.env.SESSION_SECRET || 'secret123',
+    secret: sessionSecret,
     cookie: {
       maxAge: cookieDays * 24 * 60 * 60 * 1000,
       sameSite: isProd ? 'none' : 'lax',  // 'none' for cross-origin iframe in prod

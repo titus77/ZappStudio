@@ -5,7 +5,7 @@ import path from 'path';
 import { cacheClient } from '@src/backend/services/cache.service';
 import config from '../../config';
 import SmythFS from '../../services/SmythFS.class';
-const INTERNAL_M2M_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET || 'M2M_TOKEN';
+const INTERNAL_M2M_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET || '';
 import { isSmythStaff } from '../../utils';
 
 const smythFS = new SmythFS();

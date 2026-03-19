@@ -334,7 +334,7 @@ export const findOrCreateUser = async ({ email, name, avatar }: { email: string;
       return newRecord;
     },
     {
-      timeout: 100_000, // take as much time as you need (CRITICAL TASK)
+      timeout: 15_000, // take as much time as you need (CRITICAL TASK)
     },
   );
 
@@ -426,8 +426,12 @@ export const findOrCreateUserWithTenant = async ({
       if (existingUser) {
         await syncUserDetails(existingUser, { name, avatar });
 
-        // Move user to tenant's team if they're in a different one
-        if (existingUser.teamId !== team.id) {
+        // SEC: Do NOT silently move users between teams (prevents tenant hijacking).
+        // If user is in a different team, log a warning but keep them in their current team.
+        if (existingUser.teamId && existingUser.teamId !== team.id) {
+          LOGGER.warn(`User ${email} is in team ${existingUser.teamId} but JWT claims tenant ${tenantId} (team ${team.id}). Keeping current team.`);
+        } else if (!existingUser.teamId) {
+          // User has no team — assign to tenant's team
           await tx.user.update({
             where: { id: existingUser.id },
             data: { teamId: team.id },
@@ -503,7 +507,7 @@ export const findOrCreateUserWithTenant = async ({
 
       return userRecord;
     },
-    { timeout: 100_000 },
+    { timeout: 15_000 },
   );
 
   return user;

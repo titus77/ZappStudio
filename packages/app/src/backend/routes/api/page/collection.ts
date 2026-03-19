@@ -1,6 +1,6 @@
 import express from 'express';
 import config from '../../../config';
-const INTERNAL_M2M_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET || 'M2M_TOKEN';
+const INTERNAL_M2M_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET || '';
 import axios from 'axios';
 const router = express.Router();
 

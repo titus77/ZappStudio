@@ -34,7 +34,8 @@ export default class DefaultUIAuth implements AuthStrategy {
         return { error: 'Erreur de configuration serveur : secret JWT manquant', data: null, success: false };
       }
       const secret = new TextEncoder().encode(TRUSTED_JWT_SECRET);
-      const { payload } = await jose.jwtVerify(token, secret);
+      // SEC: Restrict to HS256 only (prevent algorithm confusion)
+      const { payload } = await jose.jwtVerify(token, secret, { algorithms: ['HS256'] });
       decoded = payload;
     } catch (err: any) {
       LOGGER.error(new Error(`JWT verification failed: ${err.message}`));

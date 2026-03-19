@@ -5,8 +5,11 @@ import { teamSettingKeys } from '../../shared/teamSettingKeys';
 import { userSettingKeys } from '../../shared/userSettingKeys';
 import config from '../config';
 import { TEAM_ID_HEADER } from '../constants';
-// Internal M2M secret for app -> middleware calls (replaces Logto M2M token)
-const INTERNAL_M2M_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET || 'M2M_TOKEN';
+// SEC: Internal M2M secret — no hardcoded fallback
+const INTERNAL_M2M_SECRET = process.env.INTERNAL_TRUSTED_SECRET || process.env.SMYTHOS_JWT_SECRET;
+if (!INTERNAL_M2M_SECRET) {
+  console.error('FATAL: INTERNAL_TRUSTED_SECRET or SMYTHOS_JWT_SECRET must be set for M2M auth');
+}
 import * as teamData from '../services/team-data.service';
 import * as userData from '../services/user-data.service';
 
