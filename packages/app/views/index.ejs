@@ -50,7 +50,7 @@
   <!-- ZappImmo iframe SSO: receive renewed JWT tokens via postMessage -->
   <script>
     (function() {
-      var ALLOWED_ORIGINS = ['https://zapp.immo', 'https://smythos.zapp.immo', 'http://localhost:3100'];
+      var ALLOWED_ORIGINS = ['https://zapp.immo', 'https://studio.zapp.immo', 'http://localhost:3100'];
       window.addEventListener('message', function(event) {
         if (ALLOWED_ORIGINS.indexOf(event.origin) === -1) return;
         if (event.data && event.data.type === 'zappimmo_token_refresh') {

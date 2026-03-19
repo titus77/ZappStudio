@@ -47,7 +47,7 @@ app.use(
   cors({
     origin: [
       'https://zapp.immo',
-      'https://smythos.zapp.immo',
+      'https://studio.zapp.immo',
       process.env.APP_URL || 'http://localhost:5050',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:3100', 'http://localhost:6060'] : []),
     ].filter(Boolean),

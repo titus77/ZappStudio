@@ -4,7 +4,7 @@ import { SMYTHOS_DOCS_URL } from '@src/shared/constants/general';
 import { BookIcon, /* DiscordIcon, */ HomeIcon, KeyIcon } from '../components/svgs';
 
 // Redirige vers la page billing ZappImmo (plan Elite requis pour Studio)
-// Le Studio tourne sur smythos.zapp.immo, le billing est sur le frontend principal
+// Le Studio tourne sur studio.zapp.immo, le billing est sur le frontend principal
 const ZAPPIMMO_BASE = typeof window !== 'undefined'
   ? (window as any).__ZAPPIMMO_URL || 'https://zapp.immo'
   : 'https://zapp.immo';

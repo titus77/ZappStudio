@@ -48,7 +48,7 @@ app.get('/health', (_, res) => {
 // CORS for iframe cross-origin (ZappImmo embeds ZappStudio)
 const ALLOWED_ORIGINS = [
   'https://zapp.immo',
-  'https://smythos.zapp.immo',
+  'https://studio.zapp.immo',
   process.env.APP_URL,
   process.env.UI_SERVER,
 ].filter(Boolean) as string[];
