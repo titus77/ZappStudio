@@ -4,7 +4,7 @@ import { AuthStrategy } from '.';
 import { LOGGER } from '../../../../../../config/logging';
 import { userService } from '../../../../user/services';
 
-const TRUSTED_JWT_SECRET = process.env.TRUSTED_JWT_SECRET || process.env.PGRST_JWT_SECRET;
+const TRUSTED_JWT_SECRET = process.env.TRUSTED_JWT_SECRET;
 
 interface UserTokenData {
   logtoUser?: any;
@@ -26,7 +26,7 @@ export default class DefaultUIAuth implements AuthStrategy {
       return { error: `Un jeton d'acces est requis`, data: null, success: false };
     }
 
-    // Verify JWT with PGRST_JWT_SECRET (ZappImmo trusted secret)
+    // Verify JWT with TRUSTED_JWT_SECRET (ZappImmo trusted secret)
     let decoded: jose.JWTPayload;
     try {
       if (!TRUSTED_JWT_SECRET) {

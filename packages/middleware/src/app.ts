@@ -18,12 +18,11 @@ app.use(helmet());
 
 // app.use(appLimiter);
 // parse json request body
+// SEC: Payload limit reduit de 50MB a 5MB (suffisant pour workflows JSON)
 app.use(
   express.json({
-    limit: '50mb',
+    limit: '5mb',
     verify: (req, res, buf) => {
-      // @ts-ignore
-      // const url = req.originalUrl;
       // @ts-ignore
       req.rawBody = buf; // for webhooks signature verification
     },
@@ -39,15 +38,21 @@ if (config.variables.env !== 'production') {
   // #endregion
 }
 
-// parse urlencoded request body
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 app.use(infoLogger);
 
+// SEC: CORS restreint (pas origin:'*' avec credentials:true)
+// Le middleware API n'est accessible que depuis le container app (intra-container)
 app.use(
   cors({
-    origin: '*',
+    origin: [
+      'https://zapp.immo',
+      'https://smythos.zapp.immo',
+      process.env.APP_URL || 'http://localhost:5050',
+      ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:3100', 'http://localhost:6060'] : []),
+    ].filter(Boolean),
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Smyth-Team-Id'],
     exposedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
     maxAge: 86400,
@@ -80,7 +85,14 @@ app.use((_req, _res, next) => {
   next();
 });
 
-app.get('/metrics', (_req, res) => {
+// SEC: /metrics protege — accessible uniquement depuis le reseau Docker interne (Prometheus scraper)
+app.get('/metrics', (req, res) => {
+  // Bloquer l'acces depuis l'exterieur (seul Prometheus interne doit scraper)
+  const clientIP = req.ip || req.socket.remoteAddress || '';
+  const isInternal = clientIP.includes('172.') || clientIP.includes('127.') || clientIP === '::1';
+  if (!isInternal && process.env.NODE_ENV === 'production') {
+    return res.status(403).json({ error: 'Metrics access restricted' });
+  }
   const lines = [
     '# HELP zs_requests_total Total HTTP requests to ZappStudio middleware',
     '# TYPE zs_requests_total counter',

@@ -4,7 +4,7 @@ import * as jose from 'jose';
 import { AuthStrategy } from '.';
 import { LOGGER } from '../../../../../../config/logging';
 
-const TRUSTED_JWT_SECRET = process.env.TRUSTED_JWT_SECRET || process.env.PGRST_JWT_SECRET;
+const TRUSTED_JWT_SECRET = process.env.TRUSTED_JWT_SECRET;
 // SEC: No fallback to SMYTHOS_JWT_SECRET — must be explicitly set
 const INTERNAL_TRUSTED_SECRET = process.env.INTERNAL_TRUSTED_SECRET;
 

@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import crypto from 'crypto';
 
-const TRUSTED_JWT_SECRET = process.env.TRUSTED_JWT_SECRET || process.env.PGRST_JWT_SECRET;
+// SEC: Pas de fallback PGRST_JWT_SECRET (le secret PostgREST ne doit pas etre expose ici)
+const TRUSTED_JWT_SECRET = process.env.TRUSTED_JWT_SECRET;
 
 /**
  * Timing-safe HMAC-SHA256 JWT verification.
