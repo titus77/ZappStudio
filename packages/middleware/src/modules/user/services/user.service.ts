@@ -345,3 +345,166 @@ export const findOrCreateUser = async ({ email, name, avatar }: { email: string;
 
   return user;
 };
+
+/**
+ * Find or create a user with tenant-aware team provisioning.
+ * When tenantId is provided (from ZappImmo JWT), the user is placed
+ * in the team mapped to that tenant. If no team exists for the tenant,
+ * one is created. If the user already exists but is in a different team,
+ * they are moved to the tenant's team.
+ */
+export const findOrCreateUserWithTenant = async ({
+  email,
+  name,
+  avatar,
+  tenantId,
+}: {
+  email: string;
+  name?: string | null;
+  avatar?: string | null;
+  tenantId?: string | null;
+}) => {
+  // If no tenantId, fall back to standard flow
+  if (!tenantId) {
+    return findOrCreateUser({ email, name, avatar });
+  }
+
+  const user = await prisma.$transaction(
+    async (tx) => {
+      // 1. Find or create team for this tenant
+      let team = await tx.team.findUnique({
+        where: { tenantId },
+        select: { id: true, name: true },
+      });
+
+      if (!team) {
+        LOGGER.info(`TENANT ${tenantId} DOESN'T HAVE A TEAM. CREATING...`);
+
+        let defaultPlan = await tx.plan.findFirst({
+          where: { isDefaultPlan: true },
+          select: { id: true },
+        });
+
+        if (!defaultPlan) {
+          defaultPlan = await tx.plan.create({
+            data: {
+              name: 'Full Access',
+              price: 1,
+              paid: true,
+              isDefaultPlan: true,
+              stripeId: 'na',
+              priceId: 'na',
+              properties: quotaUtils.buildDefaultPlanProps(),
+            },
+            select: { id: true },
+          });
+        }
+
+        team = await tx.team.create({
+          data: {
+            name: name ? `${name}'s Team` : 'ZappImmo Studio',
+            tenantId,
+            subscription: {
+              create: {
+                startDate: new Date(),
+                stripeId: '',
+                status: 'ACTIVE',
+                plan: { connect: { id: defaultPlan.id } },
+              },
+            },
+          },
+          select: { id: true, name: true },
+        });
+      }
+
+      // 2. Find or create user
+      const existingUser = await tx.user.findUnique({
+        where: { email },
+        select: { id: true, email: true, teamId: true, avatar: true, name: true },
+      });
+
+      if (existingUser) {
+        await syncUserDetails(existingUser, { name, avatar });
+
+        // Move user to tenant's team if they're in a different one
+        if (existingUser.teamId !== team.id) {
+          await tx.user.update({
+            where: { id: existingUser.id },
+            data: { teamId: team.id },
+          });
+          existingUser.teamId = team.id;
+        }
+
+        // Ensure user has a role in this team
+        const hasRole = await tx.userTeamRole.findFirst({
+          where: {
+            userId: existingUser.id,
+            sharedTeamRole: { teamId: team.id },
+          },
+        });
+
+        if (!hasRole) {
+          const teamMemberCount = await tx.user.count({
+            where: { teamId: team.id },
+          });
+          const isFirstMember = teamMemberCount <= 1;
+
+          await tx.userTeamRole.create({
+            data: {
+              isTeamInitiator: isFirstMember,
+              user: { connect: { id: existingUser.id } },
+              sharedTeamRole: {
+                create: {
+                  name: isFirstMember ? 'Super Admin' : 'Editor',
+                  isOwnerRole: isFirstMember,
+                  canManageTeam: isFirstMember,
+                  team: { connect: { id: team.id } },
+                },
+              },
+            },
+          });
+        }
+
+        return existingUser;
+      }
+
+      // 3. Create new user in tenant's team
+      LOGGER.info(`USER ${email} DOESN'T EXIST. CREATING IN TENANT ${tenantId}...`);
+
+      const teamMemberCount = await tx.user.count({
+        where: { teamId: team.id },
+      });
+      const isFirstMember = teamMemberCount === 0;
+
+      const userRecord = await tx.user.create({
+        data: {
+          email,
+          name: name ?? undefined,
+          avatar: avatar ?? undefined,
+          team: { connect: { id: team.id } },
+        },
+        select: { id: true, email: true, teamId: true, avatar: true, name: true },
+      });
+
+      await tx.userTeamRole.create({
+        data: {
+          isTeamInitiator: isFirstMember,
+          user: { connect: { id: userRecord.id } },
+          sharedTeamRole: {
+            create: {
+              name: isFirstMember ? 'Super Admin' : 'Editor',
+              isOwnerRole: isFirstMember,
+              canManageTeam: isFirstMember,
+              team: { connect: { id: team.id } },
+            },
+          },
+        },
+      });
+
+      return userRecord;
+    },
+    { timeout: 100_000 },
+  );
+
+  return user;
+};

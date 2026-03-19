@@ -53,11 +53,12 @@ export default class DefaultUIAuth implements AuthStrategy {
 
     data.logtoUser = userAuth;
 
-    // Find or create user in ZappStudio DB
-    const user = await userService.findOrCreateUser({
+    // Find or create user in ZappStudio DB (tenant-aware)
+    const user = await userService.findOrCreateUserWithTenant({
       email: userAuth.primaryEmail,
       name: userAuth.name,
       avatar: userAuth.avatar,
+      tenantId: userAuth.tenant_id,
     });
 
     if (!user.teamId) {
