@@ -103,7 +103,7 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 overflow-hidden">
               <div className="flex items-center gap-2 mb-2">
                 <FileText className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium text-blue-900">Name</span>
+                <span className="text-sm font-medium text-blue-900">Nom</span>
               </div>
               <p
                 title={datasource.name}
@@ -118,7 +118,7 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
             <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Hash className="w-5 h-5 text-purple-600" />
-                <span className="text-sm font-medium text-purple-900">Vectors</span>
+                <span className="text-sm font-medium text-purple-900">Vecteurs</span>
               </div>
               <p className="text-lg font-semibold text-purple-900">
                 {vectorCount.toLocaleString()}
@@ -129,7 +129,7 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
             <div className="bg-green-50 border border-green-200 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Database className="w-5 h-5 text-green-600" />
-                <span className="text-sm font-medium text-green-900">Size</span>
+                <span className="text-sm font-medium text-green-900">Taille</span>
               </div>
               <p className="text-lg font-semibold text-green-900">
                 {datasource.datasourceSizeMb ? formatSize(datasource.datasourceSizeMb) : '-'}
@@ -140,7 +140,7 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Calendar className="w-5 h-5 text-amber-600" />
-                <span className="text-sm font-medium text-amber-900">Created</span>
+                <span className="text-sm font-medium text-amber-900">Créé le</span>
               </div>
               <p className="text-sm font-semibold text-amber-900">
                 {formatDate(datasource.createdAt)}
@@ -152,12 +152,12 @@ export const ViewDatasourceDialog: FC<ViewDatasourceDialogProps> = ({
           {(datasource.chunkSize !== undefined || datasource.chunkOverlap !== undefined) && (
             <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
               <h3 className="text-sm font-semibold text-indigo-900 mb-3 flex items-center gap-2">
-                <span>⚙️</span> Chunking Configuration
+                <span>⚙️</span> Configuration du découpage
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {datasource.chunkSize !== undefined && (
                   <div>
-                    <span className="text-xs text-indigo-600 font-medium">Chunk Size</span>
+                    <span className="text-xs text-indigo-600 font-medium">Taille des segments</span>
                     <p data-qa="chunk-size" className="text-lg font-semibold text-indigo-900 mt-1">
                       {datasource.chunkSize.toLocaleString()}{' '}
                       <span className="text-sm font-normal">chars</span>
