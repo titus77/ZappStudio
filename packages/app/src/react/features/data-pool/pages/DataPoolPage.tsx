@@ -10,6 +10,7 @@ import TableRowSkeleton from '@src/react/shared/components/ui/table/table.row.sk
 import { useScreenSize } from '@src/react/shared/hooks/useScreenSize';
 import { errorToast, successToast } from '@src/shared/components/toast';
 import { SMYTHOS_DOCS_URL } from '@src/shared/constants/general';
+import { Loader2 } from 'lucide-react';
 import { ChangeEvent, FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { dataPoolClient } from '../client/datapool.client';
 import { CreateNamespaceModal } from '../components/CreateNamespaceModal';
@@ -22,9 +23,10 @@ import { DEFAULT_PAGINATION_LIMIT } from '../types';
 const DataPoolPageContent: FC = () => {
   const [namespaces, setNamespaces] = useState<Namespace[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [loadingMore, setLoadingMore] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [page, setPage] = useState<number>(1);
-  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [total, setTotal] = useState<number>(0);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [namespaceToDelete, setNamespaceToDelete] = useState<NamespaceWithProvider | null>(null);
@@ -37,24 +39,31 @@ const DataPoolPageContent: FC = () => {
    */
   const fetchNamespaces = useCallback(
     async (currentPage: number = 1) => {
+      const isInitialLoad = currentPage === 1;
       try {
-        setLoading(true);
+        if (isInitialLoad) {
+          setLoading(true);
+        } else {
+          setLoadingMore(true);
+        }
+
         const response = await dataPoolClient.listNamespaces({
           page: currentPage,
           limit: DEFAULT_PAGINATION_LIMIT,
         });
 
-        const { namespaces: fetchedNamespaces } = response;
+        const { namespaces: fetchedNamespaces, total: fetchedTotal } = response;
 
         setNamespaces((prev) =>
-          currentPage === 1 ? fetchedNamespaces : [...prev, ...fetchedNamespaces],
+          isInitialLoad ? fetchedNamespaces : [...prev, ...fetchedNamespaces],
         );
-        setHasMore(fetchedNamespaces.length === DEFAULT_PAGINATION_LIMIT);
+        setTotal(fetchedTotal);
       } catch (error: unknown) {
         const errorMessage = (error as Error)?.message || 'Impossible de récupérer les espaces de données. Veuillez réessayer.';
         errorToast(errorMessage);
       } finally {
         setLoading(false);
+        setLoadingMore(false);
       }
     },
     [],
@@ -115,8 +124,8 @@ const DataPoolPageContent: FC = () => {
       // Call API to delete
       await dataPoolClient.deleteNamespace(namespaceToDelete.label);
       
-      // Manually remove from list without refetching
       setNamespaces((prev) => prev.filter((ns) => ns.label !== namespaceToDelete.label));
+      setTotal((prev) => Math.max(0, prev - 1));
       
       successToast('Espace de données supprimé avec succès');
       handleCloseDeleteDialog();
@@ -248,16 +257,30 @@ const DataPoolPageContent: FC = () => {
         {/* Loading State */}
         {loading && renderSkeletonLoading()}
 
-        {/* Load More */}
-        {!searchQuery && hasMore && !loading && namespaces.length > 0 && (
-          <div className="px-6 py-4 text-center border-t">
-            <button
-              onClick={handleLoadMore}
-              type="button"
-              className="text-gray-500 hover:underline"
-            >
-              Charger plus
-            </button>
+        {/* Pagination Footer */}
+        {!loading && namespaces.length > 0 && (
+          <div className="px-6 py-3 border-t bg-gray-50 flex items-center justify-between">
+            <span className="text-xs text-gray-500">
+              Affichage de {namespaces.length} sur {total} espace{total !== 1 ? 's' : ''} de donnees
+            </span>
+
+            {!searchQuery && namespaces.length < total && (
+              <button
+                onClick={handleLoadMore}
+                disabled={loadingMore}
+                type="button"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:border-gray-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loadingMore ? (
+                  <>
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                    Chargement...
+                  </>
+                ) : (
+                  `Charger plus`
+                )}
+              </button>
+            )}
           </div>
         )}
       </div>
