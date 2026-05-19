@@ -1,5 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
-  <rect x="2" y="2" width="36" height="36" rx="8" fill="#818CF8" stroke="#6366F1" stroke-width="2"/>
-  <text x="10" y="28" font-family="Arial, sans-serif" font-weight="bold" font-size="22" fill="white">Z</text>
-  <text x="46" y="28" font-family="Arial, sans-serif" font-weight="600" font-size="20" fill="white">ZappStudio</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40" fill="none">
+  <!-- ZappStudio logo (white variant): house + lightning bolt icon with text -->
+  <defs>
+    <linearGradient id="house-grad-w" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="bolt-grad-w" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDBA74"/>
+      <stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+  </defs>
+  <!-- House outline -->
+  <path d="M18 4L3 16V36H13V26H23V36H33V16L18 4Z" fill="none" stroke="url(#house-grad-w)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Lightning bolt -->
+  <path d="M21 12L13 22H18L15 30L24 19H19L21 12Z" fill="url(#bolt-grad-w)"/>
+  <!-- Text: ZappStudio -->
+  <text x="42" y="17" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="12" fill="white">Zapp</text>
+  <text x="42" y="32" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="500" font-size="12" fill="#C7D2FE">Studio</text>
 </svg>

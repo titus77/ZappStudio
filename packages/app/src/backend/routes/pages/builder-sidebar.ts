@@ -45,6 +45,9 @@ const baseMenu: Menu = {
     { name: 'Await', label: 'Await', description: '' },
   ],
 
+  'ZappImmo': [
+    { name: 'ZappImmo', label: 'ZappImmo Tool', description: 'Acceder aux 99 tools MCP ZappImmo (CRM, Geo, Estimation, Social, Veille...)', icon: 'ZappImmo' },
+  ],
   Tools: [{ name: 'MCPClient', label: 'MCP Client', description: '', icon: 'MCP' }],
   Memory: [
     { name: 'MemoryWriteKeyVal', label: 'Memory Write', icon: 'Memory' },

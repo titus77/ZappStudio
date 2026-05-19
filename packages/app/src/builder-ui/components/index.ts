@@ -35,6 +35,7 @@ import { Note } from './Note.class';
 import { PromptGenerator } from './PromptGenerator.class';
 import { VisionLLM } from './VisionLLM.class';
 import { ZapierAction } from './ZapierAction.class';
+import { ZappImmo } from './ZappImmo.class';
 
 import { AgentCard } from './AgentCard.class';
 import { DataSourceCleaner } from './DataSourceCleaner.class';
@@ -81,6 +82,7 @@ const baseComponents = {
   FileStore,
   ImageGenerator,
   MCPClient,
+  ZappImmo,
   GmailTrigger,
   WhatsAppTrigger,
   AgentCard,

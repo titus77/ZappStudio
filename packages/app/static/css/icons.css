@@ -435,3 +435,10 @@ button:hover .svg-icon {
   -webkit-mask: url(/img/icons/MCP.svg) no-repeat center;
   -webkit-mask-size: cover;
 }
+.svg-icon.ZappImmo {
+  background-color: #2563eb;
+  mask: url(/img/icons/MCP.svg) no-repeat center;
+  mask-size: cover;
+  -webkit-mask: url(/img/icons/MCP.svg) no-repeat center;
+  -webkit-mask-size: cover;
+}
