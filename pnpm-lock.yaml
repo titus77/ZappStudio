@@ -81,8 +81,8 @@ importers:
         specifier: ^4.36.1
         version: 4.40.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       axios:
-        specifier: ^1.4.0
-        version: 1.10.0
+        specifier: ^1.16.1
+        version: 1.16.1
       cheerio:
         specifier: ^1.0.0-rc.12
         version: 1.1.0
@@ -192,8 +192,8 @@ importers:
         specifier: ^14.1.0
         version: 14.1.0
       multer:
-        specifier: ^1.4.5-lts.1
-        version: 1.4.5-lts.2
+        specifier: ^2.1.1
+        version: 2.1.1
       node-cache:
         specifier: ^5.1.2
         version: 5.1.2
@@ -341,7 +341,7 @@ importers:
         version: 9.0.8
       '@vitejs/plugin-react-swc':
         specifier: ^3.8.0
-        version: 3.10.2(vite@6.3.5(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0))
+        version: 3.10.2(vite@6.4.2(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0))
       autoprefixer:
         specifier: ^10.4.16
         version: 10.4.21(postcss@8.5.6)
@@ -412,8 +412,8 @@ importers:
         specifier: ^8.26.1
         version: 8.36.0(eslint@9.30.1(jiti@2.4.2))(typescript@5.8.3)
       vite:
-        specifier: ^6.3.1
-        version: 6.3.5(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0)
+        specifier: ^6.4.2
+        version: 6.4.2(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0)
 
   packages/middleware:
     dependencies:
@@ -427,8 +427,8 @@ importers:
         specifier: ^1.6.11
         version: 1.7.20(bufferutil@4.0.9)(encoding@0.1.13)(zod@3.25.76)
       axios:
-        specifier: ^1.4.0
-        version: 1.10.0
+        specifier: ^1.16.1
+        version: 1.16.1
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -626,8 +626,8 @@ importers:
         specifier: ^1.7.16
         version: 1.7.20(bufferutil@4.0.9)(encoding@0.1.13)(zod@4.3.6)
       axios:
-        specifier: ^1.7.7
-        version: 1.10.0
+        specifier: ^1.16.1
+        version: 1.16.1
       compression:
         specifier: ^1.8.0
         version: 1.8.0
@@ -656,8 +656,8 @@ importers:
         specifier: ^17.13.3
         version: 17.13.3
       multer:
-        specifier: ^1.4.5-lts.1
-        version: 1.4.5-lts.2
+        specifier: ^2.1.1
+        version: 2.1.1
       openai:
         specifier: ^4.72.0
         version: 4.104.0(encoding@0.1.13)(ws@8.18.3(bufferutil@4.0.9))(zod@4.3.6)
@@ -4310,11 +4310,8 @@ packages:
   axios@0.26.1:
     resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
 
-  axios@1.10.0:
-    resolution: {integrity: sha512-/1xYAC4MP/HEG+3duIhFr4ZQXR4sQXOIe+o6sdqzeykGLx6Upp/1p8MHqhINOvGeP7xyNHe7tsiJByc4SSVUxw==}
-
-  axios@1.13.6:
-    resolution: {integrity: sha512-ChTCHMouEe2kn713WHbQGcuYrr6fXTBiu460OTwWrWob16g1bXn4vtz07Ope7ewMozJAnEquLk5lWQWtBig9DQ==}
+  axios@1.16.1:
+    resolution: {integrity: sha512-caYkukvroVPO8KrzuJEb50Hm07KwfBZPEC3VeFHTsqWHvKTsy54hjJz9BS/cdaypROE2rH6xvm9mHX4fgWkr3A==}
 
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -4633,10 +4630,6 @@ packages:
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
-
-  concat-stream@1.6.2:
-    resolution: {integrity: sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==}
-    engines: {'0': node >= 0.8}
 
   concat-stream@2.0.0:
     resolution: {integrity: sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==}
@@ -5590,8 +5583,8 @@ packages:
   fn.name@1.1.0:
     resolution: {integrity: sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==}
 
-  follow-redirects@1.15.11:
-    resolution: {integrity: sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==}
+  follow-redirects@1.15.9:
+    resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -5599,8 +5592,8 @@ packages:
       debug:
         optional: true
 
-  follow-redirects@1.15.9:
-    resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
+  follow-redirects@1.16.0:
+    resolution: {integrity: sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -6868,10 +6861,6 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  mkdirp@0.5.6:
-    resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}
-    hasBin: true
-
   mlly@1.7.4:
     resolution: {integrity: sha512-qmdSIPC4bDJXgZTCR7XosJiNKySV7O215tsPtDN9iEO/7q/76b/ijtgRu/+epFXSJhijtTCCGp3DWS549P3xKw==}
 
@@ -6883,11 +6872,6 @@ packages:
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
-
-  multer@1.4.5-lts.2:
-    resolution: {integrity: sha512-VzGiVigcG9zUAoCNU+xShztrlr1auZOlurXynNvO9GiWD1/mTBbUljOKY+qMeazBqXgRnjzeEgJI/wyjJUHg9A==}
-    engines: {node: '>= 6.0.0'}
-    deprecated: Multer 1.x is impacted by a number of vulnerabilities, which have been patched in 2.x. You should upgrade to the latest 2.x version.
 
   multer@2.1.1:
     resolution: {integrity: sha512-mo+QTzKlx8R7E5ylSXxWzGoXoZbOsRMpyitcht8By2KHvMbf3tjwosZ/Mu/XYU6UuJ3VZnODIrak5ZrPiPyB6A==}
@@ -7683,8 +7667,9 @@ packages:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
 
-  proxy-from-env@1.1.0:
-    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
+  proxy-from-env@2.1.0:
+    resolution: {integrity: sha512-cJ+oHTW1VAEa8cJslgmUZrc+sjRKgAKl3Zyse6+PV38hZe/V6Z14TbCuXcan9F9ghlz4QrFr2c92TNF82UkYHA==}
+    engines: {node: '>=10'}
 
   pstree.remy@1.1.8:
     resolution: {integrity: sha512-77DZwxQmxKnu3aR542U+X8FypNzbfJ+C5XQDk3uWjWxn6151aIMGthWYRXTqT1E5oJvg+ljaa2OJi+VfvCOQ8w==}
@@ -8906,8 +8891,8 @@ packages:
       terser:
         optional: true
 
-  vite@6.3.5:
-    resolution: {integrity: sha512-cZn6NDFE7wdTpINgs++ZJ4N49W2vRp8LCKrn3Ob1kYNtOo21vfDoaV5GzBfLU4MovSAB8uNRm4jgzVQZ+mBzPQ==}
+  vite@6.4.2:
+    resolution: {integrity: sha512-2N/55r4JDJ4gdrCvGgINMy+HH3iRpNIz8K6SFwVsA+JbQScLiC+clmAxBgwiSPgcG9U15QmvqCGWzMbqda5zGQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -12931,7 +12916,7 @@ snapshots:
       '@faker-js/faker': 9.9.0
       '@modelcontextprotocol/sdk': 1.27.1(zod@4.3.6)
       '@smythos/sdk': 1.6.0(bufferutil@4.0.9)(encoding@0.1.13)(zod@4.3.6)
-      axios: 1.13.6
+      axios: 1.16.1
       cors: 2.8.5
       dotenv: 17.3.1
       express: 4.21.2
@@ -12977,7 +12962,7 @@ snapshots:
       '@smithy/smithy-client': 4.9.8
       '@zilliz/milvus2-sdk-node': 2.6.5
       acorn: 8.15.0
-      axios: 1.10.0
+      axios: 1.16.1
       chokidar: 4.0.3
       dayjs: 1.11.19
       domutils: 3.2.2
@@ -13046,7 +13031,7 @@ snapshots:
       '@smithy/smithy-client': 4.9.8
       '@zilliz/milvus2-sdk-node': 2.6.5
       acorn: 8.15.0
-      axios: 1.10.0
+      axios: 1.16.1
       chokidar: 4.0.3
       dayjs: 1.11.19
       domutils: 3.2.2
@@ -13115,7 +13100,7 @@ snapshots:
       '@smithy/smithy-client': 4.9.8
       '@zilliz/milvus2-sdk-node': 2.6.5
       acorn: 8.15.0
-      axios: 1.13.6
+      axios: 1.16.1
       chokidar: 4.0.3
       dayjs: 1.11.19
       domutils: 3.2.2
@@ -13254,9 +13239,10 @@ snapshots:
 
   '@types/axios@0.14.4':
     dependencies:
-      axios: 1.10.0
+      axios: 1.16.1
     transitivePeerDependencies:
       - debug
+      - supports-color
 
   '@types/body-parser@1.19.6':
     dependencies:
@@ -13745,11 +13731,11 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitejs/plugin-react-swc@3.10.2(vite@6.3.5(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0))':
+  '@vitejs/plugin-react-swc@3.10.2(vite@6.4.2(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-beta.11
       '@swc/core': 1.12.11
-      vite: 6.3.5(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0)
+      vite: 6.4.2(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -13876,7 +13862,7 @@ snapshots:
 
   agent-base@6.0.2:
     dependencies:
-      debug: 4.4.1(supports-color@5.5.0)
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
@@ -14082,21 +14068,15 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  axios@1.10.0:
+  axios@1.16.1:
     dependencies:
-      follow-redirects: 1.15.9
+      follow-redirects: 1.16.0
       form-data: 4.0.5
-      proxy-from-env: 1.1.0
+      https-proxy-agent: 5.0.1
+      proxy-from-env: 2.1.0
     transitivePeerDependencies:
       - debug
-
-  axios@1.13.6:
-    dependencies:
-      follow-redirects: 1.15.11
-      form-data: 4.0.5
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
+      - supports-color
 
   bail@2.0.2: {}
 
@@ -14456,13 +14436,6 @@ snapshots:
       validate.io-integer-array: 1.0.0
 
   concat-map@0.0.1: {}
-
-  concat-stream@1.6.2:
-    dependencies:
-      buffer-from: 1.1.2
-      inherits: 2.0.4
-      readable-stream: 2.3.8
-      typedarray: 0.0.6
 
   concat-stream@2.0.0:
     dependencies:
@@ -15843,9 +15816,9 @@ snapshots:
 
   fn.name@1.1.0: {}
 
-  follow-redirects@1.15.11: {}
-
   follow-redirects@1.15.9: {}
+
+  follow-redirects@1.16.0: {}
 
   for-each@0.3.5:
     dependencies:
@@ -16370,7 +16343,7 @@ snapshots:
   https-proxy-agent@5.0.1:
     dependencies:
       agent-base: 6.0.2
-      debug: 4.4.1(supports-color@5.5.0)
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
@@ -17457,10 +17430,6 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  mkdirp@0.5.6:
-    dependencies:
-      minimist: 1.2.8
-
   mlly@1.7.4:
     dependencies:
       acorn: 8.15.0
@@ -17473,16 +17442,6 @@ snapshots:
   ms@2.1.2: {}
 
   ms@2.1.3: {}
-
-  multer@1.4.5-lts.2:
-    dependencies:
-      append-field: 1.0.0
-      busboy: 1.6.0
-      concat-stream: 1.6.2
-      mkdirp: 0.5.6
-      object-assign: 4.1.1
-      type-is: 1.6.18
-      xtend: 4.0.2
 
   multer@2.1.1:
     dependencies:
@@ -18323,7 +18282,7 @@ snapshots:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
 
-  proxy-from-env@1.1.0: {}
+  proxy-from-env@2.1.0: {}
 
   pstree.remy@1.1.8: {}
 
@@ -19770,7 +19729,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.43.1
 
-  vite@6.3.5(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0):
+  vite@6.4.2(@types/node@20.19.4)(jiti@2.4.2)(terser@5.43.1)(yaml@2.8.0):
     dependencies:
       esbuild: 0.25.6
       fdir: 6.4.6(picomatch@4.0.2)

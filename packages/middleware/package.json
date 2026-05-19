@@ -77,7 +77,7 @@
     "@aws-sdk/client-ses": "^3.421.0",
     "@prisma/client": "^5.7.1",
     "@smythos/sre": "^1.6.11",
-    "axios": "^1.4.0",
+    "axios": "^1.16.1",
     "cors": "^2.8.5",
     "date-fns": "^3.3.1",
     "dotenv": "^16.0.3",
